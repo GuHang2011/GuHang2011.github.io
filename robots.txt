@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://GuHang2011.github.io/sitemap.xml
