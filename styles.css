@@ -1696,3 +1696,58 @@ html[lang="zh-CN"] .brand-caption {
     transform: none;
   }
 }
+.project-accent {
+  background: #2d765f;
+  color: #f4f3e9;
+}
+
+.project-accent .eyebrow,
+.project-accent .project-caveat {
+  color: #cfe2cb;
+}
+
+.project-accent .tags span {
+  background: #3d836f;
+  color: #eff5e8;
+}
+
+.project-accent .project-link {
+  border-color: #6a9b89;
+}
+
+.research-bridge {
+  max-width: 1080px;
+  margin: 4rem auto 0;
+  padding: 2.5rem clamp(1.25rem, 4vw, 3rem);
+  border-top: 1px solid rgba(39, 48, 43, 0.22);
+  background: #e7eee2;
+}
+
+.research-bridge h2 {
+  max-width: 18ch;
+  margin: 0.45rem 0 0.8rem;
+}
+
+.research-bridge p {
+  max-width: 62ch;
+  margin: 0;
+}
+
+.research-bridge__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+/* The third public example occupies its own row. */
+.project-accent { grid-column: 1 / -1; }
+.project-accent .project-demo-links a { color: #f4f3e9; border-color: #6a9b89; }
+.research-bridge__links .project-link { gap: 1rem; margin-top: 0; }
+.reading-guide { max-width: 860px; padding-block: 3rem; }
+.reading-guide h1 { font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.15; margin-block: 1rem; }
+.reading-guide h2 { margin-top: 2.5rem; font-size: 1.5rem; }
+.reading-guide p, .reading-guide li { line-height: 1.8; }
+.reading-guide ul, .reading-guide ol { padding-left: 1.4rem; }
+.reading-guide a { text-decoration: underline; text-underline-offset: .2em; }
+.reading-guide li { margin-block: .75rem; }

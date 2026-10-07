@@ -50,7 +50,8 @@
     document.querySelectorAll("[data-project-group]").forEach((group) => {
       group.hidden = filter !== "all" && group.dataset.projectGroup !== filter;
     });
-    const count = { all: 5, public: 2, applied: 3 }[filter];
+    const count = [...document.querySelectorAll(".featured-projects > article, .engineering-grid > article")]
+      .filter((card) => filter === "all" || card.closest("[data-project-group]").dataset.projectGroup === filter).length;
     if (projectCount) {
       projectCount.dataset.en = `${count} selected projects`;
       projectCount.dataset.zh = `${count} 个精选项目`;
