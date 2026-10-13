@@ -6,14 +6,14 @@ A bilingual academic portfolio for **Hang Gu (顾航)**, connecting research int
 
 ## Design
 
-Warm paper, deep ink, and restrained green accents. Editorial typography, a custom vector illustration, a readable research list, and an accessible layout that adapts to phones and desktops.
+The academic reading structure is inspired by [winsleo.github.io](https://winsleo.github.io/), adapted to Hang Gu's own background and evidence. White and light-gray bands, blue accents, flat research lists and screenshot-led project rows adapt to phones and desktops.
 
 - Complete English / Chinese interface with a saved language preference.
-- An interactive research diagram: switch between Vision, Text, and Evaluation. The active node and research question update together; arrow keys, Home, and End work in the tab list.
-- Project filters for all work, public code, and applied engineering, with accessible selection states and a result count.
-- A reading-progress indicator, subtle section entrances, and flat hover / keyboard-focus accents.
+- Research filters for manuscripts, conference work and thesis; native expandable summaries.
+- Project filters for engineering, research and learning, with accessible selection states and result counts.
+- Screenshot previews, mobile navigation, print styles, reading progress and restrained hover / keyboard-focus accents.
 - Semantic HTML, visible keyboard focus, a skip link, and reduced-motion support.
-- No build step, third-party JavaScript, remote fonts, analytics, or CDN dependencies.
+- No build step, third-party JavaScript, remote fonts, analytics, or CDN dependencies. Local tool icons are from [Lucide](https://lucide.dev/) under the ISC license.
 - The English content and navigation work without JavaScript.
 
 ## Content
@@ -24,6 +24,14 @@ Warm paper, deep ink, and restrained green accents. Editorial typography, a cust
 4. **Background:** education and professional experience.
 
 Research status is updated September 2026. Manuscripts and accepted work are labeled separately. The KICP project links to its implementation and setup documentation; the learning lab uses synthetic data.
+
+## Local Engineering Cases
+
+- [Counselor collaboration and release verification](https://guhang2011.github.io/cases/counselor/): role-scoped collaboration, tasks, release evidence and an extracted release-gate example. Existing October 13 records are distinguished from newly executed example tests.
+- [College materials archive](https://guhang2011.github.io/cases/archive/): permissions, versioning, review, logical deletion and audit. Its interactive lifecycle illustration uses synthetic records; the original application was reviewed but not rerun for this site update.
+- [Release-gate example](cases/examples/README.md): dependency-free JavaScript, tests and limitations.
+
+Project screenshots use synthetic demo content. Public cases exclude original databases, credentials, private configuration and student records. Site content updated **2026-10-13**.
 
 ## Preview locally
 
@@ -45,17 +53,20 @@ Push these files to the root of the `GuHang2011.github.io` repository. In **Sett
 - For translated accessible names, use paired `data-en-label` and `data-zh-label` attributes.
 - Research titles remain in their original English in both interface languages.
 - Update research statuses only when supported by evidence. Add a DOI or proceedings URL only after verifying it.
-- Edit design tokens and responsive rules in `styles.css`.
+- Homepage design and interaction live in `academic.css` and `academic.js`. Existing research pages retain `styles.css` and `script.js`.
 - The learning-lab card links to the [live dashboard](https://guhang2011.github.io/frontend-data-lab/) and the [dynamic-form demo](https://guhang2011.github.io/frontend-data-lab/demos/form/). Keep these URLs aligned with the learning lab's GitHub Pages deployment; each link has both English and Chinese labels.
 - Update the source note and `sitemap.xml` after substantive content changes.
-- Before publishing, check both languages, all three research tabs, all three project filters, section links, keyboard navigation, mobile layout, and reduced-motion behavior.
+- Before publishing, check both languages, research and project filters, dialogs, section links, keyboard navigation, mobile layout, local links and the release example.
 
 ## Files
 
 ```text
 index.html          Semantic page content and bilingual copy
-styles.css          Responsive editorial design
-script.js           Language, research tabs, filters, progress, and entrances
+academic.css        Flat academic layout and responsive / print styles
+academic.js         Language, filters, navigation, dialogs and reading progress
+cases/              Selected local cases and an extracted release example
+styles.css          Legacy research-page styles
+script.js           Legacy research-page interactions
 assets/favicon.svg  Local vector favicon
 robots.txt          Search crawler instructions
 sitemap.xml         Canonical page sitemap
