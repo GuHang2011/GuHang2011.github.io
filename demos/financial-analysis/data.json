@@ -1,0 +1,4357 @@
+{
+  "metadata": {
+    "datasetType": "synthetic_learning_example",
+    "recordCount": 48,
+    "companyCount": 24,
+    "unit": "simulated CNY 10,000",
+    "generatorSeed": 20261013,
+    "model": "scikit-learn 1.7.2",
+    "nInit": 20,
+    "modelSeed": 42,
+    "distanceScore": "Min-max scaled distance to the annual mean in standardized five-feature space; not a risk probability.",
+    "missingPolicy": "Zero denominators and missing inputs produce null; annual feature medians impute clustering inputs only."
+  },
+  "features": [
+    {
+      "id": "grossMargin",
+      "en": "Gross margin",
+      "zh": "毛利率",
+      "formula": "(revenue - cost) / revenue"
+    },
+    {
+      "id": "receivableRevenue",
+      "en": "Receivables / revenue",
+      "zh": "应收账款 / 营收",
+      "formula": "receivables / revenue"
+    },
+    {
+      "id": "cashRevenue",
+      "en": "Operating cash / revenue",
+      "zh": "经营现金流 / 营收",
+      "formula": "operatingCash / revenue"
+    },
+    {
+      "id": "debtAssets",
+      "en": "Liabilities / assets",
+      "zh": "资产负债率",
+      "formula": "liabilities / assets"
+    },
+    {
+      "id": "expenseRevenue",
+      "en": "Operating expenses / revenue",
+      "zh": "期间费用 / 营收",
+      "formula": "expenses / revenue"
+    }
+  ],
+  "records": [
+    {
+      "id": "S01",
+      "year": 2023,
+      "sector": "services",
+      "revenue": 2759.19,
+      "cost": 1586.71,
+      "receivables": 816.06,
+      "operatingCash": 182.08,
+      "assets": 3317.1,
+      "liabilities": 1761.27,
+      "expenses": 421.94
+    },
+    {
+      "id": "S02",
+      "year": 2023,
+      "sector": "manufacturing",
+      "revenue": 543.74,
+      "cost": 373.14,
+      "receivables": 35.46,
+      "operatingCash": 91.94,
+      "assets": 861.08,
+      "liabilities": 253.65,
+      "expenses": 82.26
+    },
+    {
+      "id": "S03",
+      "year": 2023,
+      "sector": "retail",
+      "revenue": 2192.78,
+      "cost": 1801.71,
+      "receivables": 954.9,
+      "operatingCash": 49.08,
+      "assets": 4362.16,
+      "liabilities": 2894.42,
+      "expenses": 374.21
+    },
+    {
+      "id": "S04",
+      "year": 2023,
+      "sector": "services",
+      "revenue": 4439.74,
+      "cost": 1737.92,
+      "receivables": 2107.08,
+      "operatingCash": 1250.31,
+      "assets": 5788.45,
+      "liabilities": 1634.65,
+      "expenses": 343.84
+    },
+    {
+      "id": "S05",
+      "year": 2023,
+      "sector": "manufacturing",
+      "revenue": 1279.83,
+      "cost": 941.23,
+      "receivables": 329.96,
+      "operatingCash": 299.58,
+      "assets": 2198.84,
+      "liabilities": 542.68,
+      "expenses": 207.76
+    },
+    {
+      "id": "S06",
+      "year": 2023,
+      "sector": "retail",
+      "revenue": 3089.43,
+      "cost": 2079.24,
+      "receivables": 0.0,
+      "operatingCash": 863.3,
+      "assets": 7252.98,
+      "liabilities": 3715.38,
+      "expenses": 289.01
+    },
+    {
+      "id": "S07",
+      "year": 2023,
+      "sector": "services",
+      "revenue": 3254.76,
+      "cost": 1350.42,
+      "receivables": 1182.13,
+      "operatingCash": 633.65,
+      "assets": 10222.24,
+      "liabilities": 4974.97,
+      "expenses": 574.63
+    },
+    {
+      "id": "S08",
+      "year": 2023,
+      "sector": "manufacturing",
+      "revenue": 1003.62,
+      "cost": 828.85,
+      "receivables": 417.76,
+      "operatingCash": -92.25,
+      "assets": 2041.78,
+      "liabilities": 728.39,
+      "expenses": 146.52
+    },
+    {
+      "id": "S09",
+      "year": 2023,
+      "sector": "retail",
+      "revenue": 2760.95,
+      "cost": 1989.04,
+      "receivables": 1040.8,
+      "operatingCash": 0.0,
+      "assets": 3509.21,
+      "liabilities": 1364.54,
+      "expenses": 303.17
+    },
+    {
+      "id": "S10",
+      "year": 2023,
+      "sector": "services",
+      "revenue": 3916.76,
+      "cost": 1959.21,
+      "receivables": 959.19,
+      "operatingCash": -303.92,
+      "assets": 4595.0,
+      "liabilities": 1676.16,
+      "expenses": 170.25
+    },
+    {
+      "id": "S11",
+      "year": 2023,
+      "sector": "manufacturing",
+      "revenue": 772.09,
+      "cost": 475.77,
+      "receivables": 73.9,
+      "operatingCash": 79.53,
+      "assets": 2189.71,
+      "liabilities": 889.27,
+      "expenses": 79.52
+    },
+    {
+      "id": "S12",
+      "year": 2023,
+      "sector": "retail",
+      "revenue": 2070.3,
+      "cost": 1629.54,
+      "receivables": 354.61,
+      "operatingCash": -155.08,
+      "assets": 2373.76,
+      "liabilities": 1016.73,
+      "expenses": 146.91
+    },
+    {
+      "id": "S13",
+      "year": 2023,
+      "sector": "services",
+      "revenue": 2222.65,
+      "cost": 847.18,
+      "receivables": 1266.36,
+      "operatingCash": -198.98,
+      "assets": 6398.33,
+      "liabilities": 3206.85,
+      "expenses": 133.5
+    },
+    {
+      "id": "S14",
+      "year": 2023,
+      "sector": "manufacturing",
+      "revenue": 4181.98,
+      "cost": 3528.24,
+      "receivables": 2256.35,
+      "operatingCash": 54.42,
+      "assets": 4922.33,
+      "liabilities": 2752.7,
+      "expenses": 795.83
+    },
+    {
+      "id": "S15",
+      "year": 2023,
+      "sector": "retail",
+      "revenue": 481.02,
+      "cost": 306.55,
+      "receivables": 147.91,
+      "operatingCash": -10.71,
+      "assets": 0.0,
+      "liabilities": 703.1,
+      "expenses": 83.13
+    },
+    {
+      "id": "S16",
+      "year": 2023,
+      "sector": "services",
+      "revenue": 1446.85,
+      "cost": 836.9,
+      "receivables": 621.56,
+      "operatingCash": 226.38,
+      "assets": 3829.9,
+      "liabilities": 2518.77,
+      "expenses": 298.62
+    },
+    {
+      "id": "S17",
+      "year": 2023,
+      "sector": "manufacturing",
+      "revenue": 3611.27,
+      "cost": 2899.24,
+      "receivables": 1871.55,
+      "operatingCash": 1065.78,
+      "assets": 5081.2,
+      "liabilities": 2518.99,
+      "expenses": 598.32
+    },
+    {
+      "id": "S18",
+      "year": 2023,
+      "sector": "retail",
+      "revenue": 1816.33,
+      "cost": 1491.16,
+      "receivables": null,
+      "operatingCash": 448.19,
+      "assets": 2728.37,
+      "liabilities": 473.46,
+      "expenses": 412.44
+    },
+    {
+      "id": "S19",
+      "year": 2023,
+      "sector": "services",
+      "revenue": 3015.66,
+      "cost": 1702.47,
+      "receivables": 1052.3,
+      "operatingCash": 846.43,
+      "assets": 5396.98,
+      "liabilities": 1090.52,
+      "expenses": 190.03
+    },
+    {
+      "id": "S20",
+      "year": 2023,
+      "sector": "manufacturing",
+      "revenue": 1240.75,
+      "cost": 832.84,
+      "receivables": 707.22,
+      "operatingCash": 333.02,
+      "assets": 1382.6,
+      "liabilities": 937.83,
+      "expenses": 262.8
+    },
+    {
+      "id": "S21",
+      "year": 2023,
+      "sector": "retail",
+      "revenue": 2766.43,
+      "cost": 1930.87,
+      "receivables": 1257.83,
+      "operatingCash": 315.13,
+      "assets": 4503.36,
+      "liabilities": 2549.8,
+      "expenses": 469.85
+    },
+    {
+      "id": "S22",
+      "year": 2023,
+      "sector": "services",
+      "revenue": 3399.62,
+      "cost": 1676.32,
+      "receivables": 1010.91,
+      "operatingCash": -151.46,
+      "assets": 3612.38,
+      "liabilities": 1981.59,
+      "expenses": 251.1
+    },
+    {
+      "id": "S23",
+      "year": 2023,
+      "sector": "manufacturing",
+      "revenue": 2073.58,
+      "cost": 1500.45,
+      "receivables": 837.03,
+      "operatingCash": 204.18,
+      "assets": 4284.03,
+      "liabilities": 1209.12,
+      "expenses": 404.58
+    },
+    {
+      "id": "S24",
+      "year": 2023,
+      "sector": "retail",
+      "revenue": 244.06,
+      "cost": 155.57,
+      "receivables": 72.54,
+      "operatingCash": -4.19,
+      "assets": 511.51,
+      "liabilities": 224.41,
+      "expenses": 38.42
+    },
+    {
+      "id": "S01",
+      "year": 2024,
+      "sector": "services",
+      "revenue": 2710.67,
+      "cost": 1113.69,
+      "receivables": 216.24,
+      "operatingCash": -31.19,
+      "assets": 3296.8,
+      "liabilities": 1964.98,
+      "expenses": 532.7
+    },
+    {
+      "id": "S02",
+      "year": 2024,
+      "sector": "manufacturing",
+      "revenue": 663.49,
+      "cost": 512.98,
+      "receivables": 267.57,
+      "operatingCash": 126.61,
+      "assets": 835.69,
+      "liabilities": 369.4,
+      "expenses": 143.63
+    },
+    {
+      "id": "S03",
+      "year": 2024,
+      "sector": "retail",
+      "revenue": 2508.19,
+      "cost": 1780.04,
+      "receivables": 162.72,
+      "operatingCash": 738.51,
+      "assets": 3633.4,
+      "liabilities": 2039.52,
+      "expenses": 133.82
+    },
+    {
+      "id": "S04",
+      "year": 2024,
+      "sector": "services",
+      "revenue": 4314.5,
+      "cost": 2880.25,
+      "receivables": 2496.52,
+      "operatingCash": 1267.78,
+      "assets": 7012.59,
+      "liabilities": 2369.87,
+      "expenses": 204.67
+    },
+    {
+      "id": "S05",
+      "year": 2024,
+      "sector": "manufacturing",
+      "revenue": 1397.17,
+      "cost": 1001.32,
+      "receivables": 540.17,
+      "operatingCash": -134.86,
+      "assets": 2497.58,
+      "liabilities": 1071.53,
+      "expenses": 106.77
+    },
+    {
+      "id": "S06",
+      "year": 2024,
+      "sector": "retail",
+      "revenue": 3050.9,
+      "cost": 2302.02,
+      "receivables": 0.0,
+      "operatingCash": 531.07,
+      "assets": 6849.52,
+      "liabilities": 2236.25,
+      "expenses": 536.71
+    },
+    {
+      "id": "S07",
+      "year": 2024,
+      "sector": "services",
+      "revenue": 3531.22,
+      "cost": 1735.01,
+      "receivables": 1849.54,
+      "operatingCash": 974.01,
+      "assets": 10606.74,
+      "liabilities": 6148.66,
+      "expenses": 320.94
+    },
+    {
+      "id": "S08",
+      "year": 2024,
+      "sector": "manufacturing",
+      "revenue": 1236.76,
+      "cost": 971.99,
+      "receivables": 346.22,
+      "operatingCash": -7.22,
+      "assets": 2170.69,
+      "liabilities": 811.53,
+      "expenses": 241.51
+    },
+    {
+      "id": "S09",
+      "year": 2024,
+      "sector": "retail",
+      "revenue": 2111.93,
+      "cost": 1839.39,
+      "receivables": 673.99,
+      "operatingCash": 0.0,
+      "assets": 3565.94,
+      "liabilities": 1996.51,
+      "expenses": 166.91
+    },
+    {
+      "id": "S10",
+      "year": 2024,
+      "sector": "services",
+      "revenue": 4147.06,
+      "cost": 2440.17,
+      "receivables": 1727.93,
+      "operatingCash": 1122.47,
+      "assets": 4717.8,
+      "liabilities": 2289.03,
+      "expenses": 761.85
+    },
+    {
+      "id": "S11",
+      "year": 2024,
+      "sector": "manufacturing",
+      "revenue": 826.84,
+      "cost": 515.94,
+      "receivables": 329.22,
+      "operatingCash": 148.43,
+      "assets": 1945.14,
+      "liabilities": 1337.55,
+      "expenses": 134.3
+    },
+    {
+      "id": "S12",
+      "year": 2024,
+      "sector": "retail",
+      "revenue": 0.0,
+      "cost": 1441.84,
+      "receivables": 393.91,
+      "operatingCash": -133.45,
+      "assets": 2661.17,
+      "liabilities": 527.34,
+      "expenses": 88.39
+    },
+    {
+      "id": "S13",
+      "year": 2024,
+      "sector": "services",
+      "revenue": 2103.07,
+      "cost": 1215.55,
+      "receivables": 1120.27,
+      "operatingCash": 361.68,
+      "assets": 6360.84,
+      "liabilities": 3494.84,
+      "expenses": 303.79
+    },
+    {
+      "id": "S14",
+      "year": 2024,
+      "sector": "manufacturing",
+      "revenue": 3498.57,
+      "cost": 2953.8,
+      "receivables": 1614.62,
+      "operatingCash": 1.45,
+      "assets": 5651.23,
+      "liabilities": 2441.24,
+      "expenses": 790.53
+    },
+    {
+      "id": "S15",
+      "year": 2024,
+      "sector": "retail",
+      "revenue": 393.02,
+      "cost": 309.06,
+      "receivables": 210.31,
+      "operatingCash": 72.91,
+      "assets": 1024.05,
+      "liabilities": 441.21,
+      "expenses": 59.06
+    },
+    {
+      "id": "S16",
+      "year": 2024,
+      "sector": "services",
+      "revenue": 1418.59,
+      "cost": 932.17,
+      "receivables": 807.98,
+      "operatingCash": 124.92,
+      "assets": 3373.24,
+      "liabilities": 1428.33,
+      "expenses": 71.96
+    },
+    {
+      "id": "S17",
+      "year": 2024,
+      "sector": "manufacturing",
+      "revenue": 3869.78,
+      "cost": 2975.78,
+      "receivables": 343.75,
+      "operatingCash": 723.63,
+      "assets": 5628.17,
+      "liabilities": 3844.55,
+      "expenses": 770.09
+    },
+    {
+      "id": "S18",
+      "year": 2024,
+      "sector": "retail",
+      "revenue": 1587.18,
+      "cost": 1184.98,
+      "receivables": null,
+      "operatingCash": -127.14,
+      "assets": 2523.22,
+      "liabilities": 752.47,
+      "expenses": 334.68
+    },
+    {
+      "id": "S19",
+      "year": 2024,
+      "sector": "services",
+      "revenue": 3336.49,
+      "cost": 1861.59,
+      "receivables": 958.92,
+      "operatingCash": 385.55,
+      "assets": 5182.44,
+      "liabilities": 2671.01,
+      "expenses": 158.32
+    },
+    {
+      "id": "S20",
+      "year": 2024,
+      "sector": "manufacturing",
+      "revenue": 994.29,
+      "cost": 678.53,
+      "receivables": 408.18,
+      "operatingCash": 44.25,
+      "assets": 1351.8,
+      "liabilities": 969.17,
+      "expenses": 153.82
+    },
+    {
+      "id": "S21",
+      "year": 2024,
+      "sector": "retail",
+      "revenue": 3150.28,
+      "cost": 2106.67,
+      "receivables": 1804.41,
+      "operatingCash": 360.56,
+      "assets": 5079.6,
+      "liabilities": 3511.5,
+      "expenses": null
+    },
+    {
+      "id": "S22",
+      "year": 2024,
+      "sector": "services",
+      "revenue": 3069.6,
+      "cost": 1414.24,
+      "receivables": 1774.99,
+      "operatingCash": 875.91,
+      "assets": 3801.42,
+      "liabilities": 1040.11,
+      "expenses": 427.41
+    },
+    {
+      "id": "S23",
+      "year": 2024,
+      "sector": "manufacturing",
+      "revenue": 2039.26,
+      "cost": 1387.64,
+      "receivables": 1086.53,
+      "operatingCash": -89.97,
+      "assets": 5014.95,
+      "liabilities": 2081.51,
+      "expenses": 178.93
+    },
+    {
+      "id": "S24",
+      "year": 2024,
+      "sector": "retail",
+      "revenue": 319.93,
+      "cost": 278.49,
+      "receivables": 125.86,
+      "operatingCash": 78.0,
+      "assets": 498.82,
+      "liabilities": 286.3,
+      "expenses": 42.53
+    }
+  ],
+  "scenarios": {
+    "2023": {
+      "medians": {
+        "grossMargin": 0.32787174,
+        "receivableRevenue": 0.36320036,
+        "cashRevenue": 0.10073676,
+        "debtAssets": 0.43872065,
+        "expenseRevenue": 0.155171
+      },
+      "explainedVariance": [
+        0.34380323,
+        0.26391233
+      ],
+      "standardization": {
+        "mean": [
+          0.35000828275389523,
+          0.34570308523546284,
+          0.10021561218466825,
+          0.4376741052445901,
+          0.1396394396656339
+        ],
+        "scale": [
+          0.13731277623475238,
+          0.14986140339221007,
+          0.13387014595004304,
+          0.14005536354027318,
+          0.05317959861483797
+        ]
+      },
+      "variants": {
+        "2": {
+          "inertia": 89.400256,
+          "rows": [
+            {
+              "id": "S01",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.4249363,
+                "receivableRevenue": 0.29576071,
+                "cashRevenue": 0.06599038,
+                "debtAssets": 0.53096681,
+                "expenseRevenue": 0.15292169
+              },
+              "imputedRatios": {
+                "grossMargin": 0.4249363,
+                "receivableRevenue": 0.29576071,
+                "cashRevenue": 0.06599038,
+                "debtAssets": 0.53096681,
+                "expenseRevenue": 0.15292169
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -0.05699432,
+                0.54910244
+              ],
+              "distanceScore": 0.0
+            },
+            {
+              "id": "S02",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.3137529,
+                "receivableRevenue": 0.06521499,
+                "cashRevenue": 0.16908817,
+                "debtAssets": 0.29457193,
+                "expenseRevenue": 0.15128554
+              },
+              "imputedRatios": {
+                "grossMargin": 0.3137529,
+                "receivableRevenue": 0.06521499,
+                "cashRevenue": 0.16908817,
+                "debtAssets": 0.29457193,
+                "expenseRevenue": 0.15128554
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -0.77782111,
+                -1.82445773
+              ],
+              "distanceScore": 54.584
+            },
+            {
+              "id": "S03",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.17834438,
+                "receivableRevenue": 0.4354746,
+                "cashRevenue": 0.02238255,
+                "debtAssets": 0.66352908,
+                "expenseRevenue": 0.17065551
+              },
+              "imputedRatios": {
+                "grossMargin": 0.17834438,
+                "receivableRevenue": 0.4354746,
+                "cashRevenue": 0.02238255,
+                "debtAssets": 0.66352908,
+                "expenseRevenue": 0.17065551
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                1.63397506,
+                1.03302105
+              ],
+              "distanceScore": 57.256
+            },
+            {
+              "id": "S04",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.60855365,
+                "receivableRevenue": 0.47459536,
+                "cashRevenue": 0.28161784,
+                "debtAssets": 0.28239857,
+                "expenseRevenue": 0.07744598
+              },
+              "imputedRatios": {
+                "grossMargin": 0.60855365,
+                "receivableRevenue": 0.47459536,
+                "cashRevenue": 0.28161784,
+                "debtAssets": 0.28239857,
+                "expenseRevenue": 0.07744598
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -1.37807418,
+                -0.20864559
+              ],
+              "distanceScore": 87.083
+            },
+            {
+              "id": "S05",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.26456639,
+                "receivableRevenue": 0.25781549,
+                "cashRevenue": 0.23407796,
+                "debtAssets": 0.24680286,
+                "expenseRevenue": 0.16233406
+              },
+              "imputedRatios": {
+                "grossMargin": 0.26456639,
+                "receivableRevenue": 0.25781549,
+                "cashRevenue": 0.23407796,
+                "debtAssets": 0.24680286,
+                "expenseRevenue": 0.16233406
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                0.06899304,
+                -1.91920717
+              ],
+              "distanceScore": 42.228
+            },
+            {
+              "id": "S06",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.32698265,
+                "receivableRevenue": 0.0,
+                "cashRevenue": 0.27943666,
+                "debtAssets": 0.51225565,
+                "expenseRevenue": 0.093548
+              },
+              "imputedRatios": {
+                "grossMargin": 0.32698265,
+                "receivableRevenue": 0.0,
+                "cashRevenue": 0.27943666,
+                "debtAssets": 0.51225565,
+                "expenseRevenue": 0.093548
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -1.09987057,
+                -1.26256328
+              ],
+              "distanceScore": 82.949
+            },
+            {
+              "id": "S07",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.58509383,
+                "receivableRevenue": 0.36320036,
+                "cashRevenue": 0.19468409,
+                "debtAssets": 0.486681,
+                "expenseRevenue": 0.17655065
+              },
+              "imputedRatios": {
+                "grossMargin": 0.58509383,
+                "receivableRevenue": 0.36320036,
+                "cashRevenue": 0.19468409,
+                "debtAssets": 0.486681,
+                "expenseRevenue": 0.17655065
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -0.00721086,
+                0.33315474
+              ],
+              "distanceScore": 45.331
+            },
+            {
+              "id": "S08",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.17413961,
+                "receivableRevenue": 0.41625316,
+                "cashRevenue": -0.09191726,
+                "debtAssets": 0.35674265,
+                "expenseRevenue": 0.14599151
+              },
+              "imputedRatios": {
+                "grossMargin": 0.17413961,
+                "receivableRevenue": 0.41625316,
+                "cashRevenue": -0.09191726,
+                "debtAssets": 0.35674265,
+                "expenseRevenue": 0.14599151
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                0.4132488,
+                0.16485664
+              ],
+              "distanceScore": 47.759
+            },
+            {
+              "id": "S09",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.2795813,
+                "receivableRevenue": 0.37697169,
+                "cashRevenue": 0.0,
+                "debtAssets": 0.38884535,
+                "expenseRevenue": 0.10980641
+              },
+              "imputedRatios": {
+                "grossMargin": 0.2795813,
+                "receivableRevenue": 0.37697169,
+                "cashRevenue": 0.0,
+                "debtAssets": 0.38884535,
+                "expenseRevenue": 0.10980641
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -0.31158435,
+                0.20827642
+              ],
+              "distanceScore": 6.723
+            },
+            {
+              "id": "S10",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.49978809,
+                "receivableRevenue": 0.24489374,
+                "cashRevenue": -0.07759475,
+                "debtAssets": 0.36477911,
+                "expenseRevenue": 0.04346705
+              },
+              "imputedRatios": {
+                "grossMargin": 0.49978809,
+                "receivableRevenue": 0.24489374,
+                "cashRevenue": -0.07759475,
+                "debtAssets": 0.36477911,
+                "expenseRevenue": 0.04346705
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -2.43900547,
+                0.81866651
+              ],
+              "distanceScore": 73.028
+            },
+            {
+              "id": "S11",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.38378945,
+                "receivableRevenue": 0.09571423,
+                "cashRevenue": 0.10300613,
+                "debtAssets": 0.40611314,
+                "expenseRevenue": 0.10299317
+              },
+              "imputedRatios": {
+                "grossMargin": 0.38378945,
+                "receivableRevenue": 0.09571423,
+                "cashRevenue": 0.10300613,
+                "debtAssets": 0.40611314,
+                "expenseRevenue": 0.10299317
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -1.37795014,
+                -0.64004065
+              ],
+              "distanceScore": 37.515
+            },
+            {
+              "id": "S12",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.21289668,
+                "receivableRevenue": 0.17128435,
+                "cashRevenue": -0.07490702,
+                "debtAssets": 0.42832047,
+                "expenseRevenue": 0.07096073
+              },
+              "imputedRatios": {
+                "grossMargin": 0.21289668,
+                "receivableRevenue": 0.17128435,
+                "cashRevenue": -0.07490702,
+                "debtAssets": 0.42832047,
+                "expenseRevenue": 0.07096073
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -1.20344579,
+                0.08081074
+              ],
+              "distanceScore": 62.332
+            },
+            {
+              "id": "S13",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.61884237,
+                "receivableRevenue": 0.56975232,
+                "cashRevenue": -0.08952377,
+                "debtAssets": 0.50120109,
+                "expenseRevenue": 0.06006344
+              },
+              "imputedRatios": {
+                "grossMargin": 0.61884237,
+                "receivableRevenue": 0.56975232,
+                "cashRevenue": -0.08952377,
+                "debtAssets": 0.50120109,
+                "expenseRevenue": 0.06006344
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -1.37839642,
+                2.6131164
+              ],
+              "distanceScore": 100.0
+            },
+            {
+              "id": "S14",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.15632308,
+                "receivableRevenue": 0.53954108,
+                "cashRevenue": 0.01301297,
+                "debtAssets": 0.55922703,
+                "expenseRevenue": 0.19029981
+              },
+              "imputedRatios": {
+                "grossMargin": 0.15632308,
+                "receivableRevenue": 0.53954108,
+                "cashRevenue": 0.01301297,
+                "debtAssets": 0.55922703,
+                "expenseRevenue": 0.19029981
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                2.01009818,
+                0.78012408
+              ],
+              "distanceScore": 62.447
+            },
+            {
+              "id": "S15",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.36270841,
+                "receivableRevenue": 0.30749241,
+                "cashRevenue": -0.02226519,
+                "debtAssets": null,
+                "expenseRevenue": 0.17282026
+              },
+              "imputedRatios": {
+                "grossMargin": 0.36270841,
+                "receivableRevenue": 0.30749241,
+                "cashRevenue": -0.02226519,
+                "debtAssets": 0.43872065,
+                "expenseRevenue": 0.17282026
+              },
+              "missingFeatures": [
+                "debtAssets"
+              ],
+              "cluster": 1,
+              "pca": [
+                0.10338354,
+                0.31118942
+              ],
+              "distanceScore": 6.66
+            },
+            {
+              "id": "S16",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.421571,
+                "receivableRevenue": 0.42959533,
+                "cashRevenue": 0.15646404,
+                "debtAssets": 0.65765947,
+                "expenseRevenue": 0.2063932
+              },
+              "imputedRatios": {
+                "grossMargin": 0.421571,
+                "receivableRevenue": 0.42959533,
+                "cashRevenue": 0.15646404,
+                "debtAssets": 0.65765947,
+                "expenseRevenue": 0.2063932
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                1.44681247,
+                0.92222044
+              ],
+              "distanceScore": 53.326
+            },
+            {
+              "id": "S17",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.19716886,
+                "receivableRevenue": 0.51825258,
+                "cashRevenue": 0.29512609,
+                "debtAssets": 0.49574707,
+                "expenseRevenue": 0.16568133
+              },
+              "imputedRatios": {
+                "grossMargin": 0.19716886,
+                "receivableRevenue": 0.51825258,
+                "cashRevenue": 0.29512609,
+                "debtAssets": 0.49574707,
+                "expenseRevenue": 0.16568133
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                1.74768534,
+                -0.51803555
+              ],
+              "distanceScore": 56.237
+            },
+            {
+              "id": "S18",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.17902584,
+                "receivableRevenue": null,
+                "cashRevenue": 0.24675582,
+                "debtAssets": 0.17353218,
+                "expenseRevenue": 0.22707327
+              },
+              "imputedRatios": {
+                "grossMargin": 0.17902584,
+                "receivableRevenue": 0.36320036,
+                "cashRevenue": 0.24675582,
+                "debtAssets": 0.17353218,
+                "expenseRevenue": 0.22707327
+              },
+              "missingFeatures": [
+                "receivableRevenue"
+              ],
+              "cluster": 2,
+              "pca": [
+                1.33961181,
+                -2.43312403
+              ],
+              "distanceScore": 89.35
+            },
+            {
+              "id": "S19",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.43545691,
+                "receivableRevenue": 0.34894517,
+                "cashRevenue": 0.28067819,
+                "debtAssets": 0.20206115,
+                "expenseRevenue": 0.0630144
+              },
+              "imputedRatios": {
+                "grossMargin": 0.43545691,
+                "receivableRevenue": 0.34894517,
+                "cashRevenue": 0.28067819,
+                "debtAssets": 0.20206115,
+                "expenseRevenue": 0.0630144
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -1.54231277,
+                -1.28687366
+              ],
+              "distanceScore": 74.394
+            },
+            {
+              "id": "S20",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.32876083,
+                "receivableRevenue": 0.56999396,
+                "cashRevenue": 0.26840218,
+                "debtAssets": 0.67830898,
+                "expenseRevenue": 0.21180737
+              },
+              "imputedRatios": {
+                "grossMargin": 0.32876083,
+                "receivableRevenue": 0.56999396,
+                "cashRevenue": 0.26840218,
+                "debtAssets": 0.67830898,
+                "expenseRevenue": 0.21180737
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                2.43581306,
+                0.70479259
+              ],
+              "distanceScore": 86.464
+            },
+            {
+              "id": "S21",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.30203548,
+                "receivableRevenue": 0.45467624,
+                "cashRevenue": 0.11391215,
+                "debtAssets": 0.56619946,
+                "expenseRevenue": 0.16983983
+              },
+              "imputedRatios": {
+                "grossMargin": 0.30203548,
+                "receivableRevenue": 0.45467624,
+                "cashRevenue": 0.11391215,
+                "debtAssets": 0.56619946,
+                "expenseRevenue": 0.16983983
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                1.17655005,
+                0.59362076
+              ],
+              "distanceScore": 16.026
+            },
+            {
+              "id": "S22",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.5069096,
+                "receivableRevenue": 0.2973597,
+                "cashRevenue": -0.04455204,
+                "debtAssets": 0.54855525,
+                "expenseRevenue": 0.0738612
+              },
+              "imputedRatios": {
+                "grossMargin": 0.5069096,
+                "receivableRevenue": 0.2973597,
+                "cashRevenue": -0.04455204,
+                "debtAssets": 0.54855525,
+                "expenseRevenue": 0.0738612
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -1.452931,
+                1.55435994
+              ],
+              "distanceScore": 52.631
+            },
+            {
+              "id": "S23",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.27639638,
+                "receivableRevenue": 0.40366419,
+                "cashRevenue": 0.09846738,
+                "debtAssets": 0.28223892,
+                "expenseRevenue": 0.19511184
+              },
+              "imputedRatios": {
+                "grossMargin": 0.27639638,
+                "receivableRevenue": 0.40366419,
+                "cashRevenue": 0.09846738,
+                "debtAssets": 0.28223892,
+                "expenseRevenue": 0.19511184
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                0.76604512,
+                -0.88900791
+              ],
+              "distanceScore": 29.743
+            },
+            {
+              "id": "S24",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.36257478,
+                "receivableRevenue": 0.29722199,
+                "cashRevenue": -0.01716791,
+                "debtAssets": 0.43872065,
+                "expenseRevenue": 0.15742031
+              },
+              "imputedRatios": {
+                "grossMargin": 0.36257478,
+                "receivableRevenue": 0.29722199,
+                "cashRevenue": -0.01716791,
+                "debtAssets": 0.43872065,
+                "expenseRevenue": 0.15742031
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -0.11661949,
+                0.3146434
+              ],
+              "distanceScore": 0.301
+            }
+          ]
+        },
+        "3": {
+          "inertia": 69.736627,
+          "rows": [
+            {
+              "id": "S01",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.4249363,
+                "receivableRevenue": 0.29576071,
+                "cashRevenue": 0.06599038,
+                "debtAssets": 0.53096681,
+                "expenseRevenue": 0.15292169
+              },
+              "imputedRatios": {
+                "grossMargin": 0.4249363,
+                "receivableRevenue": 0.29576071,
+                "cashRevenue": 0.06599038,
+                "debtAssets": 0.53096681,
+                "expenseRevenue": 0.15292169
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                -0.05699432,
+                0.54910244
+              ],
+              "distanceScore": 0.0
+            },
+            {
+              "id": "S02",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.3137529,
+                "receivableRevenue": 0.06521499,
+                "cashRevenue": 0.16908817,
+                "debtAssets": 0.29457193,
+                "expenseRevenue": 0.15128554
+              },
+              "imputedRatios": {
+                "grossMargin": 0.3137529,
+                "receivableRevenue": 0.06521499,
+                "cashRevenue": 0.16908817,
+                "debtAssets": 0.29457193,
+                "expenseRevenue": 0.15128554
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                -0.77782111,
+                -1.82445773
+              ],
+              "distanceScore": 54.584
+            },
+            {
+              "id": "S03",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.17834438,
+                "receivableRevenue": 0.4354746,
+                "cashRevenue": 0.02238255,
+                "debtAssets": 0.66352908,
+                "expenseRevenue": 0.17065551
+              },
+              "imputedRatios": {
+                "grossMargin": 0.17834438,
+                "receivableRevenue": 0.4354746,
+                "cashRevenue": 0.02238255,
+                "debtAssets": 0.66352908,
+                "expenseRevenue": 0.17065551
+              },
+              "missingFeatures": [],
+              "cluster": 3,
+              "pca": [
+                1.63397506,
+                1.03302105
+              ],
+              "distanceScore": 57.256
+            },
+            {
+              "id": "S04",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.60855365,
+                "receivableRevenue": 0.47459536,
+                "cashRevenue": 0.28161784,
+                "debtAssets": 0.28239857,
+                "expenseRevenue": 0.07744598
+              },
+              "imputedRatios": {
+                "grossMargin": 0.60855365,
+                "receivableRevenue": 0.47459536,
+                "cashRevenue": 0.28161784,
+                "debtAssets": 0.28239857,
+                "expenseRevenue": 0.07744598
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -1.37807418,
+                -0.20864559
+              ],
+              "distanceScore": 87.083
+            },
+            {
+              "id": "S05",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.26456639,
+                "receivableRevenue": 0.25781549,
+                "cashRevenue": 0.23407796,
+                "debtAssets": 0.24680286,
+                "expenseRevenue": 0.16233406
+              },
+              "imputedRatios": {
+                "grossMargin": 0.26456639,
+                "receivableRevenue": 0.25781549,
+                "cashRevenue": 0.23407796,
+                "debtAssets": 0.24680286,
+                "expenseRevenue": 0.16233406
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                0.06899304,
+                -1.91920717
+              ],
+              "distanceScore": 42.228
+            },
+            {
+              "id": "S06",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.32698265,
+                "receivableRevenue": 0.0,
+                "cashRevenue": 0.27943666,
+                "debtAssets": 0.51225565,
+                "expenseRevenue": 0.093548
+              },
+              "imputedRatios": {
+                "grossMargin": 0.32698265,
+                "receivableRevenue": 0.0,
+                "cashRevenue": 0.27943666,
+                "debtAssets": 0.51225565,
+                "expenseRevenue": 0.093548
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                -1.09987057,
+                -1.26256328
+              ],
+              "distanceScore": 82.949
+            },
+            {
+              "id": "S07",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.58509383,
+                "receivableRevenue": 0.36320036,
+                "cashRevenue": 0.19468409,
+                "debtAssets": 0.486681,
+                "expenseRevenue": 0.17655065
+              },
+              "imputedRatios": {
+                "grossMargin": 0.58509383,
+                "receivableRevenue": 0.36320036,
+                "cashRevenue": 0.19468409,
+                "debtAssets": 0.486681,
+                "expenseRevenue": 0.17655065
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -0.00721086,
+                0.33315474
+              ],
+              "distanceScore": 45.331
+            },
+            {
+              "id": "S08",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.17413961,
+                "receivableRevenue": 0.41625316,
+                "cashRevenue": -0.09191726,
+                "debtAssets": 0.35674265,
+                "expenseRevenue": 0.14599151
+              },
+              "imputedRatios": {
+                "grossMargin": 0.17413961,
+                "receivableRevenue": 0.41625316,
+                "cashRevenue": -0.09191726,
+                "debtAssets": 0.35674265,
+                "expenseRevenue": 0.14599151
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                0.4132488,
+                0.16485664
+              ],
+              "distanceScore": 47.759
+            },
+            {
+              "id": "S09",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.2795813,
+                "receivableRevenue": 0.37697169,
+                "cashRevenue": 0.0,
+                "debtAssets": 0.38884535,
+                "expenseRevenue": 0.10980641
+              },
+              "imputedRatios": {
+                "grossMargin": 0.2795813,
+                "receivableRevenue": 0.37697169,
+                "cashRevenue": 0.0,
+                "debtAssets": 0.38884535,
+                "expenseRevenue": 0.10980641
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                -0.31158435,
+                0.20827642
+              ],
+              "distanceScore": 6.723
+            },
+            {
+              "id": "S10",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.49978809,
+                "receivableRevenue": 0.24489374,
+                "cashRevenue": -0.07759475,
+                "debtAssets": 0.36477911,
+                "expenseRevenue": 0.04346705
+              },
+              "imputedRatios": {
+                "grossMargin": 0.49978809,
+                "receivableRevenue": 0.24489374,
+                "cashRevenue": -0.07759475,
+                "debtAssets": 0.36477911,
+                "expenseRevenue": 0.04346705
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -2.43900547,
+                0.81866651
+              ],
+              "distanceScore": 73.028
+            },
+            {
+              "id": "S11",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.38378945,
+                "receivableRevenue": 0.09571423,
+                "cashRevenue": 0.10300613,
+                "debtAssets": 0.40611314,
+                "expenseRevenue": 0.10299317
+              },
+              "imputedRatios": {
+                "grossMargin": 0.38378945,
+                "receivableRevenue": 0.09571423,
+                "cashRevenue": 0.10300613,
+                "debtAssets": 0.40611314,
+                "expenseRevenue": 0.10299317
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                -1.37795014,
+                -0.64004065
+              ],
+              "distanceScore": 37.515
+            },
+            {
+              "id": "S12",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.21289668,
+                "receivableRevenue": 0.17128435,
+                "cashRevenue": -0.07490702,
+                "debtAssets": 0.42832047,
+                "expenseRevenue": 0.07096073
+              },
+              "imputedRatios": {
+                "grossMargin": 0.21289668,
+                "receivableRevenue": 0.17128435,
+                "cashRevenue": -0.07490702,
+                "debtAssets": 0.42832047,
+                "expenseRevenue": 0.07096073
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                -1.20344579,
+                0.08081074
+              ],
+              "distanceScore": 62.332
+            },
+            {
+              "id": "S13",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.61884237,
+                "receivableRevenue": 0.56975232,
+                "cashRevenue": -0.08952377,
+                "debtAssets": 0.50120109,
+                "expenseRevenue": 0.06006344
+              },
+              "imputedRatios": {
+                "grossMargin": 0.61884237,
+                "receivableRevenue": 0.56975232,
+                "cashRevenue": -0.08952377,
+                "debtAssets": 0.50120109,
+                "expenseRevenue": 0.06006344
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -1.37839642,
+                2.6131164
+              ],
+              "distanceScore": 100.0
+            },
+            {
+              "id": "S14",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.15632308,
+                "receivableRevenue": 0.53954108,
+                "cashRevenue": 0.01301297,
+                "debtAssets": 0.55922703,
+                "expenseRevenue": 0.19029981
+              },
+              "imputedRatios": {
+                "grossMargin": 0.15632308,
+                "receivableRevenue": 0.53954108,
+                "cashRevenue": 0.01301297,
+                "debtAssets": 0.55922703,
+                "expenseRevenue": 0.19029981
+              },
+              "missingFeatures": [],
+              "cluster": 3,
+              "pca": [
+                2.01009818,
+                0.78012408
+              ],
+              "distanceScore": 62.447
+            },
+            {
+              "id": "S15",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.36270841,
+                "receivableRevenue": 0.30749241,
+                "cashRevenue": -0.02226519,
+                "debtAssets": null,
+                "expenseRevenue": 0.17282026
+              },
+              "imputedRatios": {
+                "grossMargin": 0.36270841,
+                "receivableRevenue": 0.30749241,
+                "cashRevenue": -0.02226519,
+                "debtAssets": 0.43872065,
+                "expenseRevenue": 0.17282026
+              },
+              "missingFeatures": [
+                "debtAssets"
+              ],
+              "cluster": 2,
+              "pca": [
+                0.10338354,
+                0.31118942
+              ],
+              "distanceScore": 6.66
+            },
+            {
+              "id": "S16",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.421571,
+                "receivableRevenue": 0.42959533,
+                "cashRevenue": 0.15646404,
+                "debtAssets": 0.65765947,
+                "expenseRevenue": 0.2063932
+              },
+              "imputedRatios": {
+                "grossMargin": 0.421571,
+                "receivableRevenue": 0.42959533,
+                "cashRevenue": 0.15646404,
+                "debtAssets": 0.65765947,
+                "expenseRevenue": 0.2063932
+              },
+              "missingFeatures": [],
+              "cluster": 3,
+              "pca": [
+                1.44681247,
+                0.92222044
+              ],
+              "distanceScore": 53.326
+            },
+            {
+              "id": "S17",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.19716886,
+                "receivableRevenue": 0.51825258,
+                "cashRevenue": 0.29512609,
+                "debtAssets": 0.49574707,
+                "expenseRevenue": 0.16568133
+              },
+              "imputedRatios": {
+                "grossMargin": 0.19716886,
+                "receivableRevenue": 0.51825258,
+                "cashRevenue": 0.29512609,
+                "debtAssets": 0.49574707,
+                "expenseRevenue": 0.16568133
+              },
+              "missingFeatures": [],
+              "cluster": 3,
+              "pca": [
+                1.74768534,
+                -0.51803555
+              ],
+              "distanceScore": 56.237
+            },
+            {
+              "id": "S18",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.17902584,
+                "receivableRevenue": null,
+                "cashRevenue": 0.24675582,
+                "debtAssets": 0.17353218,
+                "expenseRevenue": 0.22707327
+              },
+              "imputedRatios": {
+                "grossMargin": 0.17902584,
+                "receivableRevenue": 0.36320036,
+                "cashRevenue": 0.24675582,
+                "debtAssets": 0.17353218,
+                "expenseRevenue": 0.22707327
+              },
+              "missingFeatures": [
+                "receivableRevenue"
+              ],
+              "cluster": 2,
+              "pca": [
+                1.33961181,
+                -2.43312403
+              ],
+              "distanceScore": 89.35
+            },
+            {
+              "id": "S19",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.43545691,
+                "receivableRevenue": 0.34894517,
+                "cashRevenue": 0.28067819,
+                "debtAssets": 0.20206115,
+                "expenseRevenue": 0.0630144
+              },
+              "imputedRatios": {
+                "grossMargin": 0.43545691,
+                "receivableRevenue": 0.34894517,
+                "cashRevenue": 0.28067819,
+                "debtAssets": 0.20206115,
+                "expenseRevenue": 0.0630144
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -1.54231277,
+                -1.28687366
+              ],
+              "distanceScore": 74.394
+            },
+            {
+              "id": "S20",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.32876083,
+                "receivableRevenue": 0.56999396,
+                "cashRevenue": 0.26840218,
+                "debtAssets": 0.67830898,
+                "expenseRevenue": 0.21180737
+              },
+              "imputedRatios": {
+                "grossMargin": 0.32876083,
+                "receivableRevenue": 0.56999396,
+                "cashRevenue": 0.26840218,
+                "debtAssets": 0.67830898,
+                "expenseRevenue": 0.21180737
+              },
+              "missingFeatures": [],
+              "cluster": 3,
+              "pca": [
+                2.43581306,
+                0.70479259
+              ],
+              "distanceScore": 86.464
+            },
+            {
+              "id": "S21",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.30203548,
+                "receivableRevenue": 0.45467624,
+                "cashRevenue": 0.11391215,
+                "debtAssets": 0.56619946,
+                "expenseRevenue": 0.16983983
+              },
+              "imputedRatios": {
+                "grossMargin": 0.30203548,
+                "receivableRevenue": 0.45467624,
+                "cashRevenue": 0.11391215,
+                "debtAssets": 0.56619946,
+                "expenseRevenue": 0.16983983
+              },
+              "missingFeatures": [],
+              "cluster": 3,
+              "pca": [
+                1.17655005,
+                0.59362076
+              ],
+              "distanceScore": 16.026
+            },
+            {
+              "id": "S22",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.5069096,
+                "receivableRevenue": 0.2973597,
+                "cashRevenue": -0.04455204,
+                "debtAssets": 0.54855525,
+                "expenseRevenue": 0.0738612
+              },
+              "imputedRatios": {
+                "grossMargin": 0.5069096,
+                "receivableRevenue": 0.2973597,
+                "cashRevenue": -0.04455204,
+                "debtAssets": 0.54855525,
+                "expenseRevenue": 0.0738612
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -1.452931,
+                1.55435994
+              ],
+              "distanceScore": 52.631
+            },
+            {
+              "id": "S23",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.27639638,
+                "receivableRevenue": 0.40366419,
+                "cashRevenue": 0.09846738,
+                "debtAssets": 0.28223892,
+                "expenseRevenue": 0.19511184
+              },
+              "imputedRatios": {
+                "grossMargin": 0.27639638,
+                "receivableRevenue": 0.40366419,
+                "cashRevenue": 0.09846738,
+                "debtAssets": 0.28223892,
+                "expenseRevenue": 0.19511184
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                0.76604512,
+                -0.88900791
+              ],
+              "distanceScore": 29.743
+            },
+            {
+              "id": "S24",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.36257478,
+                "receivableRevenue": 0.29722199,
+                "cashRevenue": -0.01716791,
+                "debtAssets": 0.43872065,
+                "expenseRevenue": 0.15742031
+              },
+              "imputedRatios": {
+                "grossMargin": 0.36257478,
+                "receivableRevenue": 0.29722199,
+                "cashRevenue": -0.01716791,
+                "debtAssets": 0.43872065,
+                "expenseRevenue": 0.15742031
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                -0.11661949,
+                0.3146434
+              ],
+              "distanceScore": 0.301
+            }
+          ]
+        },
+        "4": {
+          "inertia": 58.308259,
+          "rows": [
+            {
+              "id": "S01",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.4249363,
+                "receivableRevenue": 0.29576071,
+                "cashRevenue": 0.06599038,
+                "debtAssets": 0.53096681,
+                "expenseRevenue": 0.15292169
+              },
+              "imputedRatios": {
+                "grossMargin": 0.4249363,
+                "receivableRevenue": 0.29576071,
+                "cashRevenue": 0.06599038,
+                "debtAssets": 0.53096681,
+                "expenseRevenue": 0.15292169
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -0.05699432,
+                0.54910244
+              ],
+              "distanceScore": 0.0
+            },
+            {
+              "id": "S02",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.3137529,
+                "receivableRevenue": 0.06521499,
+                "cashRevenue": 0.16908817,
+                "debtAssets": 0.29457193,
+                "expenseRevenue": 0.15128554
+              },
+              "imputedRatios": {
+                "grossMargin": 0.3137529,
+                "receivableRevenue": 0.06521499,
+                "cashRevenue": 0.16908817,
+                "debtAssets": 0.29457193,
+                "expenseRevenue": 0.15128554
+              },
+              "missingFeatures": [],
+              "cluster": 4,
+              "pca": [
+                -0.77782111,
+                -1.82445773
+              ],
+              "distanceScore": 54.584
+            },
+            {
+              "id": "S03",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.17834438,
+                "receivableRevenue": 0.4354746,
+                "cashRevenue": 0.02238255,
+                "debtAssets": 0.66352908,
+                "expenseRevenue": 0.17065551
+              },
+              "imputedRatios": {
+                "grossMargin": 0.17834438,
+                "receivableRevenue": 0.4354746,
+                "cashRevenue": 0.02238255,
+                "debtAssets": 0.66352908,
+                "expenseRevenue": 0.17065551
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                1.63397506,
+                1.03302105
+              ],
+              "distanceScore": 57.256
+            },
+            {
+              "id": "S04",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.60855365,
+                "receivableRevenue": 0.47459536,
+                "cashRevenue": 0.28161784,
+                "debtAssets": 0.28239857,
+                "expenseRevenue": 0.07744598
+              },
+              "imputedRatios": {
+                "grossMargin": 0.60855365,
+                "receivableRevenue": 0.47459536,
+                "cashRevenue": 0.28161784,
+                "debtAssets": 0.28239857,
+                "expenseRevenue": 0.07744598
+              },
+              "missingFeatures": [],
+              "cluster": 3,
+              "pca": [
+                -1.37807418,
+                -0.20864559
+              ],
+              "distanceScore": 87.083
+            },
+            {
+              "id": "S05",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.26456639,
+                "receivableRevenue": 0.25781549,
+                "cashRevenue": 0.23407796,
+                "debtAssets": 0.24680286,
+                "expenseRevenue": 0.16233406
+              },
+              "imputedRatios": {
+                "grossMargin": 0.26456639,
+                "receivableRevenue": 0.25781549,
+                "cashRevenue": 0.23407796,
+                "debtAssets": 0.24680286,
+                "expenseRevenue": 0.16233406
+              },
+              "missingFeatures": [],
+              "cluster": 4,
+              "pca": [
+                0.06899304,
+                -1.91920717
+              ],
+              "distanceScore": 42.228
+            },
+            {
+              "id": "S06",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.32698265,
+                "receivableRevenue": 0.0,
+                "cashRevenue": 0.27943666,
+                "debtAssets": 0.51225565,
+                "expenseRevenue": 0.093548
+              },
+              "imputedRatios": {
+                "grossMargin": 0.32698265,
+                "receivableRevenue": 0.0,
+                "cashRevenue": 0.27943666,
+                "debtAssets": 0.51225565,
+                "expenseRevenue": 0.093548
+              },
+              "missingFeatures": [],
+              "cluster": 4,
+              "pca": [
+                -1.09987057,
+                -1.26256328
+              ],
+              "distanceScore": 82.949
+            },
+            {
+              "id": "S07",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.58509383,
+                "receivableRevenue": 0.36320036,
+                "cashRevenue": 0.19468409,
+                "debtAssets": 0.486681,
+                "expenseRevenue": 0.17655065
+              },
+              "imputedRatios": {
+                "grossMargin": 0.58509383,
+                "receivableRevenue": 0.36320036,
+                "cashRevenue": 0.19468409,
+                "debtAssets": 0.486681,
+                "expenseRevenue": 0.17655065
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                -0.00721086,
+                0.33315474
+              ],
+              "distanceScore": 45.331
+            },
+            {
+              "id": "S08",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.17413961,
+                "receivableRevenue": 0.41625316,
+                "cashRevenue": -0.09191726,
+                "debtAssets": 0.35674265,
+                "expenseRevenue": 0.14599151
+              },
+              "imputedRatios": {
+                "grossMargin": 0.17413961,
+                "receivableRevenue": 0.41625316,
+                "cashRevenue": -0.09191726,
+                "debtAssets": 0.35674265,
+                "expenseRevenue": 0.14599151
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                0.4132488,
+                0.16485664
+              ],
+              "distanceScore": 47.759
+            },
+            {
+              "id": "S09",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.2795813,
+                "receivableRevenue": 0.37697169,
+                "cashRevenue": 0.0,
+                "debtAssets": 0.38884535,
+                "expenseRevenue": 0.10980641
+              },
+              "imputedRatios": {
+                "grossMargin": 0.2795813,
+                "receivableRevenue": 0.37697169,
+                "cashRevenue": 0.0,
+                "debtAssets": 0.38884535,
+                "expenseRevenue": 0.10980641
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -0.31158435,
+                0.20827642
+              ],
+              "distanceScore": 6.723
+            },
+            {
+              "id": "S10",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.49978809,
+                "receivableRevenue": 0.24489374,
+                "cashRevenue": -0.07759475,
+                "debtAssets": 0.36477911,
+                "expenseRevenue": 0.04346705
+              },
+              "imputedRatios": {
+                "grossMargin": 0.49978809,
+                "receivableRevenue": 0.24489374,
+                "cashRevenue": -0.07759475,
+                "debtAssets": 0.36477911,
+                "expenseRevenue": 0.04346705
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -2.43900547,
+                0.81866651
+              ],
+              "distanceScore": 73.028
+            },
+            {
+              "id": "S11",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.38378945,
+                "receivableRevenue": 0.09571423,
+                "cashRevenue": 0.10300613,
+                "debtAssets": 0.40611314,
+                "expenseRevenue": 0.10299317
+              },
+              "imputedRatios": {
+                "grossMargin": 0.38378945,
+                "receivableRevenue": 0.09571423,
+                "cashRevenue": 0.10300613,
+                "debtAssets": 0.40611314,
+                "expenseRevenue": 0.10299317
+              },
+              "missingFeatures": [],
+              "cluster": 4,
+              "pca": [
+                -1.37795014,
+                -0.64004065
+              ],
+              "distanceScore": 37.515
+            },
+            {
+              "id": "S12",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.21289668,
+                "receivableRevenue": 0.17128435,
+                "cashRevenue": -0.07490702,
+                "debtAssets": 0.42832047,
+                "expenseRevenue": 0.07096073
+              },
+              "imputedRatios": {
+                "grossMargin": 0.21289668,
+                "receivableRevenue": 0.17128435,
+                "cashRevenue": -0.07490702,
+                "debtAssets": 0.42832047,
+                "expenseRevenue": 0.07096073
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -1.20344579,
+                0.08081074
+              ],
+              "distanceScore": 62.332
+            },
+            {
+              "id": "S13",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.61884237,
+                "receivableRevenue": 0.56975232,
+                "cashRevenue": -0.08952377,
+                "debtAssets": 0.50120109,
+                "expenseRevenue": 0.06006344
+              },
+              "imputedRatios": {
+                "grossMargin": 0.61884237,
+                "receivableRevenue": 0.56975232,
+                "cashRevenue": -0.08952377,
+                "debtAssets": 0.50120109,
+                "expenseRevenue": 0.06006344
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -1.37839642,
+                2.6131164
+              ],
+              "distanceScore": 100.0
+            },
+            {
+              "id": "S14",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.15632308,
+                "receivableRevenue": 0.53954108,
+                "cashRevenue": 0.01301297,
+                "debtAssets": 0.55922703,
+                "expenseRevenue": 0.19029981
+              },
+              "imputedRatios": {
+                "grossMargin": 0.15632308,
+                "receivableRevenue": 0.53954108,
+                "cashRevenue": 0.01301297,
+                "debtAssets": 0.55922703,
+                "expenseRevenue": 0.19029981
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                2.01009818,
+                0.78012408
+              ],
+              "distanceScore": 62.447
+            },
+            {
+              "id": "S15",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.36270841,
+                "receivableRevenue": 0.30749241,
+                "cashRevenue": -0.02226519,
+                "debtAssets": null,
+                "expenseRevenue": 0.17282026
+              },
+              "imputedRatios": {
+                "grossMargin": 0.36270841,
+                "receivableRevenue": 0.30749241,
+                "cashRevenue": -0.02226519,
+                "debtAssets": 0.43872065,
+                "expenseRevenue": 0.17282026
+              },
+              "missingFeatures": [
+                "debtAssets"
+              ],
+              "cluster": 1,
+              "pca": [
+                0.10338354,
+                0.31118942
+              ],
+              "distanceScore": 6.66
+            },
+            {
+              "id": "S16",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.421571,
+                "receivableRevenue": 0.42959533,
+                "cashRevenue": 0.15646404,
+                "debtAssets": 0.65765947,
+                "expenseRevenue": 0.2063932
+              },
+              "imputedRatios": {
+                "grossMargin": 0.421571,
+                "receivableRevenue": 0.42959533,
+                "cashRevenue": 0.15646404,
+                "debtAssets": 0.65765947,
+                "expenseRevenue": 0.2063932
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                1.44681247,
+                0.92222044
+              ],
+              "distanceScore": 53.326
+            },
+            {
+              "id": "S17",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.19716886,
+                "receivableRevenue": 0.51825258,
+                "cashRevenue": 0.29512609,
+                "debtAssets": 0.49574707,
+                "expenseRevenue": 0.16568133
+              },
+              "imputedRatios": {
+                "grossMargin": 0.19716886,
+                "receivableRevenue": 0.51825258,
+                "cashRevenue": 0.29512609,
+                "debtAssets": 0.49574707,
+                "expenseRevenue": 0.16568133
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                1.74768534,
+                -0.51803555
+              ],
+              "distanceScore": 56.237
+            },
+            {
+              "id": "S18",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.17902584,
+                "receivableRevenue": null,
+                "cashRevenue": 0.24675582,
+                "debtAssets": 0.17353218,
+                "expenseRevenue": 0.22707327
+              },
+              "imputedRatios": {
+                "grossMargin": 0.17902584,
+                "receivableRevenue": 0.36320036,
+                "cashRevenue": 0.24675582,
+                "debtAssets": 0.17353218,
+                "expenseRevenue": 0.22707327
+              },
+              "missingFeatures": [
+                "receivableRevenue"
+              ],
+              "cluster": 4,
+              "pca": [
+                1.33961181,
+                -2.43312403
+              ],
+              "distanceScore": 89.35
+            },
+            {
+              "id": "S19",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.43545691,
+                "receivableRevenue": 0.34894517,
+                "cashRevenue": 0.28067819,
+                "debtAssets": 0.20206115,
+                "expenseRevenue": 0.0630144
+              },
+              "imputedRatios": {
+                "grossMargin": 0.43545691,
+                "receivableRevenue": 0.34894517,
+                "cashRevenue": 0.28067819,
+                "debtAssets": 0.20206115,
+                "expenseRevenue": 0.0630144
+              },
+              "missingFeatures": [],
+              "cluster": 3,
+              "pca": [
+                -1.54231277,
+                -1.28687366
+              ],
+              "distanceScore": 74.394
+            },
+            {
+              "id": "S20",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.32876083,
+                "receivableRevenue": 0.56999396,
+                "cashRevenue": 0.26840218,
+                "debtAssets": 0.67830898,
+                "expenseRevenue": 0.21180737
+              },
+              "imputedRatios": {
+                "grossMargin": 0.32876083,
+                "receivableRevenue": 0.56999396,
+                "cashRevenue": 0.26840218,
+                "debtAssets": 0.67830898,
+                "expenseRevenue": 0.21180737
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                2.43581306,
+                0.70479259
+              ],
+              "distanceScore": 86.464
+            },
+            {
+              "id": "S21",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.30203548,
+                "receivableRevenue": 0.45467624,
+                "cashRevenue": 0.11391215,
+                "debtAssets": 0.56619946,
+                "expenseRevenue": 0.16983983
+              },
+              "imputedRatios": {
+                "grossMargin": 0.30203548,
+                "receivableRevenue": 0.45467624,
+                "cashRevenue": 0.11391215,
+                "debtAssets": 0.56619946,
+                "expenseRevenue": 0.16983983
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                1.17655005,
+                0.59362076
+              ],
+              "distanceScore": 16.026
+            },
+            {
+              "id": "S22",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.5069096,
+                "receivableRevenue": 0.2973597,
+                "cashRevenue": -0.04455204,
+                "debtAssets": 0.54855525,
+                "expenseRevenue": 0.0738612
+              },
+              "imputedRatios": {
+                "grossMargin": 0.5069096,
+                "receivableRevenue": 0.2973597,
+                "cashRevenue": -0.04455204,
+                "debtAssets": 0.54855525,
+                "expenseRevenue": 0.0738612
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -1.452931,
+                1.55435994
+              ],
+              "distanceScore": 52.631
+            },
+            {
+              "id": "S23",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.27639638,
+                "receivableRevenue": 0.40366419,
+                "cashRevenue": 0.09846738,
+                "debtAssets": 0.28223892,
+                "expenseRevenue": 0.19511184
+              },
+              "imputedRatios": {
+                "grossMargin": 0.27639638,
+                "receivableRevenue": 0.40366419,
+                "cashRevenue": 0.09846738,
+                "debtAssets": 0.28223892,
+                "expenseRevenue": 0.19511184
+              },
+              "missingFeatures": [],
+              "cluster": 4,
+              "pca": [
+                0.76604512,
+                -0.88900791
+              ],
+              "distanceScore": 29.743
+            },
+            {
+              "id": "S24",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.36257478,
+                "receivableRevenue": 0.29722199,
+                "cashRevenue": -0.01716791,
+                "debtAssets": 0.43872065,
+                "expenseRevenue": 0.15742031
+              },
+              "imputedRatios": {
+                "grossMargin": 0.36257478,
+                "receivableRevenue": 0.29722199,
+                "cashRevenue": -0.01716791,
+                "debtAssets": 0.43872065,
+                "expenseRevenue": 0.15742031
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -0.11661949,
+                0.3146434
+              ],
+              "distanceScore": 0.301
+            }
+          ]
+        }
+      }
+    },
+    "2024": {
+      "medians": {
+        "grossMargin": 0.31757334,
+        "receivableRevenue": 0.40690035,
+        "cashRevenue": 0.17197716,
+        "debtAssets": 0.46361004,
+        "expenseRevenue": 0.14736149
+      },
+      "explainedVariance": [
+        0.29342964,
+        0.2332413
+      ],
+      "standardization": {
+        "mean": [
+          0.3175996067304116,
+          0.3844795870927496,
+          0.12707063082181064,
+          0.4825219102585894,
+          0.1381467196188034
+        ],
+        "scale": [
+          0.11984406724248532,
+          0.17018836528017317,
+          0.12200159878431449,
+          0.1388323603932682,
+          0.05687152919785306
+        ]
+      },
+      "variants": {
+        "2": {
+          "inertia": 95.5104,
+          "rows": [
+            {
+              "id": "S01",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.58914586,
+                "receivableRevenue": 0.07977364,
+                "cashRevenue": -0.01150638,
+                "debtAssets": 0.59602645,
+                "expenseRevenue": 0.19651968
+              },
+              "imputedRatios": {
+                "grossMargin": 0.58914586,
+                "receivableRevenue": 0.07977364,
+                "cashRevenue": -0.01150638,
+                "debtAssets": 0.59602645,
+                "expenseRevenue": 0.19651968
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                0.73981406,
+                1.91356487
+              ],
+              "distanceScore": 100.0
+            },
+            {
+              "id": "S02",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.22684592,
+                "receivableRevenue": 0.40327661,
+                "cashRevenue": 0.19082428,
+                "debtAssets": 0.44202994,
+                "expenseRevenue": 0.21647651
+              },
+              "imputedRatios": {
+                "grossMargin": 0.22684592,
+                "receivableRevenue": 0.40327661,
+                "cashRevenue": 0.19082428,
+                "debtAssets": 0.44202994,
+                "expenseRevenue": 0.21647651
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                0.82152315,
+                -0.22219632
+              ],
+              "distanceScore": 15.463
+            },
+            {
+              "id": "S03",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.29030895,
+                "receivableRevenue": 0.06487547,
+                "cashRevenue": 0.29443942,
+                "debtAssets": 0.56132548,
+                "expenseRevenue": 0.05335321
+              },
+              "imputedRatios": {
+                "grossMargin": 0.29030895,
+                "receivableRevenue": 0.06487547,
+                "cashRevenue": 0.29443942,
+                "debtAssets": 0.56132548,
+                "expenseRevenue": 0.05335321
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                -0.5031228,
+                1.65438162
+              ],
+              "distanceScore": 72.899
+            },
+            {
+              "id": "S04",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.33242554,
+                "receivableRevenue": 0.57863484,
+                "cashRevenue": 0.2938417,
+                "debtAssets": 0.33794504,
+                "expenseRevenue": 0.04743771
+              },
+              "imputedRatios": {
+                "grossMargin": 0.33242554,
+                "receivableRevenue": 0.57863484,
+                "cashRevenue": 0.2938417,
+                "debtAssets": 0.33794504,
+                "expenseRevenue": 0.04743771
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                -2.12855199,
+                -1.03614097
+              ],
+              "distanceScore": 61.898
+            },
+            {
+              "id": "S05",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.28332272,
+                "receivableRevenue": 0.38661723,
+                "cashRevenue": -0.09652369,
+                "debtAssets": 0.4290273,
+                "expenseRevenue": 0.07641876
+              },
+              "imputedRatios": {
+                "grossMargin": 0.28332272,
+                "receivableRevenue": 0.38661723,
+                "cashRevenue": -0.09652369,
+                "debtAssets": 0.4290273,
+                "expenseRevenue": 0.07641876
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                0.44833148,
+                -1.01384707
+              ],
+              "distanceScore": 40.465
+            },
+            {
+              "id": "S06",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.24546199,
+                "receivableRevenue": 0.0,
+                "cashRevenue": 0.17406995,
+                "debtAssets": 0.32648273,
+                "expenseRevenue": 0.17591858
+              },
+              "imputedRatios": {
+                "grossMargin": 0.24546199,
+                "receivableRevenue": 0.0,
+                "cashRevenue": 0.17406995,
+                "debtAssets": 0.32648273,
+                "expenseRevenue": 0.17591858
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                1.4497659,
+                0.36449672
+              ],
+              "distanceScore": 66.668
+            },
+            {
+              "id": "S07",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.50866556,
+                "receivableRevenue": 0.52376799,
+                "cashRevenue": 0.27582818,
+                "debtAssets": 0.57969367,
+                "expenseRevenue": 0.09088644
+              },
+              "imputedRatios": {
+                "grossMargin": 0.50866556,
+                "receivableRevenue": 0.52376799,
+                "cashRevenue": 0.27582818,
+                "debtAssets": 0.57969367,
+                "expenseRevenue": 0.09088644
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                -2.21985305,
+                0.84197879
+              ],
+              "distanceScore": 52.574
+            },
+            {
+              "id": "S08",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.21408357,
+                "receivableRevenue": 0.27994114,
+                "cashRevenue": -0.00583783,
+                "debtAssets": 0.37385808,
+                "expenseRevenue": 0.19527637
+              },
+              "imputedRatios": {
+                "grossMargin": 0.21408357,
+                "receivableRevenue": 0.27994114,
+                "cashRevenue": -0.00583783,
+                "debtAssets": 0.37385808,
+                "expenseRevenue": 0.19527637
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                1.7736102,
+                -0.75280791
+              ],
+              "distanceScore": 30.397
+            },
+            {
+              "id": "S09",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.12904784,
+                "receivableRevenue": 0.31913463,
+                "cashRevenue": 0.0,
+                "debtAssets": 0.55988323,
+                "expenseRevenue": 0.07903198
+              },
+              "imputedRatios": {
+                "grossMargin": 0.12904784,
+                "receivableRevenue": 0.31913463,
+                "cashRevenue": 0.0,
+                "debtAssets": 0.55988323,
+                "expenseRevenue": 0.07903198
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                0.96420165,
+                -0.22580926
+              ],
+              "distanceScore": 44.208
+            },
+            {
+              "id": "S10",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.41159038,
+                "receivableRevenue": 0.41666385,
+                "cashRevenue": 0.27066645,
+                "debtAssets": 0.48519013,
+                "expenseRevenue": 0.18370846
+              },
+              "imputedRatios": {
+                "grossMargin": 0.41159038,
+                "receivableRevenue": 0.41666385,
+                "cashRevenue": 0.27066645,
+                "debtAssets": 0.48519013,
+                "expenseRevenue": 0.18370846
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                -0.64108072,
+                0.55532586
+              ],
+              "distanceScore": 13.009
+            },
+            {
+              "id": "S11",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.37600987,
+                "receivableRevenue": 0.39816651,
+                "cashRevenue": 0.17951478,
+                "debtAssets": 0.68763688,
+                "expenseRevenue": 0.16242562
+              },
+              "imputedRatios": {
+                "grossMargin": 0.37600987,
+                "receivableRevenue": 0.39816651,
+                "cashRevenue": 0.17951478,
+                "debtAssets": 0.68763688,
+                "expenseRevenue": 0.16242562
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -0.2270446,
+                1.34642296
+              ],
+              "distanceScore": 14.762
+            },
+            {
+              "id": "S12",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": null,
+                "receivableRevenue": null,
+                "cashRevenue": null,
+                "debtAssets": 0.19816096,
+                "expenseRevenue": null
+              },
+              "imputedRatios": {
+                "grossMargin": 0.31757334,
+                "receivableRevenue": 0.40690035,
+                "cashRevenue": 0.17197716,
+                "debtAssets": 0.19816096,
+                "expenseRevenue": 0.14736149
+              },
+              "missingFeatures": [
+                "grossMargin",
+                "receivableRevenue",
+                "cashRevenue",
+                "expenseRevenue"
+              ],
+              "cluster": 2,
+              "pca": [
+                -0.21488278,
+                -1.45339274
+              ],
+              "distanceScore": 35.849
+            },
+            {
+              "id": "S13",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.42201163,
+                "receivableRevenue": 0.53268317,
+                "cashRevenue": 0.17197716,
+                "debtAssets": 0.54943058,
+                "expenseRevenue": 0.14445073
+              },
+              "imputedRatios": {
+                "grossMargin": 0.42201163,
+                "receivableRevenue": 0.53268317,
+                "cashRevenue": 0.17197716,
+                "debtAssets": 0.54943058,
+                "expenseRevenue": 0.14445073
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                -0.94847988,
+                0.26072423
+              ],
+              "distanceScore": 0.0
+            },
+            {
+              "id": "S14",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.15571219,
+                "receivableRevenue": 0.46150856,
+                "cashRevenue": 0.00041446,
+                "debtAssets": 0.43198383,
+                "expenseRevenue": 0.22595803
+              },
+              "imputedRatios": {
+                "grossMargin": 0.15571219,
+                "receivableRevenue": 0.46150856,
+                "cashRevenue": 0.00041446,
+                "debtAssets": 0.43198383,
+                "expenseRevenue": 0.22595803
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                1.83295035,
+                -1.08854026
+              ],
+              "distanceScore": 49.906
+            },
+            {
+              "id": "S15",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.21362781,
+                "receivableRevenue": 0.53511272,
+                "cashRevenue": 0.18551219,
+                "debtAssets": 0.4308481,
+                "expenseRevenue": 0.15027225
+              },
+              "imputedRatios": {
+                "grossMargin": 0.21362781,
+                "receivableRevenue": 0.53511272,
+                "cashRevenue": 0.18551219,
+                "debtAssets": 0.4308481,
+                "expenseRevenue": 0.15027225
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -0.06992204,
+                -0.82259525
+              ],
+              "distanceScore": 0.943
+            },
+            {
+              "id": "S16",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.34288977,
+                "receivableRevenue": 0.56956555,
+                "cashRevenue": 0.08805927,
+                "debtAssets": 0.4234297,
+                "expenseRevenue": 0.05072643
+              },
+              "imputedRatios": {
+                "grossMargin": 0.34288977,
+                "receivableRevenue": 0.56956555,
+                "cashRevenue": 0.08805927,
+                "debtAssets": 0.4234297,
+                "expenseRevenue": 0.05072643
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                -1.27385366,
+                -1.04231178
+              ],
+              "distanceScore": 29.655
+            },
+            {
+              "id": "S17",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.23102088,
+                "receivableRevenue": 0.08882934,
+                "cashRevenue": 0.18699513,
+                "debtAssets": 0.6830906,
+                "expenseRevenue": 0.19900098
+              },
+              "imputedRatios": {
+                "grossMargin": 0.23102088,
+                "receivableRevenue": 0.08882934,
+                "cashRevenue": 0.18699513,
+                "debtAssets": 0.6830906,
+                "expenseRevenue": 0.19900098
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                1.52644479,
+                2.00988576
+              ],
+              "distanceScore": 63.801
+            },
+            {
+              "id": "S18",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.25340541,
+                "receivableRevenue": null,
+                "cashRevenue": -0.08010434,
+                "debtAssets": 0.29821815,
+                "expenseRevenue": 0.21086455
+              },
+              "imputedRatios": {
+                "grossMargin": 0.25340541,
+                "receivableRevenue": 0.40690035,
+                "cashRevenue": -0.08010434,
+                "debtAssets": 0.29821815,
+                "expenseRevenue": 0.21086455
+              },
+              "missingFeatures": [
+                "receivableRevenue"
+              ],
+              "cluster": 1,
+              "pca": [
+                1.69970678,
+                -1.62194008
+              ],
+              "distanceScore": 59.681
+            },
+            {
+              "id": "S19",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.44205138,
+                "receivableRevenue": 0.28740383,
+                "cashRevenue": 0.11555557,
+                "debtAssets": 0.51539622,
+                "expenseRevenue": 0.04745106
+              },
+              "imputedRatios": {
+                "grossMargin": 0.44205138,
+                "receivableRevenue": 0.28740383,
+                "cashRevenue": 0.11555557,
+                "debtAssets": 0.51539622,
+                "expenseRevenue": 0.04745106
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                -1.09310994,
+                0.61855586
+              ],
+              "distanceScore": 31.405
+            },
+            {
+              "id": "S20",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.31757334,
+                "receivableRevenue": 0.41052409,
+                "cashRevenue": 0.04450412,
+                "debtAssets": 0.71694777,
+                "expenseRevenue": 0.15470336
+              },
+              "imputedRatios": {
+                "grossMargin": 0.31757334,
+                "receivableRevenue": 0.41052409,
+                "cashRevenue": 0.04450412,
+                "debtAssets": 0.71694777,
+                "expenseRevenue": 0.15470336
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                0.47223524,
+                0.97740503
+              ],
+              "distanceScore": 23.655
+            },
+            {
+              "id": "S21",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.33127532,
+                "receivableRevenue": 0.57277766,
+                "cashRevenue": 0.11445332,
+                "debtAssets": 0.69129459,
+                "expenseRevenue": null
+              },
+              "imputedRatios": {
+                "grossMargin": 0.33127532,
+                "receivableRevenue": 0.57277766,
+                "cashRevenue": 0.11445332,
+                "debtAssets": 0.69129459,
+                "expenseRevenue": 0.14736149
+              },
+              "missingFeatures": [
+                "expenseRevenue"
+              ],
+              "cluster": 1,
+              "pca": [
+                -0.36633842,
+                0.53570336
+              ],
+              "distanceScore": 25.245
+            },
+            {
+              "id": "S22",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.53927548,
+                "receivableRevenue": 0.57824798,
+                "cashRevenue": 0.28534988,
+                "debtAssets": 0.27361091,
+                "expenseRevenue": 0.13923964
+              },
+              "imputedRatios": {
+                "grossMargin": 0.53927548,
+                "receivableRevenue": 0.57824798,
+                "cashRevenue": 0.28534988,
+                "debtAssets": 0.27361091,
+                "expenseRevenue": 0.13923964
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                -2.1455218,
+                -0.79148899
+              ],
+              "distanceScore": 78.637
+            },
+            {
+              "id": "S23",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.31953748,
+                "receivableRevenue": 0.53280602,
+                "cashRevenue": -0.04411895,
+                "debtAssets": 0.41506097,
+                "expenseRevenue": 0.08774261
+              },
+              "imputedRatios": {
+                "grossMargin": 0.31953748,
+                "receivableRevenue": 0.53280602,
+                "cashRevenue": -0.04411895,
+                "debtAssets": 0.41506097,
+                "expenseRevenue": 0.08774261
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -0.19758288,
+                -1.31029857
+              ],
+              "distanceScore": 28.072
+            },
+            {
+              "id": "S24",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.12952833,
+                "receivableRevenue": 0.39339856,
+                "cashRevenue": 0.24380333,
+                "debtAssets": 0.57395453,
+                "expenseRevenue": 0.13293533
+              },
+              "imputedRatios": {
+                "grossMargin": 0.12952833,
+                "receivableRevenue": 0.39339856,
+                "cashRevenue": 0.24380333,
+                "debtAssets": 0.57395453,
+                "expenseRevenue": 0.13293533
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                0.30076097,
+                0.30292414
+              ],
+              "distanceScore": 29.01
+            }
+          ]
+        },
+        "3": {
+          "inertia": 77.936822,
+          "rows": [
+            {
+              "id": "S01",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.58914586,
+                "receivableRevenue": 0.07977364,
+                "cashRevenue": -0.01150638,
+                "debtAssets": 0.59602645,
+                "expenseRevenue": 0.19651968
+              },
+              "imputedRatios": {
+                "grossMargin": 0.58914586,
+                "receivableRevenue": 0.07977364,
+                "cashRevenue": -0.01150638,
+                "debtAssets": 0.59602645,
+                "expenseRevenue": 0.19651968
+              },
+              "missingFeatures": [],
+              "cluster": 3,
+              "pca": [
+                0.73981406,
+                1.91356487
+              ],
+              "distanceScore": 100.0
+            },
+            {
+              "id": "S02",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.22684592,
+                "receivableRevenue": 0.40327661,
+                "cashRevenue": 0.19082428,
+                "debtAssets": 0.44202994,
+                "expenseRevenue": 0.21647651
+              },
+              "imputedRatios": {
+                "grossMargin": 0.22684592,
+                "receivableRevenue": 0.40327661,
+                "cashRevenue": 0.19082428,
+                "debtAssets": 0.44202994,
+                "expenseRevenue": 0.21647651
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                0.82152315,
+                -0.22219632
+              ],
+              "distanceScore": 15.463
+            },
+            {
+              "id": "S03",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.29030895,
+                "receivableRevenue": 0.06487547,
+                "cashRevenue": 0.29443942,
+                "debtAssets": 0.56132548,
+                "expenseRevenue": 0.05335321
+              },
+              "imputedRatios": {
+                "grossMargin": 0.29030895,
+                "receivableRevenue": 0.06487547,
+                "cashRevenue": 0.29443942,
+                "debtAssets": 0.56132548,
+                "expenseRevenue": 0.05335321
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -0.5031228,
+                1.65438162
+              ],
+              "distanceScore": 72.899
+            },
+            {
+              "id": "S04",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.33242554,
+                "receivableRevenue": 0.57863484,
+                "cashRevenue": 0.2938417,
+                "debtAssets": 0.33794504,
+                "expenseRevenue": 0.04743771
+              },
+              "imputedRatios": {
+                "grossMargin": 0.33242554,
+                "receivableRevenue": 0.57863484,
+                "cashRevenue": 0.2938417,
+                "debtAssets": 0.33794504,
+                "expenseRevenue": 0.04743771
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -2.12855199,
+                -1.03614097
+              ],
+              "distanceScore": 61.898
+            },
+            {
+              "id": "S05",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.28332272,
+                "receivableRevenue": 0.38661723,
+                "cashRevenue": -0.09652369,
+                "debtAssets": 0.4290273,
+                "expenseRevenue": 0.07641876
+              },
+              "imputedRatios": {
+                "grossMargin": 0.28332272,
+                "receivableRevenue": 0.38661723,
+                "cashRevenue": -0.09652369,
+                "debtAssets": 0.4290273,
+                "expenseRevenue": 0.07641876
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                0.44833148,
+                -1.01384707
+              ],
+              "distanceScore": 40.465
+            },
+            {
+              "id": "S06",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.24546199,
+                "receivableRevenue": 0.0,
+                "cashRevenue": 0.17406995,
+                "debtAssets": 0.32648273,
+                "expenseRevenue": 0.17591858
+              },
+              "imputedRatios": {
+                "grossMargin": 0.24546199,
+                "receivableRevenue": 0.0,
+                "cashRevenue": 0.17406995,
+                "debtAssets": 0.32648273,
+                "expenseRevenue": 0.17591858
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                1.4497659,
+                0.36449672
+              ],
+              "distanceScore": 66.668
+            },
+            {
+              "id": "S07",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.50866556,
+                "receivableRevenue": 0.52376799,
+                "cashRevenue": 0.27582818,
+                "debtAssets": 0.57969367,
+                "expenseRevenue": 0.09088644
+              },
+              "imputedRatios": {
+                "grossMargin": 0.50866556,
+                "receivableRevenue": 0.52376799,
+                "cashRevenue": 0.27582818,
+                "debtAssets": 0.57969367,
+                "expenseRevenue": 0.09088644
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -2.21985305,
+                0.84197879
+              ],
+              "distanceScore": 52.574
+            },
+            {
+              "id": "S08",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.21408357,
+                "receivableRevenue": 0.27994114,
+                "cashRevenue": -0.00583783,
+                "debtAssets": 0.37385808,
+                "expenseRevenue": 0.19527637
+              },
+              "imputedRatios": {
+                "grossMargin": 0.21408357,
+                "receivableRevenue": 0.27994114,
+                "cashRevenue": -0.00583783,
+                "debtAssets": 0.37385808,
+                "expenseRevenue": 0.19527637
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                1.7736102,
+                -0.75280791
+              ],
+              "distanceScore": 30.397
+            },
+            {
+              "id": "S09",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.12904784,
+                "receivableRevenue": 0.31913463,
+                "cashRevenue": 0.0,
+                "debtAssets": 0.55988323,
+                "expenseRevenue": 0.07903198
+              },
+              "imputedRatios": {
+                "grossMargin": 0.12904784,
+                "receivableRevenue": 0.31913463,
+                "cashRevenue": 0.0,
+                "debtAssets": 0.55988323,
+                "expenseRevenue": 0.07903198
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                0.96420165,
+                -0.22580926
+              ],
+              "distanceScore": 44.208
+            },
+            {
+              "id": "S10",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.41159038,
+                "receivableRevenue": 0.41666385,
+                "cashRevenue": 0.27066645,
+                "debtAssets": 0.48519013,
+                "expenseRevenue": 0.18370846
+              },
+              "imputedRatios": {
+                "grossMargin": 0.41159038,
+                "receivableRevenue": 0.41666385,
+                "cashRevenue": 0.27066645,
+                "debtAssets": 0.48519013,
+                "expenseRevenue": 0.18370846
+              },
+              "missingFeatures": [],
+              "cluster": 3,
+              "pca": [
+                -0.64108072,
+                0.55532586
+              ],
+              "distanceScore": 13.009
+            },
+            {
+              "id": "S11",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.37600987,
+                "receivableRevenue": 0.39816651,
+                "cashRevenue": 0.17951478,
+                "debtAssets": 0.68763688,
+                "expenseRevenue": 0.16242562
+              },
+              "imputedRatios": {
+                "grossMargin": 0.37600987,
+                "receivableRevenue": 0.39816651,
+                "cashRevenue": 0.17951478,
+                "debtAssets": 0.68763688,
+                "expenseRevenue": 0.16242562
+              },
+              "missingFeatures": [],
+              "cluster": 3,
+              "pca": [
+                -0.2270446,
+                1.34642296
+              ],
+              "distanceScore": 14.762
+            },
+            {
+              "id": "S12",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": null,
+                "receivableRevenue": null,
+                "cashRevenue": null,
+                "debtAssets": 0.19816096,
+                "expenseRevenue": null
+              },
+              "imputedRatios": {
+                "grossMargin": 0.31757334,
+                "receivableRevenue": 0.40690035,
+                "cashRevenue": 0.17197716,
+                "debtAssets": 0.19816096,
+                "expenseRevenue": 0.14736149
+              },
+              "missingFeatures": [
+                "grossMargin",
+                "receivableRevenue",
+                "cashRevenue",
+                "expenseRevenue"
+              ],
+              "cluster": 2,
+              "pca": [
+                -0.21488278,
+                -1.45339274
+              ],
+              "distanceScore": 35.849
+            },
+            {
+              "id": "S13",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.42201163,
+                "receivableRevenue": 0.53268317,
+                "cashRevenue": 0.17197716,
+                "debtAssets": 0.54943058,
+                "expenseRevenue": 0.14445073
+              },
+              "imputedRatios": {
+                "grossMargin": 0.42201163,
+                "receivableRevenue": 0.53268317,
+                "cashRevenue": 0.17197716,
+                "debtAssets": 0.54943058,
+                "expenseRevenue": 0.14445073
+              },
+              "missingFeatures": [],
+              "cluster": 3,
+              "pca": [
+                -0.94847988,
+                0.26072423
+              ],
+              "distanceScore": 0.0
+            },
+            {
+              "id": "S14",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.15571219,
+                "receivableRevenue": 0.46150856,
+                "cashRevenue": 0.00041446,
+                "debtAssets": 0.43198383,
+                "expenseRevenue": 0.22595803
+              },
+              "imputedRatios": {
+                "grossMargin": 0.15571219,
+                "receivableRevenue": 0.46150856,
+                "cashRevenue": 0.00041446,
+                "debtAssets": 0.43198383,
+                "expenseRevenue": 0.22595803
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                1.83295035,
+                -1.08854026
+              ],
+              "distanceScore": 49.906
+            },
+            {
+              "id": "S15",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.21362781,
+                "receivableRevenue": 0.53511272,
+                "cashRevenue": 0.18551219,
+                "debtAssets": 0.4308481,
+                "expenseRevenue": 0.15027225
+              },
+              "imputedRatios": {
+                "grossMargin": 0.21362781,
+                "receivableRevenue": 0.53511272,
+                "cashRevenue": 0.18551219,
+                "debtAssets": 0.4308481,
+                "expenseRevenue": 0.15027225
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                -0.06992204,
+                -0.82259525
+              ],
+              "distanceScore": 0.943
+            },
+            {
+              "id": "S16",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.34288977,
+                "receivableRevenue": 0.56956555,
+                "cashRevenue": 0.08805927,
+                "debtAssets": 0.4234297,
+                "expenseRevenue": 0.05072643
+              },
+              "imputedRatios": {
+                "grossMargin": 0.34288977,
+                "receivableRevenue": 0.56956555,
+                "cashRevenue": 0.08805927,
+                "debtAssets": 0.4234297,
+                "expenseRevenue": 0.05072643
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -1.27385366,
+                -1.04231178
+              ],
+              "distanceScore": 29.655
+            },
+            {
+              "id": "S17",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.23102088,
+                "receivableRevenue": 0.08882934,
+                "cashRevenue": 0.18699513,
+                "debtAssets": 0.6830906,
+                "expenseRevenue": 0.19900098
+              },
+              "imputedRatios": {
+                "grossMargin": 0.23102088,
+                "receivableRevenue": 0.08882934,
+                "cashRevenue": 0.18699513,
+                "debtAssets": 0.6830906,
+                "expenseRevenue": 0.19900098
+              },
+              "missingFeatures": [],
+              "cluster": 3,
+              "pca": [
+                1.52644479,
+                2.00988576
+              ],
+              "distanceScore": 63.801
+            },
+            {
+              "id": "S18",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.25340541,
+                "receivableRevenue": null,
+                "cashRevenue": -0.08010434,
+                "debtAssets": 0.29821815,
+                "expenseRevenue": 0.21086455
+              },
+              "imputedRatios": {
+                "grossMargin": 0.25340541,
+                "receivableRevenue": 0.40690035,
+                "cashRevenue": -0.08010434,
+                "debtAssets": 0.29821815,
+                "expenseRevenue": 0.21086455
+              },
+              "missingFeatures": [
+                "receivableRevenue"
+              ],
+              "cluster": 2,
+              "pca": [
+                1.69970678,
+                -1.62194008
+              ],
+              "distanceScore": 59.681
+            },
+            {
+              "id": "S19",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.44205138,
+                "receivableRevenue": 0.28740383,
+                "cashRevenue": 0.11555557,
+                "debtAssets": 0.51539622,
+                "expenseRevenue": 0.04745106
+              },
+              "imputedRatios": {
+                "grossMargin": 0.44205138,
+                "receivableRevenue": 0.28740383,
+                "cashRevenue": 0.11555557,
+                "debtAssets": 0.51539622,
+                "expenseRevenue": 0.04745106
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -1.09310994,
+                0.61855586
+              ],
+              "distanceScore": 31.405
+            },
+            {
+              "id": "S20",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.31757334,
+                "receivableRevenue": 0.41052409,
+                "cashRevenue": 0.04450412,
+                "debtAssets": 0.71694777,
+                "expenseRevenue": 0.15470336
+              },
+              "imputedRatios": {
+                "grossMargin": 0.31757334,
+                "receivableRevenue": 0.41052409,
+                "cashRevenue": 0.04450412,
+                "debtAssets": 0.71694777,
+                "expenseRevenue": 0.15470336
+              },
+              "missingFeatures": [],
+              "cluster": 3,
+              "pca": [
+                0.47223524,
+                0.97740503
+              ],
+              "distanceScore": 23.655
+            },
+            {
+              "id": "S21",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.33127532,
+                "receivableRevenue": 0.57277766,
+                "cashRevenue": 0.11445332,
+                "debtAssets": 0.69129459,
+                "expenseRevenue": null
+              },
+              "imputedRatios": {
+                "grossMargin": 0.33127532,
+                "receivableRevenue": 0.57277766,
+                "cashRevenue": 0.11445332,
+                "debtAssets": 0.69129459,
+                "expenseRevenue": 0.14736149
+              },
+              "missingFeatures": [
+                "expenseRevenue"
+              ],
+              "cluster": 3,
+              "pca": [
+                -0.36633842,
+                0.53570336
+              ],
+              "distanceScore": 25.245
+            },
+            {
+              "id": "S22",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.53927548,
+                "receivableRevenue": 0.57824798,
+                "cashRevenue": 0.28534988,
+                "debtAssets": 0.27361091,
+                "expenseRevenue": 0.13923964
+              },
+              "imputedRatios": {
+                "grossMargin": 0.53927548,
+                "receivableRevenue": 0.57824798,
+                "cashRevenue": 0.28534988,
+                "debtAssets": 0.27361091,
+                "expenseRevenue": 0.13923964
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -2.1455218,
+                -0.79148899
+              ],
+              "distanceScore": 78.637
+            },
+            {
+              "id": "S23",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.31953748,
+                "receivableRevenue": 0.53280602,
+                "cashRevenue": -0.04411895,
+                "debtAssets": 0.41506097,
+                "expenseRevenue": 0.08774261
+              },
+              "imputedRatios": {
+                "grossMargin": 0.31953748,
+                "receivableRevenue": 0.53280602,
+                "cashRevenue": -0.04411895,
+                "debtAssets": 0.41506097,
+                "expenseRevenue": 0.08774261
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                -0.19758288,
+                -1.31029857
+              ],
+              "distanceScore": 28.072
+            },
+            {
+              "id": "S24",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.12952833,
+                "receivableRevenue": 0.39339856,
+                "cashRevenue": 0.24380333,
+                "debtAssets": 0.57395453,
+                "expenseRevenue": 0.13293533
+              },
+              "imputedRatios": {
+                "grossMargin": 0.12952833,
+                "receivableRevenue": 0.39339856,
+                "cashRevenue": 0.24380333,
+                "debtAssets": 0.57395453,
+                "expenseRevenue": 0.13293533
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                0.30076097,
+                0.30292414
+              ],
+              "distanceScore": 29.01
+            }
+          ]
+        },
+        "4": {
+          "inertia": 64.749394,
+          "rows": [
+            {
+              "id": "S01",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.58914586,
+                "receivableRevenue": 0.07977364,
+                "cashRevenue": -0.01150638,
+                "debtAssets": 0.59602645,
+                "expenseRevenue": 0.19651968
+              },
+              "imputedRatios": {
+                "grossMargin": 0.58914586,
+                "receivableRevenue": 0.07977364,
+                "cashRevenue": -0.01150638,
+                "debtAssets": 0.59602645,
+                "expenseRevenue": 0.19651968
+              },
+              "missingFeatures": [],
+              "cluster": 3,
+              "pca": [
+                0.73981406,
+                1.91356487
+              ],
+              "distanceScore": 100.0
+            },
+            {
+              "id": "S02",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.22684592,
+                "receivableRevenue": 0.40327661,
+                "cashRevenue": 0.19082428,
+                "debtAssets": 0.44202994,
+                "expenseRevenue": 0.21647651
+              },
+              "imputedRatios": {
+                "grossMargin": 0.22684592,
+                "receivableRevenue": 0.40327661,
+                "cashRevenue": 0.19082428,
+                "debtAssets": 0.44202994,
+                "expenseRevenue": 0.21647651
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                0.82152315,
+                -0.22219632
+              ],
+              "distanceScore": 15.463
+            },
+            {
+              "id": "S03",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.29030895,
+                "receivableRevenue": 0.06487547,
+                "cashRevenue": 0.29443942,
+                "debtAssets": 0.56132548,
+                "expenseRevenue": 0.05335321
+              },
+              "imputedRatios": {
+                "grossMargin": 0.29030895,
+                "receivableRevenue": 0.06487547,
+                "cashRevenue": 0.29443942,
+                "debtAssets": 0.56132548,
+                "expenseRevenue": 0.05335321
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -0.5031228,
+                1.65438162
+              ],
+              "distanceScore": 72.899
+            },
+            {
+              "id": "S04",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.33242554,
+                "receivableRevenue": 0.57863484,
+                "cashRevenue": 0.2938417,
+                "debtAssets": 0.33794504,
+                "expenseRevenue": 0.04743771
+              },
+              "imputedRatios": {
+                "grossMargin": 0.33242554,
+                "receivableRevenue": 0.57863484,
+                "cashRevenue": 0.2938417,
+                "debtAssets": 0.33794504,
+                "expenseRevenue": 0.04743771
+              },
+              "missingFeatures": [],
+              "cluster": 4,
+              "pca": [
+                -2.12855199,
+                -1.03614097
+              ],
+              "distanceScore": 61.898
+            },
+            {
+              "id": "S05",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.28332272,
+                "receivableRevenue": 0.38661723,
+                "cashRevenue": -0.09652369,
+                "debtAssets": 0.4290273,
+                "expenseRevenue": 0.07641876
+              },
+              "imputedRatios": {
+                "grossMargin": 0.28332272,
+                "receivableRevenue": 0.38661723,
+                "cashRevenue": -0.09652369,
+                "debtAssets": 0.4290273,
+                "expenseRevenue": 0.07641876
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                0.44833148,
+                -1.01384707
+              ],
+              "distanceScore": 40.465
+            },
+            {
+              "id": "S06",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.24546199,
+                "receivableRevenue": 0.0,
+                "cashRevenue": 0.17406995,
+                "debtAssets": 0.32648273,
+                "expenseRevenue": 0.17591858
+              },
+              "imputedRatios": {
+                "grossMargin": 0.24546199,
+                "receivableRevenue": 0.0,
+                "cashRevenue": 0.17406995,
+                "debtAssets": 0.32648273,
+                "expenseRevenue": 0.17591858
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                1.4497659,
+                0.36449672
+              ],
+              "distanceScore": 66.668
+            },
+            {
+              "id": "S07",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.50866556,
+                "receivableRevenue": 0.52376799,
+                "cashRevenue": 0.27582818,
+                "debtAssets": 0.57969367,
+                "expenseRevenue": 0.09088644
+              },
+              "imputedRatios": {
+                "grossMargin": 0.50866556,
+                "receivableRevenue": 0.52376799,
+                "cashRevenue": 0.27582818,
+                "debtAssets": 0.57969367,
+                "expenseRevenue": 0.09088644
+              },
+              "missingFeatures": [],
+              "cluster": 4,
+              "pca": [
+                -2.21985305,
+                0.84197879
+              ],
+              "distanceScore": 52.574
+            },
+            {
+              "id": "S08",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.21408357,
+                "receivableRevenue": 0.27994114,
+                "cashRevenue": -0.00583783,
+                "debtAssets": 0.37385808,
+                "expenseRevenue": 0.19527637
+              },
+              "imputedRatios": {
+                "grossMargin": 0.21408357,
+                "receivableRevenue": 0.27994114,
+                "cashRevenue": -0.00583783,
+                "debtAssets": 0.37385808,
+                "expenseRevenue": 0.19527637
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                1.7736102,
+                -0.75280791
+              ],
+              "distanceScore": 30.397
+            },
+            {
+              "id": "S09",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.12904784,
+                "receivableRevenue": 0.31913463,
+                "cashRevenue": 0.0,
+                "debtAssets": 0.55988323,
+                "expenseRevenue": 0.07903198
+              },
+              "imputedRatios": {
+                "grossMargin": 0.12904784,
+                "receivableRevenue": 0.31913463,
+                "cashRevenue": 0.0,
+                "debtAssets": 0.55988323,
+                "expenseRevenue": 0.07903198
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                0.96420165,
+                -0.22580926
+              ],
+              "distanceScore": 44.208
+            },
+            {
+              "id": "S10",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.41159038,
+                "receivableRevenue": 0.41666385,
+                "cashRevenue": 0.27066645,
+                "debtAssets": 0.48519013,
+                "expenseRevenue": 0.18370846
+              },
+              "imputedRatios": {
+                "grossMargin": 0.41159038,
+                "receivableRevenue": 0.41666385,
+                "cashRevenue": 0.27066645,
+                "debtAssets": 0.48519013,
+                "expenseRevenue": 0.18370846
+              },
+              "missingFeatures": [],
+              "cluster": 4,
+              "pca": [
+                -0.64108072,
+                0.55532586
+              ],
+              "distanceScore": 13.009
+            },
+            {
+              "id": "S11",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.37600987,
+                "receivableRevenue": 0.39816651,
+                "cashRevenue": 0.17951478,
+                "debtAssets": 0.68763688,
+                "expenseRevenue": 0.16242562
+              },
+              "imputedRatios": {
+                "grossMargin": 0.37600987,
+                "receivableRevenue": 0.39816651,
+                "cashRevenue": 0.17951478,
+                "debtAssets": 0.68763688,
+                "expenseRevenue": 0.16242562
+              },
+              "missingFeatures": [],
+              "cluster": 3,
+              "pca": [
+                -0.2270446,
+                1.34642296
+              ],
+              "distanceScore": 14.762
+            },
+            {
+              "id": "S12",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": null,
+                "receivableRevenue": null,
+                "cashRevenue": null,
+                "debtAssets": 0.19816096,
+                "expenseRevenue": null
+              },
+              "imputedRatios": {
+                "grossMargin": 0.31757334,
+                "receivableRevenue": 0.40690035,
+                "cashRevenue": 0.17197716,
+                "debtAssets": 0.19816096,
+                "expenseRevenue": 0.14736149
+              },
+              "missingFeatures": [
+                "grossMargin",
+                "receivableRevenue",
+                "cashRevenue",
+                "expenseRevenue"
+              ],
+              "cluster": 2,
+              "pca": [
+                -0.21488278,
+                -1.45339274
+              ],
+              "distanceScore": 35.849
+            },
+            {
+              "id": "S13",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.42201163,
+                "receivableRevenue": 0.53268317,
+                "cashRevenue": 0.17197716,
+                "debtAssets": 0.54943058,
+                "expenseRevenue": 0.14445073
+              },
+              "imputedRatios": {
+                "grossMargin": 0.42201163,
+                "receivableRevenue": 0.53268317,
+                "cashRevenue": 0.17197716,
+                "debtAssets": 0.54943058,
+                "expenseRevenue": 0.14445073
+              },
+              "missingFeatures": [],
+              "cluster": 4,
+              "pca": [
+                -0.94847988,
+                0.26072423
+              ],
+              "distanceScore": 0.0
+            },
+            {
+              "id": "S14",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.15571219,
+                "receivableRevenue": 0.46150856,
+                "cashRevenue": 0.00041446,
+                "debtAssets": 0.43198383,
+                "expenseRevenue": 0.22595803
+              },
+              "imputedRatios": {
+                "grossMargin": 0.15571219,
+                "receivableRevenue": 0.46150856,
+                "cashRevenue": 0.00041446,
+                "debtAssets": 0.43198383,
+                "expenseRevenue": 0.22595803
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                1.83295035,
+                -1.08854026
+              ],
+              "distanceScore": 49.906
+            },
+            {
+              "id": "S15",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.21362781,
+                "receivableRevenue": 0.53511272,
+                "cashRevenue": 0.18551219,
+                "debtAssets": 0.4308481,
+                "expenseRevenue": 0.15027225
+              },
+              "imputedRatios": {
+                "grossMargin": 0.21362781,
+                "receivableRevenue": 0.53511272,
+                "cashRevenue": 0.18551219,
+                "debtAssets": 0.4308481,
+                "expenseRevenue": 0.15027225
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                -0.06992204,
+                -0.82259525
+              ],
+              "distanceScore": 0.943
+            },
+            {
+              "id": "S16",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.34288977,
+                "receivableRevenue": 0.56956555,
+                "cashRevenue": 0.08805927,
+                "debtAssets": 0.4234297,
+                "expenseRevenue": 0.05072643
+              },
+              "imputedRatios": {
+                "grossMargin": 0.34288977,
+                "receivableRevenue": 0.56956555,
+                "cashRevenue": 0.08805927,
+                "debtAssets": 0.4234297,
+                "expenseRevenue": 0.05072643
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -1.27385366,
+                -1.04231178
+              ],
+              "distanceScore": 29.655
+            },
+            {
+              "id": "S17",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.23102088,
+                "receivableRevenue": 0.08882934,
+                "cashRevenue": 0.18699513,
+                "debtAssets": 0.6830906,
+                "expenseRevenue": 0.19900098
+              },
+              "imputedRatios": {
+                "grossMargin": 0.23102088,
+                "receivableRevenue": 0.08882934,
+                "cashRevenue": 0.18699513,
+                "debtAssets": 0.6830906,
+                "expenseRevenue": 0.19900098
+              },
+              "missingFeatures": [],
+              "cluster": 3,
+              "pca": [
+                1.52644479,
+                2.00988576
+              ],
+              "distanceScore": 63.801
+            },
+            {
+              "id": "S18",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.25340541,
+                "receivableRevenue": null,
+                "cashRevenue": -0.08010434,
+                "debtAssets": 0.29821815,
+                "expenseRevenue": 0.21086455
+              },
+              "imputedRatios": {
+                "grossMargin": 0.25340541,
+                "receivableRevenue": 0.40690035,
+                "cashRevenue": -0.08010434,
+                "debtAssets": 0.29821815,
+                "expenseRevenue": 0.21086455
+              },
+              "missingFeatures": [
+                "receivableRevenue"
+              ],
+              "cluster": 2,
+              "pca": [
+                1.69970678,
+                -1.62194008
+              ],
+              "distanceScore": 59.681
+            },
+            {
+              "id": "S19",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.44205138,
+                "receivableRevenue": 0.28740383,
+                "cashRevenue": 0.11555557,
+                "debtAssets": 0.51539622,
+                "expenseRevenue": 0.04745106
+              },
+              "imputedRatios": {
+                "grossMargin": 0.44205138,
+                "receivableRevenue": 0.28740383,
+                "cashRevenue": 0.11555557,
+                "debtAssets": 0.51539622,
+                "expenseRevenue": 0.04745106
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -1.09310994,
+                0.61855586
+              ],
+              "distanceScore": 31.405
+            },
+            {
+              "id": "S20",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.31757334,
+                "receivableRevenue": 0.41052409,
+                "cashRevenue": 0.04450412,
+                "debtAssets": 0.71694777,
+                "expenseRevenue": 0.15470336
+              },
+              "imputedRatios": {
+                "grossMargin": 0.31757334,
+                "receivableRevenue": 0.41052409,
+                "cashRevenue": 0.04450412,
+                "debtAssets": 0.71694777,
+                "expenseRevenue": 0.15470336
+              },
+              "missingFeatures": [],
+              "cluster": 3,
+              "pca": [
+                0.47223524,
+                0.97740503
+              ],
+              "distanceScore": 23.655
+            },
+            {
+              "id": "S21",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.33127532,
+                "receivableRevenue": 0.57277766,
+                "cashRevenue": 0.11445332,
+                "debtAssets": 0.69129459,
+                "expenseRevenue": null
+              },
+              "imputedRatios": {
+                "grossMargin": 0.33127532,
+                "receivableRevenue": 0.57277766,
+                "cashRevenue": 0.11445332,
+                "debtAssets": 0.69129459,
+                "expenseRevenue": 0.14736149
+              },
+              "missingFeatures": [
+                "expenseRevenue"
+              ],
+              "cluster": 3,
+              "pca": [
+                -0.36633842,
+                0.53570336
+              ],
+              "distanceScore": 25.245
+            },
+            {
+              "id": "S22",
+              "sector": "services",
+              "ratios": {
+                "grossMargin": 0.53927548,
+                "receivableRevenue": 0.57824798,
+                "cashRevenue": 0.28534988,
+                "debtAssets": 0.27361091,
+                "expenseRevenue": 0.13923964
+              },
+              "imputedRatios": {
+                "grossMargin": 0.53927548,
+                "receivableRevenue": 0.57824798,
+                "cashRevenue": 0.28534988,
+                "debtAssets": 0.27361091,
+                "expenseRevenue": 0.13923964
+              },
+              "missingFeatures": [],
+              "cluster": 4,
+              "pca": [
+                -2.1455218,
+                -0.79148899
+              ],
+              "distanceScore": 78.637
+            },
+            {
+              "id": "S23",
+              "sector": "manufacturing",
+              "ratios": {
+                "grossMargin": 0.31953748,
+                "receivableRevenue": 0.53280602,
+                "cashRevenue": -0.04411895,
+                "debtAssets": 0.41506097,
+                "expenseRevenue": 0.08774261
+              },
+              "imputedRatios": {
+                "grossMargin": 0.31953748,
+                "receivableRevenue": 0.53280602,
+                "cashRevenue": -0.04411895,
+                "debtAssets": 0.41506097,
+                "expenseRevenue": 0.08774261
+              },
+              "missingFeatures": [],
+              "cluster": 1,
+              "pca": [
+                -0.19758288,
+                -1.31029857
+              ],
+              "distanceScore": 28.072
+            },
+            {
+              "id": "S24",
+              "sector": "retail",
+              "ratios": {
+                "grossMargin": 0.12952833,
+                "receivableRevenue": 0.39339856,
+                "cashRevenue": 0.24380333,
+                "debtAssets": 0.57395453,
+                "expenseRevenue": 0.13293533
+              },
+              "imputedRatios": {
+                "grossMargin": 0.12952833,
+                "receivableRevenue": 0.39339856,
+                "cashRevenue": 0.24380333,
+                "debtAssets": 0.57395453,
+                "expenseRevenue": 0.13293533
+              },
+              "missingFeatures": [],
+              "cluster": 2,
+              "pca": [
+                0.30076097,
+                0.30292414
+              ],
+              "distanceScore": 29.01
+            }
+          ]
+        }
+      }
+    }
+  }
+}

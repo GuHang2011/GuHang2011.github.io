@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" data-title-en="Financial Ratio Explorer | Hang Gu" data-title-zh="财务比率探索 | 顾航">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An interactive, synthetic-data learning experiment in financial ratios, StandardScaler, KMeans and PCA.">
+  <link rel="canonical" href="https://guhang2011.github.io/demos/financial-analysis/">
+  <title>Financial Ratio Explorer | Hang Gu</title>
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../academic.css">
+  <link rel="stylesheet" href="../demo.css">
+  <link rel="stylesheet" href="demo.css">
+  <script src="../../academic.js" defer></script>
+  <script src="../vendor/chart.umd.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-en="Skip to analysis" data-zh="跳至分析">Skip to analysis</a>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../../">Hang Gu <span>顾航</span></a>
+      <nav class="nav-links" id="demo-navigation" aria-label="Main navigation">
+        <a href="../../#work" data-en="Projects" data-zh="项目">Projects</a>
+        <a href="#methods" data-en="Methods" data-zh="方法">Methods</a>
+      </nav>
+      <div class="header-controls"><div class="language-controls" aria-label="Language">
+        <button type="button" data-language="en" aria-pressed="true">EN</button>
+        <button type="button" data-language="zh" aria-pressed="false">中文</button>
+      </div><button class="menu-toggle icon-button" type="button" aria-label="Menu" aria-controls="demo-navigation" aria-expanded="false"><img src="../../assets/icons/menu.svg" alt=""></button></div>
+    </div>
+  </header>
+  <main id="main" class="wrap financial-demo">
+    <div class="demo-opening">
+      <p class="section-number" data-en="DATA EXPLORATION · LEARNING EXPERIMENT" data-zh="数据探索 · 学习实验">DATA EXPLORATION · LEARNING EXPERIMENT</p>
+      <div class="demo-heading">
+        <h1 data-en="Financial Ratio Explorer" data-zh="财务比率探索">Financial Ratio Explorer</h1>
+        <span class="synthetic-label" data-en="Synthetic data" data-zh="合成数据">Synthetic data</span>
+      </div>
+      <p class="demo-note" data-en="24 fictional companies across two years. Clusters describe patterns; they are not tax-risk labels or violation predictions." data-zh="24 家虚构企业、两个年度。聚类仅描述样本模式，不代表税务风险等级或违规预测。">24 fictional companies across two years. Clusters describe patterns; they are not tax-risk labels or violation predictions.</p>
+    </div>
+
+    <form class="demo-toolbar" id="controls">
+      <div class="control-group"><label for="year" data-en="Year" data-zh="年度">Year</label><select id="year"><option value="2024">2024</option><option value="2023">2023</option></select></div>
+      <div class="control-group"><label for="view" data-en="View" data-zh="视图">View</label><select id="view"><option value="pca" data-en="PCA projection" data-zh="PCA 投影">PCA projection</option><option value="ratios" data-en="Ratio comparison" data-zh="比率比较">Ratio comparison</option></select></div>
+      <div class="control-group"><label for="clusters" data-en="Clusters (k)" data-zh="聚类数 (k)">Clusters (k)</label><select id="clusters"><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option></select></div>
+      <div class="control-group search-control"><label for="search" data-en="Company / sector" data-zh="企业 / 行业">Company / sector</label><input type="search" id="search" autocomplete="off" aria-label="Company or sector" data-en-label="Company or sector" data-zh-label="企业或行业"></div>
+      <div class="demo-actions">
+        <button type="button" class="icon-button" id="export-csv" disabled title="Export visible rows as CSV" data-en-label="Export visible rows as CSV" data-zh-label="导出当前行 CSV" aria-label="Export visible rows as CSV"><img src="../../assets/icons/download.svg" alt=""><span>CSV</span></button>
+        <button type="button" class="icon-button" id="export-json" disabled title="Export synthetic dataset as JSON" data-en-label="Export synthetic dataset as JSON" data-zh-label="导出合成数据 JSON" aria-label="Export synthetic dataset as JSON"><img src="../../assets/icons/download.svg" alt=""><span>JSON</span></button>
+        <button type="button" class="icon-button reset-control" id="reset" title="Reset filters" data-en-label="Reset filters" data-zh-label="重置筛选" aria-label="Reset filters"><img src="../../assets/icons/rotate-ccw.svg" alt=""></button>
+      </div>
+    </form>
+
+    <div class="metric-grid" aria-live="polite">
+      <div class="metric"><span data-en="Visible companies" data-zh="当前企业数">Visible companies</span><strong id="metric-count">—</strong></div>
+      <div class="metric"><span data-en="Missing ratio values / year" data-zh="年度缺失比率值">Missing ratio values / year</span><strong id="metric-missing">—</strong></div>
+      <div class="metric"><span data-en="PCA variance retained" data-zh="PCA 保留方差">PCA variance retained</span><strong id="metric-variance">—</strong></div>
+      <div class="metric"><span data-en="Clustering inertia / year" data-zh="年度聚类惯性">Clustering inertia / year</span><strong id="metric-inertia">—</strong></div>
+    </div>
+
+    <div class="demo-layout financial-layout">
+      <section class="demo-panel scatter-panel" aria-labelledby="scatter-heading">
+        <div class="panel-heading"><h2 id="scatter-heading" data-en="Company patterns" data-zh="企业样本模式">Company patterns</h2><div class="cluster-legend" id="cluster-legend"></div></div>
+        <div class="ratio-controls" id="ratio-controls" hidden>
+          <div class="control-group"><label for="x-ratio" data-en="Horizontal ratio" data-zh="横轴比率">Horizontal ratio</label><select id="x-ratio"></select></div>
+          <div class="control-group"><label for="y-ratio" data-en="Vertical ratio" data-zh="纵轴比率">Vertical ratio</label><select id="y-ratio"></select></div>
+        </div>
+        <div class="chart-frame"><canvas id="scatter" role="img" aria-label="Synthetic company patterns; equivalent values are in the company table." data-en-label="Synthetic company patterns; equivalent values are in the company table." data-zh-label="合成企业样本散点图；等价数值见下方企业表格。"></canvas></div>
+        <p class="chart-caption" id="chart-caption"></p>
+      </section>
+      <section class="demo-panel selection-panel" aria-labelledby="selection-heading">
+        <div class="panel-heading"><h2 id="selection-heading" data-en="Selected company" data-zh="当前企业">Selected company</h2><span id="selected-cluster" class="cluster-tag"></span></div>
+        <div class="company-identity" aria-live="polite"><strong id="selected-id">—</strong><span id="selected-sector">—</span></div>
+        <div class="distance-block"><span data-en="Relative distance to annual mean" data-zh="与年度均值的相对距离">Relative distance to annual mean</span><strong id="selected-distance">—</strong><div class="distance-track" aria-hidden="true"><span id="distance-bar"></span></div></div>
+        <p class="distance-caveat" data-en="A within-year 0–100 scale, not a probability. Scores cannot be compared across years." data-zh="年度内 0–100 相对尺度，不是概率；不同年度的分数不可直接比较。">A within-year 0–100 scale, not a probability. Scores cannot be compared across years.</p>
+        <dl class="ratio-breakdown" id="ratio-breakdown"></dl>
+        <p id="selection-note" class="demo-note"></p>
+      </section>
+    </div>
+
+    <section class="table-section" aria-labelledby="table-heading">
+      <div class="panel-heading"><h2 id="table-heading" data-en="Company observations" data-zh="企业观测值">Company observations</h2><div class="control-group sort-control"><label for="sort" data-en="Order" data-zh="排序">Order</label><select id="sort"><option value="id" data-en="Company ID" data-zh="企业编号">Company ID</option><option value="distance" data-en="Relative distance ↓" data-zh="相对距离 ↓">Relative distance ↓</option><option value="cluster" data-en="Cluster" data-zh="聚类">Cluster</option></select></div></div>
+      <div class="data-table-wrap"><table class="data-table"><thead><tr><th scope="col" data-en="Company" data-zh="企业">Company</th><th scope="col" data-en="Sector" data-zh="行业">Sector</th><th scope="col" data-en="Cluster" data-zh="聚类">Cluster</th><th scope="col" data-en="Gross margin" data-zh="毛利率">Gross margin</th><th scope="col" data-en="Receivables / revenue" data-zh="应收 / 营收">Receivables / revenue</th><th scope="col" data-en="Cash / revenue" data-zh="现金流 / 营收">Cash / revenue</th><th scope="col" data-en="Liabilities / assets" data-zh="资产负债率">Liabilities / assets</th><th scope="col" data-en="Relative distance" data-zh="相对距离">Relative distance</th></tr></thead><tbody id="company-table"></tbody></table></div>
+      <p class="demo-note table-note" data-en="— means an undefined or missing observed ratio. Median imputation is used only for the model input. Filtering does not refit the model." data-zh="— 表示未定义或缺失的观测比率。中位数填补仅用于模型输入；筛选不会重新拟合模型。">— means an undefined or missing observed ratio. Median imputation is used only for the model input. Filtering does not refit the model.</p>
+    </section>
+
+    <section id="methods" class="method-section">
+      <h2 data-en="Methods & boundaries" data-zh="方法与边界">Methods & boundaries</h2>
+      <div class="method-grid">
+        <article><h3 data-en="Five financial ratios" data-zh="五项财务比率">Five financial ratios</h3><p data-en="Gross margin, receivables/revenue, operating cash/revenue, liabilities/assets and expenses/revenue. Missing inputs and zero denominators remain explicit; observed zero values are retained." data-zh="毛利率、应收账款/营收、经营现金流/营收、资产负债率、期间费用/营收。缺失输入及零分母明确保留，观测到的零值不会被当作缺失。">Gross margin, receivables/revenue, operating cash/revenue, liabilities/assets and expenses/revenue. Missing inputs and zero denominators remain explicit; observed zero values are retained.</p></article>
+        <article><h3 data-en="Exploratory preprocessing" data-zh="探索性预处理">Exploratory preprocessing</h3><p data-en="Annual medians → StandardScaler → KMeans (k = 2/3/4, n_init = 20, seed = 42). PCA projects the same five standardized features to two dimensions; it is a display, not the clustering input." data-zh="年度中位数填补 → StandardScaler → KMeans（k = 2/3/4，n_init = 20，seed = 42）。PCA 将同一组五维标准化特征投影到二维，聚类仍使用五维特征。">Annual medians → StandardScaler → KMeans (k = 2/3/4, n_init = 20, seed = 42). PCA projects the same five standardized features to two dimensions; it is a display, not the clustering input.</p></article>
+        <article><h3 data-en="No predictive validation" data-zh="不作预测性结论">No predictive validation</h3><p data-en="All records are synthetic. There are no ground-truth risk labels, held-out predictive tests or a validated best k. Cluster numbers are arbitrary, fitted independently by year, and have no ranking meaning." data-zh="全部记录为合成数据，没有真实风险标签、留出集预测验证或经验证的最优 k。聚类编号任意，各年度独立拟合，不代表等级。">All records are synthetic. There are no ground-truth risk labels, held-out predictive tests or a validated best k. Cluster numbers are arbitrary, fitted independently by year, and have no ranking meaning.</p></article>
+      </div>
+      <div class="method-links"><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/financial-analysis/README.md" data-en="Technical notes" data-zh="技术笔记">Technical notes</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/financial-analysis/generate_data.py" data-en="Reproducible generator" data-zh="可复现数据生成代码">Reproducible generator</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/financial-analysis/test_generate_data.py" data-en="Data-quality tests" data-zh="数据质量测试">Data-quality tests</a><a href="https://scikit-learn.org/1.7/modules/clustering.html#k-means" target="_blank" rel="noreferrer" data-en="scikit-learn reference" data-zh="scikit-learn 参考文档">scikit-learn reference</a></div>
+      <p class="demo-footnotes" data-en="This newly authored example draws on financial-analysis learning topics. Source notebooks were reviewed, not reproduced with original business data. scikit-learn 1.7.2 · 48 synthetic records · generator seed 20261013." data-zh="此示例为围绕财务分析学习主题新编写的演示。已阅读相关笔记，但未复制原始业务数据。scikit-learn 1.7.2 · 48 条合成记录 · 生成种子 20261013。">This newly authored example draws on financial-analysis learning topics. Source notebooks were reviewed, not reproduced with original business data. scikit-learn 1.7.2 · 48 synthetic records · generator seed 20261013.</p>
+    </section>
+    <p id="status" role="status" class="demo-status" hidden></p>
+  </main>
+  <footer class="section surface"><div class="wrap"><a href="../../#work" data-en="Back to Hang Gu's projects" data-zh="返回顾航的项目页">Back to Hang Gu's projects</a></div></footer>
+</body>
+</html>

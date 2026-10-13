@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" data-title-en="Model Evaluation Lab | Hang Gu" data-title-zh="模型评估实验室 | 顾航">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An interactive synthetic example of classification thresholds, confusion matrices, ROC and PR curves, and prediction ensembles.">
+  <link rel="canonical" href="https://guhang2011.github.io/demos/model-evaluation/">
+  <title>Model Evaluation Lab | Hang Gu</title>
+  <link rel="icon" href="../../assets/favicon.svg">
+  <link rel="stylesheet" href="../../academic.css">
+  <link rel="stylesheet" href="../demo.css">
+  <link rel="stylesheet" href="evaluation.css">
+  <script defer src="../vendor/chart.umd.js"></script>
+  <script defer src="../../academic.js"></script>
+  <script defer src="evaluation.js"></script>
+</head>
+<body class="evaluation-page">
+  <a class="skip-link" href="#main" data-en="Skip to evaluation" data-zh="跳转到评估">Skip to evaluation</a>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../../"><span class="monogram">HG</span><span class="brand-name">Hang Gu</span></a>
+      <nav id="demo-nav" class="nav-links" aria-label="Primary">
+        <a href="../../#work" data-en="Projects" data-zh="项目">Projects</a>
+        <a href="../" data-en="Live demos" data-zh="在线演示">Live demos</a>
+        <a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/model-evaluation/note.md" data-en="Evaluation notes" data-zh="评估笔记">Evaluation notes</a>
+      </nav>
+      <div class="header-controls">
+        <div class="language-controls" aria-label="Language">
+          <button type="button" data-language="en" aria-pressed="true">EN</button>
+          <button type="button" data-language="zh" aria-pressed="false">中</button>
+        </div>
+        <button class="menu-toggle icon-button" type="button" aria-label="Menu" aria-expanded="false" aria-controls="demo-nav"><img src="../../assets/icons/menu.svg" alt="" width="20" height="20"></button>
+      </div>
+    </div>
+  </header>
+  <main id="main" class="wrap">
+    <section class="demo-opening">
+      <p class="eyebrow" data-en="MACHINE LEARNING / EVALUATION" data-zh="机器学习 / 评估">MACHINE LEARNING / EVALUATION</p>
+      <h1 class="demo-heading" data-en="Model Evaluation Lab" data-zh="模型评估实验室">Model Evaluation Lab</h1>
+      <p data-en="Two sets of supplied synthetic scores. One shared label set. Thresholds, ranking, and prediction ensembles in comparison." data-zh="两组预设合成分数，共用同一组标签。比较分类阈值、排序指标与预测集成。">Two sets of supplied synthetic scores. One shared label set. Thresholds, ranking, and prediction ensembles in comparison.</p>
+      <div class="demo-actions">
+        <a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/model-evaluation/README.md" data-en="Code & reproducibility" data-zh="代码与复现">Code & reproducibility</a>
+        <a href="scenario-input.json" data-en="Synthetic inputs" data-zh="合成输入">Synthetic inputs</a>
+      </div>
+    </section>
+    <div id="load-status" class="demo-note" role="status" data-en="Loading evaluation data…" data-zh="正在加载评估数据…">Loading evaluation data…</div>
+    <section id="evaluation-workspace" hidden aria-label="Evaluation workspace">
+      <div class="demo-toolbar evaluation-controls">
+        <div class="control-group">
+          <label for="scenario" data-en="Scenario" data-zh="样本场景">Scenario</label>
+          <select id="scenario">
+            <option value="balanced" data-en="24 synthetic samples" data-zh="24 条合成样本">24 synthetic samples</option>
+            <option value="sanity" data-en="Two-sample sanity check" data-zh="两条样本检验">Two-sample sanity check</option>
+          </select>
+        </div>
+        <fieldset class="control-group model-control">
+          <legend data-en="Displayed model" data-zh="查看模型">Displayed model</legend>
+          <div class="evaluation-segmented">
+            <button type="button" data-model="a" aria-pressed="false" data-en="Model A" data-zh="模型 A">Model A</button>
+            <button type="button" data-model="b" aria-pressed="false" data-en="Model B" data-zh="模型 B">Model B</button>
+            <button type="button" data-model="ensemble" aria-pressed="true" data-en="Mean ensemble" data-zh="均值集成">Mean ensemble</button>
+          </div>
+        </fieldset>
+        <div class="control-group threshold-control">
+          <div class="threshold-label"><label for="threshold" data-en="Decision threshold" data-zh="分类阈值">Decision threshold</label><output id="threshold-output" for="threshold">0.50</output></div>
+          <input id="threshold" type="range" min="0" max="100" step="1" value="50" aria-describedby="decision-rule">
+        </div>
+        <button class="icon-button reset-evaluation" id="reset" type="button" title="Reset" data-en-label="Reset evaluation" data-zh-label="重置评估" aria-label="Reset evaluation"><img src="../../assets/icons/rotate-ccw.svg" alt="" width="19" height="19"></button>
+      </div>
+      <p id="scenario-summary" class="evaluation-summary" aria-live="polite"></p>
+      <p id="decision-rule" class="evaluation-rule" data-en="Positive when score ≥ threshold. Mean ensemble score = (A + B) / 2." data-zh="分数 ≥ 阈值时判为正类。均值集成分数 = (A + B) / 2。">Positive when score ≥ threshold. Mean ensemble score = (A + B) / 2.</p>
+      <div class="metric-grid evaluation-metrics" aria-live="polite">
+        <div class="metric"><span data-en="Accuracy" data-zh="准确率">Accuracy</span><strong id="accuracy">—</strong><small data-en="Threshold dependent" data-zh="与阈值有关">Threshold dependent</small></div>
+        <div class="metric"><span>F1</span><strong id="f1">—</strong><small data-en="Positive-class F1" data-zh="正类 F1">Positive-class F1</small></div>
+        <div class="metric"><span>ROC AUC</span><strong id="auc">—</strong><small data-en="Ranking across thresholds" data-zh="跨阈值的排序能力">Ranking across thresholds</small></div>
+        <div class="metric"><span data-en="Average precision" data-zh="平均精确率 AP">Average precision</span><strong id="ap">—</strong><small data-en="PR summary, not trapezoidal AUC" data-zh="PR 汇总指标，并非梯形积分">PR summary, not trapezoidal AUC</small></div>
+      </div>
+      <div class="ensemble-comparison">
+        <div><span data-en="Mean individual accuracy" data-zh="两个模型准确率的均值">Mean individual accuracy</span><strong id="mean-accuracy">—</strong><small data-en="(Accuracy A + Accuracy B) / 2" data-zh="(模型 A 准确率 + 模型 B 准确率) / 2">(Accuracy A + Accuracy B) / 2</small></div>
+        <div><span data-en="Accuracy of mean predictions" data-zh="预测均值的准确率">Accuracy of mean predictions</span><strong id="ensemble-accuracy">—</strong><small data-en="Evaluate (score A + score B) / 2" data-zh="先平均预测分数，再统一评估">Evaluate (score A + score B) / 2</small></div>
+        <p data-en="Different operations can produce different results; ensemble gains are not guaranteed." data-zh="两种运算可能得出不同结果；预测集成不保证提升。">Different operations can produce different results; ensemble gains are not guaranteed.</p>
+      </div>
+      <div class="demo-layout evaluation-layout">
+        <section class="demo-panel">
+          <div class="evaluation-panel-heading"><h2 data-en="Same-threshold comparison" data-zh="同一阈值下的比较">Same-threshold comparison</h2></div>
+          <div class="chart-frame"><canvas id="comparison-chart" role="img" aria-label="Model metrics comparison" data-en-label="Model metrics comparison" data-zh-label="模型指标比较"></canvas></div>
+          <div class="data-table-wrap">
+            <table class="data-table comparison-table">
+              <caption class="evaluation-visually-hidden" data-en="Model metrics at the selected threshold" data-zh="所选阈值下的模型指标">Model metrics at the selected threshold</caption>
+              <thead><tr><th scope="col" data-en="Model" data-zh="模型">Model</th><th scope="col" data-en="Accuracy" data-zh="准确率">Accuracy</th><th scope="col" data-en="Precision" data-zh="精确率">Precision</th><th scope="col" data-en="Recall" data-zh="召回率">Recall</th><th scope="col">F1</th></tr></thead>
+              <tbody id="comparison-body"></tbody>
+            </table>
+          </div>
+        </section>
+        <section class="demo-panel">
+          <div class="evaluation-panel-heading"><h2 data-en="Ranking curves" data-zh="排序曲线">Ranking curves</h2><div class="evaluation-segmented curve-mode"><button type="button" data-curve="roc" aria-pressed="true">ROC</button><button type="button" data-curve="pr" aria-pressed="false">PR</button></div></div>
+          <div class="chart-frame"><canvas id="ranking-chart" role="img" aria-label="ROC curves and selected threshold" data-en-label="ROC or PR curves and selected threshold" data-zh-label="ROC 或 PR 曲线及所选阈值"></canvas></div>
+          <p class="evaluation-chart-note" data-en="The larger dot marks the displayed model at the selected threshold. Full curves and AUC / AP use every unique score boundary." data-zh="大圆点代表所选模型在当前阈值的位置。完整曲线及 AUC / AP 使用所有不同分数边界。">The larger dot marks the displayed model at the selected threshold. Full curves and AUC / AP use every unique score boundary.</p>
+          <p class="evaluation-chart-note" data-en="The PR curve ends at recall 0, precision 1 by convention; the threshold marker uses precision 0 when no positives are predicted." data-zh="PR 曲线按约定在召回率 0、精确率 1 处结束；没有正类预测时，当前阈值圆点的精确率按 0 处理。">The PR curve ends at recall 0, precision 1 by convention; the threshold marker uses precision 0 when no positives are predicted.</p>
+          <p id="ranking-summary" class="evaluation-chart-note"></p>
+        </section>
+      </div>
+      <section class="confusion-section">
+        <div><h2 data-en="Confusion matrix" data-zh="混淆矩阵">Confusion matrix</h2><p id="confusion-model"></p><p class="evaluation-chart-note" data-en="Rows = true labels. Columns = predictions." data-zh="行代表真实标签，列代表预测标签。">Rows = true labels. Columns = predictions.</p></div>
+        <div class="data-table-wrap"><table class="confusion-table"><thead><tr><th scope="col" data-en="True / Predicted" data-zh="真实 / 预测">True / Predicted</th><th scope="col" data-en="Negative (0)" data-zh="负类 (0)">Negative (0)</th><th scope="col" data-en="Positive (1)" data-zh="正类 (1)">Positive (1)</th></tr></thead><tbody><tr><th scope="row" data-en="Negative (0)" data-zh="负类 (0)">Negative (0)</th><td class="correct"><span>TN</span><strong id="tn">—</strong></td><td class="incorrect"><span>FP</span><strong id="fp">—</strong></td></tr><tr><th scope="row" data-en="Positive (1)" data-zh="正类 (1)">Positive (1)</th><td class="incorrect"><span>FN</span><strong id="fn">—</strong></td><td class="correct"><span>TP</span><strong id="tp">—</strong></td></tr></tbody></table></div>
+      </section>
+      <section class="evaluation-samples">
+        <div class="evaluation-panel-heading"><h2 data-en="Sample predictions" data-zh="逐样本预测">Sample predictions</h2><div class="control-group"><label for="sample-filter" class="evaluation-visually-hidden" data-en="Filter samples" data-zh="筛选样本">Filter samples</label><select id="sample-filter"><option value="all" data-en="All samples" data-zh="全部样本">All samples</option><option value="errors" data-en="Displayed model errors" data-zh="所选模型错误">Displayed model errors</option><option value="disagreement" data-en="A / B disagreement" data-zh="A / B 预测不一致">A / B disagreement</option></select></div></div>
+        <p id="sample-count" class="evaluation-chart-note" aria-live="polite"></p>
+        <div class="data-table-wrap"><table class="data-table prediction-table"><thead><tr><th scope="col">ID</th><th scope="col" data-en="True" data-zh="真实">True</th><th scope="col">A</th><th scope="col">B</th><th scope="col" data-en="Mean" data-zh="均值">Mean</th><th scope="col" data-en="Prediction" data-zh="预测">Prediction</th><th scope="col" data-en="Result" data-zh="结果">Result</th></tr></thead><tbody id="sample-body"></tbody></table></div>
+        <div class="demo-actions export-actions"><button type="button" id="export-json"><img src="../../assets/icons/download.svg" alt="" width="17" height="17"><span data-en="Export JSON" data-zh="导出 JSON">Export JSON</span></button><button type="button" id="export-csv"><img src="../../assets/icons/download.svg" alt="" width="17" height="17"><span data-en="Export CSV" data-zh="导出 CSV">Export CSV</span></button><span id="export-status" role="status"></span></div>
+      </section>
+      <aside class="demo-footnotes">
+        <h2 data-en="Evaluation boundary" data-zh="评估边界">Evaluation boundary</h2>
+        <p data-en="This is an original teaching demo using fixed synthetic scores. No model was trained here, and these values are not research results. Metric calculations use scikit-learn 1.7.2 with zero_division=0." data-zh="这是使用固定合成分数的原创教学演示。此页未训练模型，数值也不是科研实验结果。指标由 scikit-learn 1.7.2 计算，零分母采用 zero_division=0。">This is an original teaching demo using fixed synthetic scores. No model was trained here, and these values are not research results. Metric calculations use scikit-learn 1.7.2 with zero_division=0.</p>
+        <p data-en="Threshold exploration is descriptive. In a real experiment, choose thresholds and checkpoints on validation data, freeze the choices, then evaluate once on held-out test data. Prediction averaging assumes aligned sample IDs and the same positive class." data-zh="阈值探索用于观察。在真实实验中，应使用验证集选择阈值和检查点，固定选择后再评估独立测试集。平均预测前必须对齐样本 ID 与正类含义。">Threshold exploration is descriptive. In a real experiment, choose thresholds and checkpoints on validation data, freeze the choices, then evaluate once on held-out test data. Prediction averaging assumes aligned sample IDs and the same positive class.</p>
+        <div class="demo-actions"><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/model-evaluation/note.md" data-en="Methods & reading references" data-zh="方法笔记与阅读资料">Methods & reading references</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/model-evaluation/test_build.py" data-en="Regression checks" data-zh="回归检验">Regression checks</a></div>
+      </aside>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wrap"><a href="../../" data-en="Hang Gu · Research & Engineering" data-zh="顾航 · 学术研究与工程实践">Hang Gu · Research & Engineering</a><span data-en="Original synthetic learning example · 2026" data-zh="原创合成学习示例 · 2026">Original synthetic learning example · 2026</span></div></footer>
+</body>
+</html>

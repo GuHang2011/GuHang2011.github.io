@@ -13,7 +13,7 @@ The academic reading structure is inspired by [winsleo.github.io](https://winsle
 - Project filters for engineering, research and learning, with accessible selection states and result counts.
 - Screenshot previews, mobile navigation, print styles, reading progress and restrained hover / keyboard-focus accents.
 - Semantic HTML, visible keyboard focus, a skip link, and reduced-motion support.
-- No build step, third-party JavaScript, remote fonts, analytics, or CDN dependencies. Local tool icons are from [Lucide](https://lucide.dev/) under the ISC license.
+- No site build step, remote fonts, analytics, or runtime CDN dependencies. The experiments bundle pinned [Chart.js](https://www.chartjs.org/) 4.4.9 and [PapaParse](https://www.papaparse.com/) 5.5.3 under MIT licenses. Local tool icons are from [Lucide](https://lucide.dev/) under the ISC license.
 - The English content and navigation work without JavaScript.
 
 ## Content
@@ -22,6 +22,7 @@ The academic reading structure is inspired by [winsleo.github.io](https://winsle
 2. **Engineering:** public repositories and selected project descriptions.
 3. **Notebook:** entry points to the [Frontend & Data Lab](https://github.com/GuHang2011/frontend-data-lab).
 4. **Background:** education and professional experience.
+5. **Interactive experiments:** financial clustering, data preparation audits and model evaluation, with synthetic data, source code, notes and reproducible checks. [Reading map](demos/README.md).
 
 Research status is updated September 2026. Manuscripts and accepted work are labeled separately. The KICP project links to its implementation and setup documentation; the learning lab uses synthetic data.
 
@@ -35,7 +36,7 @@ Project screenshots use synthetic demo content. Public cases exclude original da
 
 ## Preview locally
 
-Open `index.html` directly in a modern browser, or serve this folder:
+Serve this folder to load the experiments' local data and JavaScript modules:
 
 ```sh
 python -m http.server 8000
@@ -65,6 +66,7 @@ index.html          Semantic page content and bilingual copy
 academic.css        Flat academic layout and responsive / print styles
 academic.js         Language, filters, navigation, dialogs and reading progress
 cases/              Selected local cases and an extracted release example
+demos/              Interactive experiments, generators, tests and methods
 styles.css          Legacy research-page styles
 script.js           Legacy research-page interactions
 assets/favicon.svg  Local vector favicon

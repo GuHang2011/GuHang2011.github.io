@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" data-title-en="Data Preparation Audit | Hang Gu" data-title-zh="数据准备与质量审计 | 顾航">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An original interactive data preparation experiment: strict validation, missing values, duplicate conflicts and exact group totals on synthetic events.">
+  <link rel="canonical" href="https://guhang2011.github.io/demos/data-preparation/">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../academic.css">
+  <link rel="stylesheet" href="../demo.css">
+  <link rel="stylesheet" href="data-preparation.css">
+  <script src="../../academic.js" defer></script>
+  <script src="../vendor/papaparse.min.js" defer></script>
+  <script type="module" src="data-preparation.js"></script>
+  <title>Data Preparation Audit | Hang Gu</title>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-en="Skip to content" data-zh="跳至正文">Skip to content</a>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+  <header class="site-header" data-open="false"><div class="wrap header-inner">
+    <a class="brand" href="../../">Hang Gu<span> / 顾航</span></a>
+    <nav class="nav-links" id="navigation" aria-label="Project navigation"><a href="#experiment" data-en="Experiment" data-zh="交互实验">Experiment</a><a href="#notes" data-en="Engineering notes" data-zh="工程笔记">Engineering notes</a><a href="../../#work" data-en="All projects" data-zh="全部项目">All projects</a></nav>
+    <div class="header-controls"><div class="language-controls" role="group" aria-label="Language"><button type="button" data-language="zh" aria-pressed="false" aria-label="中文">中</button><button type="button" data-language="en" aria-pressed="true" aria-label="English">EN</button></div><button class="menu-toggle icon-button" type="button" aria-expanded="false" aria-controls="navigation" aria-label="Menu" title="Menu"><img src="../../assets/icons/menu.svg" alt=""></button></div>
+  </div></header>
+  <main id="main">
+    <section class="demo-opening" id="experiment"><div class="wrap">
+      <a class="demo-breadcrumb" href="../../#work" data-en="← Interactive projects" data-zh="← 交互项目">← Interactive projects</a>
+      <div class="demo-heading"><div><p class="demo-eyebrow" data-en="DATA ENGINEERING / SYNTHETIC EXPERIMENT" data-zh="数据工程 / 合成实验">DATA ENGINEERING / SYNTHETIC EXPERIMENT</p><h1 data-en="Data Preparation Audit" data-zh="数据准备与质量审计">Data Preparation Audit</h1></div><a class="demo-source-link" href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/data-preparation/pipeline.mjs" data-en="Source code →" data-zh="实验源码 →">Source code →</a></div>
+      <p class="demo-note" data-en="17 synthetic events · deterministic policies · original educational example, 2026.10.13" data-zh="17 条合成事件 · 确定性处理策略 · 2026.10.13 新编教学示例">17 synthetic events · deterministic policies · original educational example, 2026.10.13</p>
+      <div class="demo-toolbar prep-toolbar">
+        <div class="control-group"><label for="scenario" data-en="Dataset" data-zh="数据场景">Dataset</label><select id="scenario"><option value="mixed" data-en="Mixed quality" data-zh="混合质量">Mixed quality</option><option value="complete" data-en="Complete events" data-zh="完整事件">Complete events</option><option value="missing" data-en="Missing amounts" data-zh="缺失金额">Missing amounts</option><option value="conflicts" data-en="Duplicate conflicts" data-zh="重复冲突">Duplicate conflicts</option></select></div>
+        <div class="control-group"><label for="duplicate-policy" data-en="Conflicting IDs" data-zh="同 ID 冲突">Conflicting IDs</label><select id="duplicate-policy"><option value="reject" data-en="Quarantine all versions" data-zh="隔离全部冲突版本">Quarantine all versions</option><option value="first" data-en="Keep first by source order" data-zh="按源顺序保留第一条">Keep first by source order</option></select></div>
+        <div class="control-group"><label for="missing-policy" data-en="Missing amount" data-zh="缺失金额">Missing amount</label><select id="missing-policy"><option value="quarantine" data-en="Quarantine event" data-zh="隔离事件">Quarantine event</option><option value="zero" data-en="Impute zero (explicit assumption)" data-zh="填充 0（显式假设）">Impute zero (explicit assumption)</option></select></div>
+        <button type="button" class="icon-button" id="reset" aria-label="Reset experiment" title="Reset experiment" data-en-label="Reset experiment" data-zh-label="重置实验"><img src="../../assets/icons/rotate-ccw.svg" alt=""></button>
+      </div>
+      <div class="prep-pipeline" role="group" aria-label="Transformation stage">
+        <button type="button" data-stage="0" aria-pressed="false"><span>00</span><b data-en="Source" data-zh="源数据">Source</b></button>
+        <button type="button" data-stage="1" aria-pressed="false"><span>01</span><b data-en="Validate" data-zh="校验">Validate</b></button>
+        <button type="button" data-stage="2" aria-pressed="false"><span>02</span><b data-en="Missing values" data-zh="缺失处理">Missing values</b></button>
+        <button type="button" data-stage="3" aria-pressed="false"><span>03</span><b data-en="Deduplicate" data-zh="去重">Deduplicate</b></button>
+        <button type="button" data-stage="4" aria-pressed="true"><span>04</span><b data-en="Aggregate" data-zh="聚合">Aggregate</b></button>
+      </div>
+      <div class="metric-grid prep-metrics" aria-live="polite">
+        <div class="metric"><span data-en="Input events" data-zh="输入事件">Input events</span><strong id="input-count">17</strong></div>
+        <div class="metric"><span data-en="Retained events" data-zh="保留事件">Retained events</span><strong id="kept-count">—</strong></div>
+        <div class="metric"><span data-en="Quarantined" data-zh="隔离事件">Quarantined</span><strong id="quarantine-count">—</strong></div>
+        <div class="metric"><span data-en="Retained amount" data-zh="保留金额合计">Retained amount</span><strong id="amount-total">—</strong></div>
+      </div>
+      <p class="prep-status" id="stage-status" role="status"></p>
+      <p class="prep-error" id="error-message" role="alert" hidden></p>
+      <div class="demo-layout prep-layout">
+        <section class="demo-panel prep-records" aria-label="Event records">
+          <div class="prep-panel-heading"><div class="prep-tabs" role="tablist" aria-label="Records view"><button type="button" role="tab" data-view="cleaned" id="tab-cleaned" aria-selected="true" aria-controls="records-panel" data-en="Retained" data-zh="保留结果">Retained</button><button type="button" role="tab" data-view="quarantine" id="tab-quarantine" aria-selected="false" aria-controls="records-panel" tabindex="-1" data-en="Quarantine" data-zh="隔离区">Quarantine</button><button type="button" role="tab" data-view="source" id="tab-source" aria-selected="false" aria-controls="records-panel" tabindex="-1" data-en="Source CSV" data-zh="源 CSV">Source CSV</button></div><span class="prep-row-count" id="row-count"></span></div>
+          <div class="data-table-wrap" id="records-panel" role="tabpanel" aria-labelledby="tab-cleaned" tabindex="0"><table class="data-table prep-table"><thead><tr><th data-en="Row" data-zh="源行">Row</th><th>ID</th><th data-en="Timestamp (UTC)" data-zh="时间戳（UTC）">Timestamp (UTC)</th><th data-en="Group" data-zh="组别">Group</th><th data-en="Amount" data-zh="金额">Amount</th><th data-en="Audit state" data-zh="审计状态">Audit state</th></tr></thead><tbody id="records-body"></tbody></table><p class="prep-empty" id="empty-state" hidden></p></div>
+          <div class="demo-actions prep-exports"><span id="export-scope"></span><button type="button" id="export-csv"><img src="../../assets/icons/download.svg" alt=""><span data-en="CSV" data-zh="CSV">CSV</span></button><button type="button" id="export-json"><img src="../../assets/icons/download.svg" alt=""><span data-en="Audit JSON" data-zh="审计 JSON">Audit JSON</span></button></div>
+        </section>
+        <aside class="demo-panel prep-analysis"><div class="prep-panel-heading"><h2 data-en="Group totals" data-zh="分组金额">Group totals</h2><span class="prep-unit" data-en="synthetic units" data-zh="合成单位">synthetic units</span></div><div class="chart-frame prep-chart" id="group-chart" aria-live="polite"></div><div class="prep-audit"><h3 data-en="Audit reasons" data-zh="隔离原因">Audit reasons</h3><ul id="reason-list"></ul></div><p class="prep-policy-note" id="policy-note"></p></aside>
+      </div>
+      <noscript><p class="demo-note" data-en="The experiment requires JavaScript. The notes and source remain available below." data-zh="交互实验需要 JavaScript；下方笔记和源码仍可阅读。">The experiment requires JavaScript. The notes and source remain available below.</p></noscript>
+    </div></section>
+    <section class="prep-notes-section surface" id="notes"><div class="wrap">
+      <div class="section-heading"><div><p class="section-number">01 / NOTES & EVIDENCE</p><h2 data-en="A small dataset, explicit decisions" data-zh="小数据，明确的处理决策">A small dataset, explicit decisions</h2></div></div>
+      <div class="prep-note-grid">
+        <article><h3 data-en="Quality before scale" data-zh="先确定质量，再讨论规模">Quality before scale</h3><p data-en="Zero is an observed value; a missing amount is unknown. Strict UTC validation rejects impossible calendar dates. Equal IDs with different business fields require a stated conflict policy. Amounts are aggregated as integer cents." data-zh="零是已观测值，缺失金额是未知值。严格 UTC 校验拒绝不存在的日期。同 ID 的业务字段不一致，需要明确冲突策略。金额按整数分聚合。">Zero is an observed value; a missing amount is unknown. Strict UTC validation rejects impossible calendar dates. Equal IDs with different business fields require a stated conflict policy. Amounts are aggregated as integer cents.</p><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/data-preparation/spark-notes.md" data-en="Original Spark & preparation notes →" data-zh="Spark 与数据准备原创笔记 →">Original Spark & preparation notes →</a></article>
+        <article><h3 data-en="Verified scope" data-zh="已验证范围">Verified scope</h3><p data-en="A new browser experiment using synthetic events and PapaParse. The core has automated checks for zeros, calendar boundaries, conflict policies, reconciliation and idempotence. It does not run Spark or benchmark distributed processing." data-zh="新编浏览器实验，使用合成事件与 PapaParse。核心代码有零值、日期边界、冲突策略、结果对账与幂等性自动检查。本页未运行 Spark，也未进行分布式性能测试。">A new browser experiment using synthetic events and PapaParse. The core has automated checks for zeros, calendar boundaries, conflict policies, reconciliation and idempotence. It does not run Spark or benchmark distributed processing.</p><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/data-preparation/pipeline.test.mjs" data-en="Read the automated checks →" data-zh="阅读自动检查 →">Read the automated checks →</a></article>
+        <article><h3 data-en="Data and source boundary" data-zh="数据与来源边界">Data and source boundary</h3><p data-en="Prepared from local data engineering study topics. No textbook pages, examination questions, private records or production data are included. The sample uses a 2000–2099 UTC date contract and two-decimal amounts within ±1,000,000." data-zh="依据本地数据工程学习主题重新编写。不包含教材页面、考试题目、私人记录或生产数据。样例日期契约为 2000–2099 年 UTC，金额最多两位小数且范围为 ±1,000,000。">Prepared from local data engineering study topics. No textbook pages, examination questions, private records or production data are included. The sample uses a 2000–2099 UTC date contract and two-decimal amounts within ±1,000,000.</p><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/data-preparation/README.md" data-en="Reproduction & limitations →" data-zh="复现方法与限制 →">Reproduction & limitations →</a></article>
+      </div>
+    </div></section>
+  </main>
+  <footer class="site-footer"><div class="wrap footer-inner"><div><strong>Hang Gu · 顾航</strong><p data-en="Research and engineering, with explicit evidence." data-zh="用明确的证据记录研究与工程。">Research and engineering, with explicit evidence.</p></div><div><a href="../../" data-en="Academic homepage →" data-zh="学术主页 →">Academic homepage →</a><a href="https://github.com/GuHang2011">GitHub →</a></div></div></footer>
+</body>
+</html>
