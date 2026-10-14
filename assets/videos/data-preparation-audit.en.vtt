@@ -1,0 +1,26 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.500
+17 synthetic events from the CSV fixture.
+No personal or production data.
+
+2
+00:00:01.500 --> 00:00:05.000
+Strict validation retains 14 rows.
+3 malformed records are quarantined.
+
+3
+00:00:05.000 --> 00:00:08.500
+Quarantine 1 missing amount; retain 13 rows.
+Two valid zero amounts remain.
+
+4
+00:00:08.500 --> 00:00:12.000
+Remove 1 exact duplicate and 2 conflicting rows.
+10 retained rows; 7 quarantined.
+
+5
+00:00:12.000 --> 00:00:18.000
+Aggregate 10 retained rows into 4 groups.
+Amount total: 47.50. Source rows are preserved.

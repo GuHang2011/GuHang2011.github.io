@@ -1,0 +1,31 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.300
+Synthetic validation scores.
+Lower loss is better.
+
+2
+00:00:02.300 --> 00:00:08.300
+Epochs 1-4 improve the validation loss.
+Each improvement saves the checkpoint.
+
+3
+00:00:08.300 --> 00:00:09.800
+Epoch 5: best checkpoint, loss 0.550.
+Patience resets to zero.
+
+4
+00:00:09.800 --> 00:00:11.300
+Epoch 6: loss 0.552 does not improve.
+Patience used: 1 of 3.
+
+5
+00:00:11.300 --> 00:00:12.800
+Epoch 7: loss 0.548 improves by only 0.002.
+It fails the 0.005 minimum change.
+
+6
+00:00:12.800 --> 00:00:18.000
+Epoch 8: stop after 3 stalled epochs.
+Retain the epoch 5 checkpoint.

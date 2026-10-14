@@ -1,0 +1,521 @@
+{
+  "created": "2026-10-14",
+  "renderer": "Pillow frame rendering, FFmpeg libx264 encoding",
+  "content_kind": "Generated explainers from real JavaScript outputs; not recorded application footage",
+  "minimum_font_pixels": 20,
+  "source_files": [
+    {
+      "path": "cases/kapt/demo-core.mjs",
+      "sha256": "75d61d3009db3954d67be30a1067272bbbf91684012fbad0d7ff184a87a45960"
+    },
+    {
+      "path": "demos/data-preparation/pipeline.mjs",
+      "sha256": "ad3d4c10da609667453dbd517569b2935668bc8d35cb963513defecc67646cee"
+    },
+    {
+      "path": "demos/vendor/papaparse.min.js",
+      "sha256": "3553fb8bdf5b8004ce5531e6827e81c8b34e7b3992677967754544064e97b016"
+    }
+  ],
+  "files": [
+    {
+      "file": "kapt-early-stopping.mp4",
+      "poster": "kapt-early-stopping.jpg",
+      "width": 1280,
+      "height": 720,
+      "duration_seconds": 18,
+      "frames": 432,
+      "fps": 24,
+      "codec": "H.264",
+      "pixel_format": "yuv420p",
+      "audio": false,
+      "faststart": true,
+      "bytes": 168230,
+      "decoded_frame_checks": [
+        {
+          "second": 0,
+          "decoded_width": 1280,
+          "decoded_height": 720,
+          "rgb_standard_deviation": [
+            32.66,
+            27.42,
+            23.3
+          ],
+          "pixel_sha256": "b81ff29c78a11659ea1e5565c2469d1ba9e7e682dfc6ff8d337ad30e71a62e50"
+        },
+        {
+          "second": 9.0,
+          "decoded_width": 1280,
+          "decoded_height": 720,
+          "rgb_standard_deviation": [
+            39.51,
+            31.19,
+            26.38
+          ],
+          "pixel_sha256": "07965226bc47906b7b057692c2cef6b0f91c3df92e9c5c2c687a34d109850154"
+        },
+        {
+          "second": 17.958333,
+          "decoded_width": 1280,
+          "decoded_height": 720,
+          "rgb_standard_deviation": [
+            42.13,
+            36.4,
+            31.15
+          ],
+          "pixel_sha256": "3b33af68ce6179b44fc0a53881f51c23cb8a6636db7757693bcc34dfc48249ea"
+        }
+      ]
+    },
+    {
+      "file": "data-preparation-audit.mp4",
+      "poster": "data-preparation-audit.jpg",
+      "width": 1280,
+      "height": 720,
+      "duration_seconds": 18,
+      "frames": 432,
+      "fps": 24,
+      "codec": "H.264",
+      "pixel_format": "yuv420p",
+      "audio": false,
+      "faststart": true,
+      "bytes": 208647,
+      "decoded_frame_checks": [
+        {
+          "second": 0,
+          "decoded_width": 1280,
+          "decoded_height": 720,
+          "rgb_standard_deviation": [
+            38.71,
+            33.4,
+            30.02
+          ],
+          "pixel_sha256": "7fec2c261ce03219da3510ce85e7db5bca707ad0d574a4d8ffefd80186d92082"
+        },
+        {
+          "second": 9.0,
+          "decoded_width": 1280,
+          "decoded_height": 720,
+          "rgb_standard_deviation": [
+            44.38,
+            36.71,
+            33.21
+          ],
+          "pixel_sha256": "0aecde75bb2f36f10a56030fa8700b394d794b08cba488d5eb1ed9d1a6445c65"
+        },
+        {
+          "second": 17.958333,
+          "decoded_width": 1280,
+          "decoded_height": 720,
+          "rgb_standard_deviation": [
+            46.26,
+            37.34,
+            33.15
+          ],
+          "pixel_sha256": "e26e9a3a5cfc9d613fc56b71b401ce9a05cf29963dc9a2421bfa8e12b528c371"
+        }
+      ]
+    }
+  ],
+  "kapt": {
+    "synthetic": true,
+    "options": {
+      "mode": "min",
+      "patience": 3,
+      "minDelta": 0.005
+    },
+    "scores": [
+      0.82,
+      0.72,
+      0.63,
+      0.585,
+      0.55,
+      0.552,
+      0.548,
+      0.556,
+      0.56,
+      0.555,
+      0.546,
+      0.552,
+      0.558,
+      0.561,
+      0.55,
+      0.544,
+      0.547,
+      0.552,
+      0.56,
+      0.566
+    ],
+    "trace": [
+      {
+        "epoch": 1,
+        "score": 0.82,
+        "bestScore": 0.82,
+        "bestEpoch": 1,
+        "badEpochs": 0,
+        "improved": true,
+        "stopped": false
+      },
+      {
+        "epoch": 2,
+        "score": 0.72,
+        "bestScore": 0.72,
+        "bestEpoch": 2,
+        "badEpochs": 0,
+        "improved": true,
+        "stopped": false
+      },
+      {
+        "epoch": 3,
+        "score": 0.63,
+        "bestScore": 0.63,
+        "bestEpoch": 3,
+        "badEpochs": 0,
+        "improved": true,
+        "stopped": false
+      },
+      {
+        "epoch": 4,
+        "score": 0.585,
+        "bestScore": 0.585,
+        "bestEpoch": 4,
+        "badEpochs": 0,
+        "improved": true,
+        "stopped": false
+      },
+      {
+        "epoch": 5,
+        "score": 0.55,
+        "bestScore": 0.55,
+        "bestEpoch": 5,
+        "badEpochs": 0,
+        "improved": true,
+        "stopped": false
+      },
+      {
+        "epoch": 6,
+        "score": 0.552,
+        "bestScore": 0.55,
+        "bestEpoch": 5,
+        "badEpochs": 1,
+        "improved": false,
+        "stopped": false
+      },
+      {
+        "epoch": 7,
+        "score": 0.548,
+        "bestScore": 0.55,
+        "bestEpoch": 5,
+        "badEpochs": 2,
+        "improved": false,
+        "stopped": false
+      },
+      {
+        "epoch": 8,
+        "score": 0.556,
+        "bestScore": 0.55,
+        "bestEpoch": 5,
+        "badEpochs": 3,
+        "improved": false,
+        "stopped": true
+      }
+    ],
+    "best_epoch": 5,
+    "stop_epoch": 8,
+    "online_case": "https://guhang2011.github.io/cases/kapt/"
+  },
+  "data_preparation": {
+    "synthetic": true,
+    "fixture": "MIXED_CSV",
+    "parser": "Papa Parse 5.5.3; header:true; skipEmptyLines:true",
+    "policies": {
+      "missing": "quarantine",
+      "duplicate": "reject"
+    },
+    "stages": [
+      {
+        "stage": 0,
+        "summary": {
+          "input": 17,
+          "kept": 17,
+          "quarantined": 0,
+          "zeros": 2,
+          "imputed": 0,
+          "totalCents": null
+        },
+        "audit": [],
+        "reasons": {},
+        "groups": [],
+        "retained_source_rows": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "quarantined_source_rows": []
+      },
+      {
+        "stage": 1,
+        "summary": {
+          "input": 17,
+          "kept": 14,
+          "quarantined": 3,
+          "zeros": 2,
+          "imputed": 0,
+          "totalCents": 8750
+        },
+        "audit": [
+          {
+            "stage": 1,
+            "kept": 14,
+            "rejected": 3
+          }
+        ],
+        "reasons": {
+          "invalid_amount": 1,
+          "invalid_date": 1,
+          "invalid_group": 1
+        },
+        "groups": [],
+        "retained_source_rows": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          8,
+          9,
+          11,
+          12,
+          14,
+          15,
+          16,
+          17
+        ],
+        "quarantined_source_rows": [
+          7,
+          10,
+          13
+        ]
+      },
+      {
+        "stage": 2,
+        "summary": {
+          "input": 17,
+          "kept": 13,
+          "quarantined": 4,
+          "zeros": 2,
+          "imputed": 0,
+          "totalCents": 8750
+        },
+        "audit": [
+          {
+            "stage": 1,
+            "kept": 14,
+            "rejected": 3
+          },
+          {
+            "stage": 2,
+            "kept": 13,
+            "rejected": 1,
+            "imputed": 0
+          }
+        ],
+        "reasons": {
+          "invalid_amount": 1,
+          "invalid_date": 1,
+          "invalid_group": 1,
+          "missing_amount": 1
+        },
+        "groups": [],
+        "retained_source_rows": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          8,
+          9,
+          11,
+          12,
+          14,
+          15,
+          16,
+          17
+        ],
+        "quarantined_source_rows": [
+          6,
+          7,
+          10,
+          13
+        ]
+      },
+      {
+        "stage": 3,
+        "summary": {
+          "input": 17,
+          "kept": 10,
+          "quarantined": 7,
+          "zeros": 2,
+          "imputed": 0,
+          "totalCents": 4750
+        },
+        "audit": [
+          {
+            "stage": 1,
+            "kept": 14,
+            "rejected": 3
+          },
+          {
+            "stage": 2,
+            "kept": 13,
+            "rejected": 1,
+            "imputed": 0
+          },
+          {
+            "stage": 3,
+            "kept": 10,
+            "rejected": 3,
+            "conflictGroups": 1
+          }
+        ],
+        "reasons": {
+          "invalid_amount": 1,
+          "invalid_date": 1,
+          "invalid_group": 1,
+          "missing_amount": 1,
+          "duplicate_exact": 1,
+          "duplicate_conflict": 2
+        },
+        "groups": [],
+        "retained_source_rows": [
+          1,
+          2,
+          3,
+          4,
+          11,
+          12,
+          14,
+          15,
+          16,
+          17
+        ],
+        "quarantined_source_rows": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          13
+        ]
+      },
+      {
+        "stage": 4,
+        "summary": {
+          "input": 17,
+          "kept": 10,
+          "quarantined": 7,
+          "zeros": 2,
+          "imputed": 0,
+          "totalCents": 4750
+        },
+        "audit": [
+          {
+            "stage": 1,
+            "kept": 14,
+            "rejected": 3
+          },
+          {
+            "stage": 2,
+            "kept": 13,
+            "rejected": 1,
+            "imputed": 0
+          },
+          {
+            "stage": 3,
+            "kept": 10,
+            "rejected": 3,
+            "conflictGroups": 1
+          },
+          {
+            "stage": 4,
+            "kept": 10,
+            "rejected": 0,
+            "groups": 4
+          }
+        ],
+        "reasons": {
+          "invalid_amount": 1,
+          "invalid_date": 1,
+          "invalid_group": 1,
+          "missing_amount": 1,
+          "duplicate_exact": 1,
+          "duplicate_conflict": 2
+        },
+        "groups": [
+          {
+            "group": "A",
+            "count": 3,
+            "cents": 1650,
+            "amount": 16.5
+          },
+          {
+            "group": "B",
+            "count": 3,
+            "cents": 900,
+            "amount": 9
+          },
+          {
+            "group": "C",
+            "count": 2,
+            "cents": 1200,
+            "amount": 12
+          },
+          {
+            "group": "D",
+            "count": 2,
+            "cents": 1000,
+            "amount": 10
+          }
+        ],
+        "retained_source_rows": [
+          1,
+          2,
+          3,
+          4,
+          11,
+          12,
+          14,
+          15,
+          16,
+          17
+        ],
+        "quarantined_source_rows": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          13
+        ]
+      }
+    ],
+    "online_case": "https://guhang2011.github.io/demos/data-preparation/"
+  }
+}
