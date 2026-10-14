@@ -44,6 +44,7 @@
     }
     document.title = document.documentElement.dataset[next === "zh" ? "titleZh" : "titleEn"] || (next === "zh" ? "顾航 | 学术研究与工程实践" : "Hang Gu | Research & Engineering");
     updateCounts();
+    document.dispatchEvent(new CustomEvent("portfolio-language-change", { detail: { language: next } }));
     try { localStorage.setItem(storageKey, next); } catch { /* Storage is optional. */ }
   }
 
