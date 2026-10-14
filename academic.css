@@ -160,6 +160,15 @@ strong { font-weight: 650; }
 .quick-links { display: flex; flex-wrap: wrap; gap: 11px 22px; padding-top: 23px; margin-top: 24px; border-top: 1px solid var(--line); }
 .quick-links a { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; }
 .quick-links svg { width: 15px; height: 15px; }
+.admissions-entry { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 24px; border-top: 1px solid var(--line); }
+.admissions-entry a { display: grid; grid-template-columns: 22px minmax(0, 1fr) 16px; align-items: center; gap: 12px; min-height: 72px; padding-block: 16px; color: var(--ink); }
+.admissions-entry a > span { color: var(--accent); font-size: 12px; font-variant-numeric: tabular-nums; }
+.admissions-entry a > span:last-child { text-align: right; }
+.admissions-entry a > div { min-width: 0; }
+.admissions-entry strong { display: block; font-size: 14px; line-height: 1.55; overflow-wrap: anywhere; }
+.admissions-entry a > div > span { display: block; margin-top: 3px; color: var(--muted); font-size: 12px; line-height: 1.7; overflow-wrap: anywhere; }
+.admissions-entry a:hover { color: var(--accent); text-decoration: none; }
+.admissions-entry a:hover strong { text-decoration: underline; }
 
 .filter-bar { display: flex; align-items: center; gap: 20px; justify-content: space-between; margin-bottom: 24px; }
 .segmented { display: flex; gap: 3px; padding: 3px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
@@ -457,6 +466,9 @@ details.abstract[open] { padding-bottom: 10px; }
   .profile-facts dl { grid-template-columns: 55px 1fr; gap: 5px 12px; }
   .quick-links { gap: 11px 17px; padding-top: 19px; margin-top: 22px; }
   .quick-links a { font-size: 11px; }
+  .admissions-entry { grid-template-columns: 1fr; gap: 0; margin-top: 22px; }
+  .admissions-entry a { min-height: 64px; padding-block: 13px; }
+  .admissions-entry a + a { border-top: 1px solid var(--line); }
   .filter-bar { gap: 12px; flex-wrap: wrap; margin-bottom: 22px; }
   .segmented { max-width: 100%; flex-wrap: wrap; }
   .segmented button { padding-inline: 10px; font-size: 11px; }

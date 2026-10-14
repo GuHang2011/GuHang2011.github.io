@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" data-title-en="Research Direction Brief | Hang Gu" data-title-zh="研究方向简述 | 顾航">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hang Gu's proposed research agenda: reliable multimodal learning with limited labels, controlled CLIP adaptation and validation-sensitive model selection.">
+  <link rel="canonical" href="https://guhang2011.github.io/research/statement.html">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../academic.css?v=20261015-phd">
+  <link rel="stylesheet" href="statement.css?v=20261015-phd">
+  <script src="../academic.js?v=20261015-phd" defer></script>
+  <title>Research Direction Brief | Hang Gu</title>
+</head>
+<body class="statement-page">
+  <a class="skip-link" href="#main" data-en="Skip to content" data-zh="跳至正文">Skip to content</a>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+  <header class="site-header" data-open="false">
+    <div class="wrap header-inner">
+      <a class="brand" href="../">Hang Gu<span> / 顾航</span></a>
+      <nav class="nav-links" id="navigation" aria-label="Research brief navigation" data-en-label="Research brief navigation" data-zh-label="研究简述导航">
+        <a href="#questions" data-en="Questions" data-zh="研究问题">Questions</a>
+        <a href="#preparation" data-en="Preparation" data-zh="现有准备">Preparation</a>
+        <a href="#sequence" data-en="Next steps" data-zh="推进顺序">Next steps</a>
+      </nav>
+      <div class="header-controls">
+        <div class="language-controls" role="group" aria-label="Language"><button type="button" data-language="zh" aria-pressed="false" aria-label="中文">中</button><button type="button" data-language="en" aria-pressed="true" aria-label="English">EN</button></div>
+        <button class="brief-print icon-button" type="button" data-print aria-label="Print research brief" data-en-label="Print research brief" data-zh-label="打印研究简述" title="Print / 打印"><img src="../assets/icons/printer.svg" alt=""></button>
+        <button class="menu-toggle icon-button" type="button" aria-expanded="false" aria-controls="navigation" aria-label="Menu" title="Menu"><img src="../assets/icons/menu.svg" alt=""></button>
+      </div>
+    </div>
+  </header>
+  <main id="main" class="brief-content">
+    <div class="brief-topline"><a href="./" data-en="← Research reading guide" data-zh="← 研究阅读指南">← Research reading guide</a><time datetime="2026-10-15">2026.10.15</time></div>
+    <section class="brief-opening" aria-labelledby="brief-title">
+      <p class="brief-status" data-en="RESEARCH DIRECTION BRIEF / PROPOSED AGENDA" data-zh="研究方向简述 / 讨论稿">RESEARCH DIRECTION BRIEF / PROPOSED AGENDA</p>
+      <h1 id="brief-title" data-en="Reliable multimodal learning with limited labels" data-zh="有限标注下的可靠多模态学习">Reliable multimodal learning with limited labels</h1>
+      <p class="brief-author">Hang Gu · 顾航</p>
+      <p class="brief-identity" data-en="Lecturer and teaching section head at 江苏财经职业技术学院; MSc in Computer Science (Data Science), Universiti Malaya." data-zh="江苏财经职业技术学院计算机讲师、教研室主任；马来亚大学计算机硕士（数据科学方向）。">Lecturer and teaching section head at 江苏财经职业技术学院; MSc in Computer Science (Data Science), Universiti Malaya.</p>
+      <p class="brief-intent" data-en="I want to understand when adapting frozen multimodal representations is reliable, and when scarce validation labels make apparent improvements unstable. News classification provides a concrete setting for connecting representation choices with model-selection decisions." data-zh="我希望理解：冻结多模态表征的适配在什么条件下可靠，以及稀缺的验证标签何时会让表面上的提升变得不稳定。新闻分类为连接表征选择与模型选择提供了具体研究场景。">I want to understand when adapting frozen multimodal representations is reliable, and when scarce validation labels make apparent improvements unstable. News classification provides a concrete setting for connecting representation choices with model-selection decisions.</p>
+      <p class="brief-draft-note" data-en="This brief proposes experiments for discussion. The designs below are planned work, not completed experiments or performance results." data-zh="本简述提出供讨论的实验方向。以下设计均拟开展，不代表已完成实验或性能结果。">This brief proposes experiments for discussion. The designs below are planned work, not completed experiments or performance results.</p>
+    </section>
+
+    <section class="brief-section" id="questions" aria-labelledby="questions-title">
+      <div class="brief-section-label"><span>01</span><h2 id="questions-title" data-en="Two testable questions" data-zh="两个可检验的问题">Two testable questions</h2></div>
+      <article class="brief-question" aria-labelledby="adaptation-title">
+        <p class="brief-question-number" data-en="Q1 / PROPOSED EXPERIMENT" data-zh="问题一 / 拟开展实验">Q1 / PROPOSED EXPERIMENT</p>
+        <h3 id="adaptation-title" data-en="Does frozen-CLIP adaptation remain useful after split and artifact controls?" data-zh="控制切分与数据伪影后，冻结 CLIP 的适配是否仍然有效？">Does frozen-CLIP adaptation remain useful after split and artifact controls?</h3>
+        <dl class="brief-design">
+          <div><dt data-en="Compare" data-zh="拟比较">Compare</dt><dd data-en="A linear classifier on frozen CLIP features, learned prompts, and token-level co-attention fusion. Keep the encoder frozen and compare each addition with the same feature baseline." data-zh="比较冻结 CLIP 特征上的线性分类器、可学习提示与词元级协同注意力融合。固定编码器，分别对照同一特征基线，检查各项适配的作用。">A linear classifier on frozen CLIP features, learned prompts, and token-level co-attention fusion. Keep the encoder frozen and compare each addition with the same feature baseline.</dd></div>
+          <div><dt data-en="Control" data-zh="拟控制">Control</dt><dd data-en="Define train, validation and test manifests before tuning. Group duplicate or related samples before splitting; inspect source and event cues. Use identical label budgets, paired seeds and tuning budgets for every method." data-zh="调参前固定训练、验证与测试清单。先对重复或相关样本分组再切分，并检查来源、事件线索。各方法使用相同标注预算、配对随机种子和调参预算。">Define train, validation and test manifests before tuning. Group duplicate or related samples before splitting; inspect source and event cues. Use identical label budgets, paired seeds and tuning budgets for every method.</dd></div>
+          <div><dt data-en="Evaluate / fail" data-zh="拟评估与失败条件">Evaluate / fail</dt><dd data-en="Predefine macro-F1 and a paired uncertainty interval for the difference from the baseline, with source/event slices as diagnostics. An improvement claim fails if its interval includes zero or its direction reverses on predefined artifact-controlled conditions. Report those failures." data-zh="预先规定宏平均 F1，以及相对基线差值的配对不确定性区间；来源、事件分组用于诊断。若差值区间包含零，或在预定义的伪影控制条件下提升方向反转，则不支持稳定提升的结论，并报告失败情形。">Predefine macro-F1 and a paired uncertainty interval for the difference from the baseline, with source/event slices as diagnostics. An improvement claim fails if its interval includes zero or its direction reverses on predefined artifact-controlled conditions. Report those failures.</dd></div>
+        </dl>
+      </article>
+      <article class="brief-question" aria-labelledby="validation-title">
+        <p class="brief-question-number" data-en="Q2 / PROPOSED EXPERIMENT" data-zh="问题二 / 拟开展实验">Q2 / PROPOSED EXPERIMENT</p>
+        <h3 id="validation-title" data-en="How does validation sampling change model selection and early stopping?" data-zh="验证集抽样如何影响模型选择与早停？">How does validation sampling change model selection and early stopping?</h3>
+        <dl class="brief-design">
+          <div><dt data-en="Compare" data-zh="拟比较">Compare</dt><dd data-en="Fixed-epoch selection and validation-based early stopping over the same candidate runs. Predefine patience and minimum-improvement settings, then repeat selection using paired stratified validation subsets at planned label budgets." data-zh="在同一组候选训练记录上，比较固定轮次选择与基于验证集的早停。预先规定耐心轮数、最小改善量，再按拟定的标注预算，以配对分层验证子集重复选择。">Fixed-epoch selection and validation-based early stopping over the same candidate runs. Predefine patience and minimum-improvement settings, then repeat selection using paired stratified validation subsets at planned label budgets.</dd></div>
+          <div><dt data-en="Control" data-zh="拟控制">Control</dt><dd data-en="Hold training data, candidate checkpoints, seeds and the sealed test set fixed. Cache validation-pool predictions so sampling changes only the selection input. Keep each comparison's validation and search budget equal; lock the protocol before inspecting test scores." data-zh="固定训练数据、候选检查点、随机种子与封存测试集。缓存验证池预测，使抽样仅改变选择时的输入。同组比较保持验证与搜索预算一致，先锁定流程再查看测试指标。">Hold training data, candidate checkpoints, seeds and the sealed test set fixed. Cache validation-pool predictions so sampling changes only the selection input. Keep each comparison's validation and search budget equal; lock the protocol before inspecting test scores.</dd></div>
+          <div><dt data-en="Evaluate / fail" data-zh="拟评估与失败条件">Evaluate / fail</dt><dd data-en="Predefine checkpoint-selection agreement, stopping-epoch dispersion and paired macro-F1 differences across resamples. Freeze the agreement threshold before running the study. A stability claim fails below that threshold; any train/test overlap or missing class coverage invalidates the affected comparison." data-zh="预先规定重抽样间的检查点选择一致率、停止轮次离散程度与宏平均 F1 配对差值，并在实验前冻结一致率判定阈值。低于阈值则不支持稳定性结论；训练与测试重叠或类别覆盖不足时，相应比较无效。">Predefine checkpoint-selection agreement, stopping-epoch dispersion and paired macro-F1 differences across resamples. Freeze the agreement threshold before running the study. A stability claim fails below that threshold; any train/test overlap or missing class coverage invalidates the affected comparison.</dd></div>
+        </dl>
+      </article>
+    </section>
+
+    <section class="brief-section" id="preparation" aria-labelledby="preparation-title">
+      <div class="brief-section-label"><span>02</span><h2 id="preparation-title" data-en="Existing preparation" data-zh="现有准备">Existing preparation</h2></div>
+      <div class="brief-preparation"><h3><a href="https://github.com/GuHang2011/KICP">FCP / KICP</a></h3><p data-en="My first-author FCP study includes frozen-CLIP adaptation, baseline comparisons, modality ablations and near-duplicate audits. KICP provides research implementation and external-asset requirements. Q1 proposes a further controlled comparison, beyond these existing preparations." data-zh="第一作者 FCP 研究包含冻结 CLIP 适配、基线比较、模态消融与近重复审计。KICP 提供研究实现及外部资源要求。问题一是在这些准备之上进一步开展的受控比较。">My first-author FCP study includes frozen-CLIP adaptation, baseline comparisons, modality ablations and near-duplicate audits. KICP provides research implementation and external-asset requirements. Q1 proposes a further controlled comparison, beyond these existing preparations.</p></div>
+      <div class="brief-preparation"><h3><a href="../#research" data-en="Validation study" data-zh="验证研究">Validation study</a></h3><p data-en="The DASFAA 2027 submission design uses 5 training seeds, 20 shared validation draws and 100 additional draws to distinguish validation composition, score weighting and epoch selection. This design informs Q2; the recorded status is submitted, not accepted." data-zh="DASFAA 2027 投稿研究设计采用 5 个训练种子、20 次共享验证抽样及额外 100 次抽样，区分验证构成、评分权重和训练轮次选择的影响，为问题二提供设计基础；记录状态为已投稿，尚未录用。">The DASFAA 2027 submission design uses 5 training seeds, 20 shared validation draws and 100 additional draws to distinguish validation composition, score weighting and epoch selection. This design informs Q2; the recorded status is submitted, not accepted.</p></div>
+      <div class="brief-preparation"><h3><a href="https://github.com/GuHang2011/KAPT/blob/main/REVIEWER_ENTRY.md">KAPT</a></h3><p data-en="KANO-derived learning tools with explicit early-stopping state, sample-aligned predictions and synthetic component checks. These support Q2's evaluation implementation; they do not establish a trained benchmark. Upstream KANO attribution is retained." data-zh="基于 KANO 的学习工具明确早停状态、样本预测对齐与合成组件检查，可支撑问题二的评估实现，但不建立训练基准结论；保留上游 KANO 归属。">KANO-derived learning tools with explicit early-stopping state, sample-aligned predictions and synthetic component checks. These support Q2's evaluation implementation; they do not establish a trained benchmark. Upstream KANO attribution is retained.</p></div>
+      <div class="brief-links"><a href="https://github.com/GuHang2011/KAPT/blob/main/docs/reproduction.md" data-en="KAPT reproduction guide" data-zh="KAPT 复现指南">KAPT reproduction guide</a><a href="../cases/kapt/" data-en="Early-stopping case" data-zh="早停学习案例">Early-stopping case</a><a href="../#research" data-en="Manuscripts and recorded statuses" data-zh="稿件与已记录状态">Manuscripts and recorded statuses</a></div>
+      <p class="brief-source-note" data-en="Research descriptions and submission status above refer to the September 2026 record." data-zh="以上研究描述与投稿状态对应 2026 年 9 月记录。">Research descriptions and submission status above refer to the September 2026 record.</p>
+    </section>
+
+    <section class="brief-section" id="sequence" aria-labelledby="sequence-title">
+      <div class="brief-section-label"><span>03</span><h2 id="sequence-title" data-en="Proposed sequence" data-zh="拟议推进顺序">Proposed sequence</h2></div>
+      <ol class="brief-stages">
+        <li><span>01</span><h3 data-en="Define the protocol" data-zh="明确实验流程">Define the protocol</h3><p data-en="Verify data access and grouping, reproduce a minimal baseline, and freeze splits, budgets, selection rules and failure criteria." data-zh="确认数据获取与分组方式，复现最小基线，固定切分、预算、选择规则和失败判据。">Verify data access and grouping, reproduce a minimal baseline, and freeze splits, budgets, selection rules and failure criteria.</p></li>
+        <li><span>02</span><h3 data-en="Run paired comparisons" data-zh="开展配对比较">Run paired comparisons</h3><p data-en="Study controlled adaptation first; reuse its fixed candidate runs to isolate validation-sampling effects and inspect reversals." data-zh="先研究受控的适配比较，再复用固定候选记录，隔离验证抽样的影响并分析方向反转。">Study controlled adaptation first; reuse its fixed candidate runs to isolate validation-sampling effects and inspect reversals.</p></li>
+        <li><span>03</span><h3 data-en="Report the limits" data-zh="报告结论与边界">Report the limits</h3><p data-en="Publish permitted code and prediction summaries with uncertainty, ablations and failure examples. Refine the next question from those findings." data-zh="公开获准分享的代码与预测摘要，报告不确定性、消融与失败案例，并据此收敛下一步研究问题。">Publish permitted code and prediction summaries with uncertainty, ablations and failure examples. Refine the next question from those findings.</p></li>
+      </ol>
+    </section>
+    <footer class="brief-footer"><span data-en="Hang Gu · Research direction discussion draft" data-zh="顾航 · 研究方向讨论稿">Hang Gu · Research direction discussion draft</span><a href="cv.html" data-en="Public CV" data-zh="公开简历">Public CV</a><a href="mailto:guhang2011@126.com" aria-label="Email Hang Gu" data-en-label="Email Hang Gu" data-zh-label="邮件联系顾航">guhang2011@126.com</a><a href="https://guhang2011.github.io/">guhang2011.github.io</a></footer>
+  </main>
+</body>
+</html>

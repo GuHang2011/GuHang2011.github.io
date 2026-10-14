@@ -1,8 +1,16 @@
 # Research Reading Guide | 研究阅读指南
 
-[Portfolio](https://guhang2011.github.io/) · [Bilingual reading guide](https://guhang2011.github.io/research/)
+[Portfolio](https://guhang2011.github.io/) · [Research direction brief](https://guhang2011.github.io/research/statement.html) · [Evidence guide](https://guhang2011.github.io/research/#evidence) · [Academic CV](https://guhang2011.github.io/research/cv.html)
 
-Updated: 2026-10-14. This guide connects public code with questions, reproduction steps and evidence boundaries. Research implementations, engineering cases and learning tools have distinct scopes.
+Updated: 2026-10-15. This guide connects public code with questions, reproduction steps and evidence boundaries. The proposed research direction is a discussion draft; manuscript and project statuses follow the supplied September 2026 CVs. Research implementations, engineering cases and learning tools have distinct scopes.
+
+## Start here | 导师阅读入口
+
+1. [Research direction brief / 研究方向简述](./statement.html): two proposed questions about frozen multimodal adaptation and validation sensitivity, with experimental controls and failure criteria.
+2. [Inspect evidence / 查看证据](https://guhang2011.github.io/research/#evidence): KICP implementation, KAPT source attribution and 31 recorded Python component checks, plus the five-test release-check example.
+3. [Academic CV / 学术简历](./cv.html): selected research, confirmed first authorship for FCP and ISCAIT, project leadership, education and experience; printable in either language.
+
+Academic contact / 学术联系: [guhang2011@126.com](mailto:guhang2011@126.com).
 
 ## Research interests | 研究兴趣
 
