@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "project": "Silk Road teaching order workflow",
+  "record_type": "audit_of_existing_local_test_reports",
+  "audit_local_date": "2026-10-16",
+  "audit_timezone": "Asia/Shanghai",
+  "audit_observed_at_utc": "2026-10-15T16:00:40Z",
+  "test_rerun_in_this_audit": false,
+  "historical_verification_document": "docs/silkroad-verification.md",
+  "historical_document_date": "2026-10-15",
+  "source_path_basis": "All source report paths are relative to the original project root. They are provenance references, not public download links.",
+  "collection_method": "Read only testsuite summary attributes and filesystem metadata; hash the original XML bytes with SHA-256. Do not export XML properties, logs, environment values or fixtures.",
+  "timestamp_interpretation": "The five XML reports have no testsuite timestamp attribute. Exact execution start/end times are unavailable. File modification times are recorded as filesystem metadata and must not be treated as exact test execution times.",
+  "raw_reports_published": false,
+  "hash_interpretation": "Hashes identify the audited local report bytes for later comparison. Without the original reports, they do not independently establish test execution or reproducibility.",
+  "totals": {
+    "suites": 5,
+    "tests": 41,
+    "passed": 41,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": [
+    {
+      "category": "order_workflow",
+      "suite": "com.example.Kcsj.SilkRoadWorkflowTest",
+      "tests": 9,
+      "passed": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "reported_elapsed_seconds": 1.372,
+      "execution_timestamp": null,
+      "report_last_modified_utc": "2026-10-15T15:24:25.5401083Z",
+      "source_report": "CropDiseasesDetection_springboot/target/surefire-reports/TEST-com.example.Kcsj.SilkRoadWorkflowTest.xml",
+      "sha256": "04503e4d4503a3c1bd53144f2980c360300e69b3a9d4bac9ae68d5621e84f8e4",
+      "scope": [
+        "Server prices, request-content idempotency and stock reservation",
+        "Concurrent retry and last-stock contention using isolated MySQL fixtures",
+        "Payment/QC gates, ordered task events and failed-task retry",
+        "Ownership, college isolation, historical pagination and print-detail access",
+        "Marketing review invalidation and manual after-sales boundaries"
+      ],
+      "limits": "The AI service is mocked. Device events and payments are simulations; this is not a real hardware or financial integration test."
+    },
+    {
+      "category": "mocked_ai_service",
+      "suite": "com.example.Kcsj.SilkRoadAiServiceTest",
+      "tests": 12,
+      "passed": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "reported_elapsed_seconds": 0.019,
+      "execution_timestamp": null,
+      "report_last_modified_utc": "2026-10-15T15:24:24.1678159Z",
+      "source_report": "CropDiseasesDetection_springboot/target/surefire-reports/TEST-com.example.Kcsj.SilkRoadAiServiceTest.xml",
+      "sha256": "c85cd816ed20f9003119b6f609c35b60c916dc9e78b17fbe1ae8b4491f49c8b9",
+      "scope": [
+        "Explicit template and AI source labels",
+        "Strict JSON shape, duplicate/trailing-content rejection and length limits",
+        "Allowed-reference checks and unknown-order handling",
+        "Private-field exclusions and untrusted business data boundaries",
+        "Provider failure reporting without silent template substitution"
+      ],
+      "limits": "Uses a mocked model client. Does not validate a live model, generation quality, paid inference or image/video generation."
+    },
+    {
+      "category": "public_account",
+      "suite": "com.example.Kcsj.PublicAccountTest",
+      "tests": 11,
+      "passed": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "reported_elapsed_seconds": 3.794,
+      "execution_timestamp": null,
+      "report_last_modified_utc": "2026-10-15T15:24:24.1463921Z",
+      "source_report": "CropDiseasesDetection_springboot/target/surefire-reports/TEST-com.example.Kcsj.PublicAccountTest.xml",
+      "sha256": "cee532aab9784fccbc9e4a2087a0d85b6fa287b34e08f6a3de9ce6645f6b256a",
+      "scope": [
+        "Customer-only registration and privilege-field rejection",
+        "Password reset expiry, hashing, replacement and single/concurrent use",
+        "Old-session revocation and failed-delivery token revocation",
+        "Source-address rate limiting and legacy/admin access restrictions"
+      ],
+      "limits": "Uses isolated database fixtures and mocked SMTP. Real email delivery was not verified."
+    },
+    {
+      "category": "shared_session_regression",
+      "suite": "com.example.Kcsj.common.AuthServiceTest",
+      "tests": 6,
+      "passed": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "reported_elapsed_seconds": 0.646,
+      "execution_timestamp": null,
+      "report_last_modified_utc": "2026-10-15T15:24:20.2422742Z",
+      "source_report": "CropDiseasesDetection_springboot/target/surefire-reports/TEST-com.example.Kcsj.common.AuthServiceTest.xml",
+      "sha256": "4963726bf116e7319be3b9065b5adf60aa3c41fa43481f532ce663cc67d4977d",
+      "scope": [
+        "Regression tests for reused authentication and session infrastructure"
+      ],
+      "limits": "Shared infrastructure tests, not six additional order-workflow tests. In-memory session concurrency does not establish full application throughput."
+    },
+    {
+      "category": "shared_capacity_filter_regression",
+      "suite": "com.example.Kcsj.common.CapacityFilterTest",
+      "tests": 3,
+      "passed": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "reported_elapsed_seconds": 0.099,
+      "execution_timestamp": null,
+      "report_last_modified_utc": "2026-10-15T15:24:20.3454490Z",
+      "source_report": "CropDiseasesDetection_springboot/target/surefire-reports/TEST-com.example.Kcsj.common.CapacityFilterTest.xml",
+      "sha256": "8379bd82ae435fc8b1590c7f25fc974b86c5b3a95441bfbccab0978989a5506a",
+      "scope": [
+        "Regression tests for reused request and shared AI capacity filtering"
+      ],
+      "limits": "Filter-level regression only. Does not establish a production load, multi-node capacity or real model service rate."
+    }
+  ],
+  "historical_runner": {
+    "surefire_default_version": "3.2.5",
+    "surefire_used_version": "2.22.2",
+    "mode": "offline using an already cached provider",
+    "reason_documented": "The default provider was not cached and the historical JDK encountered a TLS certificate-chain download error.",
+    "tls_verification_disabled": false
+  },
+  "excluded_from_41": [
+    "Frontend build, component compilation and TypeScript checks",
+    "Script-based frontend session, routing and history checks",
+    "Manual browser observations and print-preview inspection"
+  ],
+  "not_verified": [
+    "Live robot, vision, arm or other device actions",
+    "Real payment, refunds, carrier tracking or customs integration",
+    "Live model inference and generated image/video services",
+    "Actual SMTP delivery",
+    "Physical printers and cross-browser paper settings",
+    "Production load, distributed deployment or independent reproducibility"
+  ],
+  "publication_content": "Only suite identities, counts, elapsed times, filesystem times, relative report paths, hashes and scope summaries are included. No account identifiers, credentials, personal records, XML environment properties or raw logs are included."
+}

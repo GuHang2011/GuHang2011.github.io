@@ -1,0 +1,60 @@
+.silkroad-case .case-opening { padding-bottom: 32px; }
+.silkroad-case .case-opening h1 > span { display: block; margin-top: 8px; color: var(--muted); font-size: 24px; font-weight: 500; }
+.silkroad-gallery { padding-top: 32px; }
+.silkroad-entry-grid { display: grid; grid-template-columns: minmax(0, 1fr) 194px; gap: 28px; align-items: start; }
+.silkroad-case .case-screen { min-width: 0; }
+.silkroad-case .case-screen button { cursor: zoom-in; border-radius: 4px; }
+.silkroad-case .case-screen button:hover { border-color: var(--accent); }
+.silkroad-case .case-screen img { width: 100%; height: auto; }
+.silkroad-case .case-screen figcaption { display: grid; gap: 3px; line-height: 1.65; }
+.silkroad-case .case-screen figcaption strong { color: var(--ink); font-size: 12px; }
+.silkroad-case .silkroad-login-mobile { max-width: 194px; }
+.silkroad-business-gallery { display: grid; gap: 30px; margin-top: 32px; }
+.silkroad-gallery-row { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 28px; align-items: start; padding-top: 30px; border-top: 1px solid var(--line); }
+.silkroad-gallery-copy { padding-top: 2px; }
+.silkroad-gallery-copy h3 { margin-block: 6px 10px; font-size: 18px; line-height: 1.5; }
+.silkroad-gallery-copy > p:not(.section-number) { color: var(--muted); font-size: 13px; line-height: 1.85; }
+.silkroad-journey { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 22px; margin: 0; padding: 0; list-style: none; }
+.silkroad-journey li { min-width: 0; padding-top: 12px; border-top: 2px solid var(--line); }
+.silkroad-journey li > span { color: var(--teal); font-size: 11px; font-variant-numeric: tabular-nums; }
+.silkroad-journey h3 { margin-block: 5px 8px; font-size: 15px; }
+.silkroad-journey p { color: var(--muted); font-size: 12px; line-height: 1.85; }
+.silkroad-workflow-note { max-width: 870px; margin-top: 25px; color: var(--muted); font-size: 13px; }
+.silkroad-test-summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 24px; margin-top: 6px; }
+.silkroad-test-summary > strong { color: var(--teal); font-size: 30px; font-variant-numeric: tabular-nums; font-weight: 600; }
+.silkroad-test-summary > strong > span { font-size: 14px; font-weight: 500; }
+.silkroad-test-summary > p { color: var(--muted); font-size: 12px; }
+.silkroad-case .silkroad-test-table th:nth-child(2), .silkroad-case .silkroad-test-table td:nth-child(2) { width: 74px; text-align: center; font-variant-numeric: tabular-nums; }
+.silkroad-record-note { max-width: 870px; margin-top: 20px; color: var(--muted); font-size: 12px; }
+
+@media (max-width: 850px) {
+  .silkroad-entry-grid { grid-template-columns: minmax(0, 1fr) 160px; gap: 20px; }
+  .silkroad-gallery-row { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .silkroad-gallery-copy { max-width: 720px; }
+  .silkroad-journey { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+}
+@media (max-width: 620px) {
+  .silkroad-case .case-opening h1 { font-size: 28px; }
+  .silkroad-case .case-opening h1 > span { font-size: 22px; }
+  .silkroad-entry-grid { grid-template-columns: minmax(0, 1fr); gap: 25px; }
+  .silkroad-case .silkroad-login-mobile { width: min(230px, 100%); max-width: none; }
+  .silkroad-gallery-row { padding-top: 25px; }
+  .silkroad-gallery-copy h3 { font-size: 17px; }
+  .silkroad-journey { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 18px; }
+  .silkroad-case .silkroad-test-table th:first-child { min-width: 110px; }
+  .silkroad-case .silkroad-test-table th:last-child { min-width: 180px; }
+  .silkroad-test-summary > strong { font-size: 27px; }
+}
+@media print {
+  .silkroad-case .case-opening h1 > span { font-size: 15pt; }
+  .silkroad-entry-grid { grid-template-columns: minmax(0, 1fr) 115px; gap: 20px; }
+  .silkroad-business-gallery { gap: 18px; margin-top: 20px; }
+  .silkroad-gallery-row { grid-template-columns: minmax(0, 1fr) 170px; gap: 18px; padding-top: 18px; break-inside: avoid; }
+  .silkroad-gallery-copy h3 { font-size: 11pt; }
+  .silkroad-gallery-copy > p:not(.section-number) { font-size: 8pt; }
+  .silkroad-journey { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+  .silkroad-journey h3 { font-size: 9pt; }
+  .silkroad-journey p, .silkroad-workflow-note { font-size: 8pt; }
+  .silkroad-test-table { font-size: 8pt; }
+  .silkroad-case .case-screen button { border: 1px solid #ddd; }
+}
