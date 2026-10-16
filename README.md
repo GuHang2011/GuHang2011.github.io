@@ -20,7 +20,7 @@ The academic reading structure is inspired by [winsleo.github.io](https://winsle
 
 1. **Research:** manuscripts, conference work, and master’s research, with explicit publication status.
 2. **Engineering:** public repositories and selected project descriptions.
-3. **Notebook:** entry points to the [Frontend & Data Lab](https://github.com/GuHang2011/frontend-data-lab).
+3. **Notebook:** [six bilingual study notes and project reflections](notebook/) on frontend interaction, data quality, model validation, prompt contracts, order consistency and permission boundaries. Searchable by title, summary and tag, with topic filters, source references, code examples and printable article pages. Earlier repositories remain available in the homepage's expandable reading list.
 4. **Background:** education and professional experience.
 5. **Interactive experiments:** financial clustering, data preparation audits and model evaluation, with synthetic data, source code, notes and reproducible checks. [Reading map](demos/README.md).
 
@@ -32,7 +32,7 @@ Research status is updated September 2026. Manuscripts and accepted work are lab
 - [College materials archive](https://guhang2011.github.io/cases/archive/): permissions, versioning, review, logical deletion and audit. Its interactive lifecycle illustration uses synthetic records; the original application was reviewed but not rerun for this site update.
 - [Release-gate example](cases/examples/README.md): dependency-free JavaScript, tests and limitations.
 
-Project screenshots use synthetic demo content. Public cases exclude original databases, credentials, private configuration and student records. Site content updated **2026-10-13**.
+Project screenshots use synthetic demo content. Public cases exclude original databases, credentials, private configuration and student records. Notebook content updated **2026-10-17**; research statuses remain based on the September CV. The new notes were compiled with AI-assisted drafting and translation; each distinguishes code observations, examples and proposed checks.
 
 ## Preview locally
 
@@ -51,6 +51,7 @@ Push these files to the root of the `GuHang2011.github.io` repository. In **Sett
 ## Maintain
 
 - Edit content in `index.html`. Translated text uses paired `data-en` and `data-zh` attributes; keep both in sync. The visible text should match the English attribute for the no-JavaScript version.
+- For the notebook, edit `notebook/content/*.json` and run `python notebook/build.py` to regenerate committed HTML; see [notebook maintenance](notebook/README.md). Serving the generated site requires no build service.
 - For translated accessible names, use paired `data-en-label` and `data-zh-label` attributes.
 - Research titles remain in their original English in both interface languages.
 - Update research statuses only when supported by evidence. Add a DOI or proceedings URL only after verifying it.
@@ -66,6 +67,7 @@ index.html          Semantic page content and bilingual copy
 academic.css        Flat academic layout and responsive / print styles
 academic.js         Language, filters, navigation, dialogs and reading progress
 cases/              Selected local cases and an extracted release example
+notebook/           Bilingual notes, source content and an optional static renderer
 demos/              Interactive experiments, generators, tests and methods
 styles.css          Legacy research-page styles
 script.js           Legacy research-page interactions

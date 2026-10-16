@@ -1,0 +1,108 @@
+{
+  "slug": "accessible-interactions",
+  "title": {
+    "zh": "主页交互复盘：搜索、定位与可访问性",
+    "en": "Interface reflection: search, navigation and accessibility"
+  },
+  "summary": {
+    "zh": "从双语搜索和视频切换出发，梳理状态、焦点与减少动态效果之间的约束。",
+    "en": "Use bilingual search and video tabs to examine the relationship between state, focus and reduced motion."
+  },
+  "category": "frontend",
+  "kind": "reflection",
+  "minutes": 8,
+  "tags": ["JavaScript", "Accessibility", "State", "Progressive enhancement"],
+  "basis": {
+    "zh": "依据本主页现有源码与交互测试整理的工程复盘；代码片段为教学简化，不是用户研究或性能实验。",
+    "en": "An engineering reflection based on this site's source and interaction tests. The snippet is a simplified teaching example, not a user study or performance experiment."
+  },
+  "sections": [
+    {
+      "id": "question",
+      "title": { "zh": "01 · 好看的页面，还要保住阅读位置", "en": "01 · Preserve the reader's place" },
+      "paragraphs": [
+        {
+          "zh": "导师可能先搜索技术词，再切换语言，最后通过链接跳到项目。若切换语言就丢失筛选条件，或链接指向仍被隐藏的内容，视觉再精致也会打断阅读。本次复盘把问题收敛为三件事：搜索状态是否稳定、定位是否可达、动态效果是否可跳过。",
+          "en": "A supervisor may search for a technology, switch languages and then follow a project link. Losing a filter during translation, or linking to hidden content, interrupts reading even on a polished page. This reflection focuses on three questions: whether search state remains stable, navigation reaches visible content, and motion can be skipped."
+        }
+      ]
+    },
+    {
+      "id": "search-state",
+      "title": { "zh": "02 · 展示语言与搜索索引分开", "en": "02 · Separate display language from the search index" },
+      "paragraphs": [
+        {
+          "zh": "academic.js 在初始化时把中英文说明合并成索引；切换语言只更新显示文字，不重建用户条件。查询与索引同时做 NFKC 规范化和小写转换，多个词采用全部匹配，再与类别条件相交。因此全角英文可以匹配，混合中英文查询也不会随语言切换消失。",
+          "en": "academic.js builds an index containing both English and Chinese descriptions at initialization. Switching language updates presentation without rebuilding the user's filters. Both the query and index use NFKC normalization and lowercase conversion. Every query term must match, and the result must also satisfy the selected category. Full-width English and mixed-language queries therefore remain searchable across language changes."
+        },
+        {
+          "zh": "下方简化例子只展示匹配规则。它不是分词或语义搜索：连续中文按子串判断，新增项目也需要更新索引。小型静态站选择这种可解释规则，代价是召回能力有限。",
+          "en": "The simplified example below isolates the matching rule. It does not perform tokenization or semantic retrieval: continuous Chinese text is matched as a substring, and newly inserted projects would require an index update. This transparent rule suits a small static site, at the cost of limited retrieval coverage."
+        }
+      ],
+      "code": {
+        "language": "javascript",
+        "text": "// Simplified teaching example: both languages share one index.\nconst normalize = text => text.normalize(\"NFKC\").toLowerCase();\nfunction matches(translations, query) {\n  const index = normalize(translations.join(\" \"));\n  const terms = normalize(query).trim().split(/\\s+/u).filter(Boolean);\n  return terms.every(term => index.includes(term));\n}\nconst project = [\"PyTorch sample-aligned predictions\", \"逐样本对齐预测\"];\nconsole.log(matches(project, \"ＰｙＴｏｒｃｈ 预测\")); // true\nconsole.log(matches(project, \"PyTorch 物流\")); // false"
+      }
+    },
+    {
+      "id": "navigation-focus",
+      "title": { "zh": "03 · URL、可见面板和焦点各有职责", "en": "03 · URLs, visible panels and focus serve different roles" },
+      "paragraphs": [
+        {
+          "zh": "视频区读取 #film-data 等锚点来选择面板，并响应 hashchange；方向键、Home 和 End 则同时移动选中项与键盘焦点。只有当前标签进入常规 Tab 顺序，隐藏面板的视频会暂停。清空搜索后焦点回到输入框，让键盘操作能自然接着进行。",
+          "en": "The video gallery reads fragments such as #film-data to select a panel and responds to hashchange. Arrow keys, Home and End move both selection and keyboard focus. Only the selected tab participates in the normal Tab sequence, and a video pauses when its panel is hidden. Clearing search returns focus to the input so keyboard use can continue naturally."
+        },
+        {
+          "zh": "这些状态不能混为一谈：当前点击视频标签不会改写 URL，直接链接选中面板也不会主动抢焦点。项目阅读入口会清除不相容的筛选，但这不等于任意项目锚点都有完整恢复逻辑。下一步若增加分享状态，需要定义历史记录、返回键与焦点策略。",
+          "en": "These states are distinct: clicking a video tab currently does not update the URL, and selecting a panel through a direct link does not deliberately steal focus. Project reading routes clear incompatible filters, but this is not a complete restoration mechanism for arbitrary project fragments. Shareable state would need explicit history, Back-button and focus rules."
+        }
+      ]
+    },
+    {
+      "id": "motion",
+      "title": { "zh": "04 · 动画不应成为阅读前提", "en": "04 · Reading must not depend on animation" },
+      "paragraphs": [
+        {
+          "zh": "内容默认出现在 HTML 中，脚本确认可以观察滚动后才添加入场状态。检测到 prefers-reduced-motion 时，跳过入场隐藏；CSS 也取消位移和延迟。偏好在页面打开后发生变化时，已有隐藏项会显现。视频使用原生控件，不自动播放。",
+          "en": "Content is present in the HTML by default. The script adds reveal states only after checking that scroll observation is available. With prefers-reduced-motion, it skips reveal hiding, while CSS removes displacement and reduces timing. If the preference changes while the page is open, previously hidden reveal items become visible. Videos use native controls without autoplay."
+        }
+      ],
+      "callout": {
+        "zh": "取舍：适度动画帮助识别状态变化；阅读内容、键盘操作和无脚本访问始终拥有独立路径。",
+        "en": "Tradeoff: restrained motion can communicate state changes, while reading, keyboard operation and access without JavaScript retain independent paths."
+      }
+    },
+    {
+      "id": "verification",
+      "title": { "zh": "05 · 验证用户能完成的动作", "en": "05 · Verify actions a reader can complete" },
+      "paragraphs": [
+        {
+          "zh": "既有交互测试覆盖混合语言查询、清空后的焦点、视频方向键、直接锚点和无脚本内容。复查时应按操作序列检查：先筛选，再切语言，再清空；不能只断言某个按钮存在。教学片段另用正例、负例、空查询和全角输入检查匹配规则。",
+          "en": "Existing interaction tests cover mixed-language queries, focus after clearing search, video arrow keys, direct fragments and content without JavaScript. Review should follow action sequences: filter, switch language, then clear. Checking that a button exists is insufficient. The teaching snippet also exercises positive and negative matches, an empty query and full-width input."
+        }
+      ]
+    },
+    {
+      "id": "limits-next",
+      "title": { "zh": "06 · 尚未回答的问题", "en": "06 · Questions still open" },
+      "paragraphs": [
+        {
+          "zh": "DOM 测试能验证状态，却不能证明真实读屏体验、视频解码或手机触控都正确。后续应在浏览器中完成一次纯键盘阅读，并用读屏工具检查名称与状态播报。若笔记数量增长，再评估索引更新和搜索排序，而不是提前引入复杂框架。",
+          "en": "DOM tests can verify state but cannot establish the experience of real screen-reader users, video decoding or touch interaction. A next review should complete a keyboard-only reading route in a browser and check accessible names and state announcements with a screen reader. If the notebook grows, index updates and ranking can be evaluated before introducing a more complex framework."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": { "zh": "本站 academic.js：搜索、焦点、视频与锚点逻辑", "en": "Site academic.js: search, focus, video and fragment handling" },
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/academic.js"
+    },
+    {
+      "label": { "zh": "本站 academic.css：焦点样式与减少动态效果", "en": "Site academic.css: focus styles and reduced motion" },
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/academic.css"
+    }
+  ],
+  "related": ["data-quality"]
+}

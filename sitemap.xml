@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://guhang2011.github.io/</loc><lastmod>2026-10-13</lastmod></url>
+  <url><loc>https://guhang2011.github.io/</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://guhang2011.github.io/research/</loc><lastmod>2026-10-13</lastmod></url>
   <url><loc>https://guhang2011.github.io/cases/counselor/</loc><lastmod>2026-10-13</lastmod></url>
   <url><loc>https://guhang2011.github.io/cases/archive/</loc><lastmod>2026-10-13</lastmod></url>
@@ -8,4 +8,11 @@
   <url><loc>https://guhang2011.github.io/demos/financial-analysis/</loc><lastmod>2026-10-13</lastmod></url>
   <url><loc>https://guhang2011.github.io/demos/data-preparation/</loc><lastmod>2026-10-13</lastmod></url>
   <url><loc>https://guhang2011.github.io/demos/model-evaluation/</loc><lastmod>2026-10-13</lastmod></url>
+  <url><loc>https://guhang2011.github.io/notebook/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://guhang2011.github.io/notebook/model-selection.html</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://guhang2011.github.io/notebook/order-idempotency.html</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://guhang2011.github.io/notebook/accessible-interactions.html</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://guhang2011.github.io/notebook/data-quality.html</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://guhang2011.github.io/notebook/prompt-contracts.html</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://guhang2011.github.io/notebook/permission-boundaries.html</loc><lastmod>2026-10-17</lastmod></url>
 </urlset>

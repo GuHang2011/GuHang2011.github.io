@@ -1,0 +1,112 @@
+{
+  "slug": "data-quality",
+  "title": {
+    "zh": "从清洗到标注：让每条样本都有去向",
+    "en": "From cleaning to annotation: account for every sample"
+  },
+  "summary": {
+    "zh": "用现有数据准备实验解释样本 ID、重复冲突与隔离原因，再推导标注台账和模型输入应有的边界。",
+    "en": "Use the data preparation demo to examine IDs, duplicate conflicts and quarantine reasons, then derive boundaries for annotation records and model inputs."
+  },
+  "category": "data",
+  "kind": "study",
+  "minutes": 8,
+  "tags": ["Data quality", "Annotation", "Provenance", "Leakage"],
+  "basis": {
+    "zh": "基于公开的数据准备与模型评估教学代码整理。标注台账片段是新编简化练习，尚未接入项目，也不代表真实数据标注成果。",
+    "en": "Based on the public data preparation and model evaluation teaching code. The annotation ledger snippet is a new simplified exercise; it is not integrated into the project or evidence of real annotation work."
+  },
+  "sections": [
+    {
+      "id": "question",
+      "title": { "zh": "01 · 清洗后的数字必须能追溯", "en": "01 · Cleaned numbers need traceable inputs" },
+      "paragraphs": [
+        {
+          "zh": "一份结果只展示“保留十条”，无法说明其他输入去了哪里。数据准备实验把每条源记录送到保留区或隔离区，并记录 sourceRow 与 reason。源行号回答“哪一行”，业务 ID 回答“哪个事件”；两者不能互换，也不能把重复 ID 简单当成无用行删除。",
+          "en": "A result that only reports ten retained rows cannot explain what happened to the other inputs. The data preparation demo sends each source row to either the retained set or quarantine, recording sourceRow and reason. A source row number identifies a row; a business ID identifies an event. They are not interchangeable, and repeated IDs should not automatically be discarded as useless rows."
+        }
+      ]
+    },
+    {
+      "id": "duplicate-conflicts",
+      "title": { "zh": "02 · 完全重复与内容冲突是两类证据", "en": "02 · Exact copies and conflicting content are different evidence" },
+      "paragraphs": [
+        {
+          "zh": "pipeline.mjs 先校验字段，再按 ID 分组，比较规范化后的时间、组别和整数金额。金额 1 与 1.00 可以合并；同 ID 金额 2 与 3 则是冲突。默认隔离全部冲突版本，保留第一条的替代策略会设置 conflictRetained，明确它依赖输入顺序。",
+          "en": "pipeline.mjs validates fields first, then groups by ID and compares normalized timestamps, groups and integer amounts. Amounts 1 and 1.00 can collapse into one record; amounts 2 and 3 under the same ID represent a conflict. The default quarantines every conflicting version. The alternative keep-first policy sets conflictRetained to expose its dependence on source order."
+        },
+        {
+          "zh": "只有具备可信版本字段，才能讨论“保留最新”。行顺序、爬取时间和业务更新时间可能不同。Spark 的按列去重也不会自动替我们定义正确版本；规则应先于工具选择。",
+          "en": "Keeping the latest version requires a trustworthy version field. Row order, collection time and business update time may differ. Column-based deduplication in Spark does not choose the correct business version on our behalf; the rule must come before the tool."
+        }
+      ]
+    },
+    {
+      "id": "quarantine",
+      "title": { "zh": "03 · 零、缺失、非法值分别记账", "en": "03 · Account separately for zero, missing and invalid values" },
+      "paragraphs": [
+        {
+          "zh": "零是观测结果，空金额是未知，NaN 文本是非法输入。代码先隔离非法值，再执行缺失策略，避免填零掩盖错误；显式填零保留 imputed 标记。拒绝原因按源行计数，因此一个冲突 ID 可能贡献两条拒绝记录。当前每行只记录首个失败原因，不是完整字段诊断。",
+          "en": "Zero is an observation, an empty amount is unknown, and the text NaN is invalid input. The code isolates invalid values before applying a missing-value policy, so imputation cannot hide malformed input. Explicit zero imputation retains an imputed flag. Rejection reasons count source rows, so one conflicting ID may contribute two rejected records. Each row currently records its first failure reason, not a complete field-level diagnosis."
+        }
+      ],
+      "callout": {
+        "zh": "可检查的不变量：输入行数 = 保留行数 + 隔离行数；组内整数分合计 = 保留记录金额总量。中间阶段尚未去重，不能提前当作最终结果。",
+        "en": "Checkable invariants: input rows = retained rows + quarantined rows; group totals in integer cents = the retained amount total. Intermediate stages are not yet fully deduplicated and must not be presented as final results."
+      }
+    },
+    {
+      "id": "annotation-ledger",
+      "title": { "zh": "04 · 将冲突保留原则延伸到标注", "en": "04 · Extend conflict preservation to annotation" },
+      "paragraphs": [
+        {
+          "zh": "标注台账至少应关联样本 ID、标签版本、标注者和复核状态。下方合成练习只演示同 ID 标签冲突的分流：一致标签进入候选区，不一致进入复核区，不能靠保留第一条就宣称得到真值。该片段尚未实现标签合法性检查、权限和仲裁流程。",
+          "en": "An annotation ledger should link sample IDs, label versions, annotators and review status. The synthetic exercise below only routes conflicting labels: agreement enters a candidate set and disagreement enters review. Keeping the first label does not establish ground truth. This snippet does not implement label validation, permissions or adjudication."
+        }
+      ],
+      "code": {
+        "language": "javascript",
+        "text": "// Synthetic teaching example: agreement is not proof of truth.\nfunction auditAnnotations(rows) {\n  const groups = new Map();\n  for (const row of rows) {\n    if (!groups.has(row.id)) groups.set(row.id, []);\n    groups.get(row.id).push(row);\n  }\n  const candidates = [], review = [];\n  for (const [id, evidence] of groups) {\n    const labels = new Set(evidence.map(row => row.label));\n    if (labels.size === 1) candidates.push({ id, label: evidence[0].label });\n    else review.push({ id, reason: \"label_conflict\", evidence });\n  }\n  return { candidates, review };\n}\nconst result = auditAnnotations([\n  { id: \"s1\", label: 1 }, { id: \"s1\", label: 0 },\n  { id: \"s2\", label: 1 }, { id: \"s2\", label: 1 }\n]);\nconsole.log(result.candidates); // [{ id: 's2', label: 1 }]\nconsole.log(result.review[0].reason); // label_conflict"
+      }
+    },
+    {
+      "id": "model-boundary",
+      "title": { "zh": "05 · 清洗通过，不代表可以直接建模", "en": "05 · Passing cleaning does not make a sample model-ready" },
+      "paragraphs": [
+        {
+          "zh": "采集记录通过格式检查，只能说明符合当前契约。模型输入还需固定标签含义、样本划分与来源分组；统计型填充和标准化只能在训练集拟合。模型评估脚本要求唯一 ID、二元标签、有限分数及两类样本，但没有替不同外部文件自动对齐。预测合并仍需按 ID 检查，不能相信相同行号。",
+          "en": "A collected record that passes format checks only satisfies the current contract. Model inputs still need fixed label semantics, dataset splits and source grouping; statistical imputation and normalization must be fitted on training data only. The evaluation script requires unique IDs, binary labels, finite scores and both classes, but it does not automatically align independent external files. Prediction joins must still be checked by ID rather than assumed from row positions."
+        }
+      ]
+    },
+    {
+      "id": "verification-limits",
+      "title": { "zh": "06 · 用反例验证规则，继续追问来源", "en": "06 · Test rules with counterexamples and question provenance" },
+      "paragraphs": [
+        {
+          "zh": "现有测试包含非法日期、零与缺失、重复冲突、金额对账和再次清洗的幂等性。标注练习可用顺序颠倒和一致重复检查分流是否稳定。后续应增加跨划分重复检测和仲裁日志，再讨论标注一致率。17 条合成数据不能证明真实标注质量、爬取合规性或分布式性能。",
+          "en": "Existing tests cover invalid dates, zero versus missing values, duplicate conflicts, amount reconciliation and idempotence when cleaning retained data again. The annotation exercise can be checked with reversed order and repeated agreeing labels. Cross-split duplicate detection and adjudication logs should come before claims about annotation agreement. Seventeen synthetic rows cannot establish real annotation quality, collection compliance or distributed performance."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": { "zh": "数据准备核心：字段契约、冲突与隔离", "en": "Data preparation core: contracts, conflicts and quarantine" },
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/data-preparation/pipeline.mjs"
+    },
+    {
+      "label": { "zh": "数据准备测试：反例与守恒检查", "en": "Data preparation tests: counterexamples and conservation" },
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/data-preparation/pipeline.test.mjs"
+    },
+    {
+      "label": { "zh": "Spark 学习笔记：版本语义与训练集边界", "en": "Spark study notes: version semantics and training boundaries" },
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/data-preparation/spark-notes.md"
+    },
+    {
+      "label": { "zh": "模型评估构建：样本检查与逐样本预测", "en": "Evaluation builder: input checks and sample predictions" },
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/model-evaluation/build_metrics.py"
+    }
+  ],
+  "related": ["accessible-interactions"]
+}

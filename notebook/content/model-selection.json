@@ -1,0 +1,71 @@
+{
+  "slug": "model-selection",
+  "title": {"zh": "模型评估：早停、样本对齐与集成", "en": "Model evaluation: stopping, alignment and ensembles"},
+  "summary": {"zh": "从 KAPT 的小型评估工具出发，理解最佳轮次、样本身份和阈值为什么也是实验协议的一部分。", "en": "Use the small KAPT evaluation utilities to examine why the best epoch, sample identity and decision threshold belong in an experimental protocol."},
+  "category": "models",
+  "kind": "study",
+  "minutes": 8,
+  "tags": ["Python", "Early stopping", "Ensemble", "Evaluation"],
+  "basis": {"zh": "依据公开 KAPT 学习包与本站合成评估演示的源码整理；示例说明程序行为，不代表分子任务实验结果。", "en": "Based on the public KAPT learning package and this site's synthetic evaluation demo. Examples explain program behavior and are not molecular benchmark results."},
+  "sections": [
+    {
+      "id": "question",
+      "title": {"zh": "01 / 要选的是哪个模型？", "en": "01 / Which model are we selecting?"},
+      "paragraphs": [
+        {"zh": "训练到第十轮停止，不等于应该使用第十轮参数。早停回答何时停止观察，最佳轮次回答哪个候选值得保留。阅读代码时，应先写清验证指标、优化方向、最小改善量和耐心值，再讨论分数。", "en": "Stopping training at epoch ten does not imply using the parameters from epoch ten. Early stopping decides when to stop observing; the best epoch identifies the candidate to retain. Before discussing scores, specify the validation metric, its direction, the minimum improvement and patience."},
+        {"zh": "训练集更新参数；验证集选择轮次、阈值和融合权重；锁定方案后再评估独立测试集。若反复查看测试结果并修改方案，测试集就参与了选择，不能继续把它当作独立泛化证据。", "en": "Training data updates parameters; validation data selects the epoch, threshold and ensemble weights. Evaluate an independent test set after fixing those choices. Repeatedly inspecting test results and changing the design makes that set part of selection, weakening its role as independent evidence of generalization."}
+      ]
+    },
+    {
+      "id": "source",
+      "title": {"zh": "02 / 源码怎样定义改善", "en": "02 / How the source defines improvement"},
+      "paragraphs": [
+        {"zh": "EarlyStopping 的 max 模式要求新分数严格大于 best_score + min_delta；恰好相等不算改善。以 0.60、0.64、0.63、0.64 为验证序列，patience=2、min_delta=0 时，第 4 次观察停止，最佳轮次仍是第 2 轮。", "en": "In max mode, EarlyStopping requires a score strictly greater than best_score + min_delta; equality does not count. For validation scores 0.60, 0.64, 0.63 and 0.64, with patience=2 and min_delta=0, the fourth observation triggers stopping while epoch two remains best."},
+        {"zh": "实现拒绝非有限分数和不递增轮次；停止后状态保持，直到 reset。这里的耐心值按验证观察次数计数。该类只记录决策，没有保存或恢复模型权重，接入训练循环时还要实现检查点持久化。", "en": "The implementation rejects nonfinite scores and nonincreasing epochs. Once stopped, it stays stopped until reset. Patience counts validation observations. The class records decisions but neither saves nor restores model weights, so a training adapter still needs checkpoint persistence."}
+      ]
+    },
+    {
+      "id": "identity",
+      "title": {"zh": "03 / 行数相同，样本未必相同", "en": "03 / Equal row counts do not establish identity"},
+      "paragraphs": [
+        {"zh": "ensemble_predictions 根据 sample_id 取值，并检查每张表的 ID 集合一致。CSV 读取还会拒绝重复 ID。两份文件即使行数相同，按行平均也可能混合不同样本；只检查数组形状无法发现这个问题。", "en": "ensemble_predictions retrieves values by sample_id and checks that every table contains the same ID set. The CSV reader also rejects duplicate IDs. Two files can have equal row counts while row-wise averaging mixes different samples; array shape checks cannot detect this."},
+        {"zh": "输入约定为同一正类的概率，范围是有限的 [0,1]，不是原始 logits。权重需非负且至少一个为正。按 ID 对齐解决身份问题，但不会自动校准概率，也不能修复不同模型对标签 1 的不同定义。", "en": "Inputs must be finite probabilities in [0,1] for the same positive class, not raw logits. Weights must be nonnegative with at least one positive entry. ID alignment resolves identity, but it neither calibrates probabilities nor repairs inconsistent meanings of label 1."}
+      ]
+    },
+    {
+      "id": "example",
+      "title": {"zh": "04 / 一个可逐项核对的例子", "en": "04 / A small example to inspect step by step"},
+      "paragraphs": [
+        {"zh": "下面是简化教学片段，安装公开 KAPT 包后可运行。第二张预测表故意反转顺序：正确结果仍应是 s1=0.75、s2=0.25。断言同时说明停止轮次和最佳轮次并非同一个量。", "en": "This simplified teaching snippet runs after installing the public KAPT package. The second prediction table deliberately reverses its order: the result should still be s1=0.75 and s2=0.25. The assertions also distinguish the stopping epoch from the best epoch."}
+      ],
+      "code": {"language": "python", "text": "# Simplified teaching example; install the KAPT package first.\nfrom kapt_lab.early_stopping import EarlyStopping\nfrom kapt_lab.ensemble import ensemble_predictions\n\nstopper = EarlyStopping(patience=2, mode=\"max\")\nstops = [stopper(score, epoch) for epoch, score in\n         enumerate([0.60, 0.64, 0.63, 0.64], start=1)]\nassert stops == [False, False, False, True]\nassert stopper.best_epoch == 2\n\na = {\"s1\": 0.9, \"s2\": 0.4}\nb = {\"s2\": 0.1, \"s1\": 0.6}\ncombined = ensemble_predictions([a, b])\nassert combined == {\"s1\": 0.75, \"s2\": 0.25}\nprint(stopper.best_epoch, combined)"},
+      "callout": {"zh": "这里检验的是给定输入下的程序契约，没有训练模型，也没有得出集成能够提升真实任务效果的结论。", "en": "This checks a program contract for fixed inputs. It trains no model and does not establish that ensembling improves a real task."}
+    },
+    {
+      "id": "verification",
+      "title": {"zh": "05 / 把评估变成可检查的过程", "en": "05 / Make evaluation inspectable"},
+      "paragraphs": [
+        {"zh": "指标均值描述单模型结果；集成指标必须先平均预测再计算。本站 build_metrics.py 固定使用 score >= threshold，并保存输入哈希和库版本。改变阈值会改变混淆计数，但固定分数的 ROC AUC 不随这个单一阈值变化。", "en": "A mean of metrics describes individual models; ensemble metrics require averaging predictions first and then evaluating. This site's build_metrics.py uses score >= threshold and records the input hash and library version. Changing the threshold changes confusion counts, but not the ROC AUC of a fixed score vector."}
+      ],
+      "bullets": [
+        {"zh": "打乱预测表顺序后结果应相同；缺失、额外或重复 ID 应明确失败。", "en": "Reordering prediction rows should preserve results; missing, extra or duplicate IDs should fail explicitly."},
+        {"zh": "检查相等分数、min_delta 边界、非有限输入，以及停止后的状态。", "en": "Check tied scores, the min_delta boundary, nonfinite inputs and the state after stopping."},
+        {"zh": "保留逐样本概率和混淆计数；单类标签下，包中 AUC 与 AP 返回空值，演示生成器则拒绝该场景。", "en": "Retain per-sample probabilities and confusion counts. With single-class labels, the package returns null for AUC and AP, while the demo generator rejects that scenario."}
+      ]
+    },
+    {
+      "id": "next",
+      "title": {"zh": "06 / 局限与下一步问题", "en": "06 / Limits and the next question"},
+      "paragraphs": [
+        {"zh": "合成样例能暴露对齐错误，不能回答分布偏移、类别不平衡和校准误差下是否仍有效。下一步需要预先固定划分，比较单模型与等权集成，再记录失败样本和多次运行的不确定性。KAPT 是基于 KANO 工作区整理的学习包；上游方法和论文属于原作者。", "en": "Synthetic fixtures can expose alignment bugs, but cannot establish effectiveness under distribution shift, class imbalance or calibration error. A next study would fix splits in advance, compare individual models with equal-weight ensembles, and document failure cases and uncertainty across runs. KAPT is a learning package curated from a KANO-based workspace; the upstream method and paper belong to their original authors."}
+      ]
+    }
+  ],
+  "sources": [
+    {"label": {"zh": "KAPT：早停实现", "en": "KAPT: early-stopping implementation"}, "url": "https://github.com/GuHang2011/KAPT/blob/main/src/kapt_lab/early_stopping.py"},
+    {"label": {"zh": "KAPT：样本对齐与集成", "en": "KAPT: sample alignment and ensembles"}, "url": "https://github.com/GuHang2011/KAPT/blob/main/src/kapt_lab/ensemble.py"},
+    {"label": {"zh": "模型评估演示的指标生成脚本", "en": "Metric generator for the evaluation demo"}, "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/model-evaluation/build_metrics.py"},
+    {"label": {"zh": "scikit-learn：常见陷阱与数据泄漏", "en": "scikit-learn: common pitfalls and data leakage"}, "url": "https://scikit-learn.org/stable/common_pitfalls.html"}
+  ],
+  "related": ["prompt-contracts"]
+}

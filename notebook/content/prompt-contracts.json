@@ -1,0 +1,72 @@
+{
+  "slug": "prompt-contracts",
+  "title": {"zh": "提示学习：先写清张量契约", "en": "Prompt learning starts with tensor contracts"},
+  "summary": {"zh": "追踪任务提示、节点特征与梯度路径，理解冻结参数和关闭梯度的区别，再界定组件验证能说明什么。", "en": "Trace task prompts, node features and gradient paths; distinguish frozen parameters from disabled gradients, and define what component checks can establish."},
+  "category": "models",
+  "kind": "study",
+  "minutes": 8,
+  "tags": ["PyTorch", "Prompt learning", "Autograd", "Tensor contracts"],
+  "basis": {"zh": "依据 KAPT 提示组件、测试和来源说明整理。冻结编码器部分是独立教学示例，尚不是该学习包的分子训练适配。", "en": "Based on the KAPT prompt components, tests and source-attribution notes. The frozen-encoder example is standalone teaching code, not a molecular training adapter supplied by the package."},
+  "sections": [
+    {
+      "id": "question",
+      "title": {"zh": "01 / 从形状开始阅读模型", "en": "01 / Start reading a model with its shapes"},
+      "paragraphs": [
+        {"zh": "一个模块能接收张量，还不足以说明它接入了完整任务。阅读提示学习代码时，先追踪输入代表什么、维度怎样变化、损失通过哪条路径回传。KAPT 组件输入节点特征 X:[N,H] 和归属索引 batch:[N]，输出更新节点与每图提示。", "en": "Accepting tensors does not establish integration with a complete task. When reading prompt-learning code, first trace the meaning of inputs, shape transformations and the path from loss to parameters. The KAPT component takes node features X:[N,H] and graph assignments batch:[N], and returns updated nodes plus one prompt per graph."},
+        {"zh": "例如 6 个节点分属 3 个图，H=3、提示维度 D=8，输出应是 [6,3] 与 [3,8]。这只界定接口；预测头、标签、任务损失和数据划分仍需外部提供。", "en": "For six nodes in three graphs, with H=3 and prompt width D=8, the outputs should have shapes [6,3] and [3,8]. This defines the interface only; the prediction head, labels, task loss and data splits still need to be supplied externally."}
+      ]
+    },
+    {
+      "id": "source",
+      "title": {"zh": "02 / 源码里的四段数据流", "en": "02 / Four stages in the source"},
+      "paragraphs": [
+        {"zh": "任务池选取可学习 token，经自注意力和 token 均值形成任务提示。另一条路径先用 MLP 编码每个节点，再按图求均值。两类提示拼接融合，最后把每图提示投影并广播给所属节点，以门控残差更新节点。", "en": "The task pool selects learned tokens and applies self-attention followed by token mean pooling. A second path encodes each node with an MLP and then averages encoded features per graph. The two prompts are concatenated and fused; the graph prompt is projected and broadcast to its nodes for a gated residual update."},
+        {"zh": "均值顺序不能随意调换：非线性 MLP 之后再平均，通常不等于先平均原始节点再编码。当前实现没有读取边，因此相同节点集合即使边连接不同，也不能靠这一步区分图结构。", "en": "The order of operations matters: averaging after a nonlinear MLP generally differs from encoding an average of raw nodes. This implementation does not read edges, so this step cannot distinguish different graph connectivity for the same node-feature collection."}
+      ]
+    },
+    {
+      "id": "contracts",
+      "title": {"zh": "03 / 契约不仅是维度", "en": "03 / Contracts cover more than dimensions"},
+      "paragraphs": [
+        {"zh": "节点和提示必须是有限浮点数，且与参数具有相同 dtype 和 device；batch 必须为 long，长度等于节点数。图编号须覆盖 0 到 B−1，每图至少有一个节点。任务编号可共享，也可每图一个；提示宽度还必须能被注意力头数整除。", "en": "Node features and prompts must be finite floating-point tensors matching parameter dtype and device. batch must be long with one entry per node. Graph IDs must cover 0 through B−1, with at least one node in each graph. Task IDs may be shared or supplied per graph; prompt width must also be divisible by the attention head count."},
+        {"zh": "入口拒绝错误输入会多做检查，但能把隐蔽的广播、类型和空图问题变成明确错误。学习阶段优先保留这些约束；若以后优化吞吐，应先测量检查成本，再决定在哪一层统一验证。", "en": "Rejecting malformed inputs adds validation work but turns subtle broadcasting, type and empty-graph problems into explicit errors. Keeping these constraints is useful while learning. A later throughput optimization should measure validation cost before deciding which layer owns those checks."}
+      ]
+    },
+    {
+      "id": "example",
+      "title": {"zh": "04 / 冻结参数，不等于关闭梯度", "en": "04 / Freezing parameters does not disable gradients"},
+      "paragraphs": [
+        {"zh": "下面是独立的简化教学例子，冻结线性编码器，更新输入提示和预测头。提示位于编码器之前，梯度必须穿过编码器回到提示；用 no_grad 包住前向会切断这条路径。eval 则控制 Dropout 等模块的行为，不负责冻结参数。", "en": "This standalone simplified example freezes a linear encoder while updating an input prompt and prediction head. Because the prompt precedes the encoder, gradients must pass through the encoder to reach it; wrapping that forward pass in no_grad would break the path. eval controls behaviors such as Dropout, rather than freezing parameters."}
+      ],
+      "code": {"language": "python", "text": "# Simplified teaching example, not a molecular model.\nimport torch\nfrom torch import nn\n\nencoder = nn.Linear(3, 3, bias=False)\nhead = nn.Linear(3, 1, bias=False)\nwith torch.no_grad():  # Initialization only.\n    encoder.weight.copy_(torch.eye(3))\n    head.weight.fill_(1.0)\nencoder.requires_grad_(False)\nencoder.eval()\nprompt = nn.Parameter(torch.zeros(1, 3))\noptimizer = torch.optim.SGD([prompt, *head.parameters()], lr=0.01)\nx = torch.ones(2, 3)\nencoder_before = encoder.weight.detach().clone()\nprompt_before = prompt.detach().clone()\n\noptimizer.zero_grad(set_to_none=True)\noutput = head(encoder(x + prompt))\nassert output.shape == (2, 1)\noutput.square().mean().backward()  # Toy loss; no task labels.\nassert encoder.weight.grad is None\nassert prompt.grad is not None and bool((prompt.grad != 0).any())\noptimizer.step()\nassert torch.equal(encoder.weight, encoder_before)\nassert not torch.equal(prompt, prompt_before)\nprint(\"Frozen weights unchanged; prompt updated.\")"},
+      "callout": {"zh": "若提示位于已缓存特征之后，编码器可以在无梯度模式下提取特征。是否保留计算图取决于提示插入位置，不能机械套用同一种写法。", "en": "If a prompt operates after cached features, the encoder may extract those features without gradients. Whether to retain the computation graph depends on the insertion point; one recipe does not fit every architecture."}
+    },
+    {
+      "id": "verification",
+      "title": {"zh": "05 / 检验梯度路径与边界", "en": "05 / Check gradient paths and boundaries"},
+      "paragraphs": [
+        {"zh": "已有 test_prompts.py 覆盖不等长图、节点重排、残差公式和非法输入，并检查选中任务 token 的梯度。检查 grad 非空只是第一步；接入优化器后，还应比较一次更新前后的参数，确认冻结权重不变、目标参数确实改变。", "en": "The existing test_prompts.py covers unequal graph sizes, node permutations, the residual formula and malformed inputs, and checks gradients for selected task tokens. A non-null grad is only a first check. After optimizer integration, compare parameters before and after a step to confirm that frozen weights stay fixed and intended parameters change."}
+      ],
+      "bullets": [
+        {"zh": "用手算每图均值核对聚合；同时重排节点和 batch，每图池化结果应保持一致，节点级输出则随节点顺序相应重排。", "en": "Compare aggregation with manually computed per-graph means. Jointly permuting nodes and batch should preserve pooled outputs, while node-level outputs should reorder accordingly."},
+        {"zh": "测试空图、越界任务、整数特征、非有限数与设备不一致。", "en": "Test empty graphs, out-of-range tasks, integer features, nonfinite values and device mismatches."},
+        {"zh": "保存模型时同时记录结构配置；恢复后用相同输入比较输出，不能只凭加载未报错判断成功。", "en": "Store architecture configuration with a model; after restoration, compare outputs on the same input rather than treating error-free loading as sufficient evidence."}
+      ]
+    },
+    {
+      "id": "next",
+      "title": {"zh": "06 / 从组件走向实验还缺什么", "en": "06 / What remains between components and experiments"},
+      "paragraphs": [
+        {"zh": "下一步可设计固定编码器加任务头、仅任务提示、仅节点均值、融合与残差注入的对照，保持划分和预算一致。这是待实施的实验计划。当前组件检验不能证明分子预测有效；还缺边感知编码器适配、真实数据协议和检查点复现。KANO 方法与论文归原作者，现有材料只支持说明公开整理与工程修改。", "en": "A future comparison could include a fixed encoder with a task head, task prompts alone, pooled node features alone, fusion and residual injection, holding splits and budgets constant. This is a proposed experiment. Component checks do not establish molecular prediction performance; edge-aware encoder integration, a real-data protocol and checkpoint reproduction remain missing. The KANO method and paper belong to their authors; the available evidence supports describing the public curation and engineering changes."}
+      ]
+    }
+  ],
+  "sources": [
+    {"label": {"zh": "KAPT：提示组件实现", "en": "KAPT: prompt component implementation"}, "url": "https://github.com/GuHang2011/KAPT/blob/main/src/kapt_lab/prompts.py"},
+    {"label": {"zh": "KAPT：提示组件测试", "en": "KAPT: prompt component tests"}, "url": "https://github.com/GuHang2011/KAPT/blob/main/tests/test_prompts.py"},
+    {"label": {"zh": "KAPT：来源与修改边界", "en": "KAPT: provenance and scope of changes"}, "url": "https://github.com/GuHang2011/KAPT/blob/main/docs/source-and-changes.md"},
+    {"label": {"zh": "PyTorch：自动微分机制", "en": "PyTorch: autograd mechanics"}, "url": "https://pytorch.org/docs/stable/notes/autograd.html"},
+    {"label": {"zh": "上游项目：KANO", "en": "Upstream project: KANO"}, "url": "https://github.com/ZJU-Fangyin/KANO"}
+  ],
+  "related": ["model-selection"]
+}
