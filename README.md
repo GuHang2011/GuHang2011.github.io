@@ -6,12 +6,15 @@ A bilingual academic portfolio for **Hang Gu (顾航)**, connecting research int
 
 ## Design
 
-The academic reading structure is inspired by [winsleo.github.io](https://winsleo.github.io/), adapted to Hang Gu's own background and evidence. White and light-gray bands, blue accents, flat research lists and screenshot-led project rows adapt to phones and desktops.
+The academic reading structure is inspired by [winsleo.github.io](https://winsleo.github.io/), adapted to Hang Gu's own background and evidence. The homepage's October 17, 2026 design uses navy text, muted teal accents, white and pale-gray surfaces, flat research lists and screenshot-led project rows. The layout adapts to phones and desktops, with larger text for research status, project context and evidence links.
+
+The research brief, code and verification evidence, and academic CV appear immediately after the introduction so prospective supervisors can find the application materials quickly. Education sits beside the introduction in the profile panel. Publication status and learning-project labels retain distinct meanings.
 
 - Complete English / Chinese interface with a saved language preference.
-- Research filters for manuscripts, conference work and thesis; native expandable summaries.
+- Research filters for manuscripts, conference work and thesis; native expandable summaries and an expand / collapse all summaries control.
 - Project filters for engineering, research and learning, with accessible selection states and result counts.
-- Screenshot previews, mobile navigation, print styles, reading progress and restrained hover / keyboard-focus accents.
+- Screenshot previews, mobile navigation, print styles, reading progress and restrained hover / keyboard-focus accents. Filter feedback and highlighted project destinations help readers keep their place; content remains visible on arrival.
+- Reading preferences offer light and dark palettes and a reduced-motion option, saved locally when browser storage is available. The system's reduced-motion preference takes priority, including for the back-to-top action.
 - Semantic HTML, visible keyboard focus, a skip link, and reduced-motion support.
 - No site build step, remote fonts, analytics, or runtime CDN dependencies. The experiments bundle pinned [Chart.js](https://www.chartjs.org/) 4.4.9 and [PapaParse](https://www.papaparse.com/) 5.5.3 under MIT licenses. Local tool icons are from [Lucide](https://lucide.dev/) under the ISC license.
 - The English content and navigation work without JavaScript.
@@ -55,10 +58,12 @@ Push these files to the root of the `GuHang2011.github.io` repository. In **Sett
 - For translated accessible names, use paired `data-en-label` and `data-zh-label` attributes.
 - Research titles remain in their original English in both interface languages.
 - Update research statuses only when supported by evidence. Add a DOI or proceedings URL only after verifying it.
-- Homepage design and interaction live in `academic.css` and `academic.js`. Existing research pages retain `styles.css` and `script.js`.
+- `academic.css` and `academic.js` provide shared academic layouts and interactions, including language, filters, navigation, previews and reading progress. `homepage.css`, loaded after the shared stylesheet only on the homepage, defines the navy / teal palette, light and dark theme variables, homepage layout, responsive refinements and print overrides. Existing research pages retain `styles.css` and `script.js`.
+- `reader.js` manages the homepage's reading-preferences disclosure, saved appearance and motion choices, and research-summary expansion. Keep the controls' `data-reader-*` attributes and `aria-controls` targets intact. Theme and motion state are applied to the root element as `data-reader-theme` and `data-reader-motion`; preference storage is optional and controls remain usable when it fails.
+- When adding animation, respect both the system reduced-motion preference and the reader's saved choice. Use motion to clarify an action or selection, and keep the content readable before scripts run. Keep all-summary labels synchronized after individual summary toggles and language changes.
 - The learning-lab card links to the [live dashboard](https://guhang2011.github.io/frontend-data-lab/) and the [dynamic-form demo](https://guhang2011.github.io/frontend-data-lab/demos/form/). Keep these URLs aligned with the learning lab's GitHub Pages deployment; each link has both English and Chinese labels.
 - Update the source note and `sitemap.xml` after substantive content changes.
-- Before publishing, check both languages, research and project filters, dialogs, section links, keyboard navigation, mobile layout, local links and the release example.
+- Before publishing, check both languages, light and dark palettes, saved preferences, system and manual reduced motion, individual and all-summary controls, research and project filters, dialogs, section links, keyboard navigation, mobile layout, print output, local links and the release example.
 
 ## Files
 
@@ -66,6 +71,8 @@ Push these files to the root of the `GuHang2011.github.io` repository. In **Sett
 index.html          Semantic page content and bilingual copy
 academic.css        Flat academic layout and responsive / print styles
 academic.js         Language, filters, navigation, dialogs and reading progress
+homepage.css        Homepage palette, reading layout, themes and print overrides
+reader.js           Saved reading preferences and research-summary controls
 cases/              Selected local cases and an extracted release example
 notebook/           Bilingual notes, source content and an optional static renderer
 demos/              Interactive experiments, generators, tests and methods

@@ -188,7 +188,8 @@
   });
   document.querySelector("[data-print]")?.addEventListener("click", () => window.print());
   document.querySelector(".back-top")?.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches || document.documentElement.dataset.readerMotion === "reduce";
+    window.scrollTo({ top: 0, behavior: reduce ? "instant" : "smooth" });
   });
 
   const lightbox = document.querySelector(".lightbox");
