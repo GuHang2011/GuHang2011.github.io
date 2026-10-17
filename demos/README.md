@@ -23,3 +23,8 @@ The website serves precomputed JSON where applicable. Browser filtering changes 
 Chart.js **4.4.9** and PapaParse **5.5.3** are stored locally in `vendor/` with their MIT licenses. Interface icons use the existing local Lucide assets (ISC). No runtime CDN, external analytics or remote font is required.
 
 Prepared: **2026-10-13**.
+
+## Added 2026-10-17
+
+- [BLEU Translation Explorer](https://guhang2011.github.io/demos/bleu-explorer/): editable sentence-level BLEU with clipped counts, multiple references and brevity penalty. [Protocol and tests](bleu-explorer/README.md).
+- [Crop detection architecture review](../cases/crop-detection-review.md): a bounded local-source review with attribution and clearly marked unverified integration.

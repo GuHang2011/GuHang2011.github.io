@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><title>BLEU Explorer · GU HANG</title><meta name="description" content="交互理解 BLEU：n-gram 裁剪计数、几何平均与短句惩罚。"><link rel="stylesheet" href="style.css"></head>
+<body><header><a href="../../#demos">← GU HANG / 学习实验室</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/demos/bleu-explorer">代码与方法 ↗</a></header>
+<main><p class="eyebrow">04 / LANGUAGE EVALUATION</p><h1>一个分数，<br><em>怎样衡量翻译？</em></h1><p class="intro">修改一句译文，观察词组匹配、长度与 BLEU 的关系。每个数字，都能向下追溯。</p>
+<div class="lab"><section class="editor" aria-label="输入译文"><div class="presets"><button type="button" data-example="exact">完全匹配</button><button type="button" data-example="repeat">重复词陷阱</button><button type="button" data-example="short">短句惩罚</button></div>
+<label for="candidate">候选译文 <span>Candidate</span></label><textarea id="candidate" rows="3" maxlength="5000">the cat is on the mat</textarea>
+<label for="references">参考译文 <span>References · 每行一条</span></label><textarea id="references" rows="4" maxlength="10000">the cat is on the mat</textarea>
+<label for="order">最高 n-gram 阶数</label><select id="order"><option value="1">BLEU-1</option><option value="2">BLEU-2</option><option value="3">BLEU-3</option><option value="4" selected>BLEU-4</option></select>
+<p class="hint">按空白分词，保留大小写和标点。中文请先用空格分词。固定阶数、均匀权重、无平滑；仅计算单句，非语料级 BLEU。</p></section>
+<section class="result" aria-live="polite" aria-atomic="true"><p class="eyebrow">SENTENCE BLEU / 0–100</p><output id="score">100.00</output><p id="lengths"></p><p id="message"></p><div class="formula">BP × exp( mean( log pₙ ) )</div><p>BLEU 衡量词组重合，不能独立判断语义准确性、流畅度或事实正确性。</p></section></div>
+<section class="breakdown"><h2>拆开看，每一个匹配。</h2><div class="table-wrap"><table><caption>各阶裁剪精度</caption><thead><tr><th scope="col">阶数</th><th scope="col">匹配 / 总数</th><th scope="col">精度</th></tr></thead><tbody id="rows"></tbody></table></div><div id="details"></div></section>
+<section class="method"><h2>为什么这样算？</h2><p>重复词不能无限加分：每个词组的候选计数，以各参考译文中的最大计数为上限。参考长度选择与候选最接近的一条，距离相同时选较短者。</p><p>候选比参考短时，BP = exp(1 − r/c)；否则 BP = 1。任何阶的精度为零，未平滑 BLEU 就是零，因此很短的句子不适合直接使用 BLEU-4。</p><p>整理自本地翻译评估学习材料，计算模块与界面重新实现。示例为人工构造，不代表翻译模型评测结果。方法参考 <a href="https://aclanthology.org/P02-1040/">Papineni et al., 2002</a>。</p></section></main><footer>GU HANG · 从学习材料到可验证的实验</footer><script type="module" src="app.mjs"></script></body></html>
