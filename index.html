@@ -18,7 +18,7 @@
     } catch { /* The default reading palette works without local storage. */ }
   </script>
   <link rel="stylesheet" href="academic.css?v=20261017-notebook">
-  <link rel="stylesheet" href="homepage.css?v=20261017-reader">
+  <link rel="stylesheet" href="homepage.css?v=20261017-homepage">
   <script src="academic.js?v=20261017-reader" defer></script>
   <script src="reader.js?v=20261017-reader" defer></script>
   <title>Hang Gu | Research & Engineering</title>
@@ -55,14 +55,14 @@
     </div>
   </header>
   <main id="main">
-    <section class="section about-section" id="about" aria-labelledby="name">
+    <section class="section about-section home-hero" id="about" aria-labelledby="name">
       <div class="wrap">
         <div class="about-grid">
           <div class="about-copy">
             <p class="section-number" data-en="RESEARCH · ENGINEERING · TEACHING" data-zh="研究 · 工程 · 教学">RESEARCH · ENGINEERING · TEACHING</p>
             <h1 id="name">Hang Gu <span lang="zh-CN">顾航</span></h1>
             <p class="intro" data-en="Reliable multimodal learning with limited labels." data-zh="有限标注下的可靠多模态学习。">Reliable multimodal learning with limited labels.</p>
-            <p data-en="I am a computer science lecturer and teaching section head at 江苏财经职业技术学院, with an MSc in Computer Science (Data Science) from Universiti Malaya. My background in frontend engineering connects research questions with practical software and data workflows." data-zh="我是江苏财经职业技术学院计算机讲师、教研室主任，拥有马来亚大学计算机硕士（数据科学方向）学位。此前从事前端开发与团队管理，关注如何将研究问题与真实的软件、数据工作流连接起来。">I am a computer science lecturer and teaching section head at 江苏财经职业技术学院, with an MSc in Computer Science (Data Science) from Universiti Malaya. My background in frontend engineering connects research questions with practical software and data workflows.</p>
+            <p class="hero-description" data-en="I connect multimodal research, frontend engineering and data workflows—making the question, evidence and implementation clear enough to inspect." data-zh="我把多模态研究、前端工程与数据工作流连接起来，让研究问题、验证证据和实现过程都清晰可查。">I connect multimodal research, frontend engineering and data workflows—making the question, evidence and implementation clear enough to inspect.</p>
         <nav class="admissions-entry" aria-label="Academic materials" data-en-label="Academic materials" data-zh-label="学术材料入口">
           <a class="primary-material" href="research/statement.html"><div><strong data-en="Research brief" data-zh="方向简述">Research brief</strong><span data-en="Discussion draft" data-zh="讨论稿">Discussion draft</span></div><span aria-hidden="true">↗</span></a>
           <a href="research/#evidence"><div><strong data-en="Code & verification" data-zh="代码与验证证据">Code & verification</strong><span data-en="Research, tests & scope" data-zh="研究实现、测试与边界">Research, tests & scope</span></div><span aria-hidden="true">↗</span></a>
@@ -75,7 +75,30 @@
               <li><strong data-en="Intelligent information systems" data-zh="智能信息系统">Intelligent information systems</strong><p data-en="Retrieval, human-reviewed workflows, and reliable interfaces for education and services." data-zh="研究检索、人工复核工作流与面向教育和服务场景的可靠界面。">Retrieval, human-reviewed workflows, and reliable interfaces for education and services.</p></li>
             </ul>
           </div>
-          <aside class="profile-aside" aria-label="Academic profile">
+          <aside class="profile-aside" aria-label="Academic profile" data-en-label="Academic profile" data-zh-label="学术简介">
+            <figure class="profile-signal" aria-hidden="true">
+              <svg viewBox="0 0 320 176" role="presentation" focusable="false">
+                <defs>
+                  <pattern id="signal-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="currentColor" stroke-opacity=".075" stroke-width="1"/></pattern>
+                  <linearGradient id="signal-path" x1="0" x2="1"><stop offset="0" stop-color="#8aaea7"/><stop offset="1" stop-color="#b9e5d6"/></linearGradient>
+                </defs>
+                <rect width="320" height="176" fill="url(#signal-grid)"/>
+                <path class="signal-connector" d="M72 54C111 54 108 87 145 87M72 122C111 122 108 89 145 89M187 88H251" fill="none" stroke="url(#signal-path)" stroke-width="1.5"/>
+                <path class="signal-loop" d="M262 68c11 5 17 14 17 25 0 15-12 27-27 27" fill="none" stroke="#a6c8bb" stroke-width="1.2" stroke-dasharray="3 4"/>
+                <circle cx="53" cy="54" r="20" fill="#203e47" stroke="#8aaea7"/>
+                <circle cx="53" cy="122" r="20" fill="#203e47" stroke="#8aaea7"/>
+                <circle cx="166" cy="88" r="28" fill="#28564f" stroke="#b9e5d6"/>
+                <circle cx="251" cy="88" r="7" fill="#b9e5d6"/>
+                <text x="53" y="58" text-anchor="middle">V</text>
+                <text x="53" y="126" text-anchor="middle">T</text>
+                <text x="166" y="85" text-anchor="middle" class="signal-main">FUSE</text>
+                <text x="166" y="98" text-anchor="middle" class="signal-sub">EVIDENCE</text>
+                <text x="25" y="25" class="signal-label" data-en="IMAGE" data-zh="图像">IMAGE</text>
+                <text x="25" y="160" class="signal-label" data-en="TEXT" data-zh="文本">TEXT</text>
+                <text x="235" y="145" class="signal-label" data-en="VALIDATE" data-zh="验证">VALIDATE</text>
+              </svg>
+              <figcaption><span data-en="A research-to-evidence loop" data-zh="从研究到证据的闭环">A research-to-evidence loop</span><span>01—03</span></figcaption>
+            </figure>
             <div class="identity-panel">
               <div class="initials" aria-hidden="true">HG<span>顾航</span></div>
               <p class="identity-name">Hang Gu</p>
@@ -90,10 +113,8 @@
             </div>
             <p class="profile-note" data-en="Exploring doctoral research in frozen multimodal representations, validation sensitivity and data artifacts." data-zh="希望在博士阶段继续探索冻结多模态表征、验证敏感性与数据伪影。">Exploring doctoral research in frozen multimodal representations, validation sensitivity and data artifacts.</p>
             <h2 class="subheading profile-education-title" data-en="Education" data-zh="教育经历">Education</h2>
-            <div class="education-grid">
-              <div class="timeline-entry"><time>2021 – 2023</time><div><h4 data-en="Universiti Malaya" data-zh="马来亚大学">Universiti Malaya</h4><p data-en="MSc · Computer Science, Data Science" data-zh="计算机硕士 · 数据科学方向">MSc · Computer Science, Data Science</p></div></div>
-              <div class="timeline-entry"><time>2011 – 2015</time><div><h4 data-en="Huaiyin Normal University" data-zh="淮阴师范学院">Huaiyin Normal University</h4><p data-en="Bachelor's degree · Computer Science" data-zh="本科 · 计算机专业">Bachelor's degree · Computer Science</p></div></div>
-            </div>
+            <p class="profile-education-note" data-en="2021–2023 · MSc Computer Science (Data Science) · Universiti Malaya" data-zh="2021–2023 · 马来亚大学计算机硕士（数据科学方向）">2021–2023 · MSc Computer Science (Data Science) · Universiti Malaya</p>
+            <p class="profile-education-note profile-education-secondary" data-en="2011–2015 · Bachelor degree in Computer Science · Huaiyin Normal University" data-zh="2011–2015 · 淮阴师范学院计算机本科">2011–2015 · Bachelor degree in Computer Science · Huaiyin Normal University</p>
           </aside>
         </div>
       </div>

@@ -6,14 +6,14 @@ A bilingual academic portfolio for **Hang Gu (顾航)**, connecting research int
 
 ## Design
 
-The academic reading structure is inspired by [winsleo.github.io](https://winsleo.github.io/), adapted to Hang Gu's own background and evidence. The homepage's October 17, 2026 design uses navy text, muted teal accents, white and pale-gray surfaces, flat research lists and screenshot-led project rows. The layout adapts to phones and desktops, with larger text for research status, project context and evidence links.
+The academic reading structure is inspired by [winsleo.github.io](https://winsleo.github.io/), adapted to Hang Gu's own background and evidence. The October 17, 2026 homepage refresh gives the opening more room for the research focus, clearer routes to materials, three compact interest summaries and an original visual-to-evidence diagram. Ink-and-teal panels and a light orbital motif make the research identity memorable without hiding the evidence links. The layout adapts to phones and desktops, with larger text for research status, project context and evidence links.
 
 The research brief, code and verification evidence, and academic CV appear immediately after the introduction so prospective supervisors can find the application materials quickly. Education sits beside the introduction in the profile panel. Publication status and learning-project labels retain distinct meanings.
 
 - Complete English / Chinese interface with a saved language preference.
 - Research filters for manuscripts, conference work and thesis; native expandable summaries and an expand / collapse all summaries control.
 - Project filters for engineering, research and learning, with accessible selection states and result counts.
-- Screenshot previews, mobile navigation, print styles, reading progress and restrained hover / keyboard-focus accents. Filter feedback and highlighted project destinations help readers keep their place; content remains visible on arrival.
+- Screenshot previews, mobile navigation, print styles, reading progress and restrained hover / keyboard-focus accents. The homepage's research diagram is decorative, vector-based and paired with bilingual text. Filter feedback and highlighted project destinations help readers keep their place; content remains visible on arrival.
 - Reading preferences offer light and dark palettes and a reduced-motion option, saved locally when browser storage is available. The system's reduced-motion preference takes priority, including for the back-to-top action.
 - Semantic HTML, visible keyboard focus, a skip link, and reduced-motion support.
 - No site build step, remote fonts, analytics, or runtime CDN dependencies. The experiments bundle pinned [Chart.js](https://www.chartjs.org/) 4.4.9 and [PapaParse](https://www.papaparse.com/) 5.5.3 under MIT licenses. Local tool icons are from [Lucide](https://lucide.dev/) under the ISC license.
