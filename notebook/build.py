@@ -4,9 +4,9 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-DATE = "2026-10-17"
-VERSION = "20261017-notebook"
-ORDER = ["model-selection", "order-idempotency", "accessible-interactions", "data-quality", "prompt-contracts", "permission-boundaries"]
+DATE = "2026-10-19"
+VERSION = "20261019-generative-notes"
+ORDER = ["model-selection", "order-idempotency", "accessible-interactions", "data-quality", "prompt-contracts", "permission-boundaries", "digital-human", "text-to-image", "generative-workflow"]
 CATEGORIES = {
     "all": {"en": "All topics", "zh": "全部主题"},
     "frontend": {"en": "Frontend", "zh": "前端交互"},
@@ -50,7 +50,7 @@ def frame(title, description, path, body):
 <button type="button" data-language="zh" aria-pressed="false" aria-label="中文">中</button><button type="button" data-language="en" aria-pressed="true" aria-label="English">EN</button></div>
 <button class="menu-toggle icon-button" type="button" aria-expanded="false" aria-controls="navigation" aria-label="Menu"><img src="../assets/icons/menu.svg" alt=""></button></div></div></header>
 <main id="main">{body}</main>
-<footer class="site-footer"><div class="wrap footer-inner"><div><strong>Hang Gu · 顾航</strong>{pair('Learning through questions, code and review.','从问题、代码与复查中学习。','p')}</div><div>{pair('Notes compiled 17 October 2026','笔记整理于 2026-10-17','p')}<a href="../">{pair('Back to portfolio','返回个人主页')}</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/notebook">GitHub</a></div></div></footer>
+<footer class="site-footer"><div class="wrap footer-inner"><div><strong>Hang Gu · 顾航</strong>{pair('Learning through questions, code and review.','从问题、代码与复查中学习。','p')}</div><div>{pair('Notes compiled 19 October 2026','笔记整理于 2026-10-19','p')}<a href="../">{pair('Back to portfolio','返回个人主页')}</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/notebook">GitHub</a></div></div></footer>
 <button class="back-top icon-button" type="button" aria-label="Back to top"><img src="../assets/icons/arrow-up.svg" alt=""></button></body></html>
 '''
 
@@ -60,12 +60,13 @@ def note_row(note):
     kind = pair('Project reflection', '项目心得') if note['kind'] == 'reflection' else pair('Study note', '学习笔记')
     tags = ''.join('<span>' + esc(tag) + '</span>' for tag in note['tags'])
     return f'''<article class="journal-row" data-note data-topic="{note['category']}" data-search="{esc(search)}">
-<div class="journal-meta">{tr(CATEGORIES[note['category']])}<span>{kind}</span><time datetime="{DATE}">2026.10.17</time></div>
+<div class="journal-meta">{tr(CATEGORIES[note['category']])}<span>{kind}</span><time datetime="{DATE}">{DATE.replace('-', '.')}</time></div>
 <div class="journal-body"><h2><a href="{note['slug']}.html">{tr(note['title'])}</a></h2>{tr(note['summary'],'p')}<div class="journal-tags">{tags}</div></div>
 <div class="journal-read">{pair(str(note['minutes']) + ' min read', '约 ' + str(note['minutes']) + ' 分钟')}<span aria-hidden="true">↗</span></div></article>'''
 
 
 def render_index(notes):
+    count = len(notes)
     controls = ''.join(f'<button type="button" data-note-topic="{key}" aria-pressed="{str(key == "all").lower()}">{tr(label)}</button>' for key, label in CATEGORIES.items())
     routes = [
         ('models', 'From model code to credible evaluation', '从模型实现到可信评估', 'Selection · alignment · tensor contracts', '模型选择 · 样本对齐 · 张量契约'),
@@ -76,7 +77,7 @@ def render_index(notes):
     body = f'''<section class="notebook-intro wrap"><div><p class="notebook-kicker">{pair('Research & engineering notebook','研究与工程笔记')}</p>
 {pair('Learning, with a trail.','让学习留下可追溯的记录。','h1')}
 {pair('Questions from real code, small examples to reason with, and decisions worth revisiting.','围绕真实代码中的问题，记录小型示例、设计取舍与值得继续追问的地方。','p', 'class="notebook-lead"')}</div>
-<aside class="notebook-margin"><strong>{pair('Read the reasoning','从判断依据读起')}</strong>{pair('Six notes connect implementation details to verification and open questions.','六篇笔记把实现细节、验证方法与后续问题连接起来。','p')}<a href="model-selection.html">{pair('Start with model selection','从模型验证开始阅读')}</a></aside></section>
+<aside class="notebook-margin"><strong>{pair('Read the reasoning','从判断依据读起')}</strong>{pair(f'{count} notes connect implementation details to verification and open questions.',f'{count} 篇笔记把实现细节、验证方法与后续问题连接起来。','p')}<a href="model-selection.html">{pair('Start with model selection','从模型验证开始阅读')}</a></aside></section>
 <div class="wrap"><nav class="notebook-routes" aria-label="Suggested reading paths" data-en-label="Suggested reading paths" data-zh-label="建议阅读路径">{paths}</nav></div>
 <section class="wrap notebook-library" id="entries" aria-labelledby="library-title"><div class="library-heading">{pair('Notes & reflections','学习笔记与项目心得','h2','id="library-title"')}<span>{pair('Compiled October 2026','整理于 2026 年 10 月')}</span></div>
 <form class="notebook-tools" data-notebook-tools hidden role="search"><div class="notebook-search"><label for="note-search">{pair('Search notes','搜索笔记')}</label><input id="note-search" type="search" autocomplete="off" placeholder="Try: validation, focus, stock" data-en-placeholder="Try: validation, focus, stock" data-zh-placeholder="试试：验证集、焦点、库存"><button type="button" data-note-clear>{pair('Clear','清除')}</button></div>
@@ -109,7 +110,7 @@ def render_article(note, by_slug):
     sources = ''.join(f'<li><a href="{esc(s["url"])}">{tr(s["label"])}</a></li>' for s in note['sources'])
     related = ''.join(f'<a href="{slug}.html">{tr(by_slug[slug]["title"])}</a>' for slug in note.get('related', []) if slug in by_slug)
     body = f'''<div class="wrap article-top"><a href="./">{pair('← All notes','← 全部笔记')}</a><button type="button" data-print>{pair('Print / save PDF','打印 / 保存 PDF')}</button></div>
-<header class="wrap article-heading"><div class="article-meta">{tr(CATEGORIES[note['category']])}<time datetime="{DATE}">2026.10.17</time>{pair(str(note['minutes'])+' min read','约 '+str(note['minutes'])+' 分钟')}</div>
+<header class="wrap article-heading"><div class="article-meta">{tr(CATEGORIES[note['category']])}<time datetime="{DATE}">{DATE.replace('-', '.')}</time>{pair(str(note['minutes'])+' min read','约 '+str(note['minutes'])+' 分钟')}</div>
 {tr(note['title'],'h1')}{tr(note['summary'],'p','class="article-deck"')}</header>
 <div class="wrap article-layout"><aside class="article-sidebar"><details class="article-directory" open><summary>{pair('On this page','本页目录')}</summary><nav class="article-toc" aria-label="On this page" data-en-label="On this page" data-zh-label="本页目录">{pair('On this page','本页目录','h2')}{''.join(toc)}<a href="#sources">{pair('Sources & further reading','来源与延伸阅读')}</a></nav></details></aside>
 <article class="article-prose"><div class="article-basis">{pair('Basis of this note','整理依据','strong')}{tr(note['basis'],'p')}</div>{''.join(sections)}

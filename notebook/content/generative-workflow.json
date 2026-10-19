@@ -1,0 +1,56 @@
+{
+  "slug": "generative-workflow",
+  "title": {
+    "zh": "生成式项目如何可复查：版本、提示词与证据链",
+    "en": "Making generative projects reviewable: versions, prompts and evidence"
+  },
+  "summary": {
+    "zh": "把模型版本、权重来源、提示词、参数、运行环境和失败案例放进一份可复查记录。",
+    "en": "Record model revisions, checkpoint provenance, prompts, parameters, runtime environment and failure cases in a reviewable manifest."
+  },
+  "category": "engineering",
+  "kind": "study",
+  "minutes": 7,
+  "tags": ["Generative AI", "Experiment design", "Provenance", "Engineering"],
+  "basis": {
+    "zh": "这是面向文生图、数字人和多模态生成的工程化学习模板。它提出记录字段和复查步骤，不代表个人项目已经应用该模板或获得实验结果。",
+    "en": "An engineering study template for text-to-image, digital-human and multimodal generation. It proposes record fields and review steps; it does not claim that the template has been used in a personal project or produced experimental results."
+  },
+  "sections": [
+    {
+      "id": "why",
+      "title": {"zh": "01 / 为什么“同一模型名”不够", "en": "01 / Why a model name alone is not enough"},
+      "paragraphs": [
+        {"zh": "同一个模型仓库可能更新配置、权重或依赖；相同提示词也可能因预处理、scheduler、seed、精度、采样参数和软件栈变化而产生不同结果。一次推理要可复查，至少需要回答：运行了什么版本、输入是什么、用了哪些参数、输出如何检查、他人怎样在许可范围内重做。", "en": "A model repository can update configs, weights or dependencies; the same prompt can yield different outputs when preprocessing, scheduler, seed, precision, sampling parameters or software stack changes. A reviewable inference should answer: Which version ran? What were the inputs and parameters? How was the output checked? How can someone reproduce it within the applicable license?"},
+        {"zh": "推荐把“方法说明、运行记录、结果与限制”分开写。教程示例不等于真实用户研究或性能证据；合成图片和视频也不能代替数据集、基线、消融或统计分析。", "en": "Keep method notes, run records, outputs and limitations distinct. A tutorial example is not user-study or performance evidence; synthetic images and videos do not replace datasets, baselines, ablations or statistical analysis."}
+      ]
+    },
+    {
+      "id": "manifest",
+      "title": {"zh": "02 / 一份最小生成记录", "en": "02 / A minimal generation manifest"},
+      "paragraphs": [
+        {"zh": "模型字段记录仓库名、revision 或 commit、权重来源及可公开的校验值；输入字段记录提示词、素材来源摘要和预处理；运行字段记录代码版本、Python/PyTorch/CUDA、硬件、scheduler、步数、guidance、分辨率和 seed；结果字段记录输出路径、人工检查项、失败样例与限制。涉及私人素材时只留最小化的内部标识或哈希，不要公开人脸、语音或访问凭据。", "en": "Record repository ID, revision or commit, checkpoint provenance and a shareable checksum. Capture the prompt, a source summary and preprocessing. Log code version, Python/PyTorch/CUDA, hardware, scheduler, steps, guidance, resolution and seed. Track output path, human-review checks, failure cases and limitations. For private media, retain only a minimal internal identifier or hash; do not publish faces, voices or credentials."}
+      ],
+      "code": {"language": "json", "text": "{\n  \"task\": \"text-to-image\",\n  \"model\": {\n    \"repo\": \"stabilityai/stable-diffusion-xl-base-1.0\",\n    \"revision\": \"<immutable-commit-or-release>\",\n    \"checkpoint_sha256\": \"<verified-hash>\"\n  },\n  \"input\": {\n    \"prompt\": \"<exact prompt>\",\n    \"negative_prompt\": \"<exact negative prompt>\",\n    \"source_media_ref\": \"<licensed source or internal ID>\"\n  },\n  \"inference\": {\n    \"seed\": 20261020,\n    \"scheduler\": \"<scheduler name and config>\",\n    \"steps\": 30,\n    \"guidance_scale\": 6.0,\n    \"width\": 1024,\n    \"height\": 1024\n  },\n  \"runtime\": {\n    \"code_commit\": \"<commit>\",\n    \"python\": \"<version>\",\n    \"pytorch\": \"<version>\",\n    \"cuda\": \"<version or cpu>\",\n    \"device\": \"<hardware summary>\"\n  },\n  \"review\": {\n    \"checks\": [\"prompt adherence\", \"artifacts\", \"license\"],\n    \"known_failures\": [],\n    \"limitations\": []\n  }\n}"}
+    },
+    {
+      "id": "review",
+      "title": {"zh": "03 / 发布前逐项复查", "en": "03 / Review each item before publication"},
+      "paragraphs": [
+        {"zh": "公开展示前，逐项核对素材和模型许可、个人信息与肖像授权、权重是否可再分发、生成内容是否标注、提示词和示例数据是否泄露隐私、链接是否可访问。若许可证不允许上传权重，只公开代码、配置说明、校验值和合规样例；敏感素材保留在本地。", "en": "Before publishing, check media and model licenses, personal data and likeness consent, checkpoint redistribution terms, synthetic-content disclosure, privacy leakage in prompts or sample data, and link accessibility. If checkpoint redistribution is not permitted, publish code, configuration notes, checksums and compliant samples only; keep sensitive media local."}
+      ],
+      "bullets": [
+        {"zh": "能否在不暴露私密素材的前提下说明输入和处理步骤？", "en": "Can the inputs and processing be described without exposing private media?"},
+        {"zh": "读者能否区分真实项目代码、教学示例和计划中的实验？", "en": "Can readers distinguish project code, instructional examples and proposed experiments?"},
+        {"zh": "是否保留负面结果、失败样例和适用范围，而不只挑选最好看的输出？", "en": "Are negative results, failures and scope retained instead of showing only the best-looking output?"}
+      ],
+      "callout": {"zh": "清晰标注“已运行”“教学示例”“待验证”，并为每项结论附上读者可以检查的来源或记录。", "en": "Label material clearly as “run,” “instructional example” or “unverified,” and attach a checkable source or record to each claim."}
+    }
+  ],
+  "sources": [
+    {"label": {"zh": "Hugging Face：模型卡和模型许可说明", "en": "Hugging Face: model cards and model-license guidance"}, "url": "https://huggingface.co/docs/hub/model-cards"},
+    {"label": {"zh": "Hugging Face Diffusers：推理参数与管线文档", "en": "Hugging Face Diffusers: pipeline and inference documentation"}, "url": "https://huggingface.co/docs/diffusers/en/index"},
+    {"label": {"zh": "NIST AI 风险管理框架生成式 AI 配套资料", "en": "NIST AI Risk Management Framework: Generative AI profile"}, "url": "https://www.nist.gov/itl/ai-risk-management-framework"}
+  ],
+  "related": ["text-to-image", "digital-human", "data-quality"]
+}

@@ -1,0 +1,72 @@
+{
+  "slug": "text-to-image",
+  "title": {
+    "zh": "文生图：扩散模型原理与本地推理步骤",
+    "en": "Text-to-image: diffusion fundamentals and local inference"
+  },
+  "summary": {
+    "zh": "从潜空间去噪理解扩散模型，并用固定提示词、随机种子和参数完成一次可复查的图像生成。",
+    "en": "Understand latent denoising and run a reviewable image-generation workflow with fixed prompts, seeds and parameters."
+  },
+  "category": "models",
+  "kind": "study",
+  "minutes": 10,
+  "tags": ["Diffusion models", "Stable Diffusion", "PyTorch", "Reproducibility"],
+  "basis": {
+    "zh": "依据 Latent Diffusion 原始论文与 Hugging Face Diffusers 官方 API 整理。代码是教学示例，没有在本机执行，也不代表已经开展生成式模型项目实验；模型仓库访问、许可和硬件要求须按所选 checkpoint 确认。",
+    "en": "Based on the Latent Diffusion paper and the official Hugging Face Diffusers API. The code is an instructional example, not run locally for this note and not evidence of a generative-model experiment. Check access, licenses and hardware requirements for the chosen checkpoint."
+  },
+  "sections": [
+    {
+      "id": "principle",
+      "title": {"zh": "01 / 生成图像时模型在做什么", "en": "01 / What the model does during image generation"},
+      "paragraphs": [
+        {"zh": "以 Stable Diffusion XL 一类潜空间扩散模型为例，先由文本编码器把提示词变成条件向量；生成器从随机潜变量开始，在采样器安排的多个时间步中逐步预测并移除噪声；最后 VAE 解码器把潜变量还原为像素图像。模型不是逐字“理解并画图”，而是在训练得到的条件分布上逐步采样。", "en": "For a latent diffusion model such as Stable Diffusion XL, a text encoder first maps the prompt to conditioning vectors. A denoiser starts from random latent noise and predicts/removes noise across time steps scheduled by the sampler; a VAE decoder then maps the latent back to pixels. The model does not literally draw each word; it samples iteratively from a learned conditional distribution."},
+        {"zh": "潜空间降低了高分辨率生成的计算量。推理时常见的控制量包括提示词、negative prompt、随机种子、采样步数、guidance scale、分辨率和 scheduler。步数增加会增加计算，但不会保证画面质量单调提升；guidance 太强也可能带来过饱和或不自然结构。", "en": "Working in latent space reduces the cost of high-resolution generation. Common inference controls include prompt, negative prompt, random seed, number of steps, guidance scale, resolution and scheduler. More steps add computation but do not guarantee monotonically better images; excessive guidance can create oversaturation or unnatural structure."}
+      ]
+    },
+    {
+      "id": "setup",
+      "title": {"zh": "02 / 环境、权重与首次运行", "en": "02 / Environment, checkpoint and first run"},
+      "paragraphs": [
+        {"zh": "先在官方 PyTorch 安装页按 Windows、显卡和 CUDA 版本选取安装命令，再建立独立 Python 环境并安装 Diffusers、Transformers、Accelerate 与 safetensors。选用 SDXL base 等公开 checkpoint 时，先阅读模型卡、使用条款和访问门槛；若需登录模型平台，只在本机凭据管理器中保存令牌。", "en": "Use the official PyTorch selector to choose an install command for Windows, the GPU and CUDA version, then create an isolated Python environment and install Diffusers, Transformers, Accelerate and safetensors. Before using a checkpoint such as SDXL base, read its model card, license and access requirements. If model-host authentication is needed, keep the token in a local credential store."},
+        {"zh": "首次验证先使用较低分辨率和少量步数确认依赖、模型下载、显存和输出路径均正常。GPU 不可用时可以改用 CPU 测试流程，但速度可能很慢；不要把显存不足误认为生成逻辑错误。", "en": "For the first smoke test, use a smaller resolution and fewer steps to check dependencies, checkpoint download, memory and output path. CPU can test the workflow when a GPU is unavailable, but may be very slow; do not confuse an out-of-memory failure with a model-logic error."}
+      ],
+      "bullets": [
+        {"zh": "准备：Python 3.10 环境；按 PyTorch 官方选择器安装匹配版本。", "en": "Prepare a Python 3.10 environment and install a compatible PyTorch build using the official selector."},
+        {"zh": "安装：python -m pip install diffusers transformers accelerate safetensors。", "en": "Install: python -m pip install diffusers transformers accelerate safetensors."},
+        {"zh": "确认模型仓库 ID、revision/commit、许可、访问条件与权重格式。", "en": "Confirm the model repository ID, revision/commit, license, access requirements and checkpoint format."},
+        {"zh": "固定提示词、种子和分辨率，保存生成结果及环境记录。", "en": "Fix the prompt, seed and resolution; save both the generated image and environment record."}
+      ]
+    },
+    {
+      "id": "example",
+      "title": {"zh": "03 / 最小可复查的 SDXL 示例", "en": "03 / A minimal, reviewable SDXL example"},
+      "paragraphs": [
+        {"zh": "以下代码使用 Diffusers 的标准 pipeline。运行前须先在模型平台接受所选 checkpoint 的许可条款并完成必要认证；如需访问令牌，不要写入代码、Notebook 输出或公开仓库。此代码没有在本机执行验证。", "en": "The code uses a standard Diffusers pipeline. Before running, accept the selected checkpoint's license terms on its model host and complete any required authentication. Never place an access token in source code, notebook output or a public repository. This code has not been executed locally for this note."}
+      ],
+      "code": {"language": "python", "text": "from pathlib import Path\nimport torch\nfrom diffusers import DiffusionPipeline\n\nmodel_id = \"stabilityai/stable-diffusion-xl-base-1.0\"\npipe = DiffusionPipeline.from_pretrained(\n    model_id,\n    torch_dtype=torch.float16,\n    variant=\"fp16\",\n    use_safetensors=True,\n).to(\"cuda\")\n\nprompt = (\n    \"editorial photograph of a quiet university research lab, \"\n    \"a student examining a data visualization, soft morning window light, \"\n    \"natural colors, documentary composition\"\n)\nnegative_prompt = \"watermark, unreadable text, extra fingers, distorted face\"\nseed = 20261020\ngenerator = torch.Generator(device=\"cuda\").manual_seed(seed)\nimage = pipe(\n    prompt=prompt,\n    negative_prompt=negative_prompt,\n    num_inference_steps=30,\n    guidance_scale=6.0,\n    width=1024,\n    height=1024,\n    generator=generator,\n).images[0]\noutput_dir = Path(\"outputs\")\noutput_dir.mkdir(parents=True, exist_ok=True)\nimage.save(output_dir / \"lab-scene.png\")"},
+      "callout": {"zh": "SDXL 权重需要较多显存；首次运行前确认模型许可和硬件条件。示例提示词仅用于演示，不代表图像质量或研究效果经过评测。", "en": "SDXL checkpoints require substantial memory; check the license and hardware before the first run. The sample prompt is illustrative and has not been evaluated for image quality or research effectiveness."}
+    },
+    {
+      "id": "iteration",
+      "title": {"zh": "04 / 怎样有条理地改提示词", "en": "04 / How to iterate on prompts systematically"},
+      "paragraphs": [
+        {"zh": "先把提示词拆成主体、动作、环境、构图、光线和限制条件，再固定种子、模型 revision 与尺寸。每轮只改一个因素，记录种子、scheduler、步数和 guidance scale；如果同时换模型、提示词和参数，就无法判断变化来自哪里。生成文本、手指、精确空间关系或特定个体时，应额外检查失败样例。", "en": "Break a prompt into subject, action, setting, composition, lighting and constraints. Fix the seed, model revision and size. Change one factor at a time and log seed, scheduler, steps and guidance scale; changing model, prompt and parameters together makes the cause of a difference unclear. Inspect failure cases carefully for text, hands, precise spatial relations or specific individuals."}
+      ],
+      "bullets": [
+        {"zh": "提示词是否遵循：主体、场景与构图是否符合需求？", "en": "Prompt adherence: Do the subject, scene and composition match the request?"},
+        {"zh": "图像质量：检查结构、细节、文字伪影、重复对象和偏差。", "en": "Image quality: Inspect structure, details, text artifacts, duplicated objects and bias."},
+        {"zh": "许可与来源：检查模型卡、输出用途约束、肖像和商标权利。", "en": "License and provenance: Check the model card, output-use terms, likeness rights and trademarks."}
+      ],
+      "callout": {"zh": "固定 seed 有助于比较同一配置下的改动，但不同硬件、驱动、库版本和非确定性算子可能导致像素结果不完全一致；它不是跨设备逐像素复现的保证。", "en": "A fixed seed helps compare changes under one configuration, but hardware, drivers, library versions and nondeterministic kernels can still change pixels. It does not guarantee bit-for-bit reproduction across machines."}
+    }
+  ],
+  "sources": [
+    {"label": {"zh": "Latent Diffusion Models 原始论文", "en": "Original Latent Diffusion Models paper"}, "url": "https://arxiv.org/abs/2112.10752"},
+    {"label": {"zh": "Hugging Face Diffusers：文生图官方教程", "en": "Hugging Face Diffusers: official text-to-image guide"}, "url": "https://huggingface.co/docs/diffusers/en/using-diffusers/conditional_image_generation"},
+    {"label": {"zh": "Stable Diffusion XL 模型卡与许可", "en": "Stable Diffusion XL model card and license"}, "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0"},
+    {"label": {"zh": "PyTorch 官方安装选择器", "en": "Official PyTorch installation selector"}, "url": "https://pytorch.org/get-started/locally/"}
+  ],
+  "related": ["generative-workflow", "digital-human", "prompt-contracts"]
+}
