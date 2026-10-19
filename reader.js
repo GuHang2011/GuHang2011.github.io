@@ -18,6 +18,7 @@
   let theme = readPreference(keys.theme, ["light", "dark"], "light");
   let motion = readPreference(keys.motion, ["full", "reduce"], "full");
   const systemMotion = typeof matchMedia === "function" ? matchMedia("(prefers-reduced-motion: reduce)") : null;
+  let themeMotionTimer;
   const settings = document.querySelector("[data-reader-settings]");
   const toggle = settings?.querySelector("[data-reader-toggle]");
   const panel = settings?.querySelector("[data-reader-panel]");
@@ -54,6 +55,15 @@
   themes.forEach(button => {
     button.addEventListener("click", () => {
       if (!["light", "dark"].includes(button.dataset.readerTheme)) return;
+      if (button.dataset.readerTheme === theme) return;
+      const motionAllowed = !systemMotion?.matches && root.dataset.readerMotion !== "reduce";
+      if (motionAllowed) {
+        clearTimeout(themeMotionTimer);
+        root.classList.remove("theme-changing");
+        void root.offsetWidth;
+        root.classList.add("theme-changing");
+        themeMotionTimer = setTimeout(() => root.classList.remove("theme-changing"), 260);
+      }
       theme = button.dataset.readerTheme;
       applyTheme();
       savePreference(keys.theme, theme);

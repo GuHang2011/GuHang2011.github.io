@@ -9,6 +9,8 @@
   const filterState = { publications: "all", projects: "all" };
   const projectSearch = document.querySelector("#project-search");
   const clearSearch = document.querySelector("[data-clear-search]");
+  let languageInitialized = false;
+  let languageMotionTimer;
   // Keep both languages searchable when the visible language changes.
   const projectText = new Map([...document.querySelectorAll('[data-collection="projects"] [data-category]')].map(item => {
     const translations = [...item.querySelectorAll("[data-en][data-zh]")].flatMap(element => [element.dataset.en, element.dataset.zh]);
@@ -39,6 +41,13 @@
   }
 
   function setLanguage(next) {
+    if (languageInitialized && next !== language && document.body && document.documentElement.dataset.readerMotion !== "reduce" && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      clearTimeout(languageMotionTimer);
+      document.body.classList.remove("language-changing");
+      void document.body.offsetWidth;
+      document.body.classList.add("language-changing");
+      languageMotionTimer = setTimeout(() => document.body.classList.remove("language-changing"), 360);
+    }
     language = next;
     document.documentElement.lang = next === "zh" ? "zh-CN" : "en";
     document.querySelectorAll("[data-en][data-zh]").forEach(el => { el.textContent = el.dataset[next]; });
@@ -67,6 +76,7 @@
     updateCounts();
     document.dispatchEvent(new CustomEvent("portfolio-language-change", { detail: { language: next } }));
     try { localStorage.setItem(storageKey, next); } catch { /* Storage is optional. */ }
+    languageInitialized = true;
   }
 
   document.querySelectorAll("[data-language]").forEach(button => {
@@ -79,6 +89,16 @@
     const name = group.dataset.filterGroup;
     group.querySelectorAll("button").forEach(button => {
       button.addEventListener("click", () => {
+        if (filterState[name] !== button.dataset.filter) {
+          const collection = document.querySelector(`[data-collection="${name}"]`);
+          if (collection && document.documentElement.dataset.readerMotion !== "reduce" && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            clearTimeout(collection.filterMotionTimer);
+            collection.classList.remove("filter-changing");
+            void collection.offsetWidth;
+            collection.classList.add("filter-changing");
+            collection.filterMotionTimer = setTimeout(() => collection.classList.remove("filter-changing"), 520);
+          }
+        }
         filterState[name] = button.dataset.filter;
         group.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b === button)));
         updateCounts();
@@ -103,7 +123,7 @@
     resetProjects();
     projectSearch?.focus();
   });
-  document.querySelectorAll('.project-routes a[href^="#"]').forEach(link => {
+  document.querySelectorAll('.project-routes a[href^="#"], .engineering-card a[href^="#project-"]').forEach(link => {
     link.addEventListener("click", resetProjects);
   });
 
