@@ -89,3 +89,9 @@ sitemap.xml         Canonical page sitemap
 ### Learning desk · 20 October 2026
 
 The homepage presents a compact editorial reading desk with latest, frontend, data, model and engineering filters. Topic changes retain keyboard focus and respect reduced-motion settings. A short update link near the introduction leads directly to the collection. Without JavaScript all twelve article links remain readable. New notes cover RAG evaluation, async request races and SQL windows, with standalone teaching examples.
+
+## Virtual presenter videos / 虚拟主播展示
+
+新增带中文配音的 34 秒二维主播展示、22 秒操作流程回放，以及[公开交互样例](demos/virtual-host/)。原有模型早停和数据质量视频保留，首页共四段视频。每段提供封面、字幕、项目说明和下载入口。
+
+角色取自本地丝路智链 VirtualHost 组件，商品采用合成教学内容；配音为通用合成声音。该展示不代表写实数字人模型推理。详见[实现与项目心得](demos/virtual-host/README.md)。

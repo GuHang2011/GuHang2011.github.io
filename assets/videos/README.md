@@ -1,6 +1,16 @@
 # Project Video Library
 
-These two silent videos are generated explanations of the online demonstrations. They are not recordings of the original private projects and do not show real training experiments or production data.
+Four videos explain inspectable engineering examples. Two virtual-presenter videos were added on 2026-10-20; the original two silent algorithm explainers remain below. These are public demonstrations, not production streams, real training runs or private-data recordings.
+
+## Virtual Presenter Showcase
+
+`virtual-host-showcase.mp4` (34.128 seconds) combines a browser replay of the [public 2D presenter](../../demos/virtual-host/) with Chinese synthesized narration. The character and three gestures come from the local Silk Road VirtualHost component; the public stage and controls are adapted for this portfolio. Mouth opening follows the actual audio amplitude, not phoneme alignment. The video includes bilingual on-screen text and VTT captions.
+
+## Virtual Presenter Workflow
+
+`virtual-host-workflow.mp4` (22 seconds, silent) replays six control states: start, pause, chapter selection, resume, third chapter and restart. Highlighted controls and step labels explain each transition. It uses the same public interface, rather than a production stream. [Implementation and provenance](../../demos/virtual-host/README.md).
+
+To reproduce: serve the site, run `tools/record_host_videos.js` using Playwright CLI `run-code --filename`, then run `python tools/encode_host_videos.py --site . --frames output/playwright/host-frames --ffmpeg <executable>`. Browser recording uses 1280 × 720 at 24 fps. `virtual-host-metadata.json` describes the new clips.
 
 ## Early Stopping Replay
 
@@ -16,7 +26,7 @@ These two silent videos are generated explanations of the online demonstrations.
 
 ## Accessibility and Provenance
 
-- Each video is 18 seconds at 1280 x 720 and 24 frames per second, encoded as H.264/YUV420p with fast-start playback and no audio.
+- Each original algorithm video is 18 seconds at 1280 x 720 and 24 frames per second, encoded as H.264/YUV420p with fast-start playback and no audio.
 - The homepage provides captions and an equivalent text summary. The linked cases provide detailed text and interactive alternatives.
 - Posters show the final verified state. `metadata.json` records the exact synthetic scores, epoch trace, pipeline audit, source-row identities, source hashes, and decoded-frame checks.
 - `validation-contact-sheet.jpg` contains decoded first, middle, and final frames of both videos for visual inspection.

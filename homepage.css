@@ -1,4 +1,9 @@
 /* Academic reading: ink, paper and a single muted teal accent. */
+@media (max-width: 560px) {
+  .portfolio-home .film-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 14px; }
+  .portfolio-home .film-tabs button { min-width: 0; justify-content: flex-start; padding-inline: 0; }
+  .portfolio-home .film-tabs .film-duration { margin-left: auto; }
+}
 :root {
   --ink: #203442;
   --muted: #4f626b;

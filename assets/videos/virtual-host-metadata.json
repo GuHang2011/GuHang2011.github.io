@@ -1,0 +1,25 @@
+{
+  "created": "2026-10-20",
+  "kind": "Deterministic replay of public 2D component demo; not a production stream",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "files": [
+    {
+      "file": "virtual-host-showcase.mp4",
+      "duration": 34.128,
+      "audio": true,
+      "width": 1280,
+      "height": 720,
+      "fps": 24,
+      "bytes": 1326609
+    },
+    {
+      "file": "virtual-host-workflow.mp4",
+      "duration": 22,
+      "audio": false,
+      "width": 1280,
+      "height": 720,
+      "fps": 24,
+      "bytes": 533140
+    }
+  ]
+}
