@@ -1,0 +1,141 @@
+{
+  "slug": "rag-evaluation",
+  "category": "models",
+  "kind": "study",
+  "minutes": 9,
+  "title": {
+    "zh": "RAG 学习：把检索质量与回答质量分开检查",
+    "en": "RAG evaluation: separate retrieval from answer quality"
+  },
+  "summary": {
+    "zh": "从切块、混合检索到引用核验，用一个离线小例子理解 Recall@k、倒数排名和无答案问题。",
+    "en": "From chunking and hybrid retrieval to citation checks: an offline example of Recall@k, reciprocal rank and unanswerable queries."
+  },
+  "tags": [
+    "RAG",
+    "Retrieval",
+    "Recall@k",
+    "Citation",
+    "检索增强生成"
+  ],
+  "basis": {
+    "zh": "依据公开论文和工具文档整理。附带代码只计算合成检索列表的指标，不调用大模型，也不代表已部署的 RAG 系统。",
+    "en": "Compiled from public papers and tool documentation. The code computes metrics on synthetic retrieval lists; it invokes no language model and does not represent a deployed RAG system."
+  },
+  "sections": [
+    {
+      "id": "pipeline",
+      "title": {
+        "zh": "01 / 检索增强生成的两段链路",
+        "en": "01 / Two stages in retrieval-augmented generation"
+      },
+      "paragraphs": [
+        {
+          "zh": "先将文档解析、分块并记录来源，再建立检索索引。提问时召回候选片段，必要时重排，然后把问题与证据一起交给生成模型。RAG 改变的是推理时能看到的上下文，通常不需要更新生成模型权重。",
+          "en": "Parse documents, create chunks with source metadata and build an index. At query time retrieve candidate passages, optionally rerank them, and supply the question and evidence to a generator. RAG changes inference context and usually does not update generator weights."
+        },
+        {
+          "zh": "向量检索擅长找语义相近表达；BM25 对型号、编号等精确词可能更合适。混合检索可以扩大召回，但必须在相同问题集上比较，不能把“增加一个组件”直接写成质量提升。",
+          "en": "Dense retrieval matches semantic paraphrases; BM25 may handle exact identifiers and product codes better. Hybrid retrieval can broaden recall, but any benefit must be measured on the same question set."
+        }
+      ]
+    },
+    {
+      "id": "protocol",
+      "title": {
+        "zh": "02 / 先建立一个小型评估集",
+        "en": "02 / Build a small evaluation set first"
+      },
+      "paragraphs": [
+        {
+          "zh": "每条问题保存 query_id、问题、可接受来源 ID、答案要点和是否可回答。分别加入精确查找、跨段组合、版本冲突和资料缺失问题。先固定文档快照、切块规则、k 值及开发/测试划分，再比较策略；同一问题的改写不要跨越两个集合。",
+          "en": "Record a query ID, question, acceptable source IDs, answer requirements and answerability. Include exact lookup, multi-passage reasoning, version conflicts and missing information. Freeze the corpus snapshot, chunking, k and development/test split before comparison; keep paraphrases of one question in the same split."
+        },
+        {
+          "zh": "来源标签可以以文档或片段为单位，但预测和标注必须使用同一单位。下面示例使用文档 ID：一个文档的多个切块先去重，再取前 k 个；如果业务真正限制的是片段数量，应另行定义并报告该预算。",
+          "en": "Labels may be document IDs or passage IDs, but predictions and labels must use the same unit. This example deduplicates document IDs before taking k. If the real constraint is a passage budget, define and report that budget separately."
+        }
+      ]
+    },
+    {
+      "id": "metrics",
+      "title": {
+        "zh": "03 / 手算并运行检索指标",
+        "en": "03 / Calculate and run retrieval metrics"
+      },
+      "paragraphs": [
+        {
+          "zh": "Recall@k 是前 k 个结果中命中的相关来源数除以全部相关来源数；倒数排名是第一个相关结果排名的倒数。多问题的倒数排名取均值才是 MRR。没有相关来源的无答案问题不适合直接计算召回率，应单列为拒答评估。",
+          "en": "Recall@k divides relevant sources found in the first k results by all labeled relevant sources. Reciprocal rank is the inverse rank of the first relevant result; averaging it over queries gives MRR. Questions with no relevant sources need a separate abstention evaluation."
+        },
+        {
+          "zh": "从仓库根目录执行 python notebook/examples/rag_metrics.py。示例的 Recall@2 和倒数排名都为 0.5；这两个数只验证公式，不是模型效果。",
+          "en": "From the repository root run python notebook/examples/rag_metrics.py. The example prints 0.5 for Recall@2 and reciprocal rank. These values illustrate the formulas, not model performance."
+        }
+      ],
+      "code": {
+        "language": "python",
+        "text": "\"\"\"Toy retrieval metrics. No model or network access is needed.\"\"\"\ndef recall_at_k(ranked, relevant, k):\n    if k < 1:\n        raise ValueError(\"k must be positive\")\n    relevant = set(relevant)\n    if not relevant:\n        return None  # Unanswerable queries need a separate abstention measure.\n    # Remove duplicate document IDs before applying the retrieval budget.\n    retrieved = set(list(dict.fromkeys(ranked))[:k])\n    return len(retrieved & relevant) / len(relevant)\n\ndef reciprocal_rank(ranked, relevant):\n    relevant = set(relevant)\n    for rank, doc in enumerate(dict.fromkeys(ranked), start=1):\n        if doc in relevant:\n            return 1 / rank\n    return 0.0\n\nif __name__ == \"__main__\":\n    ranked = [\"policy-old\", \"guide\", \"guide\", \"policy-current\"]\n    gold = {\"guide\", \"policy-current\"}\n    print(\"Recall@2:\", recall_at_k(ranked, gold, 2))  # 0.5\n    print(\"Reciprocal rank:\", reciprocal_rank(ranked, gold))  # 0.5\n"
+      }
+    },
+    {
+      "id": "answers",
+      "title": {
+        "zh": "04 / 引用存在，还要核对是否支持回答",
+        "en": "04 / A citation must actually support the answer"
+      },
+      "paragraphs": [
+        {
+          "zh": "把回答拆成可核查的事实：引用是否指向正确来源，片段是否支持该事实，是否遗漏条件或日期，资料缺失时是否明确说明不知道。人工复核先做小样本；模型裁判只能作为辅助，还需检查其与人工判断的一致性。",
+          "en": "Break an answer into checkable claims: does the citation resolve, does the passage support the claim, are conditions or dates missing, and does the system acknowledge missing information? Start with human review on a small sample; an automated judge needs calibration against those judgments."
+        },
+        {
+          "zh": "检索到的网页和文档是不可信数据，不能让其中的指令替代应用规则。对内部资料，权限过滤应在召回和内容返回环节都执行；缓存键也需要区分用户的可见范围。",
+          "en": "Retrieved pages and documents are untrusted data: their instructions must not replace application rules. For internal documents, enforce access scope at retrieval and content delivery; cache keys must account for that scope too."
+        }
+      ]
+    },
+    {
+      "id": "reflection",
+      "title": {
+        "zh": "05 / 工程心得与下一步练习",
+        "en": "05 / Engineering reflection and next exercise"
+      },
+      "paragraphs": [
+        {
+          "zh": "回答错误时先保存检索列表与引用，再定位是资料缺失、召回失败、排序失败还是生成失真。先比较 BM25 基线与一种向量检索，再逐项改变切块或重排；同时记录延迟、成本与失败样例。这里给出的是待实施练习，不宣称已完成这些实验。",
+          "en": "When an answer fails, preserve retrieval results and citations, then classify the cause as missing evidence, retrieval failure, ranking failure or unsupported generation. Compare BM25 with one dense retriever before changing chunking or reranking; log latency, cost and failure cases. These are proposed exercises, not completed experiments."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "examples/rag_metrics.py",
+      "label": {
+        "zh": "本篇示例源文件",
+        "en": "Example source file"
+      }
+    },
+    {
+      "url": "https://arxiv.org/abs/2005.11401",
+      "label": {
+        "zh": "RAG 原始论文：Lewis 等",
+        "en": "RAG paper: Lewis et al."
+      }
+    },
+    {
+      "url": "https://www.sbert.net/docs/package_reference/sentence_transformer/evaluation.html",
+      "label": {
+        "zh": "Sentence Transformers 检索评估文档",
+        "en": "Sentence Transformers retrieval evaluation"
+      }
+    }
+  ],
+  "related": [
+    "model-selection",
+    "data-quality",
+    "generative-workflow"
+  ],
+  "date": "2026-10-20"
+}

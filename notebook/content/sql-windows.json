@@ -1,0 +1,144 @@
+{
+  "slug": "sql-windows",
+  "category": "data",
+  "kind": "study",
+  "minutes": 8,
+  "title": {
+    "zh": "SQL 窗口分析：累计值、上一期与并列排名",
+    "en": "SQL windows: running totals, prior values and ties"
+  },
+  "summary": {
+    "zh": "用合成流水练习 GROUP BY、PARTITION BY 与窗口框架，检查缺失日期和并列值造成的统计误读。",
+    "en": "Practice grouping, partitioning and window frames on synthetic transactions, with checks for missing dates and tied values."
+  },
+  "tags": [
+    "SQL",
+    "SQLite",
+    "Window functions",
+    "Analytics",
+    "数据分析"
+  ],
+  "basis": {
+    "zh": "以 SQLite 标准库编写的合成数据练习；金额仅为整数示例，不使用真实学生、财务或业务记录。",
+    "en": "A synthetic-data exercise using Python’s SQLite standard library. Amounts are illustrative integers; no student, financial or business records are used."
+  },
+  "sections": [
+    {
+      "id": "grain",
+      "title": {
+        "zh": "01 / 先确定一行代表什么",
+        "en": "01 / Define what one row represents"
+      },
+      "paragraphs": [
+        {
+          "zh": "原始表一行是一笔流水，分析表一行是某团队某日的合计。GROUP BY 将多行合并；窗口函数在保留分析行的基础上附加累计值或排名。如果直接对流水做 LAG，得到的可能是上一笔交易，而不是上一期指标。",
+          "en": "A raw row is a transaction; an analysis row is a team’s daily aggregate. GROUP BY collapses rows, while window functions add running totals or ranks without collapsing those analysis rows. LAG over raw transactions may describe the preceding transaction rather than the preceding reporting period."
+        },
+        {
+          "zh": "PARTITION BY 定义互不混算的分组，ORDER BY 定义窗口内部顺序，ROWS 定义每行参与计算的范围。最终输出顺序还需要最外层 ORDER BY；不能假设窗口排序也保证表格展示顺序。",
+          "en": "PARTITION BY separates groups, ORDER BY defines order inside a window, and ROWS defines the frame for each row. Output order still requires an outer ORDER BY; window ordering alone does not guarantee presentation order."
+        }
+      ]
+    },
+    {
+      "id": "run",
+      "title": {
+        "zh": "02 / 可直接运行的最小练习",
+        "en": "02 / A directly runnable exercise"
+      },
+      "paragraphs": [
+        {
+          "zh": "从仓库根目录运行 python notebook/examples/sql_windows.py，无需下载数据。CTE 先按日和团队聚合，再计算累计值、上一条观测值和当日排名。SQLite 需支持窗口函数（3.25.0 或更新版本）。",
+          "en": "Run python notebook/examples/sql_windows.py from the repository root without downloading data. A CTE first aggregates by date and team; windows then compute a running total, prior observation and daily rank. SQLite 3.25.0 or newer is required."
+        }
+      ],
+      "code": {
+        "language": "python / SQL",
+        "text": "\"\"\"Window functions on synthetic daily aggregates, using the standard library.\"\"\"\nimport sqlite3\n\nQUERY = \"\"\"\nWITH daily AS (\n  SELECT day, team, SUM(amount) AS total\n  FROM sales GROUP BY day, team\n)\nSELECT day, team, total,\n       SUM(total) OVER (\n         PARTITION BY team ORDER BY day\n         ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n       ) AS running_total,\n       LAG(total) OVER (PARTITION BY team ORDER BY day) AS previous_observed,\n       DENSE_RANK() OVER (PARTITION BY day ORDER BY total DESC) AS daily_rank\nFROM daily ORDER BY day, team\n\"\"\"\n\ndef analyze():\n    with sqlite3.connect(\":memory:\") as db:\n        db.execute(\"CREATE TABLE sales(day TEXT, team TEXT, amount INTEGER NOT NULL)\")\n        # Amounts are integer minor units. Team A has no observation on October 2.\n        db.executemany(\"INSERT INTO sales VALUES (?, ?, ?)\", [\n            (\"2026-10-01\", \"A\", 10), (\"2026-10-01\", \"A\", 5),\n            (\"2026-10-01\", \"B\", 15), (\"2026-10-02\", \"B\", 7),\n            (\"2026-10-03\", \"A\", 20), (\"2026-10-03\", \"B\", 3),\n        ])\n        return db.execute(QUERY).fetchall()\n\nif __name__ == \"__main__\":\n    for row in analyze():\n        print(row)\n"
+      }
+    },
+    {
+      "id": "interpret",
+      "title": {
+        "zh": "03 / 逐行解释结果，而不是只看查询成功",
+        "en": "03 / Interpret rows, not just successful execution"
+      },
+      "paragraphs": [
+        {
+          "zh": "A 在 10 月 1 日的两笔流水合计为 15，10 月 3 日累计为 35；B 的累计依次为 15、22、25。第一天 A 与 B 并列第一。DENSE_RANK 遇到并列不留名次空档，ROW_NUMBER 则必须为每行分配不同编号；选取唯一一条时要加入稳定的并列排序键。",
+          "en": "A’s two October 1 transactions total 15, and its October 3 running total is 35. B’s totals are 15, 22 and 25. Both teams rank first on day one. DENSE_RANK leaves no gaps after ties; ROW_NUMBER assigns distinct numbers, so a stable tie-breaker is needed when choosing exactly one row."
+        },
+        {
+          "zh": "A 缺少 10 月 2 日记录，因此 10 月 3 日的 LAG 是 10 月 1 日的 15，不是“昨天”的值。若业务要按日比较，应先构建日期骨架再关联数据，并决定缺失代表零、未知还是暂停营业；不要静默补零。",
+          "en": "A has no October 2 observation, so its October 3 LAG is October 1’s 15, not yesterday’s value. For calendar-day comparisons, join onto a date spine and decide whether missing means zero, unknown or closed; do not silently fill zeros."
+        }
+      ]
+    },
+    {
+      "id": "pitfalls",
+      "title": {
+        "zh": "04 / 窗口边界与数据质量",
+        "en": "04 / Window boundaries and data quality"
+      },
+      "paragraphs": [
+        {
+          "zh": "累计值显式使用 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW。原始排序键不唯一时，默认 RANGE 可能把同值的多行一起纳入，造成看似跳变的累计值。此示例先聚合，保证每团队每日只有一行。",
+          "en": "The running total explicitly uses ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW. With nonunique ordering keys, a default RANGE frame may include all peers together, producing jumps. This example aggregates first so each team has one row per day."
+        },
+        {
+          "zh": "正式分析还要校验重复流水、时区、退款符号与空金额。示例使用整数最小货币单位避免小数表示误差，但并未定义真实财务口径。对大表先查看执行计划与排序开销，再考虑索引或分布式计算，不能从这个小样本推断吞吐量。",
+          "en": "Real analysis also needs duplicate, timezone, refund-sign and null-amount checks. Integer minor units avoid fractional representation issues here but do not define a financial policy. For large tables inspect plans and sorting costs before indexes or distributed processing; this sample says nothing about throughput."
+        }
+      ]
+    },
+    {
+      "id": "practice",
+      "title": {
+        "zh": "05 / 自学与笔试复盘",
+        "en": "05 / Study and written-test reflection"
+      },
+      "paragraphs": [
+        {
+          "zh": "做题时先写粒度，再写分组与排序，最后用两三行反例验证。下一步可练习每组 Top-N、连续活跃天数和滚动七日指标；“最近七行”与“最近七个自然日”不同，回答时应明确时间口径。",
+          "en": "Start by stating the grain, then the partition and ordering, and finally check two or three counterexamples. Practice top-N per group, activity streaks and rolling seven-day metrics next. Seven preceding rows and seven calendar days are different definitions."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "examples/sql_windows.py",
+      "label": {
+        "zh": "本篇示例源文件",
+        "en": "Example source file"
+      }
+    },
+    {
+      "url": "https://www.sqlite.org/windowfunctions.html",
+      "label": {
+        "zh": "SQLite：窗口函数",
+        "en": "SQLite: window functions"
+      }
+    },
+    {
+      "url": "https://www.postgresql.org/docs/current/tutorial-window.html",
+      "label": {
+        "zh": "PostgreSQL：窗口函数教程",
+        "en": "PostgreSQL: window tutorial"
+      }
+    },
+    {
+      "url": "https://docs.python.org/3/library/sqlite3.html",
+      "label": {
+        "zh": "Python：sqlite3 文档",
+        "en": "Python: sqlite3 documentation"
+      }
+    }
+  ],
+  "related": [
+    "data-quality",
+    "order-idempotency",
+    "model-selection"
+  ],
+  "date": "2026-10-20"
+}

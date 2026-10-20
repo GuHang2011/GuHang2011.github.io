@@ -1,0 +1,144 @@
+{
+  "slug": "async-interfaces",
+  "category": "frontend",
+  "kind": "study",
+  "minutes": 8,
+  "title": {
+    "zh": "前端异步请求：防抖之外，还要处理响应竞态",
+    "en": "Async interfaces: stale responses beyond debouncing"
+  },
+  "summary": {
+    "zh": "用取消请求、递增序号和显式页面状态，避免旧搜索结果覆盖新输入，并设计可验证的异常路径。",
+    "en": "Use cancellation, sequence IDs and explicit view states to prevent stale search results and make error paths testable."
+  },
+  "tags": [
+    "Frontend",
+    "AbortController",
+    "Race condition",
+    "Vue",
+    "异步请求"
+  ],
+  "basis": {
+    "zh": "依据 Web API 文档新编写的教学示例，用于练习搜索界面的状态管理；不宣称现有业务项目已采用该实现。",
+    "en": "A new teaching example based on Web API documentation for practicing search-state management; no claim is made that existing business projects use this implementation."
+  },
+  "sections": [
+    {
+      "id": "race",
+      "title": {
+        "zh": "01 / 为什么加了防抖仍会错",
+        "en": "01 / Why debounce alone is insufficient"
+      },
+      "paragraphs": [
+        {
+          "zh": "用户先搜索 A，再搜索 AB。如果 A 请求用时更长，它可能在 AB 之后返回并覆盖页面。防抖只减少启动次数，不能保证已发出请求的完成顺序；接口返回成功也不能说明它仍对应当前输入。",
+          "en": "A user searches for A and then AB. If A takes longer, its response can arrive after AB and overwrite the view. Debounce reduces request starts; it cannot order completion of requests already sent. A successful response may still belong to outdated input."
+        },
+        {
+          "zh": "取消请求用于减少不必要的工作，递增序号用于决定哪个结果有权更新页面。两者职责不同：服务端可能已经收到请求，有些缓存或模拟适配器也不响应取消。",
+          "en": "Cancellation reduces unnecessary work; a sequence ID decides which result may update the view. The server may already have received the request, and some caches or mock adapters may ignore cancellation."
+        }
+      ]
+    },
+    {
+      "id": "states",
+      "title": {
+        "zh": "02 / 先写出界面状态",
+        "en": "02 / Name the view states"
+      },
+      "paragraphs": [
+        {
+          "zh": "这里约定 idle、loading、success、empty、error 五种状态。新查询立即清空旧结果，加载失败显示重试入口；主动取消旧查询不显示错误。若产品选择保留旧结果，需要明确标注正在刷新，并禁用依赖旧结果的危险操作。",
+          "en": "This example uses idle, loading, success, empty and error. A new query clears old results; a failed load should offer retry, while intentional cancellation stays silent. A product that retains previous results should label them as refreshing and disable unsafe actions that depend on stale data."
+        },
+        {
+          "zh": "通过 aria-busy 标识结果区更新，用 aria-live=\"polite\" 报告完成或失败；保持焦点在搜索输入上，不在每次更新时抢焦点。状态不能只靠颜色区分。",
+          "en": "Mark the results region with aria-busy and announce completion or failure through aria-live=\"polite\". Keep focus in the search input rather than moving it on every update. Do not encode state with color alone."
+        }
+      ]
+    },
+    {
+      "id": "controller",
+      "title": {
+        "zh": "03 / 一个可拆分验证的控制器",
+        "en": "03 / A controller that can be checked independently"
+      },
+      "paragraphs": [
+        {
+          "zh": "将代码保存为 .mjs。调用 createLatestRequest 时传入 request(query, signal) 和 render(state)；request 应返回结果数组，并检查 HTTP 状态与响应结构。输入变化时调用 search，组件卸载时调用 dispose。",
+          "en": "Save the code as .mjs. Supply request(query, signal) and render(state) to createLatestRequest. The request adapter should return an array and validate HTTP status and response shape. Call search on input changes and dispose when the component unmounts."
+        },
+        {
+          "zh": "Vue 中可在 onUnmounted 清理；React 中可在 effect 清理函数中调用。防抖定时器属于调用层，也要在清理时取消；不要在每次 render 时重建控制器，否则序号失去连续性。",
+          "en": "Use onUnmounted in Vue or effect cleanup in React. Debounce timers belong to the caller and also need cleanup. Keep the controller stable across renders so its sequence remains meaningful."
+        }
+      ],
+      "code": {
+        "language": "javascript",
+        "text": "// Small controller for a search interface; inject rendering at the call site.\n// request must resolve to data, for example: fetch(url, {signal}).then(r => r.json()).\nexport function createLatestRequest(request, render) {\n  let sequence = 0;\n  let controller;\n  return {\n    async search(rawQuery) {\n      const id = ++sequence;\n      controller?.abort();\n      const query = rawQuery.trim();\n      if (!query) { render({ status: \"idle\", items: [] }); return; }\n      controller = new AbortController();\n      const signal = controller.signal;\n      render({ status: \"loading\", items: [] });\n      try {\n        const items = await request(query, signal);\n        if (id !== sequence) return;\n        render({ status: items.length ? \"success\" : \"empty\", items });\n      } catch (error) {\n        if (id !== sequence || signal.aborted) return;\n        render({ status: \"error\", items: [], message: String(error.message) });\n      }\n    },\n    dispose() { ++sequence; controller?.abort(); },\n  };\n}\n"
+      }
+    },
+    {
+      "id": "verify",
+      "title": {
+        "zh": "04 / 用受控完成顺序检查边界",
+        "en": "04 / Control completion order to test boundaries"
+      },
+      "paragraphs": [
+        {
+          "zh": "不要靠等待固定秒数判断竞态。测试中创建两个可手动 resolve 的 Promise：先发 A 再发 AB，先完成 AB 再完成 A，页面最后必须仍显示 AB。再检查旧请求失败、清空输入、空数组、当前请求失败及卸载后的迟到结果。",
+          "en": "Avoid fixed sleeps in race tests. Create two manually resolvable promises: start A then AB, resolve AB before A, and require the final view to still show AB. Also check stale rejection, cleared input, an empty array, current failure and a late result after disposal."
+        }
+      ]
+    },
+    {
+      "id": "limits",
+      "title": {
+        "zh": "05 / 前端正确，不代表后端操作只发生一次",
+        "en": "05 / View correctness does not imply one server-side action"
+      },
+      "paragraphs": [
+        {
+          "zh": "这个例子适用于只读查询。下单、扣库存或上传提交不能靠 AbortController 保证撤销或幂等；应在后端设计请求标识、状态机和事务边界。项目阅读时，我会把“界面不被旧结果覆盖”与“业务操作不会重复”作为两项不同的检查。",
+          "en": "This example is for read-only queries. AbortController cannot guarantee cancellation or idempotency of orders, stock changes or uploads. Those need server-side request identifiers, state transitions and transaction boundaries. Preventing stale UI updates and preventing duplicate business actions are separate checks."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "examples/latest-request.mjs",
+      "label": {
+        "zh": "本篇示例源文件",
+        "en": "Example source file"
+      }
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/AbortController",
+      "label": {
+        "zh": "MDN：AbortController",
+        "en": "MDN: AbortController"
+      }
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+      "label": {
+        "zh": "MDN：使用 Fetch",
+        "en": "MDN: Using Fetch"
+      }
+    },
+    {
+      "url": "https://vuejs.org/api/composition-api-lifecycle.html#onunmounted",
+      "label": {
+        "zh": "Vue：组件卸载清理",
+        "en": "Vue: unmount cleanup"
+      }
+    }
+  ],
+  "related": [
+    "accessible-interactions",
+    "order-idempotency",
+    "permission-boundaries"
+  ],
+  "date": "2026-10-20"
+}

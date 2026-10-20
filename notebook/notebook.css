@@ -8,7 +8,7 @@
 .notebook-margin { align-self: end; border-left: 2px solid var(--accent); padding-left: 22px; font-size: 14px; }
 .notebook-margin p { color: var(--muted); margin-block: 10px; }
 .notebook-margin a { display: inline-block; padding-block: 5px; }
-.notebook-routes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid var(--line); }
+.notebook-routes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 1px solid var(--line); }
 .notebook-routes a { padding: 23px 25px; color: var(--ink); transition: background .18s ease; }
 .notebook-routes a + a { border-left: 1px solid var(--line); }
 .notebook-routes a:hover { background: var(--accent-soft); text-decoration: none; }
