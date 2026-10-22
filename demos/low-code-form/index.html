@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" data-title-en="Schema-driven Form Studio | Hang Gu" data-title-zh="配置驱动表单工作台 | 顾航">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A schema-driven low-code form editor with validation, field ordering and JSON inspection.">
+  <link rel="canonical" href="https://guhang2011.github.io/demos/low-code-form/">
+  <title>Schema-driven Form Studio | Hang Gu</title>
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../academic.css?v=20261022-lowcode">
+  <link rel="stylesheet" href="../demo.css">
+  <link rel="stylesheet" href="low-code-form.css">
+  <script src="../../academic.js" defer></script>
+  <script src="app.js" type="module"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-en="Skip to form studio" data-zh="跳至表单工作台">Skip to form studio</a>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../../">Hang Gu <span>顾航</span></a>
+      <nav class="nav-links" id="demo-navigation" aria-label="Main navigation" data-en-label="Main navigation" data-zh-label="主导航">
+        <a href="../../#work" data-en="Projects" data-zh="项目">Projects</a>
+        <a href="#studio" data-en="Studio" data-zh="工作台">Studio</a>
+        <a href="#method" data-en="Method" data-zh="方法">Method</a>
+      </nav>
+      <div class="header-controls"><div class="language-controls" aria-label="Language" data-en-label="Language" data-zh-label="语言">
+        <button type="button" data-language="en" aria-pressed="true">EN</button>
+        <button type="button" data-language="zh" aria-pressed="false">中文</button>
+      </div><button class="menu-toggle icon-button" type="button" aria-label="Menu" aria-controls="demo-navigation" aria-expanded="false"><img src="../../assets/icons/menu.svg" alt=""></button></div>
+    </div>
+  </header>
+  <main id="main" class="wrap low-code-demo">
+    <section class="low-code-opening">
+      <p class="section-number" data-en="SCHEMA · RENDERER · VALIDATION" data-zh="SCHEMA · 渲染器 · 校验">SCHEMA · RENDERER · VALIDATION</p>
+      <div class="low-code-title-row"><div><h1 data-en="Schema-driven Form Studio" data-zh="配置驱动表单工作台">Schema-driven Form Studio</h1><p class="low-code-kicker" data-en="Change the configuration, keep the renderer predictable." data-zh="改变配置，让渲染器保持可预测。">Change the configuration, keep the renderer predictable.</p></div><span class="demo-badge" data-en="Learning project" data-zh="学习项目">Learning project</span></div>
+      <p class="demo-note" data-en="A public, synthetic example inspired by dynamic-form patterns in local Vue teaching materials. It does not publish original business configuration, student data or database records." data-zh="一个受本地 Vue 教学材料中动态表单思路启发的公开合成示例。不公开原始业务配置、学生数据或数据库记录。">A public, synthetic example inspired by dynamic-form patterns in local Vue teaching materials. It does not publish original business configuration, student data or database records.</p>
+    </section>
+
+    <section id="studio" class="form-studio" aria-labelledby="studio-title">
+      <div class="studio-toolbar"><div><p class="section-number" data-en="CONFIGURATION PLAYGROUND" data-zh="配置实验区">CONFIGURATION PLAYGROUND</p><h2 id="studio-title" data-en="Build a small request form" data-zh="搭建一个小型申请表">Build a small request form</h2></div><div class="studio-actions"><button type="button" class="quiet-button" id="add-field" data-en="Add field" data-zh="新增字段">Add field</button><button type="button" class="quiet-button" id="reset-schema" data-en="Reset schema" data-zh="重置配置">Reset schema</button></div></div>
+      <div class="studio-grid">
+        <section class="form-preview panel" aria-labelledby="preview-title"><div class="panel-heading"><h3 id="preview-title" data-en="Live preview" data-zh="实时预览">Live preview</h3><span id="field-count" class="panel-caption"></span></div><form id="dynamic-form" novalidate></form><div class="form-result" id="form-result" role="status" aria-live="polite"></div></section>
+        <section class="schema-editor panel" aria-labelledby="schema-title"><div class="panel-heading"><h3 id="schema-title" data-en="Field schema" data-zh="字段配置">Field schema</h3><button type="button" class="text-button" id="copy-json" data-en="Copy JSON" data-zh="复制 JSON">Copy JSON</button></div><div id="schema-list" class="schema-list"></div><details class="json-details"><summary data-en="Edit / apply JSON" data-zh="编辑 / 应用 JSON">Edit / apply JSON</summary><label for="schema-json" data-en="Application schema v1 (not JSON Schema)" data-zh="应用配置 v1（不是 JSON Schema 标准）">Application schema v1 (not JSON Schema)</label><textarea id="schema-json" spellcheck="false" rows="12" maxlength="65536"></textarea><p data-en="Edit options and bounds here. Applying JSON clears preview values." data-zh="在此编辑选项与范围限制。应用 JSON 会清空预览值。">Edit options and bounds here. Applying JSON clears preview values.</p><button type="button" class="quiet-button" id="apply-json" data-en="Apply JSON" data-zh="应用 JSON">Apply JSON</button></details><p id="schema-status" role="status" aria-live="polite"></p></section>
+      </div>
+    </section>
+
+    <section id="method" class="low-code-method" aria-labelledby="method-title">
+      <div><p class="section-number" data-en="LOW-CODE READING MAP" data-zh="低代码阅读地图">LOW-CODE READING MAP</p><h2 id="method-title" data-en="Configuration is a contract" data-zh="配置就是契约">Configuration is a contract</h2></div>
+      <div class="method-grid"><article><span>01</span><h3 data-en="Schema and renderer stay separate" data-zh="Schema 与渲染器分离">Schema and renderer stay separate</h3><p data-en="Field metadata describes what to render; the renderer owns layout and safe input handling. This keeps new fields from becoming new branches in page markup." data-zh="字段元数据描述渲染内容，渲染器负责布局与安全输入处理；新增字段不必继续堆叠页面分支。">Field metadata describes what to render; the renderer owns layout and safe input handling. This keeps new fields from becoming new branches in page markup.</p></article><article><span>02</span><h3 data-en="Validation is explicit" data-zh="校验规则显式化">Validation is explicit</h3><p data-en="Required, email, minimum length and option rules are rendered from the same configuration that builds the control. The demo reports errors beside the affected field." data-zh="必填、邮箱、最小长度和选项规则都来自同一份配置，错误会显示在对应字段旁。">Required, email, minimum length and option rules are rendered from the same configuration that builds the control. The demo reports errors beside the affected field.</p></article><article><span>03</span><h3 data-en="Low-code has a boundary" data-zh="低代码有边界">Low-code has a boundary</h3><p data-en="Complex business rules, permissions, persistence and audit trails still need application code and server checks. Configuration reduces repetition; it does not remove domain design." data-zh="复杂业务规则、权限、持久化和审计仍需要应用代码与服务端检查。配置减少重复，不会替代领域设计。">Complex business rules, permissions, persistence and audit trails still need application code and server checks. Configuration reduces repetition; it does not remove domain design.</p></article></div>
+      <div class="low-code-links"><a href="schema.json" data-en="Read the schema ↗" data-zh="阅读 schema ↗">Read the schema ↗</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/low-code-form/app.js" data-en="Read the renderer ↗" data-zh="阅读渲染器 ↗">Read the renderer ↗</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/low-code-form/README.md" data-en="Open project notes ↗" data-zh="打开项目说明 ↗">Open project notes ↗</a></div>
+    </section>
+  </main>
+  <noscript><p class="wrap">This interactive studio needs JavaScript. Read <a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/low-code-form/README.md">the project notes</a> and <a href="schema.json">schema</a> directly. / 交互需要 JavaScript，项目说明与配置仍可阅读。</p></noscript>
+  <footer class="section surface"><div class="wrap"><a href="../../#work" data-en="Back to Hang Gu's projects" data-zh="返回顾航的项目页">Back to Hang Gu's projects</a></div></footer>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" data-title-en="React Workflow Board | Hang Gu" data-title-zh="React 工作流面板 | 顾航">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A React and TypeScript workflow board that makes state transitions, retry errors and version conflicts inspectable.">
+  <link rel="canonical" href="https://guhang2011.github.io/demos/react-workflow/">
+  <title>React Workflow Board | Hang Gu</title>
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../academic.css?v=20261022-react">
+  <link rel="stylesheet" href="../demo.css">
+  <link rel="stylesheet" href="react-workflow.css">
+  <script src="../../academic.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-en="Skip to workflow" data-zh="跳至工作流">Skip to workflow</a>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../../">Hang Gu <span>顾航</span></a>
+      <nav class="nav-links" id="demo-navigation" aria-label="Main navigation" data-en-label="Main navigation" data-zh-label="主导航">
+        <a href="../../#work" data-en="Projects" data-zh="项目">Projects</a>
+        <a href="#board" data-en="Board" data-zh="面板">Board</a>
+        <a href="#notes" data-en="Notes" data-zh="说明">Notes</a>
+      </nav>
+      <div class="header-controls"><div class="language-controls" aria-label="Language" data-en-label="Language" data-zh-label="语言">
+        <button type="button" data-language="en" aria-pressed="true">EN</button>
+        <button type="button" data-language="zh" aria-pressed="false">中文</button>
+      </div><button class="menu-toggle icon-button" type="button" aria-label="Menu" aria-controls="demo-navigation" aria-expanded="false"><img src="../../assets/icons/menu.svg" alt=""></button></div>
+    </div>
+  </header>
+  <main id="main" class="wrap workflow-demo">
+    <section class="workflow-opening">
+      <p class="section-number" data-en="REACT · TYPESCRIPT · STATE CONTRACTS" data-zh="REACT · TYPESCRIPT · 状态契约">REACT · TYPESCRIPT · STATE CONTRACTS</p>
+      <div class="workflow-title-row"><div><h1 data-en="React Workflow Board" data-zh="React 工作流面板">React Workflow Board</h1><p class="workflow-kicker" data-en="A small stateful interface for work that must be explainable." data-zh="一个把状态变化讲清楚的小型工作台。">A small stateful interface for work that must be explainable.</p></div><span class="demo-badge" data-en="Learning project" data-zh="学习项目">Learning project</span></div>
+      <p class="demo-note" data-en="This page loads the bundled React implementation from src/App.tsx. It uses synthetic tasks and simulates server responses locally; no data leaves the browser." data-zh="本页面加载由 src/App.tsx 构建的 React 实现，使用合成任务并在浏览器内模拟服务端响应；不会上传任何数据。">This page loads the bundled React implementation from src/App.tsx. It uses synthetic tasks and simulates server responses locally; no data leaves the browser.</p>
+    </section>
+
+    <section id="board" class="workflow-board" aria-labelledby="board-title">
+      <div id="workflow-app"><h2 id="board-title" data-en="Review queue" data-zh="审核队列">Review queue</h2><p data-en="Loading the local React example…" data-zh="正在加载本地 React 示例……">Loading the local React example…</p></div>
+    </section>
+
+    <section id="notes" class="workflow-notes" aria-labelledby="notes-title">
+      <div><p class="section-number" data-en="REACT READING MAP" data-zh="REACT 阅读地图">REACT READING MAP</p><h2 id="notes-title" data-en="What this demonstrates" data-zh="这个项目展示什么">What this demonstrates</h2></div>
+      <div class="note-grid">
+        <article><span class="note-index">01</span><h3 data-en="Union types make states visible" data-zh="联合类型让状态可见">Union types make states visible</h3><p data-en="The React source models draft, review, changes and approved as a finite workflow. Invalid transitions are rejected at the reducer boundary." data-zh="React 源码把草稿、审核、修改和通过建模为有限工作流，在 reducer 边界拒绝无效转换。">The React source models draft, review, changes and approved as a finite workflow. Invalid transitions are rejected at the reducer boundary.</p></article>
+        <article><span class="note-index">02</span><h3 data-en="Async actions need an owner" data-zh="异步操作需要责任归属">Async actions need an owner</h3><p data-en="A request id and version check prevent a late response from overwriting a newer task state. The preview exposes the conflict path instead of hiding it." data-zh="请求序号与版本检查避免过期响应覆盖新状态；预览把冲突路径展示出来，而不是隐藏。">A request id and version check prevent a late response from overwriting a newer task state. The preview exposes the conflict path instead of hiding it.</p></article>
+        <article><span class="note-index">03</span><h3 data-en="A demo carries its limits" data-zh="演示也要说明边界">A demo carries its limits</h3><p data-en="There is no backend, authentication or production SLA here. The value is the readable contract, keyboard path and testable error state." data-zh="这里没有后端、认证或生产 SLA；价值在于可读契约、键盘路径和可测试错误状态。">There is no backend, authentication or production SLA here. The value is the readable contract, keyboard path and testable error state.</p></article>
+      </div>
+      <div class="workflow-links"><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/react-workflow/src/App.tsx" data-en="Read the React source ↗" data-zh="阅读 React 源码 ↗">Read the React source ↗</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/react-workflow/src/workflow.ts" data-en="Read the pure state model ↗" data-zh="阅读纯状态模型 ↗">Read the pure state model ↗</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/react-workflow/README.md" data-en="Open project notes ↗" data-zh="打开项目说明 ↗">Open project notes ↗</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/react-workflow/package.json" data-en="View package boundary ↗" data-zh="查看依赖边界 ↗">View package boundary ↗</a></div>
+    </section>
+  </main>
+  <footer class="section surface"><div class="wrap"><a href="../../#work" data-en="Back to Hang Gu's projects" data-zh="返回顾航的项目页">Back to Hang Gu's projects</a></div></footer>
+  <noscript><p class="wrap">The board needs JavaScript. Read <a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/react-workflow/README.md">the notes</a> or <a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/react-workflow/src/workflow.ts">the state model</a> directly. / 面板交互需要 JavaScript，说明与状态模型仍可阅读。</p></noscript>
+<script type="module" src="assets/workflow.js"></script>
+</body>
+</html>

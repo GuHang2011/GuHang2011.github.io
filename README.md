@@ -17,7 +17,7 @@ Engineering highlights, code and verification evidence, and the academic CV appe
 - Screenshot previews, mobile navigation, print styles, reading progress and restrained hover / keyboard-focus accents. Language, filter and palette changes use brief transitions; content remains visible on arrival.
 - Reading preferences offer light and dark palettes and a reduced-motion option, saved locally when browser storage is available. The system's reduced-motion preference takes priority, including for the back-to-top action.
 - Semantic HTML, visible keyboard focus, a skip link, and reduced-motion support.
-- No site build step, remote fonts, analytics, or runtime CDN dependencies. The experiments bundle pinned [Chart.js](https://www.chartjs.org/) 4.4.9 and [PapaParse](https://www.papaparse.com/) 5.5.3 under MIT licenses. Local tool icons are from [Lucide](https://lucide.dev/) under the ISC license.
+- The homepage needs no build step. React example source changes require a local build; its committed bundle needs no runtime CDN. No remote fonts or analytics are used. The experiments bundle pinned [Chart.js](https://www.chartjs.org/) 4.4.9 and [PapaParse](https://www.papaparse.com/) 5.5.3 under MIT licenses. Local tool icons are from [Lucide](https://lucide.dev/) under the ISC license.
 - The English content and navigation work without JavaScript.
 
 ## Content
@@ -27,7 +27,7 @@ Engineering highlights, code and verification evidence, and the academic CV appe
 3. **Engineering lens:** a compact map of interface contracts, data quality, model evaluation and evidence-shaped delivery, linked to the relevant public cases and verification records.
 4. **Notebook:** [twelve bilingual study notes and project reflections](notebook/) on frontend interaction, data quality, model validation, prompt contracts, order consistency, permission boundaries, digital-human pipelines, text-to-image diffusion and reproducible generative workflows. Searchable by title, summary and tag, with topic filters, source references, code examples and printable article pages. Earlier repositories remain available in the homepage's expandable reading list.
 5. **Background:** education and professional experience.
-6. **Interactive experiments:** financial clustering, data preparation audits and model evaluation, with synthetic data, source code, notes and reproducible checks. [Reading map](demos/README.md).
+6. **Interactive experiments:** financial clustering, data preparation audits, model evaluation, a React workflow board and a schema-driven low-code form studio, with synthetic data, source code, notes and reproducible checks. [Reading map](demos/README.md).
 
 Displayed publication states and authorship are transcribed from the September 2026 CV and have not been independently refreshed. DASFAA author order and official proceedings records for conference work are not fully linked yet; confirm current decisions and citations before relying on them. Manuscripts and accepted work are labeled separately. The KICP project links to its implementation and setup documentation; the learning lab uses synthetic data.
 
@@ -38,6 +38,8 @@ Displayed publication states and authorship are transcribed from the September 2
 - [Release-gate example](cases/examples/README.md): dependency-free JavaScript, tests and limitations.
 
 Project screenshots use synthetic demo content. Public cases exclude original databases, credentials, private configuration and student records. Notebook content updated **2026-10-20**; research statuses remain based on the September CV. The new notes were compiled with AI-assisted drafting and translation; each distinguishes code observations, examples and proposed checks. Generative-model examples are learning guides and were not run locally for this update.
+
+The React workflow and low-code form entries were added **2026-10-22**. They are newly authored learning examples: the React page runs its locally bundled TypeScript source, and the low-code page has a schema editor and native-control renderer. Neither entry is a production deployment or a claim about an existing private application.
 
 ## Preview locally
 

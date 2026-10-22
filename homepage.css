@@ -131,7 +131,7 @@ details > summary { font-size: 14px; padding-block: 9px; min-height: 44px; }
 details p { font-size: 15px; }
 .abstract[open] > p { padding-left: 18px; border-left: 2px solid var(--accent); margin-top: 8px; max-width: 850px; }
 .source-note, .pub-body .source-note, .project-body .source-note { font-size: 13px; line-height: 1.9; }
-.project-routes { gap: 28px; }
+.project-routes { gap: 20px; grid-template-columns: repeat(5, minmax(0,1fr)); }
 .project-routes a, .project-routes a:nth-child(2), .project-routes a:nth-child(3) { border-top-color: var(--line); }
 .project-routes a:hover, .project-routes a:focus-visible { border-color: var(--accent); }
 .project-routes strong { font-size: 17px; }

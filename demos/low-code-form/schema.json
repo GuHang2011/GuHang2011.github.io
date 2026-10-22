@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "id": "teaching-request",
+  "title": "Teaching support request",
+  "fields": [
+    { "key": "topic", "label": "Topic", "labelZh": "主题", "type": "text", "required": true, "minLength": 3, "placeholder": "e.g. data quality" },
+    { "key": "contact", "label": "Contact email", "labelZh": "联系邮箱", "type": "email", "required": true, "placeholder": "name@example.org" },
+    { "key": "format", "label": "Preferred format", "labelZh": "形式", "type": "select", "required": true, "options": [{ "label": "Code review", "labelZh": "代码评审", "value": "review" }, { "label": "Short workshop", "labelZh": "短工作坊", "value": "workshop" }, { "label": "Reading guide", "labelZh": "阅读指南", "value": "reading" }] },
+    { "key": "context", "label": "Context", "labelZh": "背景说明", "type": "textarea", "required": false, "maxLength": 240, "placeholder": "What should the example make easier to understand?" }
+  ]
+}
