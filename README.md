@@ -29,7 +29,7 @@ Engineering highlights, code and verification evidence, and the academic CV appe
 5. **Background:** education and professional experience.
 6. **Interactive experiments:** financial clustering, data preparation audits, model evaluation, a React workflow board and a schema-driven low-code form studio, with synthetic data, source code, notes and reproducible checks. [Reading map](demos/README.md).
 
-Displayed publication states and authorship are transcribed from the September 2026 CV and have not been independently refreshed. DASFAA author order and official proceedings records for conference work are not fully linked yet; confirm current decisions and citations before relying on them. Manuscripts and accepted work are labeled separately. The KICP project links to its implementation and setup documentation; the learning lab uses synthetic data.
+The Neurocomputing entry was updated on 24 October 2026 from the supplied revision and author confirmation: submitted, not accepted. It describes 344 archived training runs, operating-point analysis and archive-artifact audits; FCP is not claimed as a new architecture. Other research states follow the supplied CV. DASFAA author order and official proceedings records for conference work are not fully linked yet; confirm current decisions and citations before relying on them. Manuscripts and accepted work are labeled separately. The KICP project links to its implementation and setup documentation; the learning lab uses synthetic data.
 
 ## Local Engineering Cases
 
@@ -97,3 +97,7 @@ The homepage presents a compact editorial reading desk with latest, frontend, da
 新增带中文配音的 34 秒二维主播展示、22 秒操作流程回放，以及[公开交互样例](demos/virtual-host/)。原有模型早停和数据质量视频保留，首页共四段视频。每段提供封面、字幕、项目说明和下载入口。
 
 角色取自本地丝路智链 VirtualHost 组件，商品采用合成教学内容；配音为通用合成声音。该展示不代表写实数字人模型推理。详见[实现与项目心得](demos/virtual-host/README.md)。
+
+## Research refresh · 24 October 2026
+
+The homepage, GitHub profile, public CV and proposed research brief now use consistent manuscript status. [Study overview](research/fusion-audit.html) documents findings and scope. The proposed emotion-recognition agenda separates existing evidence from future work. Native disclosure controls and a responsive research spotlight provide a short reading path; reduced-motion and no-JavaScript reading are supported. Private manuscript and RP attachments are not part of this publication.
