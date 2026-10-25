@@ -20,6 +20,10 @@ Engineering highlights, code and verification evidence, and the academic CV appe
 - The homepage needs no build step. React example source changes require a local build; its committed bundle needs no runtime CDN. No remote fonts or analytics are used. The experiments bundle pinned [Chart.js](https://www.chartjs.org/) 4.4.9 and [PapaParse](https://www.papaparse.com/) 5.5.3 under MIT licenses. Local tool icons are from [Lucide](https://lucide.dev/) under the ISC license.
 - The English content and navigation work without JavaScript.
 
+## Doctoral research plan · 2026-10-25
+
+The [bilingual research brief](research/statement.html) now follows the supplied RP: reliable multimodal emotion recognition under resource constraints. Four questions connect total-label-budget adaptation, evidence-aware decisions, continual adaptation and system validation. The brief maps existing engineering experience to planned methods, provides an expandable evaluation protocol and a provisional 2027–2031 roadmap. See the [public protocol checklist](research/protocol.md). Proposed methods and outputs are labeled separately from existing research.
+
 ## Content
 
 1. **Research:** manuscripts, conference work, and master’s research, with explicit publication status.
@@ -37,7 +41,7 @@ The Neurocomputing entry was updated on 24 October 2026 from the supplied revisi
 - [College materials archive](https://guhang2011.github.io/cases/archive/): permissions, versioning, review, logical deletion and audit. Its interactive lifecycle illustration uses synthetic records; the original application was reviewed but not rerun for this site update.
 - [Release-gate example](cases/examples/README.md): dependency-free JavaScript, tests and limitations.
 
-Project screenshots use synthetic demo content. Public cases exclude original databases, credentials, private configuration and student records. Notebook content updated **2026-10-20**; research statuses remain based on the September CV. The new notes were compiled with AI-assisted drafting and translation; each distinguishes code observations, examples and proposed checks. Generative-model examples are learning guides and were not run locally for this update.
+Project screenshots use synthetic demo content. Public cases exclude original databases, credentials, private configuration and student records. Notebook content updated **2026-10-20**; research statuses follow the supplied CV and subsequent manuscript / author updates. The new notes were compiled with AI-assisted drafting and translation; each distinguishes code observations, examples and proposed checks. Generative-model examples are learning guides and were not run locally for this update.
 
 The React workflow and low-code form entries were added **2026-10-22**. They are newly authored learning examples: the React page runs its locally bundled TypeScript source, and the low-code page has a schema editor and native-control renderer. Neither entry is a production deployment or a claim about an existing private application.
 

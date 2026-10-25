@@ -2,21 +2,30 @@
 
 [Portfolio](https://guhang2011.github.io/) · [Research direction brief](https://guhang2011.github.io/research/statement.html) · [Evidence guide](https://guhang2011.github.io/research/#evidence) · [Academic CV](https://guhang2011.github.io/research/cv.html)
 
-Updated: 2026-10-15. This guide connects public code with questions, reproduction steps and evidence boundaries. The proposed research direction is a discussion draft; manuscript and project statuses follow the supplied September 2026 CVs. Research implementations, engineering cases and learning tools have distinct scopes.
+Updated: **2026-10-25**. The research plan follows the supplied RP: **面向资源受限交互场景的可靠多模态情绪识别研究**. Its methods and four-year roadmap are proposed work. Neurocomputing and DASFAA 2027 are submitted, not accepted; ISCAIT 2026 is accepted, according to the supplied materials.
 
 ## Start here | 导师阅读入口
 
-1. [Research direction brief / 研究方向简述](./statement.html): two proposed questions about frozen multimodal adaptation and validation sensitivity, with experimental controls and failure criteria.
+1. [Research direction brief / 研究方向简述](./statement.html): four linked questions about budget-aware adaptation, evidence-aware decisions, continual updates and integrated validation, with planned controls and evidence.
 2. [Inspect evidence / 查看证据](https://guhang2011.github.io/research/#evidence): KICP implementation, KAPT source attribution and 31 recorded Python component checks, plus the five-test release-check example.
-3. [Academic CV / 学术简历](./cv.html): selected research, confirmed first authorship for FCP and ISCAIT, project leadership, education and experience; printable in either language.
+3. [Academic CV / 学术简历](./cv.html): selected research, recorded first authorship for the revised Neurocomputing submission and ISCAIT, project leadership, education and experience; printable in either language.
 
 Academic contact / 学术联系: [guhang2011@126.com](mailto:guhang2011@126.com).
 
-## Research interests | 研究兴趣
+## Proposed doctoral questions | 拟博士研究问题
 
-- Multimodal representations for news and document understanding / 面向新闻与文档理解的多模态表征
-- Reliable evaluation with limited labels: validation sensitivity, leakage and data artifacts / 有限标注下的可靠评估：验证敏感性、泄漏与数据伪影
-- Intelligent information systems: retrieval and human-reviewed workflows / 智能信息系统：检索与人工复核工作流
+| Study | Question | Evidence to collect |
+| --- | --- | --- |
+| 01 · 预算约束适配 | Does richer fusion earn its cost? | Full label budget, paired comparisons, Macro-F1 / UAR, artifact audit and resource cost |
+| 02 · 证据感知决策 | When should automatic output be withheld? | Corruption and missing-input tests; quality / disagreement / calibration ablations; risk–coverage and ECE |
+| 03 · 遗忘约束更新 | Can new classes preserve earlier reliability? | Fixed replay and compute; new / old performance, forgetting and calibration drift |
+| 04 · 系统综合验证 | Do the components work together under failure? | Independent evaluation, latency, review triggers and whole-version rollback |
+
+Studies 1–3 progress in sequence. Study 4 runs throughout. Planned period: September 2027–August 2031; the schedule is provisional.
+
+[Public protocol checklist / 公开实验协议清单](protocol.md) · [Engineering-to-research bridge / 工程基础与研究衔接](https://guhang2011.github.io/research/statement.html#preparation)
+
+The existing news-classification audit motivates the new questions; it does not establish results on emotion recognition. React and workflow demos illustrate states and recovery with synthetic examples.
 
 ## Three reading routes | 三条阅读路径
 
