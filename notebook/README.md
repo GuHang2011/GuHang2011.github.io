@@ -2,10 +2,13 @@
 
 [Read online / 在线阅读](https://guhang2011.github.io/notebook/)
 
-Twelve bilingual notes connect code observations, small examples, implementation tradeoffs and questions for further study. Collection updated on **2026-10-20**, with AI-assisted drafting and translation. Each article retains its compilation date. They are learning summaries, not a historical lab diary or evidence of new research results.
+Fifteen bilingual notes connect code observations, small examples, implementation tradeoffs and questions for further study. Collection updated on **2026-10-25**, with AI-assisted drafting and translation. Each article retains its compilation date. They are learning summaries, not a historical lab diary or evidence of new research results.
 
 | Topic | Note | Related work |
 | --- | --- | --- |
+| Models | [证据感知多模态决策 / Evidence-aware multimodal decisions](https://guhang2011.github.io/notebook/multimodal-gates.html) | Reliability Gate Lab and doctoral brief |
+| Models | [总标注预算 / Label-budget ledger](https://guhang2011.github.io/notebook/label-budget-ledger.html) | Budget protocol and validation audit |
+| Engineering | [模型版本回退 / Model-version rollback](https://guhang2011.github.io/notebook/model-version-rollback.html) | React workflow and release gate |
 | Models | [早停、样本对齐与集成 / Model selection](https://guhang2011.github.io/notebook/model-selection.html) | KAPT and model-evaluation demo |
 | Models | [提示学习的张量契约 / Prompt contracts](https://guhang2011.github.io/notebook/prompt-contracts.html) | KANO-derived KAPT components |
 | Frontend | [可访问的交互 / Accessible interactions](https://guhang2011.github.io/notebook/accessible-interactions.html) | Bilingual portfolio |

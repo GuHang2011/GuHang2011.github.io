@@ -1,0 +1,136 @@
+{
+  "slug": "multimodal-gates",
+  "title": {
+    "zh": "证据感知多模态决策：从质量信号到人工复核",
+    "en": "Evidence-aware multimodal decisions: from quality signals to review"
+  },
+  "summary": {
+    "zh": "把模态质量、缺失、跨模态分歧和校准置信度拆开，再用一个可操作的门禁决定自动输出还是请求复核。",
+    "en": "Separate modality quality, missing inputs, cross-modal disagreement and calibrated confidence, then use an inspectable gate to decide whether to output or request review."
+  },
+  "category": "models",
+  "kind": "study",
+  "minutes": 9,
+  "tags": [
+    "Multimodal",
+    "Calibration",
+    "Selective prediction",
+    "Reliability"
+  ],
+  "basis": {
+    "zh": "依据公开 RP、实验协议清单和本站合成的 Reliability Gate Lab 整理。机制与阈值是拟研究方案，不是情绪识别实验结果。",
+    "en": "Based on the public research brief, its protocol checklist and the synthetic Reliability Gate Lab on this site. The mechanism and thresholds are proposed study material, not emotion-recognition results."
+  },
+  "sections": [
+    {
+      "id": "question",
+      "title": {
+        "zh": "01 / 什么情况下不应自动输出？",
+        "en": "01 / When should automatic output be withheld?"
+      },
+      "paragraphs": [
+        {
+          "zh": "“置信度高”只说明模型给出了一个高概率，不说明输入证据完整，也不说明不同模态是否同意。一个更适合交互系统的入口，是先区分证据状态，再决定是否让模型自动通过。",
+          "en": "A high confidence score only says that the model assigns high probability to a class. It does not establish that the input evidence is complete or that modalities agree. A better interaction entry point is to separate evidence states before deciding whether automatic output is allowed."
+        }
+      ]
+    },
+    {
+      "id": "signals",
+      "title": {
+        "zh": "02 / 四种信号分别回答什么？",
+        "en": "02 / What does each signal tell us?"
+      },
+      "paragraphs": [
+        {
+          "zh": "质量代理描述输入条件，例如音频信噪、视觉检测质量或转写置信度；缺失掩码记录模态是否可用；跨模态分歧描述各模态预测是否冲突；校准置信度则描述概率与正确率的对应关系。它们不能互相替代。",
+          "en": "Quality proxies describe input conditions such as audio signal quality, visual detection quality or transcript confidence. Missing masks record availability. Cross-modal disagreement describes prediction conflict, while calibrated confidence describes the relationship between probability and correctness. These signals are not interchangeable."
+        }
+      ],
+      "bullets": [
+        {
+          "zh": "质量低，不必然代表预测错误；质量高，也不代表模态之间没有冲突。",
+          "en": "Low quality does not guarantee an error; high quality does not guarantee agreement."
+        },
+        {
+          "zh": "全部模态缺失时，系统应明确进入“证据不足”，而不是返回一个看似正常的类别。",
+          "en": "When every modality is missing, the system should enter an explicit insufficient-evidence state instead of returning a normal-looking class."
+        }
+      ]
+    },
+    {
+      "id": "gate",
+      "title": {
+        "zh": "03 / 一个最小门禁如何工作？",
+        "en": "03 / How does a minimal gate work?"
+      },
+      "paragraphs": [
+        {
+          "zh": "在开发集上确定阈值：最高校准概率达到置信阈值、分歧不超过分歧阈值、且至少有一个模态可用时，才允许自动输出；其余情况进入人工复核。下面的片段只演示状态决策。",
+          "en": "Choose thresholds on development data. Allow automatic output only when the highest calibrated probability reaches its threshold, disagreement stays below its threshold and at least one modality is available; otherwise request review. The snippet below demonstrates state logic only."
+        }
+      ],
+      "code": {
+        "language": "javascript",
+        "text": "function decide({quality, confidence, disagreement, available}) {\n  if (!available.some(Boolean)) return {state: \"insufficient-evidence\"};\n  if (quality < 0.45) return {state: \"review\", reason: \"quality\"};\n  if (confidence < 0.70) return {state: \"review\", reason: \"confidence\"};\n  if (disagreement > 0.45) return {state: \"review\", reason: \"disagreement\"};\n  return {state: \"auto-output\"};\n}\n\n// This is a contract example, not a fitted classifier."
+      }
+    },
+    {
+      "id": "checks",
+      "title": {
+        "zh": "04 / 如何检查门禁真的有用？",
+        "en": "04 / How would we check whether the gate helps?"
+      },
+      "paragraphs": [
+        {
+          "zh": "不能只看整体准确率。需要在模态缺失、噪声、遮挡和转写扰动下，比较相同覆盖率时的风险，或相同风险时的覆盖率，并报告 ECE。还要分别移除质量、分歧和校准信号，观察哪一种机制改变了决策边界。",
+          "en": "Overall accuracy is insufficient. Under missing modalities, noise, occlusion and transcript perturbations, compare risk at the same coverage or coverage at the same risk, and report ECE. Remove quality, disagreement and calibration signals separately to see which mechanism changes the decision boundary."
+        }
+      ],
+      "callout": {
+        "zh": "本站在线门禁使用的是合成数值，适合阅读状态转换，不建立真实任务的风险—覆盖结果。",
+        "en": "The online gate uses synthetic values to make state transitions readable. It does not establish a real-task risk–coverage result."
+      }
+    },
+    {
+      "id": "next",
+      "title": {
+        "zh": "05 / 后续研究边界",
+        "en": "05 / Boundary for the next study"
+      },
+      "paragraphs": [
+        {
+          "zh": "真正的实验需要先冻结数据划分、标签预算、阈值选择规则和独立测试协议，再分别报告不同数据集。未知类别检测与开放词表识别也应使用独立协议，不能与已知类别的受损输入实验混成一个指标。",
+          "en": "A real study must freeze data splits, label budgets, threshold rules and an independent-test protocol before evaluation, then report datasets separately. Unknown-class detection and open-vocabulary recognition also need separate protocols rather than being folded into the known-class degraded-input metric."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": {
+        "zh": "拟博士研究计划：证据感知决策",
+        "en": "Doctoral brief: evidence-aware decisions"
+      },
+      "url": "https://guhang2011.github.io/research/statement.html#rq-decision"
+    },
+    {
+      "label": {
+        "zh": "公开实验协议清单",
+        "en": "Public protocol checklist"
+      },
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/research/protocol.md"
+    },
+    {
+      "label": {
+        "zh": "Reliability Gate Lab 在线演示",
+        "en": "Reliability Gate Lab online demo"
+      },
+      "url": "https://guhang2011.github.io/demos/reliability-gates/"
+    }
+  ],
+  "related": [
+    "model-selection",
+    "generative-workflow"
+  ]
+}

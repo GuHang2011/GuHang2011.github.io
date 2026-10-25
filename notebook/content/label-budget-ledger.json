@@ -1,0 +1,130 @@
+{
+  "slug": "label-budget-ledger",
+  "title": {
+    "zh": "总标注预算：训练、选模与校准一起计算",
+    "en": "The label-budget ledger: count training, selection and calibration together"
+  },
+  "summary": {
+    "zh": "只报告“每类几个训练样本”会遗漏选模和校准的监督成本；用一份预算台账把比较条件写清楚。",
+    "en": "Reporting only the number of training examples per class hides the labels used for selection and calibration. Use a ledger to make the comparison condition explicit."
+  },
+  "category": "models",
+  "kind": "study",
+  "minutes": 8,
+  "tags": [
+    "Label budget",
+    "Validation",
+    "Calibration",
+    "Reproducibility"
+  ],
+  "basis": {
+    "zh": "依据 RP 的预算协议与 Neurocomputing 修订稿中的评估边界整理。本文提出记录方法，不声称已完成新的预算实验。",
+    "en": "Based on the RP budget protocol and the evaluation boundary described in the Neurocomputing revision. This note proposes a recording method and does not claim a completed budget experiment."
+  },
+  "sections": [
+    {
+      "id": "why",
+      "title": {
+        "zh": "01 / 为什么训练样本数不够？",
+        "en": "01 / Why is the training count not enough?"
+      },
+      "paragraphs": [
+        {
+          "zh": "两个方法都使用 32 个训练样本，并不代表监督条件相同。如果一个方法反复查看更大的验证集来选择轮次、阈值和融合权重，它实际依赖的标注信息更多。低资源比较需要把训练、选模、校准放在同一张账本里。",
+          "en": "Two methods using 32 training examples do not necessarily share the same supervision condition. If one method repeatedly uses a larger validation set to choose epochs, thresholds and fusion weights, it relies on more labeled information. A low-resource comparison needs one ledger for training, selection and calibration."
+        }
+      ]
+    },
+    {
+      "id": "schema",
+      "title": {
+        "zh": "02 / 台账记录哪些字段？",
+        "en": "02 / What belongs in the ledger?"
+      },
+      "paragraphs": [
+        {
+          "zh": "每个预算单元至少记录数据集、类别、样本 ID、用途、首次计费阶段、是否被重复用于开发以及是否进入独立测试。开发阶段对同一已标注样本的重复使用不重复计费，但新增类别的标签应按阶段累计。",
+          "en": "Each budget unit should record the dataset, class, sample ID, purpose, first accounting stage, whether it was reused during development and whether it belongs to the independent test. Reusing an already labeled sample during development is not charged twice, while labels added for new classes accumulate by stage."
+        }
+      ],
+      "code": {
+        "language": "python",
+        "text": "ledger = [\n    {\"sample_id\": \"meld-001\", \"stage\": \"train\", \"labels\": 1},\n    {\"sample_id\": \"meld-009\", \"stage\": \"selection\", \"labels\": 1},\n    {\"sample_id\": \"meld-014\", \"stage\": \"calibration\", \"labels\": 1},\n]\n\n# Count distinct labeled sample IDs per protocol,\n# then keep independent-test labels separate.\nused = {row[\"sample_id\"] for row in ledger}\nprint(len(used))"
+      }
+    },
+    {
+      "id": "compare",
+      "title": {
+        "zh": "03 / 如何保证方法可比？",
+        "en": "03 / How do we keep methods comparable?"
+      },
+      "paragraphs": [
+        {
+          "zh": "共享数据索引、随机种子、调参次数和验证抽样；在预算网格固定后，再进行配对重复。Macro-F1、UAR、按类召回、预测类别比例和训练成本同时记录，避免用单个最优分数代表全部证据。",
+          "en": "Share data indices, random seeds, tuning trials and validation resamples. After fixing the budget grid, run paired repeats. Record Macro-F1, UAR, class-wise recall, prediction proportions and training cost together instead of letting one best score represent all evidence."
+        }
+      ]
+    },
+    {
+      "id": "boundary",
+      "title": {
+        "zh": "04 / 与旧研究的关系",
+        "en": "04 / Relation to the earlier study"
+      },
+      "paragraphs": [
+        {
+          "zh": "Neurocomputing 修订稿限制的是训练标签，选模仍使用完整标注验证集。新的拟研究方案把这个边界向前推进，明确将选模和校准也纳入总预算。它是研究问题的来源，不是新实验结果。",
+          "en": "The Neurocomputing revision limits training labels while model selection still uses a fully labeled validation set. The proposed study moves this boundary forward by counting selection and calibration in the total budget. It motivates the question; it is not a new experiment result."
+        }
+      ]
+    },
+    {
+      "id": "next",
+      "title": {
+        "zh": "05 / 检查清单",
+        "en": "05 / Checklist before the final test"
+      },
+      "bullets": [
+        {
+          "zh": "预算协议、样本索引和标签映射先冻结。",
+          "en": "Freeze the budget protocol, sample indices and label mapping."
+        },
+        {
+          "zh": "独立测试标签不参与选模、校准或阈值选择。",
+          "en": "Keep independent-test labels out of selection, calibration and threshold choice."
+        },
+        {
+          "zh": "报告预算变化带来的性能、离散程度与资源代价。",
+          "en": "Report performance, dispersion and resource cost as the budget changes."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": {
+        "zh": "拟博士研究计划：统一标注预算",
+        "en": "Doctoral brief: unified label budgets"
+      },
+      "url": "https://guhang2011.github.io/research/statement.html#rq-budget"
+    },
+    {
+      "label": {
+        "zh": "Neurocomputing 修订稿研究解读",
+        "en": "Neurocomputing revision study overview"
+      },
+      "url": "https://guhang2011.github.io/research/fusion-audit.html"
+    },
+    {
+      "label": {
+        "zh": "公开实验协议清单",
+        "en": "Public protocol checklist"
+      },
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/research/protocol.md"
+    }
+  ],
+  "related": [
+    "model-selection",
+    "data-quality"
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "slug": "model-version-rollback",
+  "title": {
+    "zh": "模型版本发布：把权重、预处理和校准一起回退",
+    "en": "Model-version rollback: release weights, preprocessing and calibration together"
+  },
+  "summary": {
+    "zh": "模型更新不是只替换一个权重文件；候选版本必须绑定完整配置，并在失败时整体回退。",
+    "en": "A model update is more than replacing a weight file. A candidate version must bind its full configuration and roll back as one unit when checks fail."
+  },
+  "category": "engineering",
+  "kind": "reflection",
+  "minutes": 8,
+  "tags": [
+    "Model serving",
+    "Versioning",
+    "Rollback",
+    "Release gates"
+  ],
+  "basis": {
+    "zh": "依据 RP 的持续适配与版本检查，以及公开 React 工作流和发布校验案例整理。本文是工程学习总结，不代表已部署的情绪识别服务。",
+    "en": "Based on the RP continual-adaptation and version-check protocol, plus the public React workflow and release-gate cases. This is an engineering reflection, not a deployed emotion-recognition service."
+  },
+  "sections": [
+    {
+      "id": "bundle",
+      "title": {
+        "zh": "01 / 一个模型版本包含什么？",
+        "en": "01 / What belongs to a model version?"
+      },
+      "paragraphs": [
+        {
+          "zh": "至少包括权重、预处理、标签映射、类别描述、校准参数和阈值。只替换权重而保留旧的预处理或校准配置，接口可能仍能返回结果，却已经不再代表同一套决策条件。",
+          "en": "At minimum, a version includes weights, preprocessing, label mapping, class descriptions, calibration parameters and thresholds. Replacing only weights while keeping old preprocessing or calibration may still return an output, but it no longer represents the same decision condition."
+        }
+      ]
+    },
+    {
+      "id": "state",
+      "title": {
+        "zh": "02 / 候选版本怎样进入系统？",
+        "en": "02 / How does a candidate enter the system?"
+      },
+      "paragraphs": [
+        {
+          "zh": "候选版本先在开发集上做回归检查：新旧类别表现、遗忘、校准漂移、复核触发和运行成本。通过检查后才允许启用；未通过时保留当前版本。切换动作需要记录旧版本、候选版本、检查摘要和操作者。",
+          "en": "A candidate first passes development-set regression checks for new and old classes, forgetting, calibration drift, review triggers and runtime cost. Only a passing candidate can be enabled; otherwise the current version remains. A switch records the old version, candidate version, check summary and operator."
+        }
+      ]
+    },
+    {
+      "id": "manifest",
+      "title": {
+        "zh": "03 / 用清单替代“记得同步”",
+        "en": "03 / Replace “remember to sync” with a manifest"
+      },
+      "paragraphs": [
+        {
+          "zh": "将完整配置写成可哈希的 manifest，发布前检查引用的文件是否匹配。这样回退不是“再找一个旧权重”，而是恢复一组已绑定的文件。",
+          "en": "Write the complete configuration as a hashable manifest and check referenced files before release. Rollback then restores a bound set of files instead of searching for an old weight file."
+        }
+      ],
+      "code": {
+        "language": "json",
+        "text": "{\n  \"version\": \"emotion-gate-2029-03\",\n  \"weights\": \"sha256:...\",\n  \"preprocess\": \"sha256:...\",\n  \"labels\": \"sha256:...\",\n  \"calibration\": \"sha256:...\",\n  \"checks\": [\"old-class\", \"ece\", \"rollback\"]\n}"
+      }
+    },
+    {
+      "id": "failure",
+      "title": {
+        "zh": "04 / 哪些失败需要回退？",
+        "en": "04 / Which failures require rollback?"
+      },
+      "bullets": [
+        {
+          "zh": "新类分数提高，但旧类遗忘超过预设边界。",
+          "en": "New-class performance improves while forgetting old classes exceeds the predefined boundary."
+        },
+        {
+          "zh": "校准误差或风险—覆盖关系明显恶化。",
+          "en": "Calibration error or the risk–coverage relationship degrades materially."
+        },
+        {
+          "zh": "预处理、标签映射、类别描述或校准文件哈希不一致。",
+          "en": "Hashes for preprocessing, labels, class descriptions or calibration do not match."
+        },
+        {
+          "zh": "更新超时、接口异常或切换过程无法恢复完整配置。",
+          "en": "The update times out, the interface fails or the switch cannot restore the complete configuration."
+        }
+      ]
+    },
+    {
+      "id": "boundary",
+      "title": {
+        "zh": "05 / 工程演示的边界",
+        "en": "05 / Boundary of the engineering demo"
+      },
+      "paragraphs": [
+        {
+          "zh": "公开的 React 工作流和发布校验示例用于说明状态、冲突和证据绑定；它们没有运行真实情绪识别模型，也不证明持续学习效果。真正的研究还需要固定类别顺序、回放容量和独立测试。",
+          "en": "The public React workflow and release-gate examples illustrate states, conflicts and evidence binding. They do not run a real emotion-recognition model or establish continual-learning effectiveness. A real study still needs fixed class orders, replay capacity and independent testing."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": {
+        "zh": "拟博士研究计划：持续适配与版本检查",
+        "en": "Doctoral brief: continual adaptation and version checks"
+      },
+      "url": "https://guhang2011.github.io/research/statement.html#rq-update"
+    },
+    {
+      "label": {
+        "zh": "React 工作流在线演示",
+        "en": "React workflow online demo"
+      },
+      "url": "https://guhang2011.github.io/demos/react-workflow/"
+    },
+    {
+      "label": {
+        "zh": "发布校验案例",
+        "en": "Release-gate case"
+      },
+      "url": "https://guhang2011.github.io/cases/examples/README.md"
+    }
+  ],
+  "related": [
+    "permission-boundaries",
+    "generative-workflow"
+  ]
+}

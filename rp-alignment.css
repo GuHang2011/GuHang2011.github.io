@@ -97,3 +97,11 @@
   .rp-preparation-row, .rp-years li { break-inside: avoid; padding-block: 10px; }
   .rp-brief-page .brief-section { margin-top: 22px; }
 }
+
+/* Reliability Gate Lab project preview */
+.reliability-preview { display:flex; flex-direction:column; justify-content:center; min-height:240px; background:linear-gradient(135deg,#e8f2ef 0%,#f7faf9 100%); }
+.gate-preview { display:flex; align-items:center; justify-content:center; gap:0; padding:28px 20px 12px; }
+.gate-dot { width:34px; height:34px; border-radius:50%; border:5px solid var(--paper); box-shadow:0 0 0 1px var(--line); }
+.gate-quality { background:#6ba695; }.gate-confidence { background:#d4a85b; }.gate-review { background:#a85a51; }
+.gate-line { width:54px; height:2px; background:var(--line); }.gate-preview-labels { display:flex; justify-content:center; gap:35px; color:var(--muted); font-size:11px; }.gate-preview-labels span { min-width:45px; text-align:center; }
+@media (max-width:680px) { .gate-line { width:34px; } .gate-preview-labels { gap:20px; } }

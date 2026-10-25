@@ -29,9 +29,9 @@ The [bilingual research brief](research/statement.html) now follows the supplied
 1. **Research:** manuscripts, conference work, and master’s research, with explicit publication status.
 2. **Engineering:** public repositories and selected project descriptions.
 3. **Engineering lens:** a compact map of interface contracts, data quality, model evaluation and evidence-shaped delivery, linked to the relevant public cases and verification records.
-4. **Notebook:** [twelve bilingual study notes and project reflections](notebook/) on frontend interaction, data quality, model validation, prompt contracts, order consistency, permission boundaries, digital-human pipelines, text-to-image diffusion and reproducible generative workflows. Searchable by title, summary and tag, with topic filters, source references, code examples and printable article pages. Earlier repositories remain available in the homepage's expandable reading list.
+4. **Notebook:** [fifteen bilingual study notes and project reflections](notebook/) on frontend interaction, data quality, model validation, prompt contracts, order consistency, permission boundaries, digital-human pipelines, text-to-image diffusion and reproducible generative workflows. Searchable by title, summary and tag, with topic filters, source references, code examples and printable article pages. Earlier repositories remain available in the homepage's expandable reading list.
 5. **Background:** education and professional experience.
-6. **Interactive experiments:** financial clustering, data preparation audits, model evaluation, a React workflow board and a schema-driven low-code form studio, with synthetic data, source code, notes and reproducible checks. [Reading map](demos/README.md).
+6. **Interactive experiments:** financial clustering, data preparation audits, model evaluation, a React workflow board, a schema-driven low-code form studio and a synthetic reliability-gate lab, with synthetic data, source code, notes and reproducible checks. [Reading map](demos/README.md).
 
 The Neurocomputing entry was updated on 24 October 2026 from the supplied revision and author confirmation: submitted, not accepted. It describes 344 archived training runs, operating-point analysis and archive-artifact audits; FCP is not claimed as a new architecture. Other research states follow the supplied CV. DASFAA author order and official proceedings records for conference work are not fully linked yet; confirm current decisions and citations before relying on them. Manuscripts and accepted work are labeled separately. The KICP project links to its implementation and setup documentation; the learning lab uses synthetic data.
 
@@ -41,7 +41,7 @@ The Neurocomputing entry was updated on 24 October 2026 from the supplied revisi
 - [College materials archive](https://guhang2011.github.io/cases/archive/): permissions, versioning, review, logical deletion and audit. Its interactive lifecycle illustration uses synthetic records; the original application was reviewed but not rerun for this site update.
 - [Release-gate example](cases/examples/README.md): dependency-free JavaScript, tests and limitations.
 
-Project screenshots use synthetic demo content. Public cases exclude original databases, credentials, private configuration and student records. Notebook content updated **2026-10-20**; research statuses follow the supplied CV and subsequent manuscript / author updates. The new notes were compiled with AI-assisted drafting and translation; each distinguishes code observations, examples and proposed checks. Generative-model examples are learning guides and were not run locally for this update.
+Project screenshots use synthetic demo content. Public cases exclude original databases, credentials, private configuration and student records. Notebook content updated **2026-10-25**; research statuses follow the supplied CV and subsequent manuscript / author updates. The new notes were compiled with AI-assisted drafting and translation; each distinguishes code observations, examples and proposed checks. Generative-model examples are learning guides and were not run locally for this update.
 
 The React workflow and low-code form entries were added **2026-10-22**. They are newly authored learning examples: the React page runs its locally bundled TypeScript source, and the low-code page has a schema editor and native-control renderer. Neither entry is a production deployment or a claim about an existing private application.
 
@@ -105,3 +105,8 @@ The homepage presents a compact editorial reading desk with latest, frontend, da
 ## Research refresh · 24 October 2026
 
 The homepage, GitHub profile, public CV and proposed research brief now use consistent manuscript status. [Study overview](research/fusion-audit.html) documents findings and scope. The proposed emotion-recognition agenda separates existing evidence from future work. Native disclosure controls and a responsive research spotlight provide a short reading path; reduced-motion and no-JavaScript reading are supported. Private manuscript and RP attachments are not part of this publication.
+
+
+## New learning project · Reliability Gate Lab
+
+The [online lab](demos/reliability-gates/) turns the proposed evidence-aware decision question into a small dependency-free interaction. It uses synthetic quality, confidence, disagreement and modality-availability values to show auto-output, review and insufficient-evidence states. It is a teaching example, not a trained benchmark.
