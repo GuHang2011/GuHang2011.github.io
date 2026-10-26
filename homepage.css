@@ -93,6 +93,18 @@ body { font-size: 16px; line-height: 1.85; }
 .admissions-entry a.primary-material { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
 .admissions-entry a.primary-material div > span, .admissions-entry a.primary-material > span { color: var(--on-accent); }
 .admissions-entry a.primary-material:hover { background: var(--accent-hover); }
+.advisor-scan { margin-top: 31px; padding: 24px 26px 26px; border: 1px solid var(--line); border-left: 3px solid var(--accent); background: var(--surface); }
+.advisor-scan-heading { display: grid; grid-template-columns: minmax(0, 1fr) minmax(250px, .9fr); gap: 6px 24px; align-items: end; margin-bottom: 20px; }
+.advisor-scan-heading .section-number { grid-column: 1 / -1; margin: 0; color: var(--accent); }
+.advisor-scan-heading h2 { margin: 0; font-size: 22px; line-height: 1.35; letter-spacing: -.015em; }
+.advisor-scan-heading > p:last-child { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
+.advisor-scan-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; border: 1px solid var(--line); background: var(--line); }
+.advisor-scan-grid article { min-height: 178px; padding: 18px 19px 17px; background: var(--paper); }
+.scan-index { display: block; margin-bottom: 10px; color: var(--accent); font: 11px/1.2 Consolas, "SFMono-Regular", monospace; letter-spacing: .12em; }
+.advisor-scan-grid h3 { margin: 0 0 8px; font-size: 15px; line-height: 1.45; }
+.advisor-scan-grid p { margin: 0 0 13px; color: var(--muted); font-size: 13px; line-height: 1.78; }
+.advisor-scan-grid a { display: inline-block; color: var(--accent); font-size: 12px; font-weight: 600; }
+.advisor-scan-grid a:hover, .advisor-scan-grid a:focus-visible { color: var(--accent-hover); text-decoration: underline; text-underline-offset: 3px; }
 .profile-aside { padding: 26px; border: 1px solid var(--profile-line); border-radius: 7px; background: var(--profile-bg); color: var(--profile-ink); }
 .profile-aside .identity-panel { text-align: left; padding-bottom: 18px; border-color: var(--profile-line); }
 .profile-aside .initials { width: 64px; height: 64px; font-size: 31px; margin: 0 0 15px; border: 1px solid var(--profile-line); border-radius: 5px; color: var(--profile-link); background: transparent; }
@@ -245,6 +257,10 @@ details p { font-size: 15px; }
   .profile-aside .initials { grid-row: 1/4; margin: 0; }
   .profile-aside .education-grid { grid-template-columns: 1fr 1fr; gap: 18px; }
   .profile-aside .profile-links { gap: 6px 18px; }
+  .advisor-scan { padding: 21px 18px 19px; }
+  .advisor-scan-heading { grid-template-columns: 1fr; gap: 6px; }
+  .advisor-scan-grid { grid-template-columns: 1fr; }
+  .advisor-scan-grid article { min-height: 0; padding: 17px 16px 16px; }
   .section-heading h2 { font-size: 28px; }
   .project-item { grid-template-columns: 1fr; gap: 22px; }
   .project-routes { grid-template-columns: 1fr; gap: 0; }

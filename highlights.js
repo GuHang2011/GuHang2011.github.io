@@ -15,6 +15,18 @@
   let paused = false;
   let pointerStart = null;
 
+  slides.forEach((slide, slideIndex) => {
+    const dot = dots[slideIndex];
+    if (!slide.id) slide.id = `highlight-slide-${slideIndex + 1}`;
+    slide.setAttribute("aria-posinset", String(slideIndex + 1));
+    slide.setAttribute("aria-setsize", String(slides.length));
+    if (dot) {
+      if (!dot.id) dot.id = `highlight-dot-${slideIndex + 1}`;
+      dot.setAttribute("aria-controls", slide.id);
+      slide.setAttribute("aria-labelledby", dot.id);
+    }
+  });
+
   function select(nextIndex, announce = true) {
     index = (nextIndex + slides.length) % slides.length;
     slides.forEach((slide, slideIndex) => {
