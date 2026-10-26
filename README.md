@@ -15,7 +15,7 @@ Engineering highlights, code and verification evidence, and the academic CV appe
 - Project filters for engineering, research and learning, with accessible selection states and result counts.
 - Engineering-card links clear incompatible project filters and searches before navigating. Cards use four columns on wide screens, two on tablets and one on phones; print output uses two columns.
 - Screenshot previews, mobile navigation, print styles, reading progress and restrained hover / keyboard-focus accents. Language, filter and palette changes use brief transitions; content remains visible on arrival.
-- The highlights carousel supports arrows, dots, keyboard navigation, touch swipes, automatic rotation with pause on hover / focus, and reduced-motion preferences.
+- The highlights carousel supports arrows, tabs, Home / End keys and horizontal touch swipes. An explicit pause / start button controls autoplay; manual navigation stops it until restarted. Rotation runs only while the carousel is visible, stops on hover / focus and honors both system and saved reduced-motion preferences. Inactive panels are inert, slide changes preserve the layout height, and all four cards remain readable without JavaScript and in print.
 - Reading preferences offer light and dark palettes and a reduced-motion option, saved locally when browser storage is available. The system's reduced-motion preference takes priority, including for the back-to-top action.
 - Semantic HTML, visible keyboard focus, a skip link, and reduced-motion support.
 - The homepage needs no build step. React example source changes require a local build; its committed bundle needs no runtime CDN. No remote fonts or analytics are used. The experiments bundle pinned [Chart.js](https://www.chartjs.org/) 4.4.9 and [PapaParse](https://www.papaparse.com/) 5.5.3 under MIT licenses. Local tool icons are from [Lucide](https://lucide.dev/) under the ISC license.
@@ -26,7 +26,7 @@ Engineering highlights, code and verification evidence, and the academic CV appe
 1. **Research:** manuscripts, conference work, and master’s research, with explicit publication status.
 2. **Engineering:** public repositories and selected project descriptions.
 3. **Engineering lens:** a compact map of interface contracts, data quality, model evaluation and evidence-shaped delivery, linked to the relevant public cases and verification records.
-4. **Notebook:** [twelve bilingual study notes and project reflections](notebook/) on frontend interaction, data quality, model validation, prompt contracts, order consistency, permission boundaries, digital-human pipelines, text-to-image diffusion and reproducible generative workflows. Searchable by title, summary and tag, with topic filters, source references, code examples and printable article pages. Earlier repositories remain available in the homepage's expandable reading list.
+4. **Notebook:** [fifteen bilingual study notes and project reflections](notebook/) on frontend interaction, data quality, model validation, prompt contracts, order consistency, permission boundaries, digital-human pipelines, text-to-image diffusion and reproducible generative workflows. The three October 25 notes cover multimodal decision gates, total annotation budgets and model-version rollback. Searchable by title, summary and tag, with topic filters, source references, code examples and printable article pages. Earlier repositories remain available in the homepage's expandable reading list.
 5. **Background:** education and professional experience.
 6. **Interactive experiments:** financial clustering, data preparation audits, model evaluation, a React workflow board and a schema-driven low-code form studio, with synthetic data, source code, notes and reproducible checks. [Reading map](demos/README.md).
 7. **AI engineering case:** a full-stack module with account-bound key handling, endpoint policy, editable presentation generation, human review and documented mocked-provider tests. [Case study](cases/ai-office/).
@@ -40,7 +40,7 @@ The Neurocomputing entry was updated on 24 October 2026 from the supplied revisi
 - [Personal AI workspace](https://guhang2011.github.io/cases/ai-office/): an existing archive-system module, with synthetic UI fixtures, public engineering notes and documented tests that mock the provider; no real provider key was used.
 - [Release-gate example](cases/examples/README.md): dependency-free JavaScript, tests and limitations.
 
-Project screenshots use synthetic demo content. Public cases exclude original databases, credentials, private configuration and student records. Notebook content updated **2026-10-20**; research statuses remain based on the September CV. The new notes were compiled with AI-assisted drafting and translation; each distinguishes code observations, examples and proposed checks. Generative-model examples are learning guides and were not run locally for this update.
+Project screenshots use synthetic demo content. Public cases exclude original databases, credentials, private configuration and student records. Latest notebook additions: **2026-10-25**. The Neurocomputing entry follows the October 24 revision and author confirmation; other research statuses follow the September CV. The new notes were compiled with AI-assisted drafting and translation; each distinguishes code observations, examples and proposed checks. Generative-model examples are learning guides and were not run locally for this update.
 
 The React workflow and low-code form entries were added **2026-10-22**. The Personal AI Workspace case was added **2026-10-23** as an engineering highlight from an existing archive-system module: its page links to public engineering notes, synthetic screenshots and recorded mock-provider checks. It is not presented as an independently deployed product. The React page runs its locally bundled TypeScript source, and the low-code page has a schema editor and native-control renderer. Neither learning entry is a production deployment or a claim about an existing private application.
 
@@ -105,3 +105,15 @@ The homepage presents a compact editorial reading desk with latest, frontend, da
 ## Research refresh · 24 October 2026
 
 The homepage, GitHub profile, public CV and proposed research brief now use consistent manuscript status. [Study overview](research/fusion-audit.html) documents findings and scope. The proposed emotion-recognition agenda separates existing evidence from future work. Native disclosure controls and a responsive research spotlight provide a short reading path; reduced-motion and no-JavaScript reading are supported. Private manuscript and RP attachments are not part of this publication.
+
+## Homepage review · 26 October 2026
+
+The review focuses on what a prospective supervisor can verify: the research question, existing evidence, engineering work and proposed next step.
+
+- The opening now names concrete areas of work. A full-width research map distinguishes the current news-classification study from proposed emotion-recognition work; detailed interests remain in an expandable section.
+- Each highlight includes a source or scope note. The Neurocomputing manuscript is submitted, not accepted; U Mobile figures are reported in the supplied CV without public measurement logs; the data example is synthetic; the AI workspace checks use a mocked provider.
+- The research entry distinguishes related implementation from a complete artifact release for the revision. Decorative diagrams illustrate the topic and do not present new measurements.
+- The homepage again links all fifteen published notes and the existing [Reliability Gate Lab](demos/reliability-gates/). The lab illustrates explicit rules on synthetic inputs and is not a trained emotion-recognition result.
+- Carousel controls, keyboard focus, screen-reader states, stable slide height, motion preferences, mobile layout, printing and reading without JavaScript were checked. Browser checks cover English desktop and Chinese widths of 1280, 1024, 768, 390 and 320 pixels, plus light and dark palettes.
+
+This is a review of the public page, not a new experiment or a publication-status update. Official conference citations, confirmed author order for DASFAA and complete revision artifacts still require primary records; they are not invented or implied by the page design.

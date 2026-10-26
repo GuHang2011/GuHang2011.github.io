@@ -19,10 +19,10 @@
     } catch { /* The default reading palette works without local storage. */ }
   </script>
   <link rel="stylesheet" href="academic.css?v=20261017-notebook">
-  <link rel="stylesheet" href="homepage.css?v=20261026-highlights">
+  <link rel="stylesheet" href="homepage.css?v=20261026-advisor-v2">
   <link rel="stylesheet" href="research-refresh.css?v=20261024">
   <script src="academic.js?v=20261019-engineering-focus" defer></script>
-  <script src="highlights.js?v=20261026" defer></script>
+  <script src="highlights.js?v=20261026-advisor-v2" defer></script>
   <script src="learning-desk.js?v=20261020-learning-desk" defer></script>
   <script src="reader.js?v=20261019-engineering-focus" defer></script>
   <title>Hang Gu | Research & Engineering</title>
@@ -33,7 +33,7 @@
   <header class="site-header" data-open="false">
     <div class="wrap header-inner">
       <a class="brand" href="#about">Hang Gu<span> / 顾航</span></a>
-      <nav class="nav-links" id="navigation" aria-label="Main navigation">
+      <nav class="nav-links" id="navigation" aria-label="Main navigation" data-en-label="Main navigation" data-zh-label="主导航">
         <a href="#about" data-en="About" data-zh="关于我">About</a>
         <a href="#highlights" data-en="Highlights" data-zh="亮点">Highlights</a>
         <a href="#research" data-en="Research" data-zh="研究">Research</a>
@@ -67,7 +67,7 @@
           <div class="about-copy">
             <p class="section-number" data-en="ENGINEERING · DATA · APPLIED RESEARCH" data-zh="工程实践 · 数据分析 · 应用研究">ENGINEERING · DATA · APPLIED RESEARCH</p>
             <h1 id="name">Hang Gu <span lang="zh-CN">顾航</span></h1>
-            <p class="intro" data-en="Building clear interfaces and verifiable data workflows." data-zh="构建清晰的界面与可验证的数据工作流。">Building clear interfaces and verifiable data workflows.</p>
+            <p class="intro" data-en="Frontend engineering, data quality and multimodal evaluation." data-zh="前端工程、数据质量与多模态评估。">Frontend engineering, data quality and multimodal evaluation.</p>
             <p data-en="I am a computer science lecturer and teaching section head at 江苏财经职业技术学院, with an MSc in Computer Science (Data Science) from Universiti Malaya. My background in frontend engineering connects research questions with practical software and data workflows." data-zh="我是江苏财经职业技术学院计算机讲师、教研室主任，拥有马来亚大学计算机硕士（数据科学方向）学位。此前从事前端开发与团队管理，关注如何将研究问题与真实的软件、数据工作流连接起来。">I am a computer science lecturer and teaching section head at 江苏财经职业技术学院, with an MSc in Computer Science (Data Science) from Universiti Malaya. My background in frontend engineering connects research questions with practical software and data workflows.</p>
         <nav class="admissions-entry" aria-label="Portfolio reading paths" data-en-label="Portfolio reading paths" data-zh-label="作品集阅读入口">
           <a class="primary-material" href="#engineering"><div><strong data-en="Engineering highlights" data-zh="工程技术亮点">Engineering highlights</strong><span data-en="Interfaces, data & delivery" data-zh="界面、数据与交付">Interfaces, data & delivery</span></div><span aria-hidden="true">↘</span></a>
@@ -75,39 +75,13 @@
           <a href="research/cv.html"><div><strong data-en="Academic CV" data-zh="公开学术简历">Academic CV</strong><span data-en="Selected work & experience" data-zh="研究工作与经历">Selected work & experience</span></div><span aria-hidden="true">↗</span></a>
         </nav>
 <div class="learning-update research-update"><strong data-en="RESEARCH UPDATE · 24 OCT 2026" data-zh="研究更新 · 2026.10.24">RESEARCH UPDATE · 24 OCT 2026</strong><a href="research/fusion-audit.html"><span data-en="Where do fusion gains come from?" data-zh="融合收益究竟来自哪里？">Where do fusion gains come from?</span><span aria-hidden="true"> ↗</span></a></div>
-            <section class="advisor-scan" id="advisor-scan" aria-labelledby="advisor-scan-title">
-              <div class="advisor-scan-heading">
-                <p class="section-number" data-en="ADVISOR QUICK SCAN" data-zh="导师快速了解">ADVISOR QUICK SCAN</p>
-                <h2 id="advisor-scan-title" data-en="A three-minute research map" data-zh="三分钟看懂研究主线">A three-minute research map</h2>
-                <p data-en="The question, the evidence already in hand, and the next doctoral step are separated so a reader can judge fit without guessing." data-zh="把研究问题、已有证据和下一步博士研究分开呈现，方便读者直接判断研究契合度。">The question, the evidence already in hand, and the next doctoral step are separated so a reader can judge fit without guessing.</p>
-              </div>
-              <div class="advisor-scan-grid">
-                <article>
-                  <span class="scan-index">01</span>
-                  <h3 data-en="Research question" data-zh="研究问题">Research question</h3>
-                  <p data-en="When labels are scarce, which multimodal gains survive changes in validation, operating points and data artifacts?" data-zh="在标注有限时，多模态收益能否经受验证方式、决策工作点和数据伪线索变化的检验？">When labels are scarce, which multimodal gains survive changes in validation, operating points and data artifacts?</p>
-                  <a href="#research" data-en="See the evidence ↗" data-zh="查看已有证据 ↗">See the evidence ↗</a>
-                </article>
-                <article>
-                  <span class="scan-index">02</span>
-                  <h3 data-en="Evidence in hand" data-zh="已有证据">Evidence in hand</h3>
-                  <p data-en="A revised Neurocomputing study audits 344 archived runs; public code and case pages make the implementation and scope inspectable." data-zh="修订后的 Neurocomputing 研究审计 344 次训练运行；公开代码和案例页面保留实现与证据边界。">A revised Neurocomputing study audits 344 archived runs; public code and case pages make the implementation and scope inspectable.</p>
-                  <a href="research/#evidence" data-en="Check code and scope ↗" data-zh="核对代码与边界 ↗">Check code and scope ↗</a>
-                </article>
-                <article>
-                  <span class="scan-index">03</span>
-                  <h3 data-en="Doctoral next step" data-zh="博士研究下一步">Doctoral next step</h3>
-                  <p data-en="Develop reliable multimodal emotion recognition with calibration, shift checks, limited-label evaluation and human review." data-zh="面向可靠多模态情绪识别，结合校准、分布变化检查、有限标注评估和人工复核。">Develop reliable multimodal emotion recognition with calibration, shift checks, limited-label evaluation and human review.</p>
-                  <a href="research/statement.html" data-en="Read the proposed questions ↗" data-zh="阅读拟研究问题 ↗">Read the proposed questions ↗</a>
-                </article>
-              </div>
-            </section>
-            <h2 class="subheading" data-en="Research interests" data-zh="研究兴趣">Research interests</h2>
+
+<details class="interest-details"><summary data-en="Research interests and applications" data-zh="研究兴趣与应用场景">Research interests and applications</summary>
             <ul class="interests">
               <li><strong data-en="Multimodal learning" data-zh="多模态学习">Multimodal learning</strong><p data-en="Combining visual and textual representations for document and news understanding." data-zh="结合视觉与文本表征，探索文档理解和新闻信息分析。">Combining visual and textual representations for document and news understanding.</p></li>
               <li><strong data-en="Evaluation with limited labels" data-zh="有限标注下的评估">Evaluation with limited labels</strong><p data-en="Validation sensitivity, data artifacts, honest splits and error analysis." data-zh="关注验证敏感性、数据伪影、诚实的数据切分与误差分析。">Validation sensitivity, data artifacts, honest splits and error analysis.</p></li>
               <li><strong data-en="Intelligent information systems" data-zh="智能信息系统">Intelligent information systems</strong><p data-en="Retrieval, human-reviewed workflows, and reliable interfaces for education and services." data-zh="研究检索、人工复核工作流与面向教育和服务场景的可靠界面。">Retrieval, human-reviewed workflows, and reliable interfaces for education and services.</p></li>
-            </ul>
+            </ul></details>
           </div>
           <aside class="profile-aside" aria-label="Academic profile">
             <div class="identity-panel">
@@ -130,75 +104,45 @@
             </div>
           </aside>
         </div>
+            <section class="advisor-scan" id="advisor-scan" aria-labelledby="advisor-scan-title">
+              <div class="advisor-scan-heading">
+                <p class="section-number" data-en="RESEARCH AT A GLANCE" data-zh="研究概览">RESEARCH AT A GLANCE</p>
+                <h2 id="advisor-scan-title" data-en="Current work and proposed direction" data-zh="现有工作与拟研究方向">Current work and proposed direction</h2>
+                <p data-en="From low-resource news classification to reliable emotion recognition." data-zh="从低资源新闻分类中的评估问题，延伸到可靠情绪识别。">From low-resource news classification to reliable emotion recognition.</p>
+              </div>
+              <div class="advisor-scan-grid">
+                <article>
+                  <span class="scan-index">01</span>
+                  <h3 data-en="Research question" data-zh="研究问题">Research question</h3>
+                  <p data-en="When labels are scarce, which multimodal gains survive changes in validation, operating points and data artifacts?" data-zh="在标注有限时，多模态收益能否经受验证方式、决策工作点和数据伪线索变化的检验？">When labels are scarce, which multimodal gains survive changes in validation, operating points and data artifacts?</p>
+                  <a href="#research" data-en="See the evidence ↗" data-zh="查看已有证据 ↗">See the evidence ↗</a>
+                </article>
+                <article>
+                  <span class="scan-index">02</span>
+                  <h3 data-en="Evidence in hand" data-zh="已有证据">Evidence in hand</h3>
+                  <p data-en="First-author revised manuscript: 344 archived runs reanalyzed. Submitted to Neurocomputing; related code is public, the complete revision artifacts are not." data-zh="第一作者修订稿重分析 344 次训练运行，已投稿 Neurocomputing。关联代码已公开，修订稿完整复现材料尚未公开。">First-author revised manuscript: 344 archived runs reanalyzed. Submitted to Neurocomputing; related code is public, the complete revision artifacts are not.</p>
+                  <a href="research/#evidence" data-en="Check code and scope ↗" data-zh="核对代码与边界 ↗">Check code and scope ↗</a>
+                </article>
+                <article>
+                  <span class="scan-index">03</span>
+                  <h3 data-en="Doctoral next step" data-zh="博士研究下一步">Doctoral next step</h3>
+                  <p data-en="Proposed work: budget-aware adaptation, evidence-aware prediction and controlled continual updates for emotion recognition." data-zh="拟研究：面向情绪识别的预算约束适配、证据感知预测与遗忘约束更新；尚待实验验证。">Proposed work: budget-aware adaptation, evidence-aware prediction and controlled continual updates for emotion recognition.</p>
+                  <a href="research/statement.html" data-en="Read the proposed questions ↗" data-zh="阅读拟研究问题 ↗">Read the proposed questions ↗</a>
+                </article>
+              </div>
+            </section>
       </div>
     </section>
 
     <section class="section highlight-section" id="highlights" aria-labelledby="highlights-title">
       <div class="wrap">
         <div class="section-heading highlight-heading">
-          <div><p class="section-number" data-en="00 / HIGHLIGHTS · AUTO-PLAY WITH PAUSE" data-zh="00 / 亮点 · 自动播放可暂停">00 / HIGHLIGHTS · AUTO-PLAY WITH PAUSE</p><h2 id="highlights-title" data-en="A few things worth seeing first" data-zh="先看几项最能说明问题的工作">A few things worth seeing first</h2></div>
+          <div><p class="section-number" data-en="00 / SELECTED WORK" data-zh="00 / 工作亮点">00 / SELECTED WORK</p><h2 id="highlights-title" data-en="Selected research and engineering" data-zh="代表研究与工程实践">Selected research and engineering</h2></div>
           <p data-en="A short visual tour of the decisions behind the projects: what was built, what was checked, and where the boundary is." data-zh="用一组短动画快速了解项目背后的取舍：做了什么、检查了什么，以及证据边界在哪里。">A short visual tour of the decisions behind the projects: what was built, what was checked, and where the boundary is.</p>
         </div>
         <div class="highlight-carousel" data-highlight-carousel tabindex="0" role="region" aria-roledescription="carousel" aria-label="Featured work highlights" data-en-label="Featured work highlights" data-zh-label="特色工作亮点">
-          <div class="highlight-viewport" data-highlight-viewport>
-            <article class="highlight-slide is-active" id="highlight-slide-research" data-highlight-slide="0" role="group" aria-roledescription="slide" aria-label="Research audit" data-en-label="Research audit" data-zh-label="研究审计" aria-hidden="false">
-              <div class="highlight-copy">
-                <p class="highlight-kicker" data-en="RESEARCH / 01" data-zh="研究 / 01">RESEARCH / 01</p>
-                <h3 data-en="Explain the gain before claiming the gain." data-zh="先解释收益，再谈模型更强。">Explain the gain before claiming the gain.</h3>
-                <p data-en="The revised Neurocomputing study reanalyzes 344 archived training runs to separate fusion effects, operating-point changes and data artifacts." data-zh="修订后的 Neurocomputing 研究重分析 344 次训练运行，区分融合机制、决策工作点变化和数据伪线索。">The revised Neurocomputing study reanalyzes 344 archived training runs to separate fusion effects, operating-point changes and data artifacts.</p>
-                <a href="research/fusion-audit.html"><span data-en="Read the research boundary" data-zh="阅读研究边界">Read the research boundary</span><span aria-hidden="true">↗</span></a>
-              </div>
-              <div class="highlight-visual highlight-visual--research" aria-hidden="true">
-                <div class="visual-caption">FROZEN CLIP / AUDIT</div>
-                <div class="audit-orbit"><span class="orbit-core">344</span><span class="orbit-label orbit-label--top">runs</span><span class="orbit-label orbit-label--right">split</span><span class="orbit-label orbit-label--bottom">seed</span><span class="orbit-label orbit-label--left">artifact</span></div>
-                <div class="visual-foot"><span>representation</span><span>operating point</span><span>data</span></div>
-              </div>
-            </article>
-            <article class="highlight-slide" id="highlight-slide-delivery" data-highlight-slide="1" role="group" aria-roledescription="slide" aria-label="Engineering delivery" data-en-label="Engineering delivery" data-zh-label="工程交付" aria-hidden="true">
-              <div class="highlight-copy">
-                <p class="highlight-kicker" data-en="DELIVERY / 02" data-zh="交付 / 02">DELIVERY / 02</p>
-                <h3 data-en="A measurable improvement is easier to trust." data-zh="能被量化的改进，更容易被信任。">A measurable improvement is easier to trust.</h3>
-                <p data-en="For the U Mobile onboarding system, interface contracts and performance work shortened integration from 15 to 10 days and first load from 2.8s to 1.2s." data-zh="在 U Mobile 开户系统中，通过接口契约和性能优化，将联调从 15 天缩短到 10 天，首屏从 2.8 秒降到 1.2 秒。">For the U Mobile onboarding system, interface contracts and performance work shortened integration from 15 to 10 days and first load from 2.8s to 1.2s.</p>
-                <a href="#background"><span data-en="See the engineering path" data-zh="查看工程经历">See the engineering path</span><span aria-hidden="true">↗</span></a>
-              </div>
-              <div class="highlight-visual highlight-visual--delivery" aria-hidden="true">
-                <div class="visual-caption">U MOBILE / DELIVERY</div>
-                <div class="delivery-metric"><strong>15 → 10</strong><span>integration days</span></div>
-                <div class="delivery-metric"><strong>2.8s → 1.2s</strong><span>first load</span></div>
-                <div class="delivery-rail"><i></i><i></i><i></i><i></i><i></i></div>
-                <div class="visual-foot"><span>contract</span><span>check</span><span>ship</span></div>
-              </div>
-            </article>
-            <article class="highlight-slide" id="highlight-slide-data" data-highlight-slide="2" role="group" aria-roledescription="slide" aria-label="Data quality" data-en-label="Data quality" data-zh-label="数据质量" aria-hidden="true">
-              <div class="highlight-copy">
-                <p class="highlight-kicker" data-en="DATA / 03" data-zh="数据 / 03">DATA / 03</p>
-                <h3 data-en="Every excluded row has a reason." data-zh="每条被隔离的数据，都有原因。">Every excluded row has a reason.</h3>
-                <p data-en="A small audit demo makes validation, deduplication, conflict checks and reconciliation visible instead of hiding them behind a final number." data-zh="一个小型审计演示把校验、去重、冲突检查和汇总核对逐步展示出来，而不是只给一个最终数字。">A small audit demo makes validation, deduplication, conflict checks and reconciliation visible instead of hiding them behind a final number.</p>
-                <a href="demos/data-preparation/"><span data-en="Inspect the data workflow" data-zh="查看数据工作流">Inspect the data workflow</span><span aria-hidden="true">↗</span></a>
-              </div>
-              <div class="highlight-visual highlight-visual--data" aria-hidden="true">
-                <div class="visual-caption">QUALITY GATE / SYNTHETIC</div>
-                <div class="quality-flow"><span class="flow-node flow-node--input">17</span><span class="flow-line"></span><span class="flow-node flow-node--kept">10</span><span class="flow-line flow-line--split"></span><span class="flow-node flow-node--hold">7</span></div>
-                <div class="quality-legend"><span><i class="legend-dot legend-dot--kept"></i>retained</span><span><i class="legend-dot legend-dot--hold"></i>quarantined</span></div>
-                <div class="visual-foot"><span>validate</span><span>deduplicate</span><span>reconcile</span></div>
-              </div>
-            </article>
-            <article class="highlight-slide" id="highlight-slide-review" data-highlight-slide="3" role="group" aria-roledescription="slide" aria-label="Human reviewed AI" data-en-label="Human reviewed AI" data-zh-label="人工审核 AI" aria-hidden="true">
-              <div class="highlight-copy">
-                <p class="highlight-kicker" data-en="AI ENGINEERING / 04" data-zh="AI 工程 / 04">AI ENGINEERING / 04</p>
-                <h3 data-en="Keep a person in the loop where it matters." data-zh="在关键位置保留人工判断。">Keep a person in the loop where it matters.</h3>
-                <p data-en="The AI workspace keeps provider keys bounded, drafts editable and save/send actions explicit. The interface makes review part of the workflow." data-zh="AI 工作台限制密钥范围，保留可编辑草稿，并把保存与发送做成明确动作，让人工审核成为流程的一部分。">The AI workspace keeps provider keys bounded, drafts editable and save/send actions explicit. The interface makes review part of the workflow.</p>
-                <a href="cases/ai-office/"><span data-en="Read the human-review case" data-zh="阅读人工审核案例">Read the human-review case</span><span aria-hidden="true">↗</span></a>
-              </div>
-              <div class="highlight-visual highlight-visual--review" aria-hidden="true">
-                <div class="visual-caption">AI WORKSPACE / REVIEW</div>
-                <div class="review-stack"><span>request</span><span>draft</span><span class="review-stack-active">review</span><span>send</span></div>
-                <div class="review-seal">HUMAN<br><small>CHECK</small></div>
-                <div class="visual-foot"><span>bounded key</span><span>editable artifact</span></div>
-              </div>
-            </article>
-          </div>
-          <div class="highlight-controls">
+          <div class="highlight-controls" data-highlight-controls hidden>
+            <button class="highlight-rotation" type="button" data-highlight-rotation data-en="Pause autoplay" data-zh="暂停自动播放">Pause autoplay</button>
             <button class="highlight-arrow" type="button" data-highlight-prev aria-label="Previous highlight" data-en-label="Previous highlight" data-zh-label="上一项亮点">←</button>
             <div class="highlight-dots" role="tablist" aria-label="Choose a highlight" data-en-label="Choose a highlight" data-zh-label="选择亮点">
               <button id="highlight-dot-research" type="button" role="tab" data-highlight-dot="0" aria-controls="highlight-slide-research" aria-label="Research audit" data-en-label="Research audit" data-zh-label="研究审计" aria-selected="true"><span></span></button>
@@ -209,6 +153,69 @@
             <button class="highlight-arrow" type="button" data-highlight-next aria-label="Next highlight" data-en-label="Next highlight" data-zh-label="下一项亮点">→</button>
             <span class="highlight-status" data-highlight-status aria-live="polite"><span data-highlight-current>01</span> / 04</span>
           </div>
+          <div class="highlight-viewport" data-highlight-viewport>
+            <article class="highlight-slide is-active" id="highlight-slide-research" data-highlight-slide="0" role="group" aria-roledescription="slide" aria-label="Research audit" data-en-label="Research audit" data-zh-label="研究审计">
+              <div class="highlight-copy">
+                <p class="highlight-kicker" data-en="RESEARCH / 01" data-zh="研究 / 01">RESEARCH / 01</p>
+                <h3 data-en="Auditing 344 archived training runs" data-zh="训练归档的重分析">Auditing 344 archived training runs</h3>
+                <p data-en="The revised Neurocomputing study reanalyzes 344 archived training runs to separate fusion effects, operating-point changes and data artifacts." data-zh="修订后的 Neurocomputing 研究重分析 344 次训练运行，区分融合机制、决策工作点变化和数据伪线索。">The revised Neurocomputing study reanalyzes 344 archived training runs to separate fusion effects, operating-point changes and data artifacts.</p>
+                <p class="highlight-evidence" data-en="Manuscript · submitted to Neurocomputing, not accepted" data-zh="研究稿件 · 已投稿 Neurocomputing，尚未录用">Manuscript · submitted to Neurocomputing, not accepted</p>
+                <a href="research/fusion-audit.html"><span data-en="Read the research boundary" data-zh="阅读研究边界">Read the research boundary</span><span aria-hidden="true">↗</span></a>
+              </div>
+              <div class="highlight-visual highlight-visual--research" aria-hidden="true">
+                <div class="visual-caption">FROZEN CLIP / AUDIT</div>
+                <div class="audit-orbit"><span class="orbit-core">344</span><span class="orbit-label orbit-label--top">runs</span><span class="orbit-label orbit-label--right">split</span><span class="orbit-label orbit-label--bottom">seed</span><span class="orbit-label orbit-label--left">artifact</span></div>
+                <div class="visual-foot"><span>representation</span><span>operating point</span><span>data</span></div>
+              </div>
+            </article>
+            <article class="highlight-slide" id="highlight-slide-delivery" data-highlight-slide="1" role="group" aria-roledescription="slide" aria-label="Engineering delivery" data-en-label="Engineering delivery" data-zh-label="工程交付">
+              <div class="highlight-copy">
+                <p class="highlight-kicker" data-en="DELIVERY / 02" data-zh="交付 / 02">DELIVERY / 02</p>
+                <h3 data-en="U Mobile: interface and performance work" data-zh="U Mobile：接口协作与性能优化">U Mobile: interface and performance work</h3>
+                <p data-en="For the U Mobile onboarding system, interface contracts and performance work shortened integration from 15 to 10 days and first load from 2.8s to 1.2s." data-zh="在 U Mobile 开户系统中，通过接口契约和性能优化，将联调从 15 天缩短到 10 天，首屏从 2.8 秒降到 1.2 秒。">For the U Mobile onboarding system, interface contracts and performance work shortened integration from 15 to 10 days and first load from 2.8s to 1.2s.</p>
+                <p class="highlight-evidence" data-en="Project figures reported in my CV; measurement logs are not public." data-zh="指标来自个人简历的项目记录；测量日志未公开。">Project figures reported in my CV; measurement logs are not public.</p>
+                <a href="#background"><span data-en="See the engineering path" data-zh="查看工程经历">See the engineering path</span><span aria-hidden="true">↗</span></a>
+              </div>
+              <div class="highlight-visual highlight-visual--delivery" aria-hidden="true">
+                <div class="visual-caption">U MOBILE / DELIVERY</div>
+                <div class="delivery-metric"><strong>15 → 10</strong><span>integration days</span></div>
+                <div class="delivery-metric"><strong>2.8s → 1.2s</strong><span>first load</span></div>
+                <div class="delivery-rail"><i></i><i></i><i></i><i></i><i></i></div>
+                <div class="visual-foot"><span>contract</span><span>check</span><span>ship</span></div>
+              </div>
+            </article>
+            <article class="highlight-slide" id="highlight-slide-data" data-highlight-slide="2" role="group" aria-roledescription="slide" aria-label="Data quality" data-en-label="Data quality" data-zh-label="数据质量">
+              <div class="highlight-copy">
+                <p class="highlight-kicker" data-en="DATA / 03" data-zh="数据 / 03">DATA / 03</p>
+                <h3 data-en="Every excluded row has a reason." data-zh="每条被隔离的数据，都有原因。">Every excluded row has a reason.</h3>
+                <p data-en="A synthetic teaching example traces 17 input records through validation and conflict checks: 10 retained, 7 quarantined, with a reason for every decision." data-zh="合成教学样例将 17 条输入经过校验与冲突检查，保留 10 条、隔离 7 条，每条数据保留处理原因。">A synthetic teaching example traces 17 input records through validation and conflict checks: 10 retained, 7 quarantined, with a reason for every decision.</p>
+                <p class="highlight-evidence" data-en="Synthetic data · runnable teaching example" data-zh="合成数据 · 可运行的教学样例">Synthetic data · runnable teaching example</p>
+                <a href="demos/data-preparation/"><span data-en="Inspect the data workflow" data-zh="查看数据工作流">Inspect the data workflow</span><span aria-hidden="true">↗</span></a>
+              </div>
+              <div class="highlight-visual highlight-visual--data" aria-hidden="true">
+                <div class="visual-caption">QUALITY GATE / SYNTHETIC</div>
+                <div class="quality-flow"><span class="flow-node flow-node--input">17</span><span class="flow-line">=</span><span class="flow-node flow-node--kept">10</span><span class="flow-line flow-line--split">+</span><span class="flow-node flow-node--hold">7</span></div>
+                <div class="quality-legend"><span><i class="legend-dot legend-dot--kept"></i>retained</span><span><i class="legend-dot legend-dot--hold"></i>quarantined</span></div>
+                <div class="visual-foot"><span>validate</span><span>deduplicate</span><span>reconcile</span></div>
+              </div>
+            </article>
+            <article class="highlight-slide" id="highlight-slide-review" data-highlight-slide="3" role="group" aria-roledescription="slide" aria-label="Human reviewed AI" data-en-label="Human reviewed AI" data-zh-label="人工审核 AI">
+              <div class="highlight-copy">
+                <p class="highlight-kicker" data-en="AI ENGINEERING / 04" data-zh="AI 工程 / 04">AI ENGINEERING / 04</p>
+                <h3 data-en="AI drafts with explicit review and approval" data-zh="AI 草稿生成与人工审核流程">AI drafts with explicit review and approval</h3>
+                <p data-en="The AI workspace keeps provider keys bounded, drafts editable and save/send actions explicit. The interface makes review part of the workflow." data-zh="AI 工作台限制密钥范围，保留可编辑草稿，并把保存与发送做成明确动作，让人工审核成为流程的一部分。">The AI workspace keeps provider keys bounded, drafts editable and save/send actions explicit. The interface makes review part of the workflow.</p>
+                <p class="highlight-evidence" data-en="Engineering module · checks use a mocked provider" data-zh="工程模块 · 验证使用模拟模型服务">Engineering module · checks use a mocked provider</p>
+                <a href="cases/ai-office/"><span data-en="Read the human-review case" data-zh="阅读人工审核案例">Read the human-review case</span><span aria-hidden="true">↗</span></a>
+              </div>
+              <div class="highlight-visual highlight-visual--review" aria-hidden="true">
+                <div class="visual-caption">AI WORKSPACE / REVIEW</div>
+                <div class="review-stack"><span>request</span><span>draft</span><span class="review-stack-active">review</span><span>send</span></div>
+                <div class="review-seal">HUMAN<br><small>CHECK</small></div>
+                <div class="visual-foot"><span>bounded key</span><span>editable artifact</span></div>
+              </div>
+            </article>
+          </div>
+
         </div>
       </div>
     </section>
@@ -224,14 +231,14 @@
           <article class="publication-item" data-category="conference"><span class="pub-year">2026</span><div class="pub-body"><div class="pub-meta"><span class="status" data-tone="green" data-en="Accepted · ISCAIT 2026" data-zh="已录用 · ISCAIT 2026">Accepted · ISCAIT 2026</span><span data-en="First author · Vision & language" data-zh="第一作者 · 视觉与语言">First author · Vision & language</span></div><h3>Design and Implementation of a Vision-Language Multimodal Behavior Prediction Model</h3><p class="source-note research-role-note" data-en="The September 2026 CV records first authorship and acceptance. This page has no linked official proceedings citation or DOI, and the status needs a current check." data-zh="2026 年 9 月简历记录为第一作者及已录用。本页尚无官方论文集题录或 DOI 链接，最新状态仍需核对。">The September 2026 CV records first authorship and acceptance. This page has no linked official proceedings citation or DOI, and the status needs a current check.</p><details class="abstract"><summary data-en="Research summary" data-zh="研究概要">Research summary</summary><p data-en="Encodes visual and language inputs with VideoMAE and DistilBERT, combining bidirectional cross-attention, gated residuals, text dropout and LSTM temporal modeling to predict behavior classes and trajectory trends." data-zh="使用 VideoMAE 与 DistilBERT 编码视觉和语言，结合双向交叉注意力、门控残差、文本随机丢弃与 LSTM 时序建模，联合预测行为类别与轨迹趋势。">Encodes visual and language inputs with VideoMAE and DistilBERT, combining bidirectional cross-attention, gated residuals, text dropout and LSTM temporal modeling to predict behavior classes and trajectory trends.</p><p class="source-note" data-en="This method summary is not a reported metric." data-zh="此方法概要不代表研究指标结果。">This method summary is not a reported metric.</p></details></div></article>
           <article class="publication-item" data-category="thesis"><span class="pub-year">2023</span><div class="pub-body"><div class="pub-meta"><span class="status" data-tone="blue" data-en="Master's thesis · Universiti Malaya" data-zh="硕士论文 · 马来亚大学">Master's thesis · Universiti Malaya</span><span data-en="Bayesian networks" data-zh="贝叶斯网络">Bayesian networks</span></div><h3>Dental Deformities Prediction Using Bayesian Networks among Adolescents</h3><details class="abstract"><summary data-en="Research summary" data-zh="研究概要">Research summary</summary><p data-en="Master's research using R and Bayesian networks to study conditional relationships and dental deformities prediction among adolescents." data-zh="硕士阶段使用 R 与贝叶斯网络研究条件关系及青少年牙齿畸形预测。">Master's research using R and Bayesian networks to study conditional relationships and dental deformities prediction among adolescents.</p></details></div></article>
         </div>
-        <p class="source-note" data-en="Four selected records; all six appear in the academic CV. The Neurocomputing entry follows the revised manuscript and author update of 24 October 2026. Other states follow the supplied CV. Portfolio content was reviewed on 26 October 2026; submitted work and accepted work are labeled separately." data-zh="此处精选 4 项研究，全部 6 项见公开简历。Neurocomputing 条目依据修订稿及作者于 2026 年 10 月 24 日的最新说明更新；其他状态依据所提供的简历。作品集内容于 2026 年 10 月 26 日复核，已投稿与已录用分别标注。">Four selected records; all six appear in the academic CV. The Neurocomputing entry follows the revised manuscript and author update of 24 October 2026. Other states follow the supplied CV. Portfolio content was reviewed on 26 October 2026; submitted work and accepted work are labeled separately.</p>
+        <p class="source-note" data-en="Four selected records; all six appear in the academic CV. The Neurocomputing entry follows the revised manuscript and author update of 24 October 2026. Other states follow the supplied CV. Page structure was reviewed on 26 October 2026. This does not change the manuscript statuses above." data-zh="此处精选 4 项研究，全部 6 项见公开简历。Neurocomputing 条目依据修订稿及作者于 2026 年 10 月 24 日的最新说明更新；其他状态依据所提供的简历。页面结构于 2026 年 10 月 26 日复核，不代表论文状态发生变化。">Four selected records; all six appear in the academic CV. The Neurocomputing entry follows the revised manuscript and author update of 24 October 2026. Other states follow the supplied CV. Page structure was reviewed on 26 October 2026. This does not change the manuscript statuses above.</p>
         <div class="pub-links"><a href="research/cv.html#cv-research" data-en="Check all six CV research records ↗" data-zh="核对简历中的全部六项研究记录 ↗">Check all six CV research records ↗</a></div>
         <aside class="advisor-checks" aria-labelledby="advisor-checks-title">
           <div class="advisor-checks-heading"><div><p class="section-number" data-en="READING GUIDE" data-zh="阅读指南">READING GUIDE</p><h3 id="advisor-checks-title" data-en="Three ways to explore the work" data-zh="从三个入口了解我的工作">Three ways to explore the work</h3></div><p data-en="Research findings, engineering decisions and the next questions to investigate." data-zh="先看研究发现，再看工程实现，最后了解拟解决的问题。">Research findings, engineering decisions and the next questions to investigate.</p></div>
           <div class="advisor-check-grid">
             <article><span class="advisor-index">01</span><h4 data-en="What is reported, and what is still proposed?" data-zh="哪些是现有记录，哪些仍是研究设想？">What is reported, and what is still proposed?</h4><p data-en="The revised manuscript examines where fusion gains come from. The doctoral brief proposes how to test reliable decisions and updates in emotion recognition." data-zh="修订稿分析融合收益从何而来；博士研究简述进一步提出情绪识别中的可靠决策与持续更新问题。">The revised manuscript examines where fusion gains come from. The doctoral brief proposes how to test reliable decisions and updates in emotion recognition.</p><a href="research/statement.html" data-en="Read the proposed questions ↗" data-zh="查看拟研究问题 ↗">Read the proposed questions ↗</a></article>
             <article><span class="advisor-index">02</span><h4 data-en="What can be reproduced from the public code?" data-zh="公开代码目前能复查到什么程度？">What can be reproduced from the public code?</h4><p data-en="KICP requires external datasets and model assets and was not rerun for this update. KAPT checks use synthetic component fixtures; they are not benchmark results." data-zh="KICP 需外部数据集与模型资源，本次更新未重跑；KAPT 检查使用合成组件样例，不是基准实验结果。">KICP requires external datasets and model assets and was not rerun for this update. KAPT checks use synthetic component fixtures; they are not benchmark results.</p><a href="research/#evidence" data-en="Compare code and evidence scopes ↗" data-zh="对照代码与证据范围 ↗">Compare code and evidence scopes ↗</a></article>
-            <article><span class="advisor-index">03</span><h4 data-en="Can I verify authorship and the formal citation?" data-zh="作者排序和正式题录能否核实？">Can I verify authorship and the formal citation?</h4><p data-en="The visible states are based on a September CV. DASFAA author order and official citations for DASFAA and ISCAIT are not linked; check the latest decisions before presenting these as current." data-zh="页面状态依据 9 月版简历。DASFAA 作者排序及两项会议工作的官方题录链接尚缺；对外使用前请核实最新决定。">The visible states are based on a September CV. DASFAA author order and official citations for DASFAA and ISCAIT are not linked; check the latest decisions before presenting these as current.</p><a href="research/cv.html#cv-research" data-en="Review the complete CV record ↗" data-zh="查看完整简历记录 ↗">Review the complete CV record ↗</a></article>
+            <article><span class="advisor-index">03</span><h4 data-en="Can I verify authorship and the formal citation?" data-zh="作者排序和正式题录能否核实？">Can I verify authorship and the formal citation?</h4><p data-en="Neurocomputing follows the revised manuscript and the author update of 24 October. Other entries follow the supplied September CV; official citations and DASFAA author order remain to be documented." data-zh="Neurocomputing 依据修订稿与 10 月 24 日作者说明，其他条目依据 9 月版简历；正式题录与 DASFAA 作者排序仍待补充。">Neurocomputing follows the revised manuscript and the author update of 24 October. Other entries follow the supplied September CV; official citations and DASFAA author order remain to be documented.</p><a href="research/cv.html#cv-research" data-en="Review the complete CV record ↗" data-zh="查看完整简历记录 ↗">Review the complete CV record ↗</a></article>
           </div>
         </aside>
       </div>
@@ -295,6 +302,9 @@ train.py  →  test.py</code></pre><p class="preview-foot" data-en="Illustrative
           <article class="project-item" data-category="engineering" id="project-ai-office">
             <figure class="project-media"><a href="cases/ai-office/"><img src="assets/ai-settings-desktop.png" alt="AI workspace settings with hidden personal key, endpoint controls and connection feedback" loading="lazy"></a><figcaption data-en="Local UI test fixture · Synthetic connection response" data-zh="本地界面测试夹具 · 模拟连接响应">Local UI test fixture · Synthetic connection response</figcaption></figure>
             <div class="project-body"><div class="project-meta"><span data-en="FULL-STACK AI ENGINEERING MODULE" data-zh="全栈 AI 工程模块">FULL-STACK AI ENGINEERING MODULE</span><span>Vue 3 / Spring Boot</span></div><h3 data-en="Personal AI Workspace & Document Automation" data-zh="个人 AI 工作台与文档自动化">Personal AI Workspace &amp; Document Automation</h3><p data-en="A module in the college archive system: account-bound encrypted provider keys, public HTTPS endpoint policy, bounded AI requests and editable PPT drafts. Users review before saving or sending." data-zh="学院资料归档系统中的 AI 模块：账号绑定的加密密钥、公网 HTTPS 地址策略、受限模型请求与可编辑 PPT 草稿；保存和发送仍由用户确认。">A module in the college archive system: account-bound encrypted provider keys, public HTTPS endpoint policy, bounded AI requests and editable PPT drafts. Users review before saving or sending.</p><div class="tags"><span>Spring Boot</span><span>AES-GCM</span><span>Endpoint policy</span><span>Human review</span><span>PPTX</span></div><p class="source-note" data-en="Existing feature within the archive system, not a standalone deployed product. Public material is an engineering case, notes and synthetic evidence; mock-provider tests did not use a real key." data-zh="这是归档系统既有功能模块，并非独立部署产品。公开材料是工程案例、笔记和合成证据；模拟服务测试未使用真实密钥。">Existing feature within the archive system, not a standalone deployed product. Public material is an engineering case, notes and synthetic evidence; mock-provider tests did not use a real key.</p><div class="project-links"><a href="cases/ai-office/" data-en="Read architecture & evidence ↗" data-zh="阅读架构与证据 ↗">Read architecture &amp; evidence ↗</a><a href="https://github.com/GuHang2011/engineering-notes/blob/main/notes/personal-ai-keys.md" data-en="Key-handling notes ↗" data-zh="密钥处理笔记 ↗">Key-handling notes ↗</a><a href="https://github.com/GuHang2011/engineering-notes/blob/main/notes/human-reviewed-ai-workflows.md" data-en="Human-review notes ↗" data-zh="人工审核笔记 ↗">Human-review notes ↗</a></div></div>
+          </article>
+<article class="project-item" data-category="learning" id="project-reliability-gates">
+            <div class="project-media lab-preview"><p class="preview-label">RELIABILITY GATE / LEARNING LAB</p><dl><div><dt>01</dt><dd data-en="Input quality and missing data" data-zh="输入质量与缺失">Input quality and missing data</dd></div><div><dt>02</dt><dd data-en="Confidence and disagreement" data-zh="置信度与分歧">Confidence and disagreement</dd></div><div><dt>03</dt><dd data-en="Output or request review" data-zh="自动输出或请求复核">Output or request review</dd></div></dl><p class="preview-foot" data-en="Synthetic inputs · Inspectable rules" data-zh="合成输入 · 可查看规则">Synthetic inputs · Inspectable rules</p></div><div class="project-body"><div class="project-meta"><span data-en="RELIABILITY LEARNING PROJECT" data-zh="可靠性学习项目">RELIABILITY LEARNING PROJECT</span><span class="status" data-tone="neutral" data-en="New online lab" data-zh="新增在线实验">New online lab</span></div><h3 data-en="Reliability Gate Lab" data-zh="证据可靠性门禁实验室">Reliability Gate Lab</h3><p data-en="A small interactive lab for the proposed multimodal decision protocol: adjust modality quality, confidence and disagreement, then inspect whether the system outputs or requests review." data-zh="面向拟研究决策协议的交互实验：调整模态质量、置信度与分歧，观察系统自动输出还是请求复核。">A small interactive lab for the proposed multimodal decision protocol: adjust modality quality, confidence and disagreement, then inspect whether the system outputs or requests review.</p><div class="tags"><span>JavaScript</span><span>Calibration</span><span>Risk–coverage</span><span>Accessibility</span></div><p class="source-note" data-en="Synthetic educational example. It explains state logic and does not report a trained emotion-recognition result." data-zh="合成教学示例，用于解释状态逻辑，不报告已训练情绪识别模型的结果。">Synthetic educational example. It explains state logic and does not report a trained emotion-recognition result.</p><div class="project-links"><a href="demos/reliability-gates/" data-en="Open online lab ↗" data-zh="打开在线实验 ↗">Open online lab ↗</a><a href="notebook/multimodal-gates.html" data-en="Read the learning note ↗" data-zh="阅读配套笔记 ↗">Read the learning note ↗</a><a href="research/statement.html" data-en="See proposed question ↗" data-zh="查看拟研究问题 ↗">See proposed question ↗</a></div></div>
           </article>
           <article class="project-item" data-category="engineering">
             <figure class="project-media"><button type="button" data-preview="assets/counselor-mobile.png" aria-label="Preview mobile dashboard"><img class="mobile-shot" src="assets/counselor-mobile.png" alt="Mobile counselor dashboard with synthetic demonstration content" width="390" height="844" loading="lazy"></button><figcaption data-en="Responsive workflow · Mobile evidence" data-zh="响应式工作流 · 手机布局证据">Responsive workflow · Mobile evidence</figcaption></figure>
@@ -390,15 +400,18 @@ train.py  →  test.py</code></pre><p class="preview-foot" data-en="Illustrative
       <div class="section-heading"><div><p class="section-number">05 / NOTEBOOK</p><h2 id="notes-title" data-en="Learning &amp; project reflections" data-zh="学习笔记与项目心得">Learning &amp; project reflections</h2></div><p data-en="Questions, implementation choices and checks, connected to the code." data-zh="从问题出发，把实现取舍与验证方法连到代码。">Questions, implementation choices and checks, connected to the code.</p></div>
 <div class="learning-desk">
 <aside class="learning-feature">
-<p class="learning-edition"><span  data-en="FIELD NOTES / 12" data-zh="学习档案 / 12">FIELD NOTES / 12</span><span>2026.10</span></p>
+<p class="learning-edition"><span  data-en="FIELD NOTES / 15" data-zh="学习档案 / 15">FIELD NOTES / 15</span><span>2026.10</span></p>
 <h3  data-en="Build it. Question it. Write it down." data-zh="把问题写清，把实现做实。">Build it. Question it. Write it down.</h3>
 <p  data-en="A working notebook on interfaces, data and models. Start with a question, inspect a small example, then check where it breaks." data-zh="围绕前端、数据与模型持续整理。从一个具体问题开始，读一段小型实现，再检查它在哪些条件下失效。">A working notebook on interfaces, data and models. Start with a question, inspect a small example, then check where it breaks.</p>
 <ol class="learning-process"><li><span aria-hidden="true">01</span><span  data-en="Frame the question" data-zh="明确问题">Frame the question</span></li><li><span aria-hidden="true">02</span><span  data-en="Inspect the implementation" data-zh="阅读实现">Inspect the implementation</span></li><li><span aria-hidden="true">03</span><span  data-en="Check the boundaries" data-zh="验证边界">Check the boundaries</span></li></ol>
-<a class="learning-all" href="notebook/"><span  data-en="Browse all 12 notes" data-zh="阅读全部 12 篇笔记">Browse all 12 notes</span><span aria-hidden="true">↗</span></a>
+<a class="learning-all" href="notebook/"><span  data-en="Browse all 15 notes" data-zh="阅读全部 15 篇笔记">Browse all 15 notes</span><span aria-hidden="true">↗</span></a>
 <p class="learning-feature-foot"><span  data-en="Bilingual · searchable · printable" data-zh="中英双语 · 可搜索 · 可打印">Bilingual · searchable · printable</span></p>
 </aside>
 <div class="learning-library"><div class="learning-toolbar" data-desk-tools hidden><div class="learning-tabs" role="group" aria-label="Learning topics" data-en-label="Learning topics" data-zh-label="学习主题"><button type="button" data-desk-topic="recent" aria-controls="learning-results" aria-pressed="true"><span  data-en="Latest" data-zh="最新整理">Latest</span></button><button type="button" data-desk-topic="frontend" aria-controls="learning-results" aria-pressed="false"><span  data-en="Frontend" data-zh="前端">Frontend</span></button><button type="button" data-desk-topic="data" aria-controls="learning-results" aria-pressed="false"><span  data-en="Data &amp; SQL" data-zh="数据与 SQL">Data &amp; SQL</span></button><button type="button" data-desk-topic="models" aria-controls="learning-results" aria-pressed="false"><span  data-en="Models &amp; AI" data-zh="模型与 AI">Models &amp; AI</span></button><button type="button" data-desk-topic="engineering" aria-controls="learning-results" aria-pressed="false"><span  data-en="Engineering" data-zh="工程心得">Engineering</span></button></div><p data-desk-count role="status" aria-live="polite" aria-atomic="true"></p></div>
-<div id="learning-results"><article class="learning-entry" data-desk-note data-topic="models" data-recent="true">
+<div id="learning-results"><article class="learning-entry" data-desk-note data-topic="models" data-recent="true"><div class="learning-entry-meta"><span data-en="Model learning" data-zh="模型学习">Model learning</span><time datetime="2026-10-25">2026.10.25</time></div><h3><a href="notebook/multimodal-gates.html"><span data-en="Evidence-aware multimodal decisions: from quality signals to review" data-zh="证据感知多模态决策：从质量信号到人工复核">Evidence-aware multimodal decisions: from quality signals to review</span><span class="learning-arrow" aria-hidden="true">↗</span></a></h3><p data-en="Separate quality, missing inputs, disagreement and calibrated confidence before deciding whether to output or request review." data-zh="先拆开质量、缺失、分歧和校准置信度，再决定自动输出还是请求复核。">Separate quality, missing inputs, disagreement and calibrated confidence before deciding whether to output or request review.</p><div class="learning-entry-foot"><span data-en="9 min read" data-zh="约 9 分钟">9 min read</span><span aria-hidden="true">/</span><span data-en="Protocol → gate → checks" data-zh="协议 → 门禁 → 检查">Protocol → gate → checks</span></div></article>
+<article class="learning-entry" data-desk-note data-topic="models" data-recent="true"><div class="learning-entry-meta"><span data-en="Model learning" data-zh="模型学习">Model learning</span><time datetime="2026-10-25">2026.10.25</time></div><h3><a href="notebook/label-budget-ledger.html"><span data-en="The label-budget ledger: count training, selection and calibration together" data-zh="总标注预算：训练、选模与校准一起计算">The label-budget ledger: count training, selection and calibration together</span><span class="learning-arrow" aria-hidden="true">↗</span></a></h3><p data-en="Turn low-resource comparisons into an auditable ledger instead of reporting training examples alone." data-zh="把低资源比较写成可审计的预算台账，而不是只报告训练样本数。">Turn low-resource comparisons into an auditable ledger instead of reporting training examples alone.</p><div class="learning-entry-foot"><span data-en="8 min read" data-zh="约 8 分钟">8 min read</span><span aria-hidden="true">/</span><span data-en="Protocol → budget → evidence" data-zh="协议 → 预算 → 证据">Protocol → budget → evidence</span></div></article>
+<article class="learning-entry" data-desk-note data-topic="engineering" data-recent="true"><div class="learning-entry-meta"><span data-en="Project reflections" data-zh="项目心得">Project reflections</span><time datetime="2026-10-25">2026.10.25</time></div><h3><a href="notebook/model-version-rollback.html"><span data-en="Model-version rollback: release weights, preprocessing and calibration together" data-zh="模型版本发布：把权重、预处理和校准一起回退">Model-version rollback: release weights, preprocessing and calibration together</span><span class="learning-arrow" aria-hidden="true">↗</span></a></h3><p data-en="Treat model updates as complete, hashable bundles with a reviewable rollback path." data-zh="把模型更新当作完整、可哈希的配置包，并留下可复查的回退路径。">Treat model updates as complete, hashable bundles with a reviewable rollback path.</p><div class="learning-entry-foot"><span data-en="8 min read" data-zh="约 8 分钟">8 min read</span><span aria-hidden="true">/</span><span data-en="Manifest → gate → rollback" data-zh="清单 → 门禁 → 回退">Manifest → gate → rollback</span></div></article>
+<article class="learning-entry" data-desk-note data-topic="models" data-recent="true">
 <div class="learning-entry-meta"><span  data-en="Model learning" data-zh="模型学习">Model learning</span><time datetime="2026-10-20">2026.10.20</time></div>
 <h3><a href="notebook/rag-evaluation.html"><span  data-en="RAG evaluation: separate retrieval from answer quality" data-zh="RAG 学习：把检索质量与回答质量分开检查">RAG evaluation: separate retrieval from answer quality</span><span class="learning-arrow" aria-hidden="true">↗</span></a></h3>
 <p  data-en="From chunking and hybrid retrieval to citation checks: an offline example of Recall@k, reciprocal rank and unanswerable queries." data-zh="从切块、混合检索到引用核验，用一个离线小例子理解 Recall@k、倒数排名和无答案问题。">From chunking and hybrid retrieval to citation checks: an offline example of Recall@k, reciprocal rank and unanswerable queries.</p>
