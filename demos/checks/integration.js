@@ -54,5 +54,19 @@ async page => {
     ok(await fallback.locator('#method').isVisible() && await fallback.locator('.ops-workbench').isHidden(),'No-JS method and explanation: '+slug);
   }
   await nojs.close();
+  for(const slug of ['production-workbench','telecom-service']){
+    let releaseScript;
+    const scriptGate=new Promise(resolve=>{releaseScript=resolve;});
+    const pattern=base+'/demos/'+slug+'/app.js*';
+    await page.route(pattern,async route=>{await scriptGate;await route.continue();});
+    await page.goto(base+'/demos/'+slug+'/',{waitUntil:'commit'});
+    const sample=page.locator(slug==='production-workbench'?'#sample-report':'#sample-customer');
+    await sample.waitFor({state:'visible'});
+    ok(await sample.isDisabled(),'Pending script keeps controls disabled: '+slug);
+    releaseScript();
+    await page.waitForFunction(()=>document.querySelector('.ops-workbench').dataset.ready==='true');
+    ok(await sample.isEnabled(),'Loaded script enables controls: '+slug);
+    await page.unroute(pattern);
+  }
   return {checks,scans};
 }

@@ -86,4 +86,7 @@
   $('#scan-button').addEventListener('click', () => { batch.value = 'DEMO-BATCH-028'; edit(); feedback('Synthetic scan filled a demo reference; no camera is used.', '已填入合成扫码编号，不调用摄像头。'); batch.focus(); });
   [machine, quantity, batch, failure].forEach(el => el.addEventListener('input', edit));
   updateMachine();
+  $('.ops-loading-guard').disabled = false;
+  $('.ops-loading-message').hidden = true;
+  $('.ops-workbench').dataset.ready = 'true';
 })();

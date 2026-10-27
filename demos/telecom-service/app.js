@@ -104,4 +104,7 @@
   submit.addEventListener('click', commit);
   form.addEventListener('submit', event => { event.preventDefault(); current === 3 ? commit() : advance(); });
   summary(); setStep(0, false);
+  $('.ops-loading-guard').disabled = false;
+  $('.ops-loading-message').hidden = true;
+  $('.ops-workbench').dataset.ready = 'true';
 })();

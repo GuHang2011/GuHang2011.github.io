@@ -17,6 +17,8 @@
 .ops-sample { margin-top: 14px; }
 .ops-page [hidden] { display: none !important; }
 .ops-page fieldset { border: 0; margin: 0; padding: 0; }
+.ops-loading-guard { min-inline-size: 0; }
+.ops-loading-message { margin-bottom: 16px; color: var(--muted); font-size: 13px; }
 .ops-page :focus-visible { outline: 3px solid var(--ops-accent); outline-offset: 3px; }
 .ops-page h3[tabindex="-1"] { scroll-margin-top: 100px; }
 .ops-opening { max-width: 940px; padding-block: 16px 30px; }

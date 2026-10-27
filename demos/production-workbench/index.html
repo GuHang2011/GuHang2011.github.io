@@ -8,10 +8,10 @@
   <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../academic.css?v=20261028-ops-demos">
   <link rel="stylesheet" href="../demo.css">
-  <link rel="stylesheet" href="../operations.css">
+  <link rel="stylesheet" href="../operations.css?v=20261028-ready">
   <script src="../ops-settings.js" defer></script>
   <script src="../../academic.js" defer></script>
-  <script src="app.js" defer></script>
+  <script src="app.js?v=20261028-ready" defer></script>
   <title>Production Reporting Workbench | Hang Gu</title>
 </head>
 <body class="ops-page production-page">
@@ -34,7 +34,7 @@
       <div class="ops-title-row"><div><h1 data-en="Production Reporting Workbench" data-zh="生产报工工作台">Production Reporting Workbench</h1><p class="ops-kicker" data-en="Make a shop-floor report clear before it reaches the backend." data-zh="让一条生产报工在提交后端前就能被看懂、校验和恢复。">Make a shop-floor report clear before it reaches the backend.</p></div><span class="ops-badge" data-en="Synthetic learning project" data-zh="合成学习项目">Synthetic learning project</span></div>
       <p class="demo-note" data-en="A runnable interface prototype based on the desktop and mobile production-feedback scenarios recorded in my earlier CV. All machine names, quantities and records are synthetic; this is not the original enterprise system or source code." data-zh="这是根据早期简历中的生产反馈 PC 端与移动端场景整理的可运行界面原型。机台、数量和记录均为合成数据，不代表原企业系统或原始源代码。">A runnable interface prototype based on the desktop and mobile production-feedback scenarios recorded in my earlier CV. All machine names, quantities and records are synthetic; this is not the original enterprise system or source code.</p>
     </section>
-    <section id="workbench" class="ops-workbench" aria-labelledby="workbench-title">
+    <section id="workbench" class="ops-workbench" aria-labelledby="workbench-title"><p class="ops-loading-message" role="status" data-en="Preparing the interactive demo. If this message remains, refresh to retry loading." data-zh="正在准备交互演示；若提示一直保留，请刷新后重试。">Preparing the interactive demo. If this message remains, refresh to retry loading.</p><fieldset class="ops-loading-guard" disabled aria-label="Interactive workflow" data-en-label="Interactive workflow" data-zh-label="交互流程">
       <div class="ops-toolbar"><div><p class="section-number" data-en="ENGINEERING DEMO 07" data-zh="工程演示 07">ENGINEERING DEMO 07</p><h2 id="workbench-title" data-en="Report one completed batch" data-zh="提交一条完成报工">Report one completed batch</h2></div><p data-en="Try the happy path, then turn on the failure switch to inspect recovery." data-zh="先走通成功流程，再打开故障开关观察恢复。">Try the happy path, then turn on the failure switch to inspect recovery.</p></div>
       <div class="ops-grid">
         <aside class="ops-panel" aria-labelledby="shift-title">
@@ -58,7 +58,7 @@
           <div class="ops-records" aria-labelledby="records-title"><div class="ops-records-heading"><strong id="records-title" data-en="Recent records (latest 8)" data-zh="最近记录（保留最新 8 条）">Recent records (latest 8)</strong><span id="record-count">0</span></div><p id="record-empty" class="ops-empty" data-en="No report has been confirmed yet." data-zh="还没有已确认的报工。">No report has been confirmed yet.</p><div id="record-list"></div></div>
         </section>
       </div>
-    </section>
+    </fieldset></section>
     <section id="method" class="ops-method" aria-labelledby="method-title"><p class="section-number" data-en="READING MAP / WHAT TO INSPECT" data-zh="阅读地图 / 重点观察">READING MAP / WHAT TO INSPECT</p><h2 id="method-title" data-en="Three decisions behind this interface" data-zh="这个界面背后的三个设计决定">Three decisions behind this interface</h2><div class="ops-method-grid"><article><span>01 / INPUT</span><h3 data-en="Validate at the edge" data-zh="在边界处校验">Validate at the edge</h3><p data-en="Machine, quantity and batch reference have visible constraints before submission. Invalid input keeps the user in context." data-zh="机台、数量和批次编号在提交前就有可见约束，错误输入会保留在当前上下文中。">Machine, quantity and batch reference have visible constraints before submission. Invalid input keeps the user in context.</p></article><article><span>02 / STATE</span><h3 data-en="Make progress readable" data-zh="让进度可读">Make progress readable</h3><p data-en="The step list, progress bar and status chip move together, so a reviewer can see which state the interface claims to be in." data-zh="步骤列表、进度条和状态标签同步变化，读者可以看见界面当前声称处于哪个状态。">The step list, progress bar and status chip move together, so a reviewer can see which state the interface claims to be in.</p></article><article><span>03 / RECOVERY</span><h3 data-en="Failure is a designed state" data-zh="失败也是设计状态">Failure is a designed state</h3><p data-en="The one-shot failure switch exposes a retry path instead of hiding an error behind a permanent spinner." data-zh="一次性故障开关会展示可重试路径，而不是把错误藏在一直转动的加载状态后面。">The one-shot failure switch exposes a retry path instead of hiding an error behind a permanent spinner.</p></article></div><div class="ops-links"><a href="../../cases/early-frontend/" data-en="Read the CV-based frontend cases ↗" data-zh="阅读基于简历整理的前端案例 ↗">Read the CV-based frontend cases ↗</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/production-workbench/README.md" data-en="Open implementation notes ↗" data-zh="打开实现说明 ↗">Open implementation notes ↗</a><a href="../../#demos" data-en="Back to all demos ↗" data-zh="返回全部演示 ↗">Back to all demos ↗</a></div></section>
   <noscript><style>.ops-workbench,.ops-preferences{display:none}</style><p>This demo needs JavaScript. The method and source notes remain readable. / 演示需要 JavaScript，方法与源代码说明仍可阅读。</p></noscript></main>
   <footer class="section surface"><div class="wrap"><a href="../../#demos" data-en="Back to Hang Gu's project demos" data-zh="返回顾航的项目演示">Back to Hang Gu's project demos</a></div></footer>

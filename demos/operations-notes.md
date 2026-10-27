@@ -41,6 +41,6 @@ Playwright with Microsoft Edge was used on **28 October 2026**:
 
 34 项交互断言通过，16 组双语屏宽检查无横向溢出；三个状态的无障碍自动扫描未发现违规。所有结果仅描述这个合成原型，不能推导原企业系统的质量或性能。
 
-An additional **17 integration assertions passed**, including both homepage themes, eight gallery entries, mobile navigation, keyboard radio controls and the no-JavaScript fallback. The two homepage theme scans reported zero violations after palette transitions completed. See the [browser-check source and commands](checks/README.md) to reproduce the checks.
+An additional **21 integration assertions passed**, including both homepage themes, eight gallery entries, mobile navigation, keyboard radio controls, the no-JavaScript fallback and delayed-script loading. Native controls stay disabled until workflow handlers are attached, preventing an early click from submitting the browser's default GET form. The two homepage theme scans reported zero violations after palette transitions completed. See the [browser-check source and commands](checks/README.md) to reproduce the checks.
 
-另有 17 项集成断言通过，覆盖首页双主题、演示入口、手机导航、键盘选择及无 JavaScript 的阅读回退。两次首页主题扫描未发现违规；[验证脚本与运行方法](checks/README.md)随源码公开。
+另有 21 项集成断言通过，覆盖首页双主题、演示入口、手机导航、键盘选择、无 JavaScript 的阅读回退与脚本延迟加载。业务脚本准备好后才启用表单，避免过早点击触发浏览器默认提交。两次首页主题扫描未发现违规；[验证脚本与运行方法](checks/README.md)随源码公开。
