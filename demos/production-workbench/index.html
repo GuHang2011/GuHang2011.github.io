@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" data-title-en="Production Reporting Workbench | Hang Gu" data-title-zh="生产报工工作台 | 顾航">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A synthetic production reporting workbench demonstrating machine selection, validation, submission states and recovery.">
+  <link rel="canonical" href="https://guhang2011.github.io/demos/production-workbench/">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../academic.css?v=20261028-ops-demos">
+  <link rel="stylesheet" href="../demo.css">
+  <link rel="stylesheet" href="../operations.css">
+  <script src="../ops-settings.js" defer></script>
+  <script src="../../academic.js" defer></script>
+  <script src="app.js" defer></script>
+  <title>Production Reporting Workbench | Hang Gu</title>
+</head>
+<body class="ops-page production-page">
+  <a class="skip-link" href="#main" data-en="Skip to production workbench" data-zh="跳转到生产报工工作台">Skip to production workbench</a>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../../">Hang Gu <span>/ 顾航</span></a>
+      <nav class="nav-links" id="demo-navigation" aria-label="Main navigation" data-en-label="Main navigation" data-zh-label="主导航">
+        <a href="../../#work" data-en="Projects" data-zh="项目">Projects</a>
+        <a href="../../#demos" data-en="Demos" data-zh="演示">Demos</a>
+        <a href="#method" data-en="Method" data-zh="方法">Method</a>
+      </nav>
+      <div class="header-controls"><div class="language-controls" role="group" aria-label="Language" data-en-label="Language" data-zh-label="语言"><button type="button" data-language="en" aria-pressed="true">EN</button><button type="button" data-language="zh" aria-pressed="false">中文</button></div><button class="menu-toggle icon-button" type="button" aria-label="Menu" aria-controls="demo-navigation" aria-expanded="false"><img src="../../assets/icons/menu.svg" alt=""></button></div>
+    </div>
+  </header>
+  <main id="main" class="wrap"><div class="ops-preferences"><label><input type="checkbox" data-ops-motion><span data-en="Reduce motion" data-zh="减少动态效果">Reduce motion</span></label><small><span data-en="Local simulation · no data upload" data-zh="本地模拟 · 不上传输入数据">Local simulation · no data upload</span></small></div>
+    <section class="ops-opening">
+      <p class="section-number" data-en="FRONTEND ENGINEERING / FORM STATES / RECOVERY" data-zh="前端工程 / 表单状态 / 故障恢复">FRONTEND ENGINEERING / FORM STATES / RECOVERY</p>
+      <div class="ops-title-row"><div><h1 data-en="Production Reporting Workbench" data-zh="生产报工工作台">Production Reporting Workbench</h1><p class="ops-kicker" data-en="Make a shop-floor report clear before it reaches the backend." data-zh="让一条生产报工在提交后端前就能被看懂、校验和恢复。">Make a shop-floor report clear before it reaches the backend.</p></div><span class="ops-badge" data-en="Synthetic learning project" data-zh="合成学习项目">Synthetic learning project</span></div>
+      <p class="demo-note" data-en="A runnable interface prototype based on the desktop and mobile production-feedback scenarios recorded in my earlier CV. All machine names, quantities and records are synthetic; this is not the original enterprise system or source code." data-zh="这是根据早期简历中的生产反馈 PC 端与移动端场景整理的可运行界面原型。机台、数量和记录均为合成数据，不代表原企业系统或原始源代码。">A runnable interface prototype based on the desktop and mobile production-feedback scenarios recorded in my earlier CV. All machine names, quantities and records are synthetic; this is not the original enterprise system or source code.</p>
+    </section>
+    <section id="workbench" class="ops-workbench" aria-labelledby="workbench-title">
+      <div class="ops-toolbar"><div><p class="section-number" data-en="ENGINEERING DEMO 07" data-zh="工程演示 07">ENGINEERING DEMO 07</p><h2 id="workbench-title" data-en="Report one completed batch" data-zh="提交一条完成报工">Report one completed batch</h2></div><p data-en="Try the happy path, then turn on the failure switch to inspect recovery." data-zh="先走通成功流程，再打开故障开关观察恢复。">Try the happy path, then turn on the failure switch to inspect recovery.</p></div>
+      <div class="ops-grid">
+        <aside class="ops-panel" aria-labelledby="shift-title">
+          <div class="ops-panel-heading"><h3 id="shift-title" data-en="Shift status" data-zh="班次状态">Shift status</h3><span id="report-status" class="ops-status" data-tone="neutral" data-en="Ready" data-zh="待开始">Ready</span></div>
+          <div class="ops-machine-card"><strong id="machine-name">Line A / Cell 03</strong><span id="machine-detail" data-en="Morning shift · 07:30–15:30" data-zh="早班 · 07:30–15:30">Morning shift · 07:30–15:30</span><span class="ops-pulse" data-en="Local simulation ready" data-zh="本地模拟已就绪">Local simulation ready</span></div>
+          <ol class="ops-step-list" aria-label="Report progress" data-en-label="Report progress" data-zh-label="报工进度"><li aria-current="step"><span>01</span><strong data-en="Prepare input" data-zh="准备输入">Prepare input</strong></li><li><span>02</span><strong data-en="Validate quantity" data-zh="校验数量">Validate quantity</strong></li><li><span>03</span><strong data-en="Submit report" data-zh="提交报工">Submit report</strong></li><li><span>04</span><strong data-en="Confirm record" data-zh="确认记录">Confirm record</strong></li></ol>
+          <div class="ops-progress"><div class="ops-progress-head"><span data-en="Workflow progress" data-zh="流程进度">Workflow progress</span><strong id="report-progress-label">0%</strong></div><div class="ops-progress-track" role="progressbar" aria-label="Workflow progress" data-en-label="Workflow progress" data-zh-label="流程进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="report-progress-bar"></span></div></div>
+        </aside>
+        <section class="ops-panel" aria-labelledby="report-form-title">
+          <div class="ops-panel-heading"><h3 id="report-form-title" data-en="New production report" data-zh="新建生产报工">New production report</h3><small data-en="No backend · deterministic states" data-zh="无后端 · 确定性状态">No backend · deterministic states</small></div>
+          <button type="button" class="ops-button ops-sample" id="sample-report" data-en="Load sample: 1,200 units" data-zh="载入示例：1,200 件">Load sample: 1,200 units</button><form id="report-form" class="ops-form" novalidate>
+            <div class="ops-form-grid">
+              <div class="ops-field"><label for="machine-select" data-en="Machine" data-zh="机台">Machine</label><select id="machine-select" name="machine"><option value="line-a" data-en="Line A / Cell 03" data-zh="A 线 / 03 号机台">Line A / Cell 03</option><option value="line-b" data-en="Line B / Cell 07" data-zh="B 线 / 07 号机台">Line B / Cell 07</option><option value="line-c" data-en="Line C / Cell 02" data-zh="C 线 / 02 号机台">Line C / Cell 02</option></select><small data-en="The selected machine updates the status card." data-zh="选择后会同步更新左侧状态卡片。">The selected machine updates the status card.</small></div>
+              <div class="ops-field"><label for="quantity" data-en="Completed quantity" data-zh="完成数量">Completed quantity</label><input id="quantity" aria-describedby="report-feedback" name="quantity" type="number" min="1" max="9999" inputmode="numeric" placeholder="0" required><small id="quantity-help" data-en="Allowed range: 1–9,999 units." data-zh="允许范围：1–9,999 件。">Allowed range: 1–9,999 units.</small></div>
+              <div class="ops-field full"><label for="batch-id" data-en="Batch / scan reference" data-zh="批次 / 扫码编号">Batch / scan reference</label><div class="ops-inline"><input id="batch-id" aria-describedby="report-feedback" name="batch" type="text" maxlength="24" placeholder="e.g. BATCH-20261027-03" data-en-placeholder="e.g. BATCH-20261027-03" data-zh-placeholder="例如 BATCH-20261027-03"><button class="ops-button" id="scan-button" type="button" data-en="Simulate scan" data-zh="模拟扫码">Simulate scan</button></div><small data-en="The scan action fills a synthetic reference and records the action." data-zh="扫码动作会填入合成编号，并在状态反馈中记录。">The scan action fills a synthetic reference and records the action.</small></div>
+            </div>
+            <div class="ops-inline"><label><input id="simulate-failure" type="checkbox"> <span data-en="Simulate network failure once" data-zh="模拟一次网络故障">Simulate network failure once</span></label></div>
+            <div class="ops-form-actions"><button class="ops-button primary" id="submit-report" type="submit" data-en="Submit report" data-zh="提交报工">Submit report</button><button class="ops-button" id="reset-report" type="button" data-en="Reset" data-zh="重置">Reset</button></div>
+          </form>
+          <div id="report-feedback" class="ops-feedback" role="status" aria-live="polite" data-en="Fill the quantity and submit to start." data-zh="填写数量后提交，开始演示。">Fill the quantity and submit to start.</div>
+          <div class="ops-records" aria-labelledby="records-title"><div class="ops-records-heading"><strong id="records-title" data-en="Recent records (latest 8)" data-zh="最近记录（保留最新 8 条）">Recent records (latest 8)</strong><span id="record-count">0</span></div><p id="record-empty" class="ops-empty" data-en="No report has been confirmed yet." data-zh="还没有已确认的报工。">No report has been confirmed yet.</p><div id="record-list"></div></div>
+        </section>
+      </div>
+    </section>
+    <section id="method" class="ops-method" aria-labelledby="method-title"><p class="section-number" data-en="READING MAP / WHAT TO INSPECT" data-zh="阅读地图 / 重点观察">READING MAP / WHAT TO INSPECT</p><h2 id="method-title" data-en="Three decisions behind this interface" data-zh="这个界面背后的三个设计决定">Three decisions behind this interface</h2><div class="ops-method-grid"><article><span>01 / INPUT</span><h3 data-en="Validate at the edge" data-zh="在边界处校验">Validate at the edge</h3><p data-en="Machine, quantity and batch reference have visible constraints before submission. Invalid input keeps the user in context." data-zh="机台、数量和批次编号在提交前就有可见约束，错误输入会保留在当前上下文中。">Machine, quantity and batch reference have visible constraints before submission. Invalid input keeps the user in context.</p></article><article><span>02 / STATE</span><h3 data-en="Make progress readable" data-zh="让进度可读">Make progress readable</h3><p data-en="The step list, progress bar and status chip move together, so a reviewer can see which state the interface claims to be in." data-zh="步骤列表、进度条和状态标签同步变化，读者可以看见界面当前声称处于哪个状态。">The step list, progress bar and status chip move together, so a reviewer can see which state the interface claims to be in.</p></article><article><span>03 / RECOVERY</span><h3 data-en="Failure is a designed state" data-zh="失败也是设计状态">Failure is a designed state</h3><p data-en="The one-shot failure switch exposes a retry path instead of hiding an error behind a permanent spinner." data-zh="一次性故障开关会展示可重试路径，而不是把错误藏在一直转动的加载状态后面。">The one-shot failure switch exposes a retry path instead of hiding an error behind a permanent spinner.</p></article></div><div class="ops-links"><a href="../../cases/early-frontend/" data-en="Read the CV-based frontend cases ↗" data-zh="阅读基于简历整理的前端案例 ↗">Read the CV-based frontend cases ↗</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/production-workbench/README.md" data-en="Open implementation notes ↗" data-zh="打开实现说明 ↗">Open implementation notes ↗</a><a href="../../#demos" data-en="Back to all demos ↗" data-zh="返回全部演示 ↗">Back to all demos ↗</a></div></section>
+  <noscript><style>.ops-workbench,.ops-preferences{display:none}</style><p>This demo needs JavaScript. The method and source notes remain readable. / 演示需要 JavaScript，方法与源代码说明仍可阅读。</p></noscript></main>
+  <footer class="section surface"><div class="wrap"><a href="../../#demos" data-en="Back to Hang Gu's project demos" data-zh="返回顾航的项目演示">Back to Hang Gu's project demos</a></div></footer>
+</body>
+</html>

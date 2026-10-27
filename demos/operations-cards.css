@@ -1,0 +1,10 @@
+/* Shared by the homepage and the demo index; uses each page's existing palette. */
+.ops-new-demos { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 24px; margin-block:0 24px; padding:18px 20px; border-left:3px solid var(--accent); background:var(--paper); color:var(--ink); font-size:14px; }
+.ops-new-demos > div { display:flex; flex-wrap:wrap; gap:12px 22px; }
+.ops-new-demos a { min-height:44px; display:inline-flex; align-items:center; font-weight:600; }
+.ops-demo-entry .demo-image { position: relative; }
+.ops-demo-entry .demo-image img { aspect-ratio: 1280 / 900; object-fit: cover; object-position: top; }
+.ops-demo-play { position: absolute; right: 14px; bottom: 14px; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: #0b5b78; color: white; border: 2px solid #fff; font-size: 20px; transition: transform .22s ease; }
+.ops-demo-entry .demo-image:is(:hover,:focus-visible) .ops-demo-play { transform: translate(2px,-3px); }
+@media (prefers-reduced-motion: reduce) { .ops-demo-play { transition: none; transform: none !important; } }
+html[data-reader-motion="reduce"] .ops-demo-play { transition: none; transform: none !important; }

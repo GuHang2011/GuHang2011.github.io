@@ -133,3 +133,11 @@ This is a review of the public page, not a new experiment or a publication-statu
 ## 2026-10-27 · Homepage frontend review
 
 [Review findings, changes and validation](docs/frontend-review-20261027.md): repaired filtered-project anchors and mobile-menu dismissal; added a six-project default view and notebook search; improved text contrast and reduced display-media bytes by 51.4%. All twelve projects and nineteen notes remain accessible.
+
+
+## 2026-10-28 · Engineering workflow demos
+
+- [Production Reporting Workbench](https://guhang2011.github.io/demos/production-workbench/): machine selection, synthetic scan, quantity validation, a frozen submission snapshot, progress and retry.
+- [Telecom Service Desk](https://guhang2011.github.io/demos/telecom-service/): customer lookup, new install / suspension / relocation, order review and explicit duplicate-conflict recovery.
+
+Each has a sample preset, bilingual guidance, responsive layout, keyboard support and motion preferences. These are newly written browser learning prototypes based on historical CV scenarios; no original employer source code or production data is published. [Design and verification](demos/operations-notes.md).
