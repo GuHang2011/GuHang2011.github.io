@@ -4,6 +4,12 @@ A bilingual engineering and research portfolio for **Hang Gu (顾航)**, connect
 
 **Intended website:** [guhang2011.github.io](https://guhang2011.github.io/) · **GitHub:** [@GuHang2011](https://github.com/GuHang2011)
 
+## Climate-risk research · 27 October 2026
+
+**Hybrid AI Framework for Multi-Hazard Climate Risk Governance in Renewable Energy-Water Nexus Systems** — first author, submitted to **Climate Risk Management**, **not accepted**. [Bilingual overview](https://guhang2011.github.io/research/climate-risk.html) · [Abstract and status record](research/climate-risk.md).
+
+研究范围：中国 30 个省份，2005—2024 年；方法：TFT + GNN-CRP。页面整理研究问题、方法分工、摘要报告的发现及后续方向，并同步首页、研究指南、在线简历与 GitHub Overview。内容依据作者提供的摘要及身份／状态说明，不提供尚未公开的数据、性能数值或代码承诺。
+
 ## Design
 
 The academic reading structure is inspired by [winsleo.github.io](https://winsleo.github.io/), adapted to Hang Gu's own background and evidence. The homepage's October 19, 2026 design uses navy text, muted teal accents, white and pale-gray surfaces, flat research lists and screenshot-led project rows. A short highlights carousel gives early readers four evidence-led entry points: research audit, measurable delivery, data quality and human-reviewed AI. The layout adapts to phones, tablets and desktops, with concise evidence notes, reviewer questions and restrained transition feedback.
@@ -31,7 +37,7 @@ Engineering highlights, code and verification evidence, and the academic CV appe
 6. **Interactive experiments:** financial clustering, data preparation audits, model evaluation, a React workflow board and a schema-driven low-code form studio, with synthetic data, source code, notes and reproducible checks. [Reading map](demos/README.md).
 7. **AI engineering case:** a full-stack module with account-bound key handling, endpoint policy, editable presentation generation, human review and documented mocked-provider tests. [Case study](cases/ai-office/).
 
-The Neurocomputing entry was updated on 24 October 2026 from the supplied revision and author confirmation: submitted, not accepted. It describes 344 archived training runs, operating-point analysis and archive-artifact audits; FCP is not claimed as a new architecture. Other research states follow the supplied CV. DASFAA author order and official proceedings records for conference work are not fully linked yet; confirm current decisions and citations before relying on them. Manuscripts and accepted work are labeled separately. The KICP project links to its implementation and setup documentation; the learning lab uses synthetic data.
+The Neurocomputing entry was updated on 24 October 2026 from the supplied revision and author confirmation: submitted, not accepted. It describes 344 archived training runs, operating-point analysis and archive-artifact audits; FCP is not claimed as a new architecture. The Climate Risk Management entry follows the abstract and author update of 27 October 2026. Other research states follow the supplied CV. DASFAA author order and official proceedings records for conference work are not fully linked yet; confirm current decisions and citations before relying on them. Manuscripts and accepted work are labeled separately. The KICP project links to its implementation and setup documentation; the learning lab uses synthetic data.
 
 ## Local Engineering Cases
 

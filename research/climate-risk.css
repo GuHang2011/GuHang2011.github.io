@@ -1,0 +1,57 @@
+.climate-page { --accent: #155fd1; --accent-soft: #eaf2ff; --ink: #193349; --muted: #465e70; --line: #c8d5e6; background: #fff; font-size: 16px; line-height: 1.8; }
+.climate-page .brief-content { width: min(980px, calc(100% - 48px)); padding-block: 32px 52px; }
+.climate-page .brief-opening { padding: 26px 0 28px; border-top: 4px solid #155fd1; border-bottom: 1px solid var(--line); }
+.climate-page .brief-status { display: inline-flex; flex-wrap: wrap; gap: 4px 12px; max-width: 100%; color: #80521a; background: #fff3dc; padding: 8px 12px; font-size: 13px; margin-bottom: 24px; }
+.climate-page .brief-status > span { white-space: nowrap; }
+.climate-page .brief-opening h1 { max-width: 960px; font-size: clamp(27px, 3.3vw, 41px); line-height: 1.25; overflow-wrap: normal; }
+.climate-title-zh { margin-top: 14px; font-size: 17px; color: var(--muted); }
+.climate-lead { max-width: 850px; margin-top: 24px; font-size: 20px; line-height: 1.65; color: var(--accent); }
+.climate-facts { display: grid; grid-template-columns: 1fr 1.2fr 1.2fr; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+.climate-facts dt { color: var(--muted); font-size: 13px; }
+.climate-facts dd { margin: 6px 0 0; font: 600 clamp(23px, 3vw, 30px)/1.3 Georgia, serif; color: var(--ink); }
+.climate-page .brief-section { margin-top: 36px; }
+.climate-page h2 { font-size: 24px; line-height: 1.45; margin-bottom: 15px; }
+.climate-page h3 { font-size: 17px; line-height: 1.5; margin-bottom: 7px; }
+.climate-page .brief-section > p { margin-bottom: 13px; }
+.climate-map { margin: 25px 0; }
+.map-input, .map-output { padding: 19px 24px; background: #172f51; color: #fff; }
+.map-input p, .map-output p { color: #d2e5fa; font-size: 14px; margin-top: 5px; }
+.map-models { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.map-models > div { border: 1px solid #bacde8; border-top: 3px solid #155fd1; padding: 24px; background: #f5f8fc; }
+.map-models > div:last-child { border-top-color: #087a71; background: #eef8f5; }
+.map-models p { font-size: 14px; color: var(--muted); }
+.map-code { display: block; color: #155fd1; font: 700 20px/1.4 Consolas, monospace; margin-bottom: 10px; }
+.map-models > div:last-child .map-code { color: #087a71; }
+.map-connector { color: #155fd1; font-size: 25px; text-align: center; line-height: 1.5; margin: 4px 0; }
+.climate-map figcaption { margin-top: 14px; font-size: 13px; line-height: 1.75; color: var(--muted); }
+.climate-findings { margin: 0; padding-left: 25px; }
+.climate-findings li { padding: 15px 0 15px 7px; border-bottom: 1px solid var(--line); }
+.climate-findings li::marker { color: var(--accent); font-weight: 700; }
+.climate-findings p { color: var(--muted); font-size: 15px; }
+.climate-scope { padding: 24px; background: #f5f8fc; border-left: 3px solid #155fd1; }
+.climate-scope p { font-size: 14px; color: var(--muted); }
+.climate-abstract { padding: 16px 0; border-block: 1px solid var(--line); }
+.climate-abstract summary { cursor: pointer; color: var(--accent); font-size: 16px; min-height: 44px; }
+.climate-abstract p { margin-top: 14px; line-height: 1.9; font-size: 15px; }
+.climate-page .brief-links a, .climate-page .brief-footer a { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; }
+.climate-page :focus-visible { outline: 3px solid #155fd1; outline-offset: 4px; }
+@media (max-width: 620px) {
+  .climate-page .brief-content { width: calc(100% - 36px); }
+  .climate-facts { grid-template-columns: 1fr; gap: 16px; }
+  .climate-facts > div { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+  .climate-facts dt { max-width: 48%; }
+  .climate-facts dd { font-size: 22px; text-align: right; margin: 0; }
+  .map-models { grid-template-columns: 1fr; gap: 12px; }
+  .map-models > div, .climate-scope { padding: 18px; }
+  .climate-lead { font-size: 18px; }
+}
+@media print {
+  .climate-page .brief-content { width: 100%; padding: 0; }
+  .climate-page .brief-opening h1 { font-size: 22pt; }
+  .climate-page .brief-status { color: #111; background: #fff; border: 1px solid #777; }
+  .climate-facts { grid-template-columns: 1fr 1fr 1fr; }
+  .map-input, .map-output, .map-models > div, .climate-scope { background: #fff; color: #111; border: 1px solid #777; }
+  .map-input p, .map-output p { color: #333; }
+  .climate-map, .climate-findings li { break-inside: avoid; }
+  .climate-page .brief-section { margin-top: 22px; }
+}
