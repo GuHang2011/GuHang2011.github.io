@@ -1,0 +1,24 @@
+.history-opening { padding: 64px 0 36px; background: #eef4fb; border-bottom: 1px solid var(--line); }
+.history-kicker { color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .12em; }
+.history-opening h1 { max-width: 870px; font-size: clamp(30px, 4vw, 48px); line-height: 1.25; margin: 16px 0 22px; }
+.history-lead { max-width: 790px; font-size: 18px; line-height: 1.85; }
+.history-date,.scope-note { color: var(--muted); font-size: 13px; }
+.history-nav { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 30px; }
+.history-nav a { border-bottom: 1px solid #8eabc9; padding-bottom: 4px; }
+.history-case { display: grid; grid-template-columns: 70px minmax(0,1fr); gap: 24px; padding: 44px 0; border-bottom: 1px solid var(--line); }
+.case-index { font-size: 34px; font-family: Georgia,serif; color: var(--accent); line-height: 1.4; }
+.case-main h2 { font-size: 27px; line-height: 1.4; margin-bottom: 16px; }
+.case-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 26px; }
+.case-main h3 { font-size: 15px; margin: 20px 0 8px; color: var(--teal); }
+.case-main ul { list-style: disc; padding-left: 22px; margin: 10px 0 20px; }
+.case-reflection { margin: 20px 0; padding: 16px 20px; border-left: 3px solid var(--teal); background: var(--surface); }
+.case-reflection summary { cursor: pointer; font-weight: 650; }
+.case-reflection[open] summary { margin-bottom: 14px; }
+.history-scope { padding: 44px 0 55px; }
+.history-scope h2 { margin-bottom: 18px; }
+.history-scope p { max-width: 890px; }
+.history-links { display: flex; flex-wrap: wrap; gap: 16px 28px; margin-top: 24px; }
+.history-case,.history-scope { scroll-margin-top: 90px; }
+.case-main,.history-opening { overflow-wrap: anywhere; }
+@media(max-width:700px) { .history-opening { padding: 36px 0 25px; } .history-case { grid-template-columns: 34px minmax(0,1fr); gap: 12px; padding: 28px 0; } .case-index { font-size: 26px; } .case-columns { grid-template-columns: 1fr; gap: 0; margin-top: 12px; } .case-main h2 { font-size: 23px; } .case-reflection { padding: 12px; } .history-lead { font-size: 16px; } }
+@media print { .site-header,.history-nav { display:none; } .history-opening { padding:16px 0; background:white; } .case-reflection { break-inside:avoid; } }

@@ -1,0 +1,174 @@
+{
+  "slug": "research-demo-handoff",
+  "title": {
+    "en": "Project reflection: what should accompany a research demo?",
+    "zh": "项目心得：一个研究 Demo，交付时还应该带上什么？"
+  },
+  "summary": {
+    "en": "Turn a demo into a reviewable handoff with input contracts, versioned evidence, failure behavior and a clear separation between teaching output and paper results.",
+    "zh": "除了展示页面，还要交代输入约定、版本记录、失败行为，以及教学输出与论文结果的区别。"
+  },
+  "category": "engineering",
+  "kind": "reflection",
+  "minutes": 6,
+  "date": "2026-10-27",
+  "tags": [
+    "Demo",
+    "Reproducibility",
+    "Release",
+    "Engineering",
+    "Research",
+    "工程交付",
+    "项目心得"
+  ],
+  "basis": {
+    "en": "Compiled from this portfolio’s public examples, new climate-protocol checks and the author-provided manuscript abstract. This is a design reflection, not a claim that the climate paper already has a deployed application.",
+    "zh": "结合本站公开示例、新增气候协议检查与作者提供的论文摘要整理。这是一篇设计复盘，不表示气候论文已经完成线上系统部署。"
+  },
+  "sections": [
+    {
+      "id": "reader",
+      "title": {
+        "en": "01 / Start from what a reader can verify",
+        "zh": "01 / 从读者能核对什么开始"
+      },
+      "paragraphs": [
+        {
+          "en": "A reviewer should be able to identify the question, change one input and understand why the output changes. For the new graph example, removing B→C changes the weighted result at C. The explanation is more useful than an unlabeled moving network.",
+          "zh": "读者应能看懂问题、改变一个输入，并理解输出为何变化。例如新增图算例中，删掉 B→C 会改变 C 的加权结果。把这一步解释清楚，比展示没有标注的动态网络更有用。"
+        },
+        {
+          "en": "Use four explicit artifact types: the paper record, the model implementation, a synthetic teaching example and an interface prototype. One can link to another, but a synthetic example should not inherit the paper’s performance claims.",
+          "zh": "明确区分四种产物：论文记录、模型实现、合成教学示例与界面原型。它们可以互相链接，但合成例子不应沿用论文性能主张。"
+        }
+      ]
+    },
+    {
+      "id": "contract",
+      "title": {
+        "en": "02 / Keep a small handoff contract",
+        "zh": "02 / 留下一份简短的交接约定"
+      },
+      "paragraphs": [
+        {
+          "en": "Record the entry command, supported runtime, input fields, units, missing-value rule, output schema and error behavior. A graph with a missing endpoint should fail clearly; returning a plausible-looking zero can hide bad data.",
+          "zh": "记录启动命令、运行环境、输入字段与单位、缺失处理、输出结构和错误行为。图边指向不存在节点时，应明确报错；返回一个看似合理的零值可能掩盖坏数据。"
+        }
+      ],
+      "code": {
+        "language": "YAML",
+        "text": "artifact: climate-protocol-learning-example\ndata_kind: synthetic\nmodel_training: false\npython: \">=3.8\"\nentry: notebook/examples/climate_protocol.py\nchecks: notebook/examples/test_climate_protocol.py\noutputs: information_flags, quantile_loss, graph_messages, split_labels\nnot_covered: spatial_holdouts, trained_forecasts, policy_effects"
+      }
+    },
+    {
+      "id": "evidence",
+      "title": {
+        "en": "03 / Store commands and outputs together",
+        "zh": "03 / 把命令、输出与范围放在一起"
+      },
+      "paragraphs": [
+        {
+          "en": "A useful evidence bundle contains the exact source revision, configuration, commands, output and test results. With real data, add acquisition dates, permissions and hashes for the actual inputs. Record only what exists; do not insert invented dataset IDs or placeholder success rates.",
+          "zh": "有用的验证包包含准确源码版本、配置、命令、输出和测试结果。涉及真实数据时，还应补采集日期、使用权限和实际输入的哈希。只记录已经存在的材料，不填造数据集编号或占位成功率。"
+        },
+        {
+          "en": "The small examples were run on 27 October 2026. Ten tests passed. Recorded outputs include q=0.9 pinball loss 1.0 and graph aggregation 6.5 before edge removal versus 2.0 afterward. These are arithmetic fixtures, not measured climate-risk outcomes.",
+          "zh": "这些小例子于 2026 年 10 月 27 日运行，10 项测试通过。记录输出包括 q=0.9 时损失为 1.0，以及删边前后聚合值 6.5 和 2.0。它们是计算样例，不是测得的气候风险结果。"
+        }
+      ]
+    },
+    {
+      "id": "failure",
+      "title": {
+        "en": "04 / A useful demo also shows failure",
+        "zh": "04 / 演示还应该让人看见失败路径"
+      },
+      "paragraphs": [
+        {
+          "en": "For an interface, distinguish loading, empty, invalid, failed and successful states. Reset should restore a documented initial case. An older request should not overwrite a later selection. Provide keyboard controls and text explanations alongside visual changes.",
+          "zh": "界面应区分加载中、空结果、非法输入、失败与成功。重置应恢复说明清楚的初始例子，旧请求不应覆盖新选择；视觉变化旁边还需有键盘操作和文字说明。"
+        },
+        {
+          "en": "For a scientific example, failure includes unavailable future data, a forecast window that straddles a boundary and nonfinite values. An explicit refusal can be more informative than an uninterrupted animation.",
+          "zh": "科学计算示例的失败情况包括：不可获得的未来数据、跨边界预测窗口、非有限数值。明确拒绝计算，往往比一段持续播放的动画更有信息量。"
+        }
+      ]
+    },
+    {
+      "id": "release",
+      "title": {
+        "en": "05 / Link the research to the right artifact",
+        "zh": "05 / 给研究工作连接正确的产物"
+      },
+      "paragraphs": [
+        {
+          "en": "The climate-risk page currently links an abstract-based overview and these learning notes. If a model release becomes available, it should add its own environment, data prerequisites, training/evaluation commands and supported claims. Until then, the small protocol example remains a separate educational artifact.",
+          "zh": "气候风险研究页目前连接摘要解读与这些学习笔记。后续若公开模型，需要单独提供环境、数据前提、训练／评估命令与支持的结论。在此之前，小型协议示例保持为独立教学产物。"
+        }
+      ]
+    },
+    {
+      "id": "takeaway",
+      "title": {
+        "en": "06 / The handoff I would want to receive",
+        "zh": "06 / 怎样的交接更值得信任"
+      },
+      "paragraphs": [
+        {
+          "en": "My preferred handoff is small enough to run and explicit enough to question: one command, one example with a hand-checkable result, one failure case and a source link. More screenshots can help navigation, but they cannot replace those four items.",
+          "zh": "更值得保留的交接方式，是足够小、能运行、也允许质疑：一个命令、一个能手算的结果、一个失败案例和一个源码入口。截图可以帮助阅读，但不能替代这四项。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/notebook/examples/climate_protocol.py",
+      "label": {
+        "en": "Runnable synthetic protocol examples",
+        "zh": "可运行的合成协议示例"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/notebook/examples/test_climate_protocol.py",
+      "label": {
+        "en": "Ten focused checks",
+        "zh": "10 项针对性检查"
+      }
+    },
+    {
+      "url": "examples/climate-protocol-results.json",
+      "label": {
+        "en": "Recorded example output · 27 October 2026",
+        "zh": "示例运行输出 · 2026-10-27"
+      }
+    },
+    {
+      "url": "async-interfaces.html",
+      "label": {
+        "en": "Async interface note",
+        "zh": "异步请求与竞态笔记"
+      }
+    },
+    {
+      "url": "model-version-rollback.html",
+      "label": {
+        "en": "Model-version rollback note",
+        "zh": "模型版本回退笔记"
+      }
+    },
+    {
+      "url": "../demos/react-workflow/",
+      "label": {
+        "en": "React workflow demonstration",
+        "zh": "React 工作流演示"
+      }
+    }
+  ],
+  "related": [
+    "gnn-risk-graphs",
+    "spatiotemporal-validation",
+    "async-interfaces",
+    "model-version-rollback"
+  ]
+}

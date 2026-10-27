@@ -1,0 +1,184 @@
+{
+  "slug": "spatiotemporal-validation",
+  "title": {
+    "en": "Panel-data validation: keep the whole forecast horizon on one side of a split",
+    "zh": "时空数据验证：不能只按样本行随机切分"
+  },
+  "summary": {
+    "en": "Separate future-period prediction from unseen-region transfer, purge boundary-crossing label windows and fit preprocessing only on training data.",
+    "zh": "区分未来年份预测与新地区迁移，剔除跨边界标签窗口，并将预处理拟合限制在训练数据内。"
+  },
+  "category": "data",
+  "kind": "study",
+  "minutes": 8,
+  "date": "2026-10-27",
+  "tags": [
+    "Panel data",
+    "Time series",
+    "Spatial holdout",
+    "Leakage",
+    "Validation",
+    "时空验证",
+    "数据泄漏"
+  ],
+  "basis": {
+    "en": "A study note prepared alongside the author-provided climate-risk abstract, using the sources below and a new standard-library Python example. The example uses invented values and is not the manuscript implementation or a research reproduction.",
+    "zh": "结合作者提供的气候风险摘要、下方来源与新编写的标准库 Python 示例整理。示例使用虚构数值，不是论文实现，也不属于论文复现实验。"
+  },
+  "sections": [
+    {
+      "id": "unit",
+      "title": {
+        "en": "01 / More rows do not mean more independent evidence",
+        "zh": "01 / 行数多，不等于独立证据多"
+      },
+      "paragraphs": [
+        {
+          "en": "Thirty provinces over twenty years would yield 600 province-year rows only if the panel were complete. Revisions, missingness, target construction and lag windows can reduce the usable set. Nearby provinces and adjacent years are correlated, so 600 rows do not imply 600 independent experiments.",
+          "zh": "30 个省份、20 年，只有在面板完整时才对应 600 条省—年记录。修订、缺失、目标构造和滞后窗口都会影响可用样本；相邻省份与年份还可能相关，因此 600 行不等于 600 次独立实验。"
+        },
+        {
+          "en": "Before counting samples, specify whether one example is a province-year, a time window, a network snapshot or a forecast horizon. Save an identifier such as province + origin + horizon to align predictions and prevent accidental duplicates.",
+          "zh": "统计样本前，先说明一个样本是省—年、时间窗口、网络快照还是预测跨度。保存“省份 + 起点 + 跨度”等标识，方便预测对齐并避免意外重复。"
+        }
+      ]
+    },
+    {
+      "id": "estimand",
+      "title": {
+        "en": "02 / The test split must answer the intended question",
+        "zh": "02 / 划分方式必须对应要回答的问题"
+      },
+      "paragraphs": [
+        {
+          "en": "A future-time test on already observed provinces measures temporal generalization. Holding out provinces measures transfer to new regions. Holding out both is harder and addresses a third question. Report these protocols separately rather than treating one as evidence for all three.",
+          "zh": "在已见省份上测试未来年份，衡量时间泛化；留出省份，衡量向新地区迁移；同时留出地区与时间，则是更严格的第三个问题。三种协议应分开报告，不能用一种结果代替全部。"
+        },
+        {
+          "en": "For graph models, state whether held-out nodes, their features and their edges are visible during training. Transductive access to an unlabeled node is different from inductive prediction on a previously unseen node; labels must remain withheld in either case.",
+          "zh": "对图模型，还要交代训练时是否能看到留出节点、节点特征与边。可访问未标注节点的传导式设置，与预测完全未见节点的归纳式设置不同；无论哪种，测试标签都应留出。"
+        }
+      ]
+    },
+    {
+      "id": "window",
+      "title": {
+        "en": "03 / Check label intervals, not just start dates",
+        "zh": "03 / 检查标签区间，而不只检查起始年份"
+      },
+      "paragraphs": [
+        {
+          "en": "In an illustrative split, training labels end in 2016, validation labels cover 2017–2020 and test labels cover 2021–2024. A two-year forecast issued in 2015 targets 2016 and 2017, crossing the training/validation boundary. Purge it under this strict label-disjoint protocol.",
+          "zh": "在一个教学划分中，训练标签截至 2016 年，验证标签为 2017—2020 年，测试标签为 2021—2024 年。2015 年发出的两年预测涉及 2016 与 2017，跨过训练／验证边界；在此严格标签隔离协议下，应剔除该窗口。"
+        },
+        {
+          "en": "A validation window may use earlier observed history: sharing historical inputs is not automatically leakage. Check whether a fitted transformation, target, revised statistic or graph edge introduces information unavailable at the origin. The illustrative dates below are not claimed to be the paper’s split.",
+          "zh": "验证窗口可以使用更早的已观测历史，共享历史输入不自动等于泄漏。真正要检查的是拟合变换、标签、修订统计值或图边，是否引入预测起点不可得的信息。下列年份仅用于教学，不代表论文实际划分。"
+        }
+      ],
+      "code": {
+        "language": "Python",
+        "text": "from climate_protocol import split_window\n\nassert split_window(2014, 2) == 'train'       # 2015, 2016\nassert split_window(2015, 2) == 'purged'      # 2016, 2017\nassert split_window(2016, 2) == 'validation'  # 2017, 2018\nassert split_window(2019, 2) == 'purged'      # 2020, 2021\nassert split_window(2020, 2) == 'test'        # 2021, 2022"
+      }
+    },
+    {
+      "id": "pipeline",
+      "title": {
+        "en": "04 / Preprocessing is part of the model",
+        "zh": "04 / 预处理也是模型的一部分"
+      },
+      "paragraphs": [
+        {
+          "en": "Fit imputers, scalers, feature selectors and learned graph construction on training data only. Apply the frozen transformations to validation and test data. If a procedure uses a future value to interpolate a historical gap, it can leak even when its code is outside the model.",
+          "zh": "缺失值填补器、标准化器、特征选择器及学习型构图都应只在训练数据上拟合，再冻结后应用于验证和测试。如果用未来值插补过去缺口，即使代码写在模型外，也可能泄漏。"
+        }
+      ],
+      "bullets": [
+        {
+          "en": "Lock target definitions, baseline rules and metrics before final testing. Use validation for model selection; repeated test-guided tuning turns the test into development data.",
+          "zh": "最终测试前固定目标定义、基线规则与指标；验证集用于选择模型，反复按测试结果调参会把测试集变成开发数据。"
+        },
+        {
+          "en": "Report error by horizon and region, not just a pooled average. For rare extreme events, inspect event counts and error distribution.",
+          "zh": "除汇总均值外，按预测跨度和地区报告误差；对于稀少极端事件，还应查看事件数量与误差分布。"
+        },
+        {
+          "en": "Use dependence-aware uncertainty estimates where feasible; resampling individual province-year rows may understate uncertainty when errors cluster.",
+          "zh": "条件允许时使用考虑相关性的区间估计；若误差聚集，逐行重采样省—年记录可能低估不确定性。"
+        }
+      ]
+    },
+    {
+      "id": "run",
+      "title": {
+        "en": "05 / What the executed check establishes",
+        "zh": "05 / 实际检查覆盖什么"
+      },
+      "paragraphs": [
+        {
+          "en": "The script enumerates two-year windows and checks that retained label-year sets are disjoint across splits. Ten focused tests also cover invalid horizons, information availability, graph inputs and quantile arithmetic. They do not check spatial holdouts, measurement quality or model accuracy.",
+          "zh": "脚本枚举两年预测窗口，检查保留窗口的标签年份集合在训练、验证和测试之间互不重叠。10 项针对性测试还覆盖非法跨度、信息可用性、图输入及分位数计算；不覆盖空间留出、测量质量或模型准确率。"
+        }
+      ],
+      "code": {
+        "language": "Shell",
+        "text": "python -m unittest discover -s notebook/examples -p test_climate_protocol.py -v"
+      }
+    },
+    {
+      "id": "reflection",
+      "title": {
+        "en": "06 / Write the split before building the model",
+        "zh": "06 / 先画清划分，再讨论模型"
+      },
+      "paragraphs": [
+        {
+          "en": "A useful first artifact is a table of issue time, available features, label interval, region set and split. If a colleague cannot reconstruct which information each prediction used, improving the model architecture will not repair the evaluation protocol.",
+          "zh": "一个有用的起点，是列出发布时间、可用特征、标签区间、地区集合与所属划分。如果同行无法重建每次预测用了什么信息，再复杂的模型结构也无法修复评估协议。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://scikit-learn.org/stable/common_pitfalls.html",
+      "label": {
+        "en": "scikit-learn · Common pitfalls and recommended practices",
+        "zh": "scikit-learn · 数据泄漏与常见问题"
+      }
+    },
+    {
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html",
+      "label": {
+        "en": "TimeSeriesSplit · time ordering and gap parameter",
+        "zh": "TimeSeriesSplit · 时间顺序与间隔参数"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/notebook/examples/climate_protocol.py",
+      "label": {
+        "en": "Runnable synthetic protocol examples",
+        "zh": "可运行的合成协议示例"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/notebook/examples/test_climate_protocol.py",
+      "label": {
+        "en": "Ten focused checks",
+        "zh": "10 项针对性检查"
+      }
+    },
+    {
+      "url": "examples/climate-protocol-results.json",
+      "label": {
+        "en": "Recorded example output · 27 October 2026",
+        "zh": "示例运行输出 · 2026-10-27"
+      }
+    }
+  ],
+  "related": [
+    "tft-information-boundary",
+    "gnn-risk-graphs",
+    "label-budget-ledger"
+  ]
+}

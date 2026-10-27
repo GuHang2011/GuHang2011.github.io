@@ -1,0 +1,213 @@
+{
+  "updated": "2026-10-27",
+  "basis": {
+    "en": "Project descriptions from a historical CV supplied by the author. No original source, screenshots or measured outcomes were supplied for these four projects.",
+    "zh": "根据本人提供的旧简历整理项目描述；本次未提供这四个项目的原始源码、截图或量化结果。"
+  },
+  "projects": [
+    {
+      "id": "production-desktop",
+      "title": {
+        "en": "Production feedback · Desktop",
+        "zh": "生产反馈 · PC 端"
+      },
+      "context": {
+        "en": "A reporting interface for production-process feedback, including printing-sheet and post-processing feedback.",
+        "zh": "面向工厂生产流程的报表管理系统，支持大版反馈、后工反馈等业务。"
+      },
+      "role": {
+        "en": "Worked within a team on overall page layout, cross-browser consistency, selected interactions and project integration; refined page structure and functionality.",
+        "zh": "参与团队开发，主要负责整体页面排版、浏览器表现一致性、部分交互与项目整合，并优化页面结构和功能。"
+      },
+      "stack": [
+        "Vue",
+        "Vuex",
+        "Vue Router",
+        "Webpack",
+        "ES6",
+        "Element UI",
+        "vw"
+      ],
+      "points": [
+        {
+          "en": "Overall page layout and interface integration",
+          "zh": "整体页面布局与界面整合"
+        },
+        {
+          "en": "Browser consistency and interaction refinements",
+          "zh": "浏览器一致性与交互优化"
+        }
+      ],
+      "reflection": {
+        "en": "A shared layout is only part of consistency. When revisiting a reporting interface, check whether filters, table state and error feedback stay aligned during navigation.",
+        "zh": "回看报表类界面，统一布局只是第一步。更值得检查的是切换页面后筛选条件、表格状态和错误提示是否一致。"
+      },
+      "checks": [
+        {
+          "en": "Test long table values, empty results and failed requests separately.",
+          "zh": "分别检查表格长文本、空结果与请求失败。"
+        },
+        {
+          "en": "Keep reusable layout components separate from business-specific state.",
+          "zh": "将通用布局组件与业务状态分开维护。"
+        }
+      ],
+      "link": "../../notebook/async-interfaces.html",
+      "linklabel": {
+        "en": "Read: async interface races",
+        "zh": "延伸笔记：异步请求竞态"
+      }
+    },
+    {
+      "id": "production-mobile",
+      "title": {
+        "en": "Production feedback · Mobile",
+        "zh": "生产反馈 · 移动端"
+      },
+      "context": {
+        "en": "A mobile interface for workers to report progress, choose a machine and access scan-based queries in printing workflows.",
+        "zh": "方便工厂业务人员及时报工、选择机台和扫描查询，支持移动场景中的生产进度反馈。"
+      },
+      "role": {
+        "en": "Implemented page layouts, page transitions and mobile presentation.",
+        "zh": "主要负责页面布局、页面切换和移动端效果实现。"
+      },
+      "stack": [
+        "HTML5",
+        "CSS3",
+        "rem",
+        "transform / animation",
+        "LocalStorage",
+        "Swiper"
+      ],
+      "points": [
+        {
+          "en": "Adapted layouts with rem units",
+          "zh": "使用 rem 适配不同分辨率"
+        },
+        {
+          "en": "Page transitions, local caching and swipe interactions",
+          "zh": "页面切换、本地缓存与滑动交互"
+        }
+      ],
+      "reflection": {
+        "en": "Local caching and successful submission are different states. A cached form should not look like a confirmed production record; the old CV records LocalStorage use but does not establish an offline synchronization mechanism.",
+        "zh": "本地缓存与提交成功是两种状态。缓存的表单不应被误认成已确认的报工记录；旧简历仅记载使用 LocalStorage，不能据此认定实现了离线同步。"
+      },
+      "checks": [
+        {
+          "en": "Check small screens, touch targets, keyboard obstruction and reduced-motion settings.",
+          "zh": "检查小屏布局、触摸目标、键盘遮挡和减少动态效果设置。"
+        },
+        {
+          "en": "Define cache expiry and distinguish pending input from server-confirmed data.",
+          "zh": "明确缓存过期规则，区分待提交输入与服务端已确认数据。"
+        }
+      ],
+      "link": "../../notebook/accessible-interactions.html",
+      "linklabel": {
+        "en": "Read: accessible interactions",
+        "zh": "延伸笔记：可访问的交互"
+      }
+    },
+    {
+      "id": "siyue-admin",
+      "title": {
+        "en": "Siyue administration system",
+        "zh": "思悦后台管理系统"
+      },
+      "context": {
+        "en": "A web administration system for a printing factory, covering production feedback, shipment management, receipt statistics and quotation calculation.",
+        "zh": "面向印刷工厂的网页后台，覆盖生产工序反馈、发货管理、收款统计及报价算价等功能。"
+      },
+      "role": {
+        "en": "Primarily responsible for page layout and rendering. The business scope describes the system as a whole, not sole ownership of every module.",
+        "zh": "主要负责页面布局与页面渲染。上述业务范围属于系统整体功能，不表示独立完成全部模块。"
+      },
+      "stack": [
+        "Vue CLI",
+        "Webpack",
+        "Element UI",
+        "vue-resource"
+      ],
+      "points": [
+        {
+          "en": "Modular frontend construction with Vue CLI and Webpack",
+          "zh": "使用 Vue CLI 与 Webpack 组织模块化前端"
+        },
+        {
+          "en": "Component-based views and request-driven rendering",
+          "zh": "组件化页面与请求数据渲染"
+        }
+      ],
+      "reflection": {
+        "en": "A reusable admin page needs explicit field rules and request states, not just matching table styles. A schema-driven form is a useful separate exercise for examining that boundary.",
+        "zh": "后台页面的复用需要明确字段规则和请求状态，不能只统一表格样式。配置驱动表单可以作为独立练习，用来拆解这种边界。"
+      },
+      "checks": [
+        {
+          "en": "List field types, defaults and validation rules before extracting shared forms.",
+          "zh": "抽取公共表单前，先列清字段类型、默认值与校验规则。"
+        },
+        {
+          "en": "Separate loading, empty, validation-error and request-error states.",
+          "zh": "分别表达加载、空数据、校验错误与请求失败。"
+        }
+      ],
+      "link": "../../demos/low-code-form/",
+      "linklabel": {
+        "en": "Try a separate form-design learning demo",
+        "zh": "体验独立的表单设计学习 Demo"
+      }
+    },
+    {
+      "id": "fixed-network",
+      "title": {
+        "en": "Fixed-network service platform",
+        "zh": "固网开发平台"
+      },
+      "context": {
+        "en": "A customized telecom administration platform for overseas customers, with account opening, service suspension, relocation, cashier and order-preview interfaces.",
+        "zh": "为海外客户定制的电信后台，包含开户、停机、移机、收银台和订单预览等界面。"
+      },
+      "role": {
+        "en": "Implemented frontend page logic for the Bundle module and account-opening, suspension and relocation pages.",
+        "zh": "负责前台页面逻辑，参与 Bundle 模块及开户、停机、移机等功能页面开发。"
+      },
+      "stack": [
+        "Fish framework",
+        "Handlebars templates",
+        "Event listeners"
+      ],
+      "points": [
+        {
+          "en": "Business-page logic and product-list rendering",
+          "zh": "业务页面逻辑与产品列表渲染"
+        },
+        {
+          "en": "Navigation and interactions through local event listeners",
+          "zh": "通过局部事件监听组织页面跳转与交互"
+        }
+      ],
+      "reflection": {
+        "en": "A visible action is not necessarily a valid business transition. State-based UI exercises help describe which actions are permitted and how stale responses should be handled; the historical CV does not document a specific state-machine implementation.",
+        "zh": "按钮可见不等于业务操作合法。状态化界面练习有助于说明哪些操作允许执行、过期响应如何处理；旧简历未记录具体状态机实现。"
+      },
+      "checks": [
+        {
+          "en": "State each action’s preconditions, expected response and failure display.",
+          "zh": "写清操作前置条件、预期响应与失败提示。"
+        },
+        {
+          "en": "Check listener cleanup when views are mounted and removed repeatedly.",
+          "zh": "检查页面反复挂载、卸载时监听器是否正确清理。"
+        }
+      ],
+      "link": "../../demos/react-workflow/",
+      "linklabel": {
+        "en": "Try a separate React workflow demo",
+        "zh": "体验独立的 React 工作流 Demo"
+      }
+    }
+  ]
+}

@@ -4,9 +4,9 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-DATE = "2026-10-25"
-VERSION = "20261025-reliability-lab"
-ORDER = ["multimodal-gates", "label-budget-ledger", "model-version-rollback", "rag-evaluation", "async-interfaces", "sql-windows", "model-selection", "order-idempotency", "accessible-interactions", "data-quality", "prompt-contracts", "permission-boundaries", "digital-human", "text-to-image", "generative-workflow"]
+DATE = "2026-10-27"
+VERSION = "20261027-notes-projects"
+ORDER = ['tft-information-boundary', 'gnn-risk-graphs', 'spatiotemporal-validation', 'research-demo-handoff', "multimodal-gates", "label-budget-ledger", "model-version-rollback", "rag-evaluation", "async-interfaces", "sql-windows", "model-selection", "order-idempotency", "accessible-interactions", "data-quality", "prompt-contracts", "permission-boundaries", "digital-human", "text-to-image", "generative-workflow"]
 CATEGORIES = {
     "all": {"en": "All topics", "zh": "全部主题"},
     "frontend": {"en": "Frontend", "zh": "前端交互"},
@@ -50,7 +50,7 @@ def frame(title, description, path, body):
 <button type="button" data-language="zh" aria-pressed="false" aria-label="中文">中</button><button type="button" data-language="en" aria-pressed="true" aria-label="English">EN</button></div>
 <button class="menu-toggle icon-button" type="button" aria-expanded="false" aria-controls="navigation" aria-label="Menu"><img src="../assets/icons/menu.svg" alt=""></button></div></div></header>
 <main id="main">{body}</main>
-<footer class="site-footer"><div class="wrap footer-inner"><div><strong>Hang Gu · 顾航</strong>{pair('Learning through questions, code and review.','从问题、代码与复查中学习。','p')}</div><div>{pair('Collection updated 20 October 2026','笔记集更新于 2026-10-20','p')}<a href="../">{pair('Back to portfolio','返回个人主页')}</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/notebook">GitHub</a></div></div></footer>
+<footer class="site-footer"><div class="wrap footer-inner"><div><strong>Hang Gu · 顾航</strong>{pair('Learning through questions, code and review.','从问题、代码与复查中学习。','p')}</div><div>{pair('Collection updated 27 October 2026','笔记集更新于 2026-10-27','p')}<a href="../">{pair('Back to portfolio','返回个人主页')}</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/notebook">GitHub</a></div></div></footer>
 <button class="back-top icon-button" type="button" aria-label="Back to top"><img src="../assets/icons/arrow-up.svg" alt=""></button></body></html>
 '''
 
@@ -71,7 +71,7 @@ def render_index(notes):
     controls = ''.join(f'<button type="button" data-note-topic="{key}" aria-pressed="{str(key == "all").lower()}">{tr(label)}</button>' for key, label in CATEGORIES.items())
     routes = [
         ('frontend', 'From input to a reliable interface', '从输入到可靠交互', 'Async responses · focus · accessibility', '异步响应 · 焦点 · 可访问性'),
-        ('models', 'From model code to credible evaluation', '从模型实现到可信评估', 'Retrieval · selection · generation', '检索评估 · 模型选择 · 内容生成'),
+        ('models', 'From model code to credible evaluation', '从模型实现到可信评估', 'TFT inputs · graph edges · model selection', 'TFT 输入 · 图边语义 · 模型选择'),
         ('engineering', 'From a working system to clear boundaries', '从功能实现到工程边界', 'State transitions · retries · authorization', '状态迁移 · 重试 · 权限'),
         ('data', 'From collected records to usable samples', '从采集记录到可用样本', 'SQL windows · conflicts · traceability', 'SQL 窗口 · 冲突处理 · 可追溯性'),
     ]
@@ -82,7 +82,7 @@ def render_index(notes):
 <aside class="notebook-margin"><strong>{pair('Read the reasoning','从判断依据读起')}</strong>{pair(f'{count} notes connect implementation details to verification and open questions.',f'{count} 篇笔记把实现细节、验证方法与后续问题连接起来。','p')}<a href="model-selection.html">{pair('Start with model selection','从模型验证开始阅读')}</a></aside></section>
 <div class="wrap"><nav class="notebook-routes" aria-label="Suggested reading paths" data-en-label="Suggested reading paths" data-zh-label="建议阅读路径">{paths}</nav></div>
 <section class="wrap notebook-library" id="entries" aria-labelledby="library-title"><div class="library-heading">{pair('Notes & reflections','学习笔记与项目心得','h2','id="library-title"')}<span>{pair('Compiled October 2026','整理于 2026 年 10 月')}</span></div>
-<form class="notebook-tools" data-notebook-tools hidden role="search"><div class="notebook-search"><label for="note-search">{pair('Search notes','搜索笔记')}</label><input id="note-search" type="search" autocomplete="off" placeholder="Try: validation, focus, stock" data-en-placeholder="Try: validation, focus, stock" data-zh-placeholder="试试：验证集、焦点、库存"><button type="button" data-note-clear>{pair('Clear','清除')}</button></div>
+<form class="notebook-tools" data-notebook-tools hidden role="search"><div class="notebook-search"><label for="note-search">{pair('Search notes','搜索笔记')}</label><input id="note-search" type="search" autocomplete="off" placeholder="Try: TFT, GNN, validation" data-en-placeholder="Try: TFT, GNN, validation" data-zh-placeholder="试试：TFT、GNN、泄漏"><button type="button" data-note-clear>{pair('Clear','清除')}</button></div>
 <div class="notebook-filters" role="group" aria-label="Note topics" data-en-label="Note topics" data-zh-label="笔记主题">{controls}</div>
 <p data-note-count role="status" aria-live="polite" aria-atomic="true"></p></form>
 <div class="journal-list">{''.join(note_row(n) for n in notes)}</div>

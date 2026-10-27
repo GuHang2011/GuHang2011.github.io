@@ -2,7 +2,7 @@
 
 [Read online / 在线阅读](https://guhang2011.github.io/notebook/)
 
-Fifteen bilingual notes connect code observations, small examples, implementation tradeoffs and questions for further study. Collection updated on **2026-10-25**, with AI-assisted drafting and translation. Each article retains its compilation date. They are learning summaries, not a historical lab diary or evidence of new research results.
+Nineteen bilingual notes connect code observations, small examples, implementation tradeoffs and questions for further study. Collection updated on **2026-10-27**, with AI-assisted drafting and translation. Each article retains its compilation date. They are learning summaries, not a historical lab diary or evidence of new research results.
 
 | Topic | Note | Related work |
 | --- | --- | --- |
@@ -52,3 +52,14 @@ node --test notebook/examples/latest-request.test.mjs
 ```
 
 These checks validate the small examples only. They do not evaluate a deployed search service, a language model or large-scale SQL performance.
+
+## 27 October 2026 additions / 本轮新增
+
+学习笔记共 **19** 篇。以下四篇围绕时空建模和工程交付，使用合成教学例子，不补写论文实验结果。
+
+- [TFT 学习：预测发出时，哪些信息真的已知？ / Learning TFT: what was actually known when a forecast was issued?](tft-information-boundary.html)
+- [GNN 学习：消息传递之前，先定义风险图 / Learning GNNs: defining a risk graph before passing messages](gnn-risk-graphs.html)
+- [时空数据验证：不能只按样本行随机切分 / Panel-data validation: keep the whole forecast horizon on one side of a split](spatiotemporal-validation.html)
+- [项目心得：一个研究 Demo，交付时还应该带上什么？ / Project reflection: what should accompany a research demo?](research-demo-handoff.html)
+
+[Python 示例、运行方法与 10 项测试](examples/climate-protocol-README.md) · [历史前端项目案例](../cases/early-frontend/README.md)

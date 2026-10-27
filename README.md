@@ -35,7 +35,7 @@ Engineering highlights, code and verification evidence, and the academic CV appe
 4. **Notebook:** [fifteen bilingual study notes and project reflections](notebook/) on frontend interaction, data quality, model validation, prompt contracts, order consistency, permission boundaries, digital-human pipelines, text-to-image diffusion and reproducible generative workflows. The three October 25 notes cover multimodal decision gates, total annotation budgets and model-version rollback. Searchable by title, summary and tag, with topic filters, source references, code examples and printable article pages. Earlier repositories remain available in the homepage's expandable reading list.
 5. **Background:** education and professional experience.
 6. **Interactive experiments:** financial clustering, data preparation audits, model evaluation, a React workflow board and a schema-driven low-code form studio, with synthetic data, source code, notes and reproducible checks. [Reading map](demos/README.md).
-7. **AI engineering case:** a full-stack module with account-bound key handling, endpoint policy, editable presentation generation, human review and documented mocked-provider tests. [Case study](cases/ai-office/).
+7. **AI engineering case:** a full-stack module with account-bound key handling, endpoint policy, editable presentation generation, human review and documented mocked-provider tests. [Case study](https://github.com/GuHang2011/engineering-notes/blob/main/notes/personal-ai-keys.md).
 
 The Neurocomputing entry was updated on 24 October 2026 from the supplied revision and author confirmation: submitted, not accepted. It describes 344 archived training runs, operating-point analysis and archive-artifact audits; FCP is not claimed as a new architecture. The Climate Risk Management entry follows the abstract and author update of 27 October 2026. Other research states follow the supplied CV. DASFAA author order and official proceedings records for conference work are not fully linked yet; confirm current decisions and citations before relying on them. Manuscripts and accepted work are labeled separately. The KICP project links to its implementation and setup documentation; the learning lab uses synthetic data.
 
@@ -43,7 +43,7 @@ The Neurocomputing entry was updated on 24 October 2026 from the supplied revisi
 
 - [Counselor collaboration and release verification](https://guhang2011.github.io/cases/counselor/): role-scoped collaboration, tasks, release evidence and an extracted release-gate example. Existing October 13 records are distinguished from newly executed example tests.
 - [College materials archive](https://guhang2011.github.io/cases/archive/): permissions, versioning, review, logical deletion and audit. Its interactive lifecycle illustration uses synthetic records; the original application was reviewed but not rerun for this site update.
-- [Personal AI workspace](https://guhang2011.github.io/cases/ai-office/): an existing archive-system module, with synthetic UI fixtures, public engineering notes and documented tests that mock the provider; no real provider key was used.
+- [Personal AI workspace](https://github.com/GuHang2011/engineering-notes/blob/main/notes/personal-ai-keys.md): an existing archive-system module, with synthetic UI fixtures, public engineering notes and documented tests that mock the provider; no real provider key was used.
 - [Release-gate example](cases/examples/README.md): dependency-free JavaScript, tests and limitations.
 
 Project screenshots use synthetic demo content. Public cases exclude original databases, credentials, private configuration and student records. Latest notebook additions: **2026-10-25**. The Neurocomputing entry follows the October 24 revision and author confirmation; other research statuses follow the September CV. The new notes were compiled with AI-assisted drafting and translation; each distinguishes code observations, examples and proposed checks. Generative-model examples are learning guides and were not run locally for this update.
@@ -123,3 +123,9 @@ The review focuses on what a prospective supervisor can verify: the research que
 - Carousel controls, keyboard focus, screen-reader states, stable slide height, motion preferences, mobile layout, printing and reading without JavaScript were checked. Browser checks cover English desktop and Chinese widths of 1280, 1024, 768, 390 and 320 pixels, plus light and dark palettes.
 
 This is a review of the public page, not a new experiment or a publication-status update. Official conference citations, confirmed author order for DASFAA and complete revision artifacts still require primary records; they are not invented or implied by the page design.
+
+## 2026-10-27 · Project archive and learning notes
+
+- [四个历史前端项目 / Four historical frontend cases](cases/early-frontend/README.md): desktop/mobile production feedback, factory administration and telecom service interfaces; responsibilities from the author’s supplied CV.
+- [学习笔记集 / Notebook](https://guhang2011.github.io/notebook/) now has 19 articles, including TFT inputs, graph semantics, time-aware validation and demo handoffs.
+- [Runnable protocol examples](notebook/examples/climate-protocol-README.md): 10 synthetic checks passed; no manuscript training or performance claims.

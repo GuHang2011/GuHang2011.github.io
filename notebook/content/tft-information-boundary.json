@@ -1,0 +1,188 @@
+{
+  "slug": "tft-information-boundary",
+  "title": {
+    "en": "Learning TFT: what was actually known when a forecast was issued?",
+    "zh": "TFT 学习：预测发出时，哪些信息真的已知？"
+  },
+  "summary": {
+    "en": "Separate static, observed and known-future inputs; work through quantile loss and keep attention explanations separate from causal claims.",
+    "zh": "分清静态、历史观测与已知未来输入，手算分位数损失，并区分注意力解释与因果结论。"
+  },
+  "category": "models",
+  "kind": "study",
+  "minutes": 7,
+  "date": "2026-10-27",
+  "tags": [
+    "TFT",
+    "Temporal Fusion Transformer",
+    "Forecasting",
+    "Quantile loss",
+    "Information leakage",
+    "信息泄漏",
+    "时序预测"
+  ],
+  "basis": {
+    "en": "A study note prepared alongside the author-provided climate-risk abstract, using the sources below and a new standard-library Python example. The example uses invented values and is not the manuscript implementation or a research reproduction.",
+    "zh": "结合作者提供的气候风险摘要、下方来源与新编写的标准库 Python 示例整理。示例使用虚构数值，不是论文实现，也不属于论文复现实验。"
+  },
+  "sections": [
+    {
+      "id": "question",
+      "title": {
+        "en": "01 / Fix the prediction question first",
+        "zh": "01 / 先把预测问题写完整"
+      },
+      "paragraphs": [
+        {
+          "en": "At an origin t, predict a named outcome at t+h. The unit might be a province and the target a documented risk indicator. That statement needs an issue date, horizon, target definition and available input history. An annual risk assessment with contemporaneous variables is not automatically a prospective forecast.",
+          "zh": "以时点 t 为起点，预测 t+h 的某个明确指标。样本单位可以是省份，目标可以是定义清楚的风险指标，但必须同时写明发布时间、预测跨度、目标定义与可用历史。使用同期变量的年度风险评估，不自动等同于面向未来的预测。"
+        },
+        {
+          "en": "The supplied abstract mentions TFT–GNN, but does not give its forecasting horizon or target construction. The examples here explain questions to ask when reading or implementing TFT; they do not fill in those missing manuscript details.",
+          "zh": "当前摘要提到 TFT–GNN，但没有给出预测跨度与目标构造细节。本篇说明学习或实现 TFT 时应问的问题，不替论文补写这些设定。"
+        }
+      ]
+    },
+    {
+      "id": "inputs",
+      "title": {
+        "en": "02 / Three input families, two timestamps",
+        "zh": "02 / 三类输入，两种时间"
+      },
+      "paragraphs": [
+        {
+          "en": "Static context describes an entity; observed inputs become known through measurement; known-future inputs are available for a future target time before the forecast is issued. Each field needs both the period it describes and the date its value became available.",
+          "zh": "静态上下文描述对象；观测输入通过测量获得；已知未来输入则在预测发出前，已经能确定未来目标时点的取值。每个字段都需要同时记录“描述哪个时期”和“何时能获得”。"
+        }
+      ],
+      "bullets": [
+        {
+          "en": "A future calendar year or scheduled event can be known. Realized rainfall next year cannot be treated as known-future rainfall. A weather forecast is a different, vintage-specific input.",
+          "zh": "未来日历或已公布的计划可以已知；下一年的实测降水不能当作已知未来降水。天气预报是另一种带有发布版本的输入。"
+        },
+        {
+          "en": "A statistic for 2015 revised in 2018 is unavailable to a forecast issued in 2016. Historical validity is not the same as historical availability.",
+          "zh": "2015 年统计值若在 2018 年才修订发布，就不能直接给 2016 年发出的预测使用。“历史年份”不等于“当时可获得”。"
+        },
+        {
+          "en": "Static does not mean timeless: a topology or installed-capacity category may change. Version it at the forecast origin when necessary.",
+          "zh": "静态不等于永久不变：网络结构或装机类别可能变化，必要时也要保存预测时点对应的版本。"
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "title": {
+        "en": "03 / Read the TFT components by their job",
+        "zh": "03 / 按职责理解 TFT 组件"
+      },
+      "paragraphs": [
+        {
+          "en": "The original TFT combines variable selection, static-covariate context, recurrent processing for local temporal structure, attention for longer dependencies and gating/residual mechanisms. Its multi-horizon quantile outputs answer a different question from a single deterministic score.",
+          "zh": "原始 TFT 将变量选择、静态协变量上下文、处理局部时间结构的循环模块、处理较长依赖的注意力，以及门控和残差机制结合起来。多步分位数输出回答的问题，与单个确定性分数不同。"
+        },
+        {
+          "en": "Start with a seasonal or persistence baseline and a simpler model using the same information. Compare errors by horizon, region and extreme-event subset. A large architecture alone is not evidence that a small panel needs it.",
+          "zh": "先建立季节性或持续性基线，再比较使用相同信息的简单模型。分预测跨度、地区和极端事件子集查看误差；模型规模本身不能证明小型面板需要复杂结构。"
+        }
+      ]
+    },
+    {
+      "id": "quantiles",
+      "title": {
+        "en": "04 / Hand-check the asymmetric loss",
+        "zh": "04 / 手算不对称的分位数损失"
+      },
+      "paragraphs": [
+        {
+          "en": "For residual e = y − q̂, pinball loss is max(τe, (τ−1)e). At τ=0.9, underpredicting by 2 costs 1.8; overpredicting by 2 costs 0.2. For y=[10,20] and predictions [12,18], the mean loss is 1.0.",
+          "zh": "令残差 e = y − q̂，pinball loss 为 max(τe, (τ−1)e)。当 τ=0.9 时，少预测 2 的损失为 1.8，多预测 2 的损失为 0.2。真实值 [10,20]、预测值 [12,18] 的平均损失为 1.0。"
+        },
+        {
+          "en": "A nominal 10th–90th percentile interval targets 80% coverage; it does not guarantee it. Measure empirical coverage and interval width on held-out cases, check quantile crossing, and inspect regional coverage rather than treating a narrow interval as proof of reliability.",
+          "zh": "10%—90% 分位区间的名义覆盖率为 80%，但不保证实际覆盖率达到 80%。应在独立样本上测覆盖率与区间宽度、检查分位数交叉，并查看地区差异；区间窄不等于可靠。"
+        }
+      ],
+      "code": {
+        "language": "Python",
+        "text": "from climate_protocol import pinball_loss\n\nloss = pinball_loss([10, 20], [12, 18], 0.9)\nassert abs(loss - 1.0) < 1e-12"
+      }
+    },
+    {
+      "id": "run",
+      "title": {
+        "en": "05 / Run a small information-boundary check",
+        "zh": "05 / 运行一个信息可用性检查"
+      },
+      "paragraphs": [
+        {
+          "en": "From the repository root, run the commands below with Python 3.8 or later. No GPU, PyTorch or model weights are needed. The import snippet above can be run from notebook/examples. Expected availability outputs are true, false, false for the future calendar, future observed rainfall and late historical revision.",
+          "zh": "在仓库根目录使用 Python 3.8 及以上运行下列命令，无需 GPU、PyTorch 或模型权重。上方导入片段可在 notebook/examples 目录执行。未来日历、未来实测降水和晚发布历史修订值的预期可用性依次为 true、false、false。"
+        }
+      ],
+      "code": {
+        "language": "Shell",
+        "text": "python notebook/examples/climate_protocol.py\npython -m unittest discover -s notebook/examples -p test_climate_protocol.py -v"
+      }
+    },
+    {
+      "id": "reflection",
+      "title": {
+        "en": "06 / A useful reading habit",
+        "zh": "06 / 一个值得保留的阅读习惯"
+      },
+      "paragraphs": [
+        {
+          "en": "Before comparing attention plots, write an availability ledger. Ask which input would disappear if the forecast were replayed at its original issue time. Variable-selection and attention weights can describe model behavior, but they are not causal effects or automatically stable explanations.",
+          "zh": "比较注意力图之前，先列一张信息可用性台账：如果回到预测当时，哪些输入会消失？变量选择权重与注意力权重可以描述模型行为，却不是因果效应，也不自动代表稳定解释。"
+        }
+      ],
+      "callout": {
+        "en": "These checks validate loss arithmetic and information rules only. No TFT training or manuscript performance is evaluated here.",
+        "zh": "这些检查仅验证损失计算与信息规则；本示例未训练 TFT，也未评估论文性能。"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://arxiv.org/abs/1912.09363",
+      "label": {
+        "en": "Lim et al. · Temporal Fusion Transformers for Interpretable Multi-horizon Time Series Forecasting",
+        "zh": "Lim 等 · TFT 原始论文"
+      }
+    },
+    {
+      "url": "https://pytorch-forecasting.readthedocs.io/en/stable/",
+      "label": {
+        "en": "PyTorch Forecasting documentation",
+        "zh": "PyTorch Forecasting 文档"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/notebook/examples/climate_protocol.py",
+      "label": {
+        "en": "Runnable synthetic protocol examples",
+        "zh": "可运行的合成协议示例"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/notebook/examples/test_climate_protocol.py",
+      "label": {
+        "en": "Ten focused checks",
+        "zh": "10 项针对性检查"
+      }
+    },
+    {
+      "url": "examples/climate-protocol-results.json",
+      "label": {
+        "en": "Recorded example output · 27 October 2026",
+        "zh": "示例运行输出 · 2026-10-27"
+      }
+    }
+  ],
+  "related": [
+    "spatiotemporal-validation",
+    "gnn-risk-graphs",
+    "model-selection"
+  ]
+}

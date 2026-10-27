@@ -1,0 +1,51 @@
+{
+  "scope": "Synthetic protocol checks; no model training or manuscript results.",
+  "features": {
+    "future_calendar": true,
+    "future_observed_rainfall": false,
+    "late_revised_history": false
+  },
+  "pinball_q90": 1.0,
+  "graph_full": {
+    "A": null,
+    "B": null,
+    "C": 6.5
+  },
+  "graph_drop_B_to_C": {
+    "A": null,
+    "B": null,
+    "C": 2.0
+  },
+  "windows": [
+    {
+      "origin": 2014,
+      "horizon": 2,
+      "split": "train"
+    },
+    {
+      "origin": 2015,
+      "horizon": 2,
+      "split": "purged"
+    },
+    {
+      "origin": 2016,
+      "horizon": 2,
+      "split": "validation"
+    },
+    {
+      "origin": 2019,
+      "horizon": 2,
+      "split": "purged"
+    },
+    {
+      "origin": 2020,
+      "horizon": 2,
+      "split": "test"
+    },
+    {
+      "origin": 2022,
+      "horizon": 2,
+      "split": "test"
+    }
+  ]
+}
