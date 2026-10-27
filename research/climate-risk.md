@@ -3,6 +3,7 @@
 面向可再生能源—水耦合系统多灾种气候风险治理的混合人工智能框架
 
 **第一作者 / First author: 顾航（Hang Gu）**  
+**个人贡献 / Contribution:** 负责项目开发，参与论文部分内容编辑。 / Responsible for project development; contributed to editing parts of the manuscript.  
 **投稿期刊 / Submitted to: Climate Risk Management**  
 **状态 / Status: 已投稿，尚未录用 / Submitted, not accepted**  
 状态记录更新于 2026-10-27；依据作者说明，不代表确切投稿日期或特定审稿阶段。
@@ -28,7 +29,7 @@
 
 This record is based on the author-provided abstract and first-author confirmation on 27 October 2026. The manuscript is submitted, not accepted. The supplied abstract reports improved performance over traditional machine-learning and econometric approaches, but it supplies no numerical results, named comparators, uncertainty estimates, evaluation splits or threshold values. No DOI, full manuscript, public dataset or implementation link has been supplied for this work. The conceptual diagram explains the abstract; it does not specify the implemented fusion order or graph construction.
 
-本记录依据作者提供的摘要与第一作者身份说明整理。没有补写性能提升比例、统计显著性、图构造细节或个人贡献分工。题名仅规范原输入中 AI 与 Framework for 的拼写／空格；中文题名为介绍用译名。
+本记录依据作者提供的摘要与第一作者身份说明整理。个人贡献按作者说明记录为项目开发和论文部分内容编辑；未补写性能提升比例、统计显著性或图构造细节。题名仅规范原输入中 AI 与 Framework for 的拼写／空格；中文题名为介绍用译名。
 
 ## English abstract supplied by the author
 
@@ -37,3 +38,4 @@ This research proposes a new hybrid artificial intelligence system to assess mul
 ## Future directions mentioned in the abstract
 
 Real-time satellite observations, carbon-transition dynamics and cross-border climate-risk spillovers are proposed extensions, not completed capabilities asserted in this record.
+
