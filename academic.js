@@ -9,6 +9,9 @@
   const filterState = { publications: "all", projects: "all" };
   const projectSearch = document.querySelector("#project-search");
   const clearSearch = document.querySelector("[data-clear-search]");
+  const projectExpansion = document.querySelector("[data-project-expansion]");
+  const expandProjects = document.querySelector("[data-project-expand]");
+  let projectsExpanded = false;
   let languageInitialized = false;
   let languageMotionTimer;
   // Keep both languages searchable when the visible language changes.
@@ -22,9 +25,10 @@
     const terms = query.split(/\s+/u).filter(Boolean);
     for (const [group, filter] of Object.entries(filterState)) {
       const items = [...document.querySelectorAll(`[data-collection="${group}"] [data-category]`)];
+      const curated = group === "projects" && expandProjects && !projectsExpanded && filter === "all" && !terms.length;
       items.forEach(item => {
         const matchesQuery = group !== "projects" || terms.every(term => projectText.get(item).includes(term));
-        item.hidden = (filter !== "all" && item.dataset.category !== filter) || !matchesQuery;
+        item.hidden = (filter !== "all" && item.dataset.category !== filter) || !matchesQuery || Boolean(curated && item.dataset.featured !== "true");
         item.classList.remove("first-visible", "last-visible");
       });
       const visible = items.filter(item => !item.hidden);
@@ -35,6 +39,13 @@
       if (group === "projects") {
         const empty = document.querySelector("[data-project-empty]");
         if (empty) empty.hidden = visible.length > 0;
+        if (projectExpansion) projectExpansion.hidden = filter !== "all" || terms.length > 0;
+        if (expandProjects) {
+          expandProjects.setAttribute("aria-expanded", String(projectsExpanded));
+          expandProjects.textContent = projectsExpanded
+            ? (language === "zh" ? "收起，查看代表项目" : "Show selected projects")
+            : (language === "zh" ? `展开全部 ${items.length} 个项目` : `Show all ${items.length} projects`);
+        }
       }
     }
     if (clearSearch) clearSearch.disabled = !projectSearch.value;
@@ -112,6 +123,7 @@
     projectSearch.focus();
   });
   function resetProjects() {
+    projectsExpanded = true;
     filterState.projects = "all";
     if (projectSearch) projectSearch.value = "";
     document.querySelectorAll('[data-filter-group="projects"] button').forEach(button => {
@@ -123,9 +135,33 @@
     resetProjects();
     projectSearch?.focus();
   });
-  document.querySelectorAll('.project-routes a[href^="#"], .engineering-card a[href^="#project-"]').forEach(link => {
-    link.addEventListener("click", resetProjects);
+  expandProjects?.addEventListener("click", () => {
+    projectsExpanded = !projectsExpanded;
+    updateCounts();
+    if (!projectsExpanded) expandProjects.scrollIntoView({ block: "center", behavior: "instant" });
   });
+
+  // Reveal the target before native anchor navigation; also handle history and direct URLs.
+  function revealTarget(hash, scroll = false) {
+    if (!hash || hash === "#") return;
+    let id;
+    try { id = decodeURIComponent(hash.slice(1)); } catch { return; }
+    const target = document.getElementById(id);
+    if (!target) return;
+    const project = target.closest('[data-collection="projects"] [data-category]');
+    if (project?.hidden) resetProjects();
+    for (let parent = target.parentElement; parent; parent = parent.parentElement) {
+      if (parent.tagName === "DETAILS") parent.open = true;
+    }
+    (project || target).classList.add("is-visible");
+    if (scroll) requestAnimationFrame(() => target.scrollIntoView({ block: "start", behavior: "instant" }));
+  }
+  document.addEventListener("click", event => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const link = event.target.closest('a[href^="#"]');
+    if (link) revealTarget(link.hash, link.hash === location.hash);
+  });
+  addEventListener("hashchange", () => revealTarget(location.hash, true));
 
   document.querySelectorAll("[data-video-gallery]").forEach(gallery => {
     const tabList = gallery.querySelector("[data-video-tabs]");
@@ -194,6 +230,16 @@
     header.dataset.open = String(open);
   });
   document.querySelectorAll(".nav-links a").forEach(a => a.addEventListener("click", closeMenu));
+  const navigation = document.getElementById(menu?.getAttribute("aria-controls"));
+  document.addEventListener("click", event => {
+    if (header?.dataset.open === "true" && !menu?.contains(event.target) && !navigation?.contains(event.target)) closeMenu();
+  });
+  header?.addEventListener("focusout", event => {
+    if (event.relatedTarget && !header.contains(event.relatedTarget)) closeMenu();
+  });
+  addEventListener("resize", () => {
+    if (menu && getComputedStyle(menu).display === "none") closeMenu();
+  });
   document.addEventListener("keydown", event => {
     if (event.key === "Escape" && header?.dataset.open === "true") { closeMenu(); menu?.focus(); }
   });
@@ -265,4 +311,5 @@
     }, { rootMargin: "-15% 0px -65% 0px" });
     links.forEach(link => { const section = document.querySelector(link.hash); if (section) observer.observe(section); });
   }
+  revealTarget(location.hash, Boolean(location.hash));
 })();

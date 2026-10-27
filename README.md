@@ -129,3 +129,7 @@ This is a review of the public page, not a new experiment or a publication-statu
 - [四个历史前端项目 / Four historical frontend cases](cases/early-frontend/README.md): desktop/mobile production feedback, factory administration and telecom service interfaces; responsibilities from the author’s supplied CV.
 - [学习笔记集 / Notebook](https://guhang2011.github.io/notebook/) now has 19 articles, including TFT inputs, graph semantics, time-aware validation and demo handoffs.
 - [Runnable protocol examples](notebook/examples/climate-protocol-README.md): 10 synthetic checks passed; no manuscript training or performance claims.
+
+## 2026-10-27 · Homepage frontend review
+
+[Review findings, changes and validation](docs/frontend-review-20261027.md): repaired filtered-project anchors and mobile-menu dismissal; added a six-project default view and notebook search; improved text contrast and reduced display-media bytes by 51.4%. All twelve projects and nineteen notes remain accessible.
