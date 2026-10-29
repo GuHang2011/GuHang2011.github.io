@@ -2,7 +2,7 @@
 
 [Read online / 在线阅读](https://guhang2011.github.io/notebook/)
 
-Twenty-five bilingual notes connect code observations, small examples, implementation tradeoffs and questions for further study. Collection updated on **2026-10-29**, with AI-assisted drafting and translation. Each article retains its compilation date. They are learning summaries, not a historical lab diary or evidence of new research results.
+Twenty-six bilingual notes connect code observations, small examples, implementation tradeoffs and questions for further study. Collection updated on **2026-10-29**, with AI-assisted drafting and translation. Each article retains its compilation date. They are learning summaries, not a historical lab diary or evidence of new research results.
 
 | Topic | Note | Related work |
 | --- | --- | --- |
@@ -79,3 +79,10 @@ These checks validate the small examples only. They do not evaluate a deployed s
 本轮新增 6 篇，笔记总数为 25。日志日期表示代码阅读与整理日期，不重构此前逐日经历。
 
 To render selected articles and refresh the full index: `python notebook/build.py --only cross-platform-boundaries request-scope-lifecycle weather-fallback upload-readiness low-code-contracts progressive-demo-loading`.
+
+
+## 29 October 2026 · AI 与前端学习感悟
+
+[AI 对前端的冲击很大，我想怎样继续学下去](ai-frontend-reflection.html) / [Learning frontend development when AI can write the code](ai-frontend-reflection.html)
+
+补充个人观点与下一步学习打算，讨论 AI 辅助开发中的基础知识、任务拆分、代码阅读与结果验证。关联前面的请求竞态、低代码与上传笔记。当前共 26 篇。

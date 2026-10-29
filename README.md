@@ -148,3 +148,8 @@ Each has a sample preset, bilingual guidance, responsive layout, keyboard suppor
 Six new bilingual notes cover cross-platform boundaries, request ownership, weather fallback, attachment readiness, low-code contracts and safe demo initialization. [Learning log](https://guhang2011.github.io/notebook/journal.html) · [Source review and 27 rerun checks](notebook/frontend-review-20261029.md).
 
 新增六篇大前端笔记，结合近期项目代码整理具体取舍与后续问题；本次复跑 5 个请求作用域场景、12 个天气场景及 10 项表单配置测试。
+
+
+### AI 与前端学习感悟
+
+新增[个人感悟：AI 对前端的冲击很大，我想怎样继续学下去](https://guhang2011.github.io/notebook/ai-frontend-reflection.html)。结合近期项目笔记，整理对 AI 编程的看法与下一步学习计划。笔记集现有 26 篇。
