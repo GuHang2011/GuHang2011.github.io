@@ -141,3 +141,10 @@ This is a review of the public page, not a new experiment or a publication-statu
 - [Telecom Service Desk](https://guhang2011.github.io/demos/telecom-service/): customer lookup, new install / suspension / relocation, order review and explicit duplicate-conflict recovery.
 
 Each has a sample preset, bilingual guidance, responsive layout, keyboard support and motion preferences. These are newly written browser learning prototypes based on historical CV scenarios; no original employer source code or production data is published. [Design and verification](demos/operations-notes.md).
+
+
+## 2026-10-29 · Frontend learning notes
+
+Six new bilingual notes cover cross-platform boundaries, request ownership, weather fallback, attachment readiness, low-code contracts and safe demo initialization. [Learning log](https://guhang2011.github.io/notebook/journal.html) · [Source review and 27 rerun checks](notebook/frontend-review-20261029.md).
+
+新增六篇大前端笔记，结合近期项目代码整理具体取舍与后续问题；本次复跑 5 个请求作用域场景、12 个天气场景及 10 项表单配置测试。

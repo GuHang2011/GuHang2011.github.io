@@ -1,0 +1,132 @@
+{
+  "slug": "request-scope-lifecycle",
+  "title": {
+    "en": "Who owns an asynchronous response?",
+    "zh": "请求回来了，但当前页面还是原来的页面吗？"
+  },
+  "summary": {
+    "en": "Separate search ordering, identity changes and page disposal. Check stale success, failure and finally paths.",
+    "zh": "区分搜索顺序、身份变化与页面销毁，检查旧请求的成功、失败和 finally 分支。"
+  },
+  "category": "frontend",
+  "kind": "reflection",
+  "minutes": 7,
+  "date": "2026-10-29",
+  "tags": [
+    "大前端",
+    "Frontend",
+    "异步",
+    "竞态",
+    "账号切换",
+    "Vue"
+  ],
+  "basis": {
+    "en": "Based on public useRequestScope/useGallery code and the five deferred-response checks rerun on 29 October. The code example below is a compact teaching sketch.",
+    "zh": "依据公开的 useRequestScope、useGallery 及 10 月 29 日复跑的 5 个延迟响应场景。文中代码为精简教学写法。"
+  },
+  "sections": [
+    {
+      "id": "incident",
+      "title": {
+        "en": "A response can outlive its owner",
+        "zh": "响应可能比发起它的页面活得更久"
+      },
+      "paragraphs": [
+        {
+          "en": "Consider opening a private album as account A, signing out, then receiving the album response. The response may be valid for the original request while being inappropriate for the current screen. The same problem appears when an order finishes after an account switch or a location request completes after selecting another activity.",
+          "zh": "例如用账号 A 打开相册，退出登录后，相册请求才返回。响应可能属于原请求，却不应再写入当前页面。订单在切换账号后返回、定位在切换活动后结束，也属于这类问题。"
+        },
+        {
+          "en": "Debouncing controls how often work starts. It does not decide whether a result still belongs to the current identity or selection. That decision needs a context check at the point where state is written.",
+          "zh": "防抖控制发起频率。结果是否仍属于当前身份和选择，需要在写入状态的位置再次判断。"
+        }
+      ]
+    },
+    {
+      "id": "generation",
+      "title": {
+        "en": "Invalidate the context explicitly",
+        "zh": "显式让旧上下文失效"
+      },
+      "paragraphs": [
+        {
+          "en": "useRequestScope captures a generation and returns a validity function. Its unmount hook invalidates the generation. useGallery additionally watches user ID, role, status and management mode with synchronous flushing, clears old data and starts a new load. The caller is responsible for wiring these invalidation events.",
+          "zh": "useRequestScope 保存代次并返回有效性函数，在卸载时递增代次。useGallery 还同步监听用户 ID、角色、状态及管理模式，先清除旧数据再加载。身份变化何时使请求失效，需要调用方显式接线。"
+        }
+      ],
+      "code": {
+        "language": "JavaScript",
+        "text": "// Teaching sketch: call invalidate on identity or page changes.\nlet epoch = 0;\nconst invalidate = () => { epoch += 1; };\nasync function load(read) {\n  const mine = epoch;\n  state.loading = true;\n  try {\n    const result = await read();\n    if (mine === epoch) state.data = result;\n  } catch (error) {\n    if (mine === epoch) state.error = error.message;\n  } finally {\n    if (mine === epoch) state.loading = false;\n  }\n}"
+      }
+    },
+    {
+      "id": "independent",
+      "title": {
+        "en": "Identity scope and latest request are different",
+        "zh": "身份作用域与请求顺序要分别考虑"
+      },
+      "paragraphs": [
+        {
+          "en": "Two requests may belong to the same account but different search terms. They need a request sequence as well as an identity epoch. An old catch can replace a newer result with an error; an old finally can remove the loading indicator from a newer request. Guard every state write, not only the successful result.",
+          "zh": "两个请求可能属于同一账号，却对应不同搜索词，因此还需要请求序号。旧 catch 可能用错误覆盖新结果，旧 finally 可能把新请求的加载状态提前关掉。所有写入状态的位置都需要检查。"
+        },
+        {
+          "en": "There is a follow-up in the reviewed gallery loader: success checks both request generation and scope, while catch checks only scope. The five existing scenarios do not test a stale list failure within one identity. That is a proposed regression case, not a verified fix.",
+          "zh": "本次审阅还留下一个待办：相册列表成功分支同时检查请求代次和作用域，catch 只检查作用域。既有 5 个场景未覆盖同一身份下旧列表请求迟到报错，值得补一个回归用例；这里尚未修改原项目。"
+        }
+      ]
+    },
+    {
+      "id": "server",
+      "title": {
+        "en": "Discarding a result does not undo a write",
+        "zh": "丢弃响应不会撤销服务端写入"
+      },
+      "paragraphs": [
+        {
+          "en": "AbortController can stop some client work, but the server may already have committed a mutation. A frontend epoch prevents stale rendering; retry safety still requires server authorization, an idempotency strategy and an operation-status query when the outcome is uncertain.",
+          "zh": "AbortController 可以停止部分客户端工作，但服务端可能已经完成写入。前端代次保护解决旧结果污染；重试是否安全，还需要服务端授权、幂等策略，以及结果不确定时的操作状态查询。"
+        },
+        {
+          "en": "The five passing fixtures cover logout during album loading, album save, account switching during order submission, activity switching during location acquisition and logout during posting. They check UI state isolation with deferred promises and do not simulate real database transactions.",
+          "zh": "本次通过的 5 个夹具覆盖相册加载时退出、相册保存、下单时换账号、定位时换活动及发帖时退出。它们通过延迟 Promise 检查界面状态隔离，没有模拟真实数据库事务。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/GuHang2011/shuyang-home/blob/ef8c6cdffe7512cf88273205dc6c17173191a03d/CropDiseasesDetection_vue/shared/useRequestScope.ts",
+      "label": {
+        "en": "Request scope",
+        "zh": "请求作用域"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/shuyang-home/blob/ef8c6cdffe7512cf88273205dc6c17173191a03d/CropDiseasesDetection_vue/shared/useGallery.ts",
+      "label": {
+        "en": "Gallery state and watchers",
+        "zh": "相册状态与监听"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/shuyang-home/blob/ef8c6cdffe7512cf88273205dc6c17173191a03d/scripts/test-request-scopes.cjs",
+      "label": {
+        "en": "Executed deferred-response cases",
+        "zh": "已执行的延迟响应场景"
+      }
+    },
+    {
+      "url": "async-interfaces.html",
+      "label": {
+        "en": "Earlier note on stale search responses",
+        "zh": "此前的搜索竞态笔记"
+      }
+    }
+  ],
+  "related": [
+    "cross-platform-boundaries",
+    "weather-fallback",
+    "order-idempotency"
+  ]
+}

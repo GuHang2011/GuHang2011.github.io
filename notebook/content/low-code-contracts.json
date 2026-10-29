@@ -1,0 +1,131 @@
+{
+  "slug": "low-code-contracts",
+  "title": {
+    "en": "A low-code form starts with a configuration contract",
+    "zh": "低代码表单心得：先规定配置，再生成界面"
+  },
+  "summary": {
+    "en": "Review schema validation, stable field keys, numeric zero and calendar dates using the existing form demo.",
+    "zh": "结合现有表单演示，检查配置校验、字段稳定标识、数字零值与真实日历日期。"
+  },
+  "category": "frontend",
+  "kind": "reflection",
+  "minutes": 7,
+  "date": "2026-10-29",
+  "tags": [
+    "大前端",
+    "Frontend",
+    "低代码",
+    "Schema",
+    "TypeScript",
+    "表单"
+  ],
+  "basis": {
+    "en": "Based on the public schema.mjs and schema.test.mjs. All ten existing tests were rerun on 29 October. The demo uses a custom application schema, not the JSON Schema specification.",
+    "zh": "依据公开的 schema.mjs 与 schema.test.mjs，10 月 29 日复跑既有 10 项测试全部通过。演示使用自定义应用配置协议，不是 JSON Schema 标准实现。"
+  },
+  "sections": [
+    {
+      "id": "entry",
+      "title": {
+        "en": "Validate the configuration before rendering",
+        "zh": "配置进入渲染器前先校验"
+      },
+      "paragraphs": [
+        {
+          "en": "checkSchema requires version 1, a bounded number of fields and known field types. It rejects duplicate or reserved keys, conflicting numeric ranges and duplicate select values. Returning a structured clone also prevents an editor from accidentally sharing the original object with a preview.",
+          "zh": "checkSchema 要求版本为 1，限制字段数量及已知字段类型，并拒绝重复或保留字段名、相互矛盾的数值范围和重复选项值。返回 structuredClone 也让编辑器和预览不必意外共用同一个原对象。"
+        },
+        {
+          "en": "The practical benefit is an understandable failure at import time. Otherwise, a configuration can appear to load and only break when a user submits a less common field.",
+          "zh": "这样配置导入时就能给出可解释的失败原因，避免表面加载成功，直到提交某个不常用字段才出错。"
+        }
+      ]
+    },
+    {
+      "id": "keys",
+      "title": {
+        "en": "Field keys belong to the data model",
+        "zh": "字段 key 属于数据结构"
+      },
+      "paragraphs": [
+        {
+          "en": "A field key should survive reordering and translation. Display labels can change without renaming stored values. The demo finds unused field_N keys when deleting and adding fields; using the current array length would collide after a deletion.",
+          "zh": "字段 key 应在排序和翻译后保持稳定，显示名称变化不应连带改名已保存的数据。演示在删除后重新添加字段时寻找未使用的 field_N；直接拿当前数组长度编号，删除后容易发生碰撞。"
+        },
+        {
+          "en": "Once configurations persist, version changes need migration rules. Removing a field also raises a data question: whether to retain historical values, hide them or export them. The current browser demo has no persisted business records, so it does not yet answer that migration question.",
+          "zh": "当配置需要持久保存，版本变化就需要迁移规则。删除字段还涉及历史值保留、隐藏或导出。当前浏览器演示没有持久化业务记录，因此还未处理这类迁移。"
+        }
+      ]
+    },
+    {
+      "id": "values",
+      "title": {
+        "en": "Test values that look empty or valid",
+        "zh": "专门测试看起来像空值或合法值的输入"
+      },
+      "paragraphs": [
+        {
+          "en": "Using raw || an empty string would discard numeric zero. The implementation uses a nullish fallback and then trims text. Optional blank values bypass minimum-length checks, while required whitespace fails. Date validation also compares the parsed calendar day back to the original string.",
+          "zh": "使用 raw || 空字符串会丢掉数字 0。现有实现先用空值合并，再转换并去除首尾空白。可选空值跳过最短长度限制，必填的纯空格则失败。日期校验还将解析后的日历日期与原字符串比较，防止非法日期被自动进位。"
+        }
+      ],
+      "code": {
+        "language": "JavaScript",
+        "text": "// Run with Node from the website repository root.\nimport { validateField } from \"./demos/low-code-form/schema.mjs\";\nconst field = { key: \"count\", label: \"Count\", type: \"number\",\n  required: true, min: 0, max: 10 };\nconsole.log(validateField(field, 0)); // empty error string\nconsole.log(validateField(field, \"Infinity\")); // validation error"
+      }
+    },
+    {
+      "id": "limits",
+      "title": {
+        "en": "Ten checks, with a defined scope",
+        "zh": "10 项检查及其覆盖范围"
+      },
+      "paragraphs": [
+        {
+          "en": "The passing suite covers independent cloning, key validation, supported versions and field limits, key allocation, blank values, email and enum rules, numeric bounds, calendar dates, invalid ranges and translated messages. It validates this small renderer contract.",
+          "zh": "通过的测试覆盖独立复制、字段键、版本和字段数、编号分配、空值、邮箱与枚举、数值边界、日历日期、非法范围及错误翻译。它们验证当前小型渲染器的约定。"
+        },
+        {
+          "en": "Client validation helps users correct input; a backend must validate again. A larger form system would also need an explicit policy for conditional fields, asynchronous validators, unknown properties and configuration migration. Those features should come with separate tests.",
+          "zh": "客户端校验帮助用户修正输入，后端仍需重新验证。更大的表单系统还需定义条件字段、异步校验、未知属性和配置迁移策略，并为这些能力补单独测试。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/d54db2395d8dc2ce95fe7e73cbad3ae1d63da096/demos/low-code-form/schema.mjs",
+      "label": {
+        "en": "Configuration and value validation",
+        "zh": "配置与值校验源码"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/d54db2395d8dc2ce95fe7e73cbad3ae1d63da096/demos/low-code-form/schema.test.mjs",
+      "label": {
+        "en": "Ten executed schema tests",
+        "zh": "10 项已执行的配置测试"
+      }
+    },
+    {
+      "url": "../demos/low-code-form/",
+      "label": {
+        "en": "Try the form demo",
+        "zh": "体验表单演示"
+      }
+    },
+    {
+      "url": "frontend-review-20261029.md",
+      "label": {
+        "en": "Reproduction commands",
+        "zh": "复跑命令"
+      }
+    }
+  ],
+  "related": [
+    "cross-platform-boundaries",
+    "accessible-interactions"
+  ]
+}

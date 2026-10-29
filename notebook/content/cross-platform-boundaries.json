@@ -1,0 +1,136 @@
+{
+  "slug": "cross-platform-boundaries",
+  "title": {
+    "en": "Sharing frontend logic across Web and mobile",
+    "zh": "大前端心得：Web 与移动端，哪些代码值得共用？"
+  },
+  "summary": {
+    "en": "Use the membership project to separate domain state from network, storage and device APIs; keep platform verification explicit.",
+    "zh": "从会员系统的共享逻辑与平台适配出发，整理业务状态、网络请求、存储和设备能力的拆分办法。"
+  },
+  "category": "frontend",
+  "kind": "reflection",
+  "minutes": 7,
+  "date": "2026-10-29",
+  "tags": [
+    "大前端",
+    "Frontend",
+    "Vue",
+    "uni-app",
+    "跨端",
+    "平台适配"
+  ],
+  "basis": {
+    "en": "Reviewed the public membership revision ef8c6cd: shared composables, Web components and the uni-app adapter. The source shows the design; this review did not perform a new native-device release.",
+    "zh": "审阅会员系统公开版本 ef8c6cd 的 shared 组合式函数、Web 组件与 uni-app 适配层。本次核对代码结构，未重新执行原生应用发布或真机验收。"
+  },
+  "sections": [
+    {
+      "id": "boundary",
+      "title": {
+        "en": "Start with the dependency boundary",
+        "zh": "先看代码依赖什么"
+      },
+      "paragraphs": [
+        {
+          "en": "The project keeps useGallery, useForum, useChat and useWeather under shared/. Web and mobile components render their own interfaces around that state. useWeather accepts an API function; the component supplies location acquisition. This makes search and request-order behavior testable without a browser permission prompt.",
+          "zh": "项目将 useGallery、useForum、useChat、useWeather 放在 shared/，Web 与移动端组件分别渲染界面。useWeather 接收 API 函数，定位能力由组件传入，因此可以在不弹出浏览器定位授权框的情况下测试搜索和请求顺序。"
+        },
+        {
+          "en": "A useful extraction criterion is whether the rule has the same meaning on both platforms. An order status usually does. Choosing a file, requesting a location and downloading a temporary file have different platform behavior and belong behind adapters.",
+          "zh": "判断是否值得抽取，可以先看规则在两端是否具有同一个含义。订单状态通常可以共用；选择文件、获取位置和下载临时文件涉及平台差异，适合放进适配层。"
+        }
+      ]
+    },
+    {
+      "id": "ports",
+      "title": {
+        "en": "Give platform capabilities a narrow interface",
+        "zh": "把平台能力收成小接口"
+      },
+      "paragraphs": [
+        {
+          "en": "The mobile adapter uses uni.request, uni.uploadFile and uni storage. Its request function captures the token before sending; a late 401 clears the session only if that token still matches the current one. Keeping this decision at the request boundary avoids each screen inventing its own expiry behavior.",
+          "zh": "移动端适配使用 uni.request、uni.uploadFile 与 uni 存储。请求前保存令牌，迟到的 401 仅在请求令牌仍等于当前令牌时清除会话。把这个判断放在请求入口，可以减少各页面对登录失效的不同处理。"
+        },
+        {
+          "en": "The following interface is a proposed extraction, not a claim that the current project already implements this exact type. A capability should describe its failure behavior as well as its return value.",
+          "zh": "下面是建议的抽象形式，不是当前项目已经实现的同名类型。接口除返回值外，还需约定用户取消、授权拒绝和网络失败如何表示。"
+        }
+      ],
+      "code": {
+        "language": "TypeScript",
+        "text": "// Proposed platform boundary\ntype Position = { latitude: number; longitude: number; accuracy?: number };\ntype Platform = {\n  request<T>(path: string): Promise<T>;\n  locate(): Promise<Position>;\n  readSession(): string;\n};"
+      }
+    },
+    {
+      "id": "cost",
+      "title": {
+        "en": "Shared Vue logic still depends on Vue",
+        "zh": "共享 Vue 逻辑仍然依赖 Vue"
+      },
+      "paragraphs": [
+        {
+          "en": "These composables import ref, watch and lifecycle hooks. They can be shared across the current Vue clients, but a React client cannot simply import them as framework-independent domain code. Pure validation and transition functions are better candidates for reuse across frameworks.",
+          "zh": "这些组合式函数依赖 ref、watch 和生命周期钩子，适合在当前 Vue 客户端之间复用。若增加 React 客户端，不能直接把它们当作无框架依赖的业务代码。纯校验、状态迁移函数更适合跨框架使用。"
+        },
+        {
+          "en": "The existing domain.ts uses Row = Record<string, any>. It makes early iteration convenient, but leaves response assumptions unchecked. A next step is to introduce explicit DTOs at API boundaries, then validate external data at runtime. A TypeScript annotation alone cannot validate JSON returned by a server.",
+          "zh": "现有 domain.ts 使用 Row = Record<string, any>，迭代方便，但接口字段约定较弱。后续可以先为 API 边界补明确的 DTO，再对外部数据做运行时校验。只写 TypeScript 类型，不能保证服务端返回的 JSON 符合约定。"
+        }
+      ]
+    },
+    {
+      "id": "checks",
+      "title": {
+        "en": "What was checked and what remains",
+        "zh": "本次核对与下一步"
+      },
+      "paragraphs": [
+        {
+          "en": "On 29 October, the existing request-scope script passed five deferred-response scenarios and the weather script passed twelve scenarios. Their Vue harness stubs mount and unmount registration; these checks do not establish complete lifecycle integration or identical behavior on H5, WeChat and native clients.",
+          "zh": "10 月 29 日复跑了既有脚本：请求作用域 5 个延迟响应场景、天气 12 个场景均通过。测试使用 Vue 逻辑夹具并替代部分挂载／卸载注册，不能据此认定 H5、小程序与原生端行为完全一致。"
+        },
+        {
+          "en": "For the next platform change, I would record file-picker cancellation, background/resume behavior, location refusal and session expiry separately on each target. This makes the remaining work visible before calling a build ready for release.",
+          "zh": "下次增加平台能力时，值得按目标端分别记录文件选择取消、后台恢复、定位拒绝和会话失效。这样在判断能否发布之前，就能看见还缺哪些证据。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/GuHang2011/shuyang-home/blob/ef8c6cdffe7512cf88273205dc6c17173191a03d/CropDiseasesDetection_vue/shared/weather.ts",
+      "label": {
+        "en": "Shared weather logic",
+        "zh": "共享天气逻辑"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/shuyang-home/blob/ef8c6cdffe7512cf88273205dc6c17173191a03d/CropDiseasesDetection_vue/mobile/src/platform.ts",
+      "label": {
+        "en": "uni-app platform adapter",
+        "zh": "uni-app 平台适配"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/shuyang-home/blob/ef8c6cdffe7512cf88273205dc6c17173191a03d/CropDiseasesDetection_vue/shared/domain.ts",
+      "label": {
+        "en": "Domain types and helpers",
+        "zh": "业务类型与辅助函数"
+      }
+    },
+    {
+      "url": "frontend-review-20261029.md",
+      "label": {
+        "en": "Review and executed commands",
+        "zh": "本次核对与执行命令"
+      }
+    }
+  ],
+  "related": [
+    "request-scope-lifecycle",
+    "weather-fallback",
+    "low-code-contracts"
+  ]
+}

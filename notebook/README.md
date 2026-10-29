@@ -2,7 +2,7 @@
 
 [Read online / 在线阅读](https://guhang2011.github.io/notebook/)
 
-Nineteen bilingual notes connect code observations, small examples, implementation tradeoffs and questions for further study. Collection updated on **2026-10-27**, with AI-assisted drafting and translation. Each article retains its compilation date. They are learning summaries, not a historical lab diary or evidence of new research results.
+Twenty-five bilingual notes connect code observations, small examples, implementation tradeoffs and questions for further study. Collection updated on **2026-10-29**, with AI-assisted drafting and translation. Each article retains its compilation date. They are learning summaries, not a historical lab diary or evidence of new research results.
 
 | Topic | Note | Related work |
 | --- | --- | --- |
@@ -63,3 +63,19 @@ These checks validate the small examples only. They do not evaluate a deployed s
 - [项目心得：一个研究 Demo，交付时还应该带上什么？ / Project reflection: what should accompany a research demo?](research-demo-handoff.html)
 
 [Python 示例、运行方法与 10 项测试](examples/climate-protocol-README.md) · [历史前端项目案例](../cases/early-frontend/README.md)
+
+
+## 29 October 2026 · Frontend learning log
+
+[本次学习日志 / Dated learning log](journal.html) · [来源与复跑记录 / Sources and checks](frontend-review-20261029.md)
+
+- [大前端心得：Web 与移动端，哪些代码值得共用？ / Sharing frontend logic across Web and mobile](cross-platform-boundaries.html)
+- [请求回来了，但当前页面还是原来的页面吗？ / Who owns an asynchronous response?](request-scope-lifecycle.html)
+- [天气功能复盘：定位失败后，如何尊重用户的选择？ / Location fallback and the user’s latest choice](weather-fallback.html)
+- [附件上传心得：进度条走完，文件就能用了吗？ / When is an uploaded attachment ready to use?](upload-readiness.html)
+- [低代码表单心得：先规定配置，再生成界面 / A low-code form starts with a configuration contract](low-code-contracts.html)
+- [演示上线复盘：脚本还没加载完，按钮就能点了 / Keep a demo safe before its scripts are ready](progressive-demo-loading.html)
+
+本轮新增 6 篇，笔记总数为 25。日志日期表示代码阅读与整理日期，不重构此前逐日经历。
+
+To render selected articles and refresh the full index: `python notebook/build.py --only cross-platform-boundaries request-scope-lifecycle weather-fallback upload-readiness low-code-contracts progressive-demo-loading`.

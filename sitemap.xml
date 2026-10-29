@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://guhang2011.github.io/</loc>
-    <lastmod>2026-10-28</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
   <url>
     <loc>https://guhang2011.github.io/research/</loc>
@@ -38,7 +38,7 @@
   </url>
   <url>
     <loc>https://guhang2011.github.io/notebook/</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-29</lastmod>
   </url>
   <url>
     <loc>https://guhang2011.github.io/notebook/model-selection.html</loc>
@@ -159,4 +159,11 @@
     <loc>https://guhang2011.github.io/demos/telecom-service/</loc>
     <lastmod>2026-10-28</lastmod>
   </url>
+<url><loc>https://guhang2011.github.io/notebook/journal.html</loc><lastmod>2026-10-29</lastmod></url>
+<url><loc>https://guhang2011.github.io/notebook/cross-platform-boundaries.html</loc><lastmod>2026-10-29</lastmod></url>
+<url><loc>https://guhang2011.github.io/notebook/request-scope-lifecycle.html</loc><lastmod>2026-10-29</lastmod></url>
+<url><loc>https://guhang2011.github.io/notebook/weather-fallback.html</loc><lastmod>2026-10-29</lastmod></url>
+<url><loc>https://guhang2011.github.io/notebook/upload-readiness.html</loc><lastmod>2026-10-29</lastmod></url>
+<url><loc>https://guhang2011.github.io/notebook/low-code-contracts.html</loc><lastmod>2026-10-29</lastmod></url>
+<url><loc>https://guhang2011.github.io/notebook/progressive-demo-loading.html</loc><lastmod>2026-10-29</lastmod></url>
 </urlset>

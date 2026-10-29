@@ -1,0 +1,132 @@
+{
+  "slug": "upload-readiness",
+  "title": {
+    "en": "When is an uploaded attachment ready to use?",
+    "zh": "附件上传心得：进度条走完，文件就能用了吗？"
+  },
+  "summary": {
+    "en": "Separate transfer, processing and business attachment; track retries and clean up browser media resources.",
+    "zh": "区分文件传输、处理和业务关联，梳理重试边界及浏览器媒体资源的回收。"
+  },
+  "category": "frontend",
+  "kind": "reflection",
+  "minutes": 7,
+  "date": "2026-10-29",
+  "tags": [
+    "大前端",
+    "Frontend",
+    "上传",
+    "媒体",
+    "生命周期",
+    "文件处理"
+  ],
+  "basis": {
+    "en": "Code reading of the current counselor MaterialUpload.vue and its 27 October review document. Private business data and source files are not copied here. The snippet is a simplified design example, and full upload acceptance was not rerun.",
+    "zh": "依据当前辅导员项目 MaterialUpload.vue 与 10 月 27 日复查文档进行代码阅读。本文不复制内部业务数据或源码文件；代码片段为简化设计例子，本轮未重跑完整附件验收。"
+  },
+  "sections": [
+    {
+      "id": "meaning",
+      "title": {
+        "en": "Give progress a precise meaning",
+        "zh": "先解释进度条代表什么"
+      },
+      "paragraphs": [
+        {
+          "en": "The component caps transfer progress at 99%. A file is appended to the business attachment list only when the backend reports processingStatus = ready. queued and processing keep it pending; other states retain an explanation and a recheck path.",
+          "zh": "组件将传输进度限制到最高 99%。后端返回 processingStatus = ready 后，才把文件加入事项附件列表；queued、processing 继续等待，其他状态保留说明和重新检查入口。"
+        },
+        {
+          "en": "This distinction matters when a server has received the bytes but is still scanning or generating a preview. Showing a completed business attachment too early can let a user submit an item that is not yet available.",
+          "zh": "服务端收到字节后，还可能在扫描或生成预览。过早将它显示为可用附件，可能让用户提交尚未就绪的材料。"
+        }
+      ]
+    },
+    {
+      "id": "state",
+      "title": {
+        "en": "Model the attachment independently",
+        "zh": "给附件单独建状态"
+      },
+      "paragraphs": [
+        {
+          "en": "A useful simplification is to represent transfer and processing separately, then derive whether the business form can submit. Unknown processing states should stay unavailable until the API contract explains them. The following sketch illustrates that decision and does not implement scanning.",
+          "zh": "可以分别表示传输和处理状态，再据此计算业务表单能否提交。未知的处理状态应等待接口约定明确后再开放使用。下面只说明判断方式，没有实现扫描服务。"
+        }
+      ],
+      "code": {
+        "language": "TypeScript",
+        "text": "// Teaching sketch; server processing remains authoritative.\ntype Attachment = {\n  transfer: \"idle\" | \"sending\" | \"stored\" | \"failed\";\n  processing: \"unknown\" | \"queued\" | \"processing\" | \"ready\" | \"rejected\";\n};\nconst canAttach = (file: Attachment) =>\n  file.transfer === \"stored\" && file.processing === \"ready\";"
+      }
+    },
+    {
+      "id": "resume",
+      "title": {
+        "en": "Resuming needs server knowledge",
+        "zh": "续传需要知道服务端已经收到了什么"
+      },
+      "paragraphs": [
+        {
+          "en": "The reviewed component obtains received chunk indices from the server before sending missing chunks. A local percentage cannot establish that a chunk was committed. Pause aborts the active XHR; cancelling also requests server cleanup when an upload ID exists.",
+          "zh": "组件续传前会查询服务端已收到的分片编号，再发送缺失分片。本地百分比不能证明分片已保存。暂停会中止当前 XHR；取消在已有上传 ID 时还会请求服务端清理。"
+        },
+        {
+          "en": "The current hashing path reads the entire file with arrayBuffer() before SHA-256. For larger mobile files this deserves memory profiling. Incremental hashing or worker-based work is a possible next step; a worker moves work off the UI thread but does not automatically reduce total memory.",
+          "zh": "当前 SHA-256 路径通过 arrayBuffer() 一次读取整个文件，大文件在移动端的内存占用值得单独测量。增量计算或 Worker 是可研究的方向；把任务移到 Worker 并不自动降低总内存。"
+        }
+      ]
+    },
+    {
+      "id": "cleanup",
+      "title": {
+        "en": "Media resources need explicit owners",
+        "zh": "媒体资源需要明确由谁释放"
+      },
+      "paragraphs": [
+        {
+          "en": "The component revokes object URLs, stops media tracks, aborts pending XHRs and clears its processing poll when unmounting. Late callbacks still deserve separate tests, especially canvas conversion or an upload response arriving after navigation. Cleanup code being present does not prove every race is covered.",
+          "zh": "组件在卸载时回收 Object URL、停止媒体轨道、中止 XHR 并清理处理轮询。迟到回调仍需单独测试，尤其是跳转后的 Canvas 转换或上传响应。代码里有清理逻辑，不等于覆盖了所有竞态。"
+        },
+        {
+          "en": "A future acceptance matrix should include rejecting file access, a failed scan, lost acknowledgement after chunk storage, navigation during preview generation and repeated retry. The public case page links earlier evidence; this note only adds the current reading observations.",
+          "zh": "后续验收矩阵可加入文件无权限、扫描失败、分片保存后确认丢失、预览生成中跳转和反复重试。公开案例页保留此前的证据，本篇只新增当前代码阅读观察。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "../cases/counselor/",
+      "label": {
+        "en": "Public counselor project case",
+        "zh": "辅导员系统公开案例"
+      }
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/URL/revokeObjectURL_static",
+      "label": {
+        "en": "MDN: revokeObjectURL",
+        "zh": "MDN：回收 Object URL"
+      }
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack/stop",
+      "label": {
+        "en": "MDN: stop media tracks",
+        "zh": "MDN：停止媒体轨道"
+      }
+    },
+    {
+      "url": "frontend-review-20261029.md",
+      "label": {
+        "en": "Code-reading scope and limits",
+        "zh": "代码阅读范围与限制"
+      }
+    }
+  ],
+  "related": [
+    "request-scope-lifecycle",
+    "progressive-demo-loading",
+    "permission-boundaries"
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "slug": "weather-fallback",
+  "title": {
+    "en": "Location fallback and the user’s latest choice",
+    "zh": "天气功能复盘：定位失败后，如何尊重用户的选择？"
+  },
+  "summary": {
+    "en": "Label device and network estimates, preserve manual city selection and test searches that finish out of order.",
+    "zh": "标明设备定位与网络估算，保留手动选城的优先级，并检查乱序返回的搜索结果。"
+  },
+  "category": "engineering",
+  "kind": "reflection",
+  "minutes": 7,
+  "date": "2026-10-29",
+  "tags": [
+    "大前端",
+    "Frontend",
+    "定位",
+    "天气",
+    "降级",
+    "Geolocation"
+  ],
+  "basis": {
+    "en": "Reviewed shared/weather.ts and Web/mobile weather components at membership revision ef8c6cd. Twelve mocked scenarios were rerun; live geolocation providers were not called in these checks.",
+    "zh": "核对会员系统版本 ef8c6cd 的 shared/weather.ts 与 Web／移动天气组件；复跑 12 个模拟场景，未在这些检查中调用真实定位服务。"
+  },
+  "sections": [
+    {
+      "id": "choice",
+      "title": {
+        "en": "Location is one way to choose a city",
+        "zh": "定位只是选城的一种入口"
+      },
+      "paragraphs": [
+        {
+          "en": "The interface supports shortcuts, city search and location. When the user manually selects a city while GPS is pending, that selection should remain authoritative. load() increments locationGeneration, so a late device or network result cannot replace the new city.",
+          "zh": "界面提供常用城市、城市搜索和定位。当 GPS 尚未返回时，用户已经手动选城，后到的定位结果不应再替换选择。load() 会递增 locationGeneration，让旧设备或网络定位结果失效。"
+        },
+        {
+          "en": "Keeping an old temperature on screen while changing the city can imply that the temperature belongs to the new location. The current load path clears weather data first and shows a loading state, then renders the returned result.",
+          "zh": "切换城市时继续展示旧温度，容易让读者误以为它属于新地点。当前加载流程会先清空天气结果并显示加载状态，再渲染返回的数据。"
+        }
+      ]
+    },
+    {
+      "id": "quality",
+      "title": {
+        "en": "Expose the source and precision",
+        "zh": "让位置来源与精度可见"
+      },
+      "paragraphs": [
+        {
+          "en": "The reviewed logic accepts finite device coordinates within geographic ranges and device accuracy no worse than 5,000 metres. Otherwise it tries a network estimate. This is a project threshold for nearby weather, not a general rule for attendance, delivery or emergency services.",
+          "zh": "当前逻辑要求设备经纬度为有效范围内的有限数值，且精度误差不超过 5,000 米，否则尝试网络估算。这是附近天气的项目阈值，不适合直接沿用到签到、配送或应急场景。"
+        },
+        {
+          "en": "Network location can follow a VPN exit or a carrier address. The UI labels it as an estimate, identifies ipwho.is and leaves manual city selection available. Location success and weather-data success are separate outcomes: locate() starts load() without awaiting the weather request.",
+          "zh": "网络位置可能跟随 VPN 出口或运营商地址。界面标明“网络估算”和 ipwho.is，并保留手动选城。定位成功与天气获取成功也应分开：locate() 启动 load() 时没有等待天气请求完成。"
+        }
+      ]
+    },
+    {
+      "id": "search",
+      "title": {
+        "en": "Handle typing before the response returns",
+        "zh": "用户继续输入时，旧搜索已经失效"
+      },
+      "paragraphs": [
+        {
+          "en": "The search watcher invalidates old results synchronously as the query changes. find() checks a separate search generation before writing results, errors or loading state. This covers the case where a user types a new term but has not submitted the next search yet.",
+          "zh": "搜索输入变化时，同步监听会立即使旧结果失效。find() 在写结果、错误和加载状态前检查独立的 searchGeneration，因此用户改了词、尚未再次点击搜索时，旧响应也不会突然出现。"
+        },
+        {
+          "en": "The 12 passing fixtures cover reversed response order, short queries, typing during a request, search failure, permission or accuracy fallback, device versus network choice, late positioning after manual selection, location failure and unmount. They validate application choices with mocked inputs.",
+          "zh": "本次 12 个通过场景涉及乱序返回、短词、等待期间改词、搜索失败、授权或精度回退、设备／网络选择、手动选城后的迟到定位、定位失败及卸载。它们使用模拟输入验证应用逻辑。"
+        }
+      ]
+    },
+    {
+      "id": "next",
+      "title": {
+        "en": "Next checks need the real platforms",
+        "zh": "下一轮应放到真实终端上"
+      },
+      "paragraphs": [
+        {
+          "en": "The remaining work is to observe timeouts and permission changes on actual devices, validate the server response shape, and show data age when the provider is slow. A typed return value alone does not guarantee a current observation or a valid daily forecast array.",
+          "zh": "后续还需在真实设备上观察超时和权限变化，校验服务端响应结构，并在供应方延迟时说明数据时间。标注返回类型不能保证当前观测及时，也不能保证日预测数组完整。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/GuHang2011/shuyang-home/blob/ef8c6cdffe7512cf88273205dc6c17173191a03d/CropDiseasesDetection_vue/shared/weather.ts",
+      "label": {
+        "en": "Weather state and fallback",
+        "zh": "天气状态与回退逻辑"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/shuyang-home/blob/ef8c6cdffe7512cf88273205dc6c17173191a03d/scripts/test-weather.cjs",
+      "label": {
+        "en": "Twelve reproducible weather cases",
+        "zh": "12 个可复跑的天气场景"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/shuyang-home/blob/ef8c6cdffe7512cf88273205dc6c17173191a03d/CropDiseasesDetection_vue/src/components/WeatherCard.vue",
+      "label": {
+        "en": "Location explanation in the Web UI",
+        "zh": "Web 界面的定位说明"
+      }
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API",
+      "label": {
+        "en": "MDN: Geolocation API",
+        "zh": "MDN：定位 API"
+      }
+    }
+  ],
+  "related": [
+    "request-scope-lifecycle",
+    "cross-platform-boundaries"
+  ]
+}

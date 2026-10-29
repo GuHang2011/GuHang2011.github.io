@@ -1,0 +1,139 @@
+{
+  "slug": "progressive-demo-loading",
+  "title": {
+    "en": "Keep a demo safe before its scripts are ready",
+    "zh": "演示上线复盘：脚本还没加载完，按钮就能点了"
+  },
+  "summary": {
+    "en": "A real loading race in the engineering demos led to disabled-by-default controls, versioned assets and delayed-script checks.",
+    "zh": "从工程演示的一次加载时序问题出发，记录默认禁用控件、资源版本和延迟脚本验证。"
+  },
+  "category": "engineering",
+  "kind": "reflection",
+  "minutes": 7,
+  "date": "2026-10-29",
+  "tags": [
+    "大前端",
+    "Frontend",
+    "渐进增强",
+    "加载",
+    "动画",
+    "Playwright"
+  ],
+  "basis": {
+    "en": "Based on the 28 October engineering-demo release and its public browser checks. The loading issue and fix were observed in that release; this article was compiled on 29 October.",
+    "zh": "依据 10 月 28 日工程演示发布及公开的浏览器检查。加载问题及修复发生在该次发布，本篇整理于 10 月 29 日。"
+  },
+  "sections": [
+    {
+      "id": "failure",
+      "title": {
+        "en": "HTML can be interactive before the handler exists",
+        "zh": "HTML 已经能操作，事件处理器还没准备好"
+      },
+      "paragraphs": [
+        {
+          "en": "During the initial live check, the production form submitted a normal GET navigation before its application handler was attached. The sample button appeared clickable but had no working listener yet. Local file hashes were correct; they could not detect this interaction timing problem.",
+          "zh": "首次线上检查时，生产报工表单在应用处理器接好前触发了普通 GET 跳转。示例按钮看起来能点，但监听器尚未生效。文件哈希核对正常，也无法发现这类交互时序问题。"
+        },
+        {
+          "en": "The repair wraps the workbench controls in a disabled fieldset. The application enables it only after attaching the workflow listeners. A loading message explains the waiting state and offers refresh if it remains.",
+          "zh": "修复方式是把工作台控件放进默认 disabled 的 fieldset，业务脚本接好监听器后再启用；等待期间有加载说明，持续未完成时提示刷新。"
+        }
+      ]
+    },
+    {
+      "id": "readiness",
+      "title": {
+        "en": "Make readiness part of the markup",
+        "zh": "把就绪条件写进页面初始状态"
+      },
+      "paragraphs": [
+        {
+          "en": "This pattern works before JavaScript runs because disabled is native HTML behavior. It is especially useful for forms whose browser default submission is not meaningful. The demo also hides the interactive workbench in a noscript fallback while keeping method notes readable.",
+          "zh": "disabled 是原生 HTML 行为，在 JavaScript 执行前就能阻止操作，适合默认浏览器提交并无业务意义的表单。演示同时提供 noscript 回退：隐藏交互工作台，保留方法说明。"
+        }
+      ],
+      "code": {
+        "language": "HTML / JavaScript",
+        "text": "<fieldset class=\"ops-loading-guard\" disabled>\n  <!-- Interactive form controls -->\n</fieldset>\n\n// At the end of successful application initialization:\ndocument.querySelector(\".ops-loading-guard\").disabled = false;"
+      }
+    },
+    {
+      "id": "motion",
+      "title": {
+        "en": "Keep text legible while it moves",
+        "zh": "文字移动时也要能读清"
+      },
+      "paragraphs": [
+        {
+          "en": "Early entry effects animated opacity and briefly reduced text contrast. The final effect moves panels and records a few pixels without fading their text. Progress animation follows workflow state, and a reduced-motion setting removes motion while keeping the status updates.",
+          "zh": "早期入场效果改变透明度，短暂降低了文字对比度。最终效果只让面板和记录移动少量距离，文字保持清晰。进度动画跟随流程状态；减少动态效果后，状态文字仍正常更新。"
+        },
+        {
+          "en": "Contrast tests wait for theme transitions to settle. That removes timing noise from the measurement; it does not excuse unreadable final colors. Motion and keyboard checks remain separate concerns.",
+          "zh": "对比度测试会等待主题切换结束后测量，以避免过渡帧造成噪声；最终配色仍需合格。动态效果和键盘路径需要分别检查。"
+        }
+      ]
+    },
+    {
+      "id": "release",
+      "title": {
+        "en": "Test the path through the published page",
+        "zh": "沿着线上入口再走一遍"
+      },
+      "paragraphs": [
+        {
+          "en": "The recorded release passed 34 flow assertions, 21 integration assertions and 16 language/viewport combinations. Integration includes deliberately delaying app.js and checking that controls remain disabled until initialization. The live walkthrough then completed both workflows from the homepage.",
+          "zh": "该次发布记录了 34 项流程断言、21 项集成断言和 16 组语言／屏宽检查。集成测试主动延迟 app.js，检查初始化前后控件的禁用状态；线上再从首页走通两条流程。"
+        },
+        {
+          "en": "These are the 28 October results linked below, not new backend benchmarks. A useful next extension is to block an asset entirely, confirm that the loading explanation remains usable, then test recovery after a refresh.",
+          "zh": "这些是下方链接中的 10 月 28 日结果，不是新增后端性能数据。下一步可进一步完全阻断资源，检查等待说明是否仍可读，再验证刷新后的恢复过程。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/d54db2395d8dc2ce95fe7e73cbad3ae1d63da096/demos/production-workbench/index.html",
+      "label": {
+        "en": "Native disabled fieldset",
+        "zh": "原生禁用控件容器"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/d54db2395d8dc2ce95fe7e73cbad3ae1d63da096/demos/checks/integration.js",
+      "label": {
+        "en": "Delayed-script browser checks",
+        "zh": "延迟脚本浏览器检查"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/d54db2395d8dc2ce95fe7e73cbad3ae1d63da096/demos/operations-notes.md",
+      "label": {
+        "en": "Recorded workflow verification",
+        "zh": "既有流程验证记录"
+      }
+    },
+    {
+      "url": "../demos/production-workbench/",
+      "label": {
+        "en": "Production workflow demo",
+        "zh": "生产报工演示"
+      }
+    },
+    {
+      "url": "../demos/telecom-service/",
+      "label": {
+        "en": "Telecom workflow demo",
+        "zh": "电信业务演示"
+      }
+    }
+  ],
+  "related": [
+    "upload-readiness",
+    "accessible-interactions",
+    "research-demo-handoff"
+  ]
+}

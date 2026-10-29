@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-29",
+  "scope": "Existing local fixtures; no real customers, geolocation calls or production backend tests.",
+  "results": [
+    {
+      "suite": "request-scopes",
+      "command": "node scripts/test-request-scopes.cjs",
+      "cases": 5,
+      "exit_code": 0,
+      "output": "PASS: 5 deferred-response scenarios (logout, gallery save, order/account switch, location/navigation, post/logout)",
+      "errors": ""
+    },
+    {
+      "suite": "weather",
+      "command": "node scripts/test-weather.cjs",
+      "cases": 12,
+      "exit_code": 0,
+      "output": "PASS: 12 weather scenarios (search races, stale results, permission/accuracy fallback, device/network choice, manual selection, errors and unmount)",
+      "errors": ""
+    },
+    {
+      "suite": "low-code",
+      "command": "node --test demos/low-code-form/schema.test.mjs",
+      "cases": 10,
+      "exit_code": 0,
+      "output": "✔ default schema validates and returns an independent copy (1.3198ms)\n✔ missing, duplicate and reserved keys are rejected (0.2781ms)\n✔ unsupported types, versions and excessive fields are rejected (0.1217ms)\n✔ deleting and adding fields never duplicates a key (0.0929ms)\n✔ required whitespace fails while optional blank ignores minLength (0.1288ms)\n✔ email and enum checks reject malformed values (0.1028ms)\n✔ numeric bounds retain zero and reject infinities (0.0883ms)\n✔ dates validate actual calendar days (0.9111ms)\n✔ invalid rule ranges and duplicate options are rejected (0.1703ms)\n✔ length bounds and translated errors are explicit (0.1771ms)\nℹ tests 10\nℹ suites 0\nℹ pass 10\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 84.312",
+      "errors": ""
+    }
+  ]
+}
