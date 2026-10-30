@@ -150,11 +150,23 @@
     if (!target) return;
     const project = target.closest('[data-collection="projects"] [data-category]');
     if (project?.hidden) resetProjects();
+    const publication = target.closest('[data-collection="publications"] [data-category]');
+    if (publication?.hidden) {
+      filterState.publications = "all";
+      document.querySelectorAll('[data-filter-group="publications"] button').forEach(button => {
+        button.setAttribute("aria-pressed", String(button.dataset.filter === "all"));
+      });
+      updateCounts();
+    }
     for (let parent = target.parentElement; parent; parent = parent.parentElement) {
       if (parent.tagName === "DETAILS") parent.open = true;
     }
     (project || target).classList.add("is-visible");
-    if (scroll) requestAnimationFrame(() => target.scrollIntoView({ block: "start", behavior: "instant" }));
+    if (scroll) requestAnimationFrame(() => {
+      target.scrollIntoView({ block: "start", behavior: "instant" });
+      if (!target.matches('a,button,input,select,textarea,summary,[tabindex]')) target.tabIndex = -1;
+      target.focus({ preventScroll: true });
+    });
   }
   document.addEventListener("click", event => {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -162,6 +174,13 @@
     if (link) revealTarget(link.hash, link.hash === location.hash);
   });
   addEventListener("hashchange", () => revealTarget(location.hash, true));
+
+  // A collapsed video gallery must not leave audio playing off screen.
+  document.querySelectorAll("details.portfolio-depth").forEach(detail => {
+    detail.addEventListener("toggle", () => {
+      if (!detail.open) detail.querySelectorAll("video").forEach(video => video.pause());
+    });
+  });
 
   document.querySelectorAll("[data-video-gallery]").forEach(gallery => {
     const tabList = gallery.querySelector("[data-video-tabs]");
@@ -244,13 +263,18 @@
     if (event.key === "Escape" && header?.dataset.open === "true") { closeMenu(); menu?.focus(); }
   });
   let printDetails = [];
+  let printHiddenItems = [];
   addEventListener("beforeprint", () => {
     printDetails = [...document.querySelectorAll("details")].map(element => [element, element.open]);
     printDetails.forEach(([element]) => { element.open = true; });
+    printHiddenItems = [...document.querySelectorAll('[data-collection] [data-category][hidden], [data-desk-note][hidden]')];
+    printHiddenItems.forEach(element => { element.hidden = false; });
   });
   addEventListener("afterprint", () => {
     printDetails.forEach(([element, open]) => { element.open = open; });
     printDetails = [];
+    printHiddenItems.forEach(element => { element.hidden = true; });
+    printHiddenItems = [];
   });
   document.querySelector("[data-print]")?.addEventListener("click", () => window.print());
   document.querySelector(".back-top")?.addEventListener("click", () => {

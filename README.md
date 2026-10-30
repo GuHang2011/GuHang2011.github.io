@@ -153,3 +153,8 @@ Six new bilingual notes cover cross-platform boundaries, request ownership, weat
 ### AI 与前端学习感悟
 
 新增[个人感悟：AI 对前端的冲击很大，我想怎样继续学下去](https://guhang2011.github.io/notebook/ai-frontend-reflection.html)。结合近期项目笔记，整理对 AI 编程的看法与下一步学习计划。笔记集现有 26 篇。
+
+
+## 2026-10-30 · Homepage reading review
+
+Three selected engineering projects and three actionable demos now lead the page. Supplementary diagrams and films remain available on demand. [Review, fixes and verification](reviews/homepage-20261030.md).

@@ -12,7 +12,7 @@
   const media = matchMedia("(prefers-reduced-motion: reduce)");
   const reduced = () => media.matches || document.documentElement.dataset.readerMotion === "reduce";
   let index = 0, timer = 0, pointer = null;
-  let userPaused = false, hovering = false, focused = false;
+  let userPaused = true, hovering = false, focused = false;
   let inView = !("IntersectionObserver" in window);
 
   slides.forEach((slide, i) => {
