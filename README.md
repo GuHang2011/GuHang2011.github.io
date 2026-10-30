@@ -12,9 +12,9 @@ A bilingual engineering and research portfolio for **Hang Gu (顾航)**, connect
 
 ## Design
 
-The academic reading structure is inspired by [winsleo.github.io](https://winsleo.github.io/), adapted to Hang Gu's own background and evidence. The homepage's October 19, 2026 design uses navy text, muted teal accents, white and pale-gray surfaces, flat research lists and screenshot-led project rows. A short highlights carousel gives early readers four evidence-led entry points: research audit, measurable delivery, data quality and human-reviewed AI. The layout adapts to phones, tablets and desktops, with concise evidence notes, reviewer questions and restrained transition feedback.
+The homepage's **30 October 2026 visual redesign** uses a warm ivory canvas, navy typography and restrained rust accents. A large name lockup and real project previews introduce the portfolio. Selected projects use large screenshot covers, the interactive demos sit in a contrasting navy section, and research and notes retain an editorial reading layout. Earlier academic organization was inspired by [winsleo.github.io](https://winsleo.github.io/); the current visual composition uses Hang Gu's own project material.
 
-Engineering highlights, code and verification evidence, and the academic CV appear immediately after the introduction. The primary link opens four engineering capabilities with routes to the relevant cases; the research brief remains available in the research section. Education sits beside the introduction in the profile panel. Publication status and learning-project labels retain distinct meanings.
+The opening links directly to the React workflow demo, selected projects and the academic CV. Three representative projects lead the engineering section; all 13 remain searchable. Three initial demos each suggest an interaction to try. Education and work history share the experience section, while detailed research context, engineering diagrams, highlights and films expand on demand. Publication status and learning-project labels retain distinct meanings.
 
 - Complete English / Chinese interface with a saved language preference.
 - Research filters for manuscripts, conference work and thesis; native expandable summaries and an expand / collapse all summaries control.
@@ -71,7 +71,7 @@ Push these files to the root of the `GuHang2011.github.io` repository. In **Sett
 - For translated accessible names, use paired `data-en-label` and `data-zh-label` attributes.
 - Research titles remain in their original English in both interface languages.
 - Update research statuses only when supported by evidence. Add a DOI or proceedings URL only after verifying it.
-- `academic.css` and `academic.js` provide shared academic layouts and interactions, including language, filters, navigation, previews and reading progress. `homepage.css`, loaded after the shared stylesheet only on the homepage, defines the navy / teal palette, light and dark theme variables, homepage layout, responsive refinements and print overrides. `highlights.js` owns the homepage evidence carousel and its keyboard, touch, auto-play and motion behavior. Existing research pages retain `styles.css` and `script.js`.
+- `academic.css` and `academic.js` provide shared layouts and interactions. Homepage refinements load afterward; `portfolio-design.css` is the final homepage-only visual layer for the ivory / navy palette, image-led cards, typography, themes, responsive layout and motion. Keep new homepage visual overrides there. `highlights.js` owns the carousel's keyboard, touch and optional autoplay behavior. Research and article pages retain their own styles.
 - `reader.js` manages the homepage's reading-preferences disclosure, saved appearance and motion choices, and research-summary expansion. Keep the controls' `data-reader-*` attributes and `aria-controls` targets intact. Theme and motion state are applied to the root element as `data-reader-theme` and `data-reader-motion`; preference storage is optional and controls remain usable when it fails. A short palette transition runs only for a deliberate theme change, and the page-head script restores a valid saved palette before the first paint.
 - When adding animation, respect both the system reduced-motion preference and the reader's saved choice. Use motion to clarify an action or selection, and keep the content readable before scripts run. Keep all-summary labels synchronized after individual summary toggles and language changes.
 - The learning-lab card links to the [live dashboard](https://guhang2011.github.io/frontend-data-lab/) and the [dynamic-form demo](https://guhang2011.github.io/frontend-data-lab/demos/form/). Keep these URLs aligned with the learning lab's GitHub Pages deployment; each link has both English and Chinese labels.
@@ -85,6 +85,7 @@ index.html          Semantic page content and bilingual copy
 academic.css        Flat academic layout and responsive / print styles
 academic.js         Language, filters, navigation, dialogs and reading progress
 homepage.css        Homepage palette, reading layout, themes and print overrides
+portfolio-design.css Final homepage visual layer: project previews, cards and themes
 highlights.js       Evidence-led highlights carousel and motion controls
 reader.js           Saved reading preferences and research-summary controls
 cases/              Selected local cases and an extracted release example
@@ -158,3 +159,7 @@ Six new bilingual notes cover cross-platform boundaries, request ownership, weat
 ## 2026-10-30 · Homepage reading review
 
 Three selected engineering projects and three actionable demos now lead the page. Supplementary diagrams and films remain available on demand. [Review, fixes and verification](reviews/homepage-20261030.md).
+
+## 2026-10-30 · Portfolio visual redesign
+
+Real project previews, larger image-led case cards, a navy demo section and a quieter research / notebook layout now give the homepage a clearer visual identity. The original project screenshot remains available in the lightbox; its 47,700-byte WebP cover serves the opening and selected-work card. [Visual decisions and browser checks](reviews/visual-design-20261030.md).
