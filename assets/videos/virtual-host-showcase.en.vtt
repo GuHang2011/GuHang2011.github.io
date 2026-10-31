@@ -1,10 +1,19 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:09.504
-Hello, I am Lin, the virtual presenter for Silk Road Intelligence. This video shows how the project combines a 2D character, a script and speech.
+00:00:00.000 --> 00:00:14.804
+Welcome to Silk Road Intelligence. Meet Mao, an official Live2D sample character. This demo connects character motion, synthesized narration, bilingual captions and playback controls.
 
-00:00:09.504 --> 00:00:19.920
-Using a synthetic steppe-honey sample, verify its name, specification and origin before preparing the narration. No real transaction is shown.
+00:00:14.804 --> 00:00:31.288
+Start with a synthetic honey sample: verify its name, specification and origin before writing. No real transaction is involved. Leave unverified details blank instead of inventing them.
 
-00:00:19.920 --> 00:00:34.128
-Pause, replay or switch chapters. Captions, gestures and playback progress move together for review. This version uses a cartoon and synthesized speech; precise lip sync is future work.
+00:00:31.288 --> 00:00:48.468
+Each chapter covers one topic. Audio supplies the playback clock, captions follow chapter positions, and measured volume drives the mouth. Media supports a clear, reviewable explanation.
+
+00:00:48.468 --> 00:01:06.800
+Review generated content before showing it: check descriptions, caption readability and asset attribution. Mouth movement is amplitude-driven; it is not phoneme alignment or real-time model inference.
+
+00:01:06.800 --> 00:01:23.692
+Pause, seek, jump to a chapter, or switch to Lin to compare presenters. Sound and motion pause together, including when the tab is hidden. Reduced motion supports quieter viewing.
+
+00:01:23.692 --> 00:01:41.016
+The focus is engineering integration: consistent character, audio, captions and control state. Next steps include phoneme alignment, slow-network recovery and device testing. The implementation is available for inspection.

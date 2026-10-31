@@ -1,0 +1,33 @@
+/* The original character remains unmodified; the stage matches the project portfolio. */
+.stage{min-height:720px;background:#f1e9de;background-image:radial-gradient(ellipse at 75% 26%,#fffaf2,transparent 65%);color:#183f3d}
+.stage:before{border-color:#fff9;box-shadow:0 0 0 40px #fff3,0 0 0 80px #fff2;top:25px;right:-80px}
+.brand small,.stage-description,.sample span,.sample small,.host-name small{color:#42615e}
+.stage-badge{color:#245e54;border-color:#a4b6ac;background:#fff7}
+.stage-left>.eyebrow,.sample strong{color:#935126}
+.stage-left{width:45%;margin-top:30px}
+.stage-left h2{font-size:32px;max-width:7em;font-weight:600;letter-spacing:0}
+.host-slot{height:440px;bottom:205px;width:53%;right:0}
+.mao-slot{height:485px;width:56%;right:-2%;bottom:195px}
+#mao-canvas{width:100%;height:100%}
+#mao-canvas canvas{display:block}
+#mao-preview{position:absolute;width:78%;height:auto;left:11%;top:15%;border-radius:50%;opacity:.85}
+.host-name{bottom:197px;right:24px;text-align:right;background:#fff9;padding:5px 8px;border-radius:5px}
+.host-name strong{font-size:12px;letter-spacing:0}.host-name small{font-size:9px}
+.stage-caption{min-height:175px;background:#fffc;color:#183f3d;border-top:1px solid #e3d8c8}
+.stage-caption>span{color:#935126}.stage-caption [lang=en]{color:#46625f}
+.stage-meter{bottom:200px}.stage-meter i{background:#368372}
+.console{padding:22px}.console h2{margin:12px 0 6px;font-size:22px}.console-lead{margin-bottom:14px}
+.avatar-choices{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.avatar-choices button{display:flex;align-items:center;gap:8px;background:#faf8f3;border:1px solid var(--line);border-radius:7px;color:var(--ink);padding:7px;min-height:58px;text-align:left}
+.avatar-choices button[aria-pressed=true]{border-color:#ad6638;box-shadow:inset 0 0 0 1px #ad6638;background:#fff6eb}
+.avatar-choices img,.lin-mark{width:40px;height:40px;flex:0 0 40px;border-radius:5px;object-fit:cover}
+.lin-mark{display:grid;place-items:center;background:#dcebe4;color:#215d51;font-size:22px}
+.avatar-choices span{font-size:13px;font-weight:600}.avatar-choices small{display:block;font-size:9px;font-weight:400;color:var(--muted);margin-top:3px}
+#avatar-status{min-height:16px;font-size:10px;color:#526760;line-height:1.6;margin:7px 0 10px}
+#avatar-retry{min-height:40px;border:1px solid var(--line);border-radius:4px;color:var(--teal);background:white;margin-bottom:10px}
+.chapters{margin:0 0 14px}.chapters li+li{margin-top:4px}.chapters button{padding:7px 10px;min-height:43px;gap:10px}.chapters span{display:flex;justify-content:space-between;align-items:center;flex:1;font-size:12px;gap:10px}.chapters small{font:10px Consolas,monospace;margin:0}
+.timeline-label{margin-top:15px}#timeline{margin:7px 0 10px}.console-note{margin:12px 0 0;font-size:10px}.signal-path{margin-top:14px;padding-top:12px}
+.asset-credit{font-size:11px;line-height:1.8;color:var(--muted);border-top:1px solid var(--line);padding-top:18px;max-width:1050px}
+.capture-mode .asset-credit{display:none}.capture-mode .console{padding:24px}.capture-mode .console h2{margin-top:16px}.capture-mode .chapters{margin:0 0 14px}.capture-mode .host-slot{height:465px;bottom:205px}.capture-mode .mao-slot{height:500px;bottom:185px}.capture-mode .stage-left h2{font-size:38px}.capture-mode .stage-caption{min-height:175px}.capture-mode .console-note{margin-top:12px}
+@media(max-width:900px){.chapters{grid-template-columns:1fr 1fr;gap:6px}.chapters li+li{margin-top:0}.stage-left h2{font-size:36px}.mao-slot{right:0;width:55%}.console{padding:24px}}
+@media(max-width:520px){.stage{min-height:730px}.stage-left{width:46%;margin-left:18px;margin-top:24px}.stage-left h2{font-size:25px;max-width:4em}.stage-description{font-size:11px}.sample strong{font-size:12px}.host-slot{width:59%;right:-5px;height:350px;bottom:250px}.mao-slot{width:65%;height:390px;bottom:245px;right:-5%}.stage-caption{min-height:225px;padding:15px 18px}.stage-caption p{font-size:12px}.stage-caption [lang=en]{font-size:10px;line-height:1.65}.host-name{bottom:235px;right:10px}.host-name strong{font-size:11px}.host-name small{font-size:8px}.stage-meter{bottom:246px;left:20px}.console{padding:22px 18px}.chapters{display:grid;grid-template-columns:1fr 1fr}.chapters button{gap:6px;padding:8px}.chapters span{display:block;font-size:11px}.chapters small{display:block;margin-top:4px}.avatar-choices small{font-size:9px}.asset-credit{font-size:10px}}

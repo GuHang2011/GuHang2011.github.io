@@ -2,40 +2,44 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="丝路智链虚拟主播公开演示：二维角色、合成语音、字幕与章节控制。">
+  <meta name="description" content="丝路智链虚拟主播公开演示：Mao Live2D 卡通主播、小林 SVG 角色、六章合成语音、双语字幕与播放控制。">
   <title>虚拟主播演示 · 丝路智链 | 顾航</title><link rel="icon" href="../../assets/icons/github.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="studio.css"><link rel="stylesheet" href="host.css">
-  <script src="studio.js" defer></script>
+  <link rel="stylesheet" href="studio.css"><link rel="stylesheet" href="host.css"><link rel="stylesheet" href="presenter.css?v=20261101">
+  <script src="mao-renderer.js?v=20261101" defer></script><script src="studio.js?v=20261101" defer></script>
 </head>
 <body>
   <header class="topbar"><a href="../../#film-host">← 顾航 · 项目影像</a><span>SILK ROAD / INTERFACE LAB</span><a href="../../cases/silkroad/">项目案例 ↗</a></header>
   <main>
-    <div class="intro"><p class="eyebrow">ENGINEERING IN MOTION / 01</p><h1>让讲解，有声有形。</h1><p>从讲稿到语音，再到角色与字幕。一个可暂停、可复查的虚拟主播交互样例。</p></div>
+    <div class="intro"><p class="eyebrow">ENGINEERING IN MOTION / 01</p><h1>让讲解，有声有形。</h1><p>Mao 卡通主播与小林双角色。跟随六个章节，看商品信息、讲稿、语音与播放控制如何协同。</p></div>
     <div id="studio" class="studio" data-state="idle">
       <section class="stage" aria-label="虚拟主播画面">
         <div class="stage-top"><span class="brand">丝路智链 <small>SILK ROAD</small></span><span class="stage-badge">2D 角色 · 合成语音</span></div>
         <div class="stage-left"><p class="eyebrow">VIRTUAL PRESENTER</p><h2 id="stage-title">欢迎来到<br>丝路智链</h2><p class="stage-description">用可控制的交互，<br>串联内容与表达。</p><div class="sample"><span>本场教学样品</span><strong>草原蜂蜜 / DEMO</strong><p>名称 · 规格 · 产地核对</p><small>合成商品，不对应真实交易</small></div></div>
-        <div class="host-slot" aria-hidden="true"><div data-pose="welcome"></div><div data-pose="present" hidden></div><div data-pose="nod" hidden></div></div>
-        <div class="host-name"><strong>小林 <span>LIN</span></strong><small>虚拟讲解员 / 2D SVG</small></div>
+        <div id="mao-slot" class="host-slot mao-slot" aria-hidden="true"><img id="mao-preview" src="mao-preview.png" alt="" width="320" height="320"><div id="mao-canvas"></div></div>
+        <div id="lin-slot" class="host-slot" aria-hidden="true" hidden><div data-pose="welcome"></div><div data-pose="present" hidden></div><div data-pose="nod" hidden></div></div>
+        <div class="host-name"><strong id="host-label">Mao / 虹色まお</strong><small id="host-kind">Live2D 示例角色 © Live2D Inc.</small></div>
         <div class="stage-caption"><span id="chapter-label">01 / 欢迎来到丝路智链</span><p id="caption-zh">点击“开始讲解”，观看角色、字幕和播放进度的联动。</p><p id="caption-en" lang="en">Press Play to explore the presenter, captions and playback controls.</p></div>
         <div class="stage-meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
       </section>
       <aside class="console" aria-label="讲解控制台">
         <div class="console-heading"><span class="eyebrow">NARRATION DESK</span><p id="play-status" role="status">准备就绪</p></div>
-        <h2>讲解控制台</h2><p class="console-lead">三段讲稿，一条清晰的叙述线。</p>
-        <ol class="chapters"><li><button type="button" data-chapter="0" aria-current="step"><b>01</b><span>欢迎与项目介绍<small>WELCOME · 欢迎手势</small></span></button></li><li><button type="button" data-chapter="1"><b>02</b><span>商品讲解与核对<small>PRESENT · 展示手势</small></span></button></li><li><button type="button" data-chapter="2"><b>03</b><span>播放控制与复查<small>NOD · 点头手势</small></span></button></li></ol>
+        <h2>讲解控制台</h2><p class="console-lead">六段讲稿 · 双角色 · 自由切换</p>
+        <div class="avatar-choices" role="group" aria-label="选择主播形象"><button type="button" data-host-choice="mao" aria-pressed="true"><img src="mao-preview.png" alt="" width="40" height="40"><span>Mao<small>Live2D 卡通主播</small></span></button><button type="button" data-host-choice="lin" aria-pressed="false"><span class="lin-mark" aria-hidden="true">林</span><span>小林<small>SVG 讲解员</small></span></button></div>
+        <p id="avatar-status" role="status">正在准备角色…</p><button id="avatar-retry" type="button" hidden>重新加载 Mao</button>
+        <ol class="chapters"></ol>
         <div class="transport"><button type="button" id="play" disabled>准备音频…</button><button type="button" id="restart" disabled>从头开始</button></div>
-        <label class="timeline-label" for="timeline">播放进度 <output id="time">00:00 / 00:34</output></label><input id="timeline" type="range" min="0" max="34.128" value="0" step="0.1" disabled>
+        <label class="timeline-label" for="timeline">播放进度 <output id="time">00:00 / --:--</output></label><input id="timeline" type="range" min="0" max="100" value="0" step="0.1" disabled>
         <label class="motion-option"><input type="checkbox" id="reduce-motion">减少角色动作</label>
         <p class="console-note">点击后播放中文合成配音；口型跟随音量变化，未进行音素级对齐。</p>
-        <p id="load-error" role="alert" hidden>演示加载失败，请刷新页面或直接观看下方视频。</p>
+        <p id="load-error" role="alert" hidden>演示加载失败，请刷新页面或<a href="../../assets/videos/virtual-host-showcase.mp4">直接观看视频</a>。</p>
         <div class="signal-path"><span>讲稿</span><i>→</i><span>语音</span><i>→</i><span>角色 / 字幕</span></div>
       </aside>
     </div>
-    <section class="reading"><div><p class="eyebrow">WHAT TO LOOK FOR</p><h2>看效果，也看控制。</h2><p>切换章节时定位到对应语音；暂停时角色停止讲述；离开标签页时自动暂停。保留双语文字稿，在无声环境也能理解展示内容。</p><a href="../../notebook/digital-human.html">阅读数字人原理笔记 ↗</a></div><div><h3>展示范围</h3><p>角色取自“技能系统”的 VirtualHost 组件，公开演示重新组织了舞台和控制面板。配音使用通用合成声音；商品与讲稿为公开教学示例。这段演示展示二维前端交互，不代表写实数字人模型推理或线上直播实录。</p><a href="README.md">实现说明与素材来源 ↗</a></div></section>
+    <section class="reading"><div><p class="eyebrow">WHAT TO LOOK FOR</p><h2>看效果，也看控制。</h2><p>切换章节时定位到对应语音；切换角色保留播放进度；暂停时角色停止讲述；离开标签页时自动暂停。保留双语文字稿，在无声环境也能理解展示内容。</p><a href="../../notebook/digital-human.html">阅读数字人原理笔记 ↗</a></div><div><h3>展示范围</h3><p>Mao 是 Live2D Inc. 的官方示例角色，小林来自本地项目的 SVG 组件。此处展示前端集成、音量驱动口型与章节控制。配音为通用合成声音，商品为教学样例；不代表写实数字人模型推理或线上直播实录。</p><a href="README.md">实现说明与素材来源 ↗</a></div></section>
+    <p class="asset-credit">This content uses sample data owned and copyrighted by Live2D Inc. The sample data are utilized in accordance with terms and conditions set by Live2D Inc. This content itself is created at the author’s sole discretion. <a href="LIVE2D-NOTICE.md">素材使用条款</a></p>
     <section class="transcript"><h2>完整讲稿 / Transcript</h2><div id="transcript"></div><p><a href="../../assets/videos/virtual-host-showcase.mp4">下载展示视频 MP4 ↓</a> · <a href="../../#film-host-workflow">观看操作演示 ↗</a></p></section>
     <noscript><p>交互演示需要 JavaScript。请<a href="../../assets/videos/virtual-host-showcase.mp4">观看展示视频</a>，或<a href="script.json">阅读完整讲稿</a>。</p></noscript>
   </main>
-  <audio id="narration" preload="metadata" src="narration.mp3"></audio>
+  <audio id="narration" preload="metadata" src="narration.mp3?v=20261101"></audio>
   <footer>顾航 / Hang Gu · 工程技术作品集 <a href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/demos/virtual-host">查看演示代码 ↗</a></footer>
 </body></html>

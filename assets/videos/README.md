@@ -1,16 +1,18 @@
 # Project Video Library
 
-Four videos explain inspectable engineering examples. Two virtual-presenter videos were added on 2026-10-20; the original two silent algorithm explainers remain below. These are public demonstrations, not production streams, real training runs or private-data recordings.
+Four videos explain inspectable engineering examples. The two virtual-presenter videos were extended on 2026-11-01 with the Mao Live2D sample character; the original two silent algorithm explainers remain below. These are public demonstrations, not production streams, real training runs or private-data recordings.
 
 ## Virtual Presenter Showcase
 
-`virtual-host-showcase.mp4` (34.128 seconds) combines a browser replay of the [public 2D presenter](../../demos/virtual-host/) with Chinese synthesized narration. The character and three gestures come from the local Silk Road VirtualHost component; the public stage and controls are adapted for this portfolio. Mouth opening follows the actual audio amplitude, not phoneme alignment. The video includes bilingual on-screen text and VTT captions.
+`virtual-host-showcase.mp4` (about 101 seconds; narration 101.016 seconds) records the [public presenter](../../demos/virtual-host/) with Chinese synthesized narration. Six chapters cover the character, product checks, script preparation, human review, playback controls and next steps. Mao is an official Live2D sample character; mouth opening follows measured audio amplitude, not phoneme alignment. The video includes bilingual on-screen text and VTT captions.
 
 ## Virtual Presenter Workflow
 
-`virtual-host-workflow.mp4` (22 seconds, silent) replays six control states: start, pause, chapter selection, resume, third chapter and restart. Highlighted controls and step labels explain each transition. It uses the same public interface, rather than a production stream. [Implementation and provenance](../../demos/virtual-host/README.md).
+`virtual-host-workflow.mp4` (60 seconds, silent) replays seven steps: start, pause, chapter selection, switch to Lin, return to Mao, reduced motion and restart. Highlighted controls and step labels explain transitions. [Implementation and provenance](../../demos/virtual-host/README.md).
 
-To reproduce: serve the site, run `tools/record_host_videos.js` using Playwright CLI `run-code --filename`, then run `python tools/encode_host_videos.py --site . --frames output/playwright/host-frames --ffmpeg <executable>`. Browser recording uses 1280 × 720 at 24 fps. `virtual-host-metadata.json` describes the new clips.
+To reproduce: run `python tools/serve_presenter.py`, run `tools/record_host_videos.js` using Playwright CLI `run-code --filename`, then run `python tools/encode_host_videos.py --site . --frames output/playwright/presenter-frames --ffmpeg <executable>`. Browser recording uses 1280 × 720 at 24 fps. `virtual-host-metadata.json` describes the clips.
+
+This content uses sample data owned and copyrighted by Live2D Inc. The sample data are utilized in accordance with terms and conditions set by Live2D Inc. This content itself is created at the author’s sole discretion.
 
 ## Early Stopping Replay
 

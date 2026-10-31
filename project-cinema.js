@@ -3,8 +3,8 @@
   const root = document.querySelector("[data-project-cinema]");
   if (!root) return;
   const catalog = [
-    { id: "film-host", en: "Virtual presenter", zh: "虚拟主播", summaryEn: "Cartoon animation with synthesized Chinese narration and bilingual captions.", summaryZh: "卡通人物与中文合成配音，配有中英字幕。", linkEn: "Try the presenter ↗", linkZh: "操作虚拟主播 ↗" },
-    { id: "film-host-workflow", en: "Presenter controls", zh: "主播操作流程", summaryEn: "A silent replay of chapter selection, pause and restart using synthetic content.", summaryZh: "切换章节、暂停和重播的无声流程回放，使用合成内容。", linkEn: "Read implementation ↗", linkZh: "查看实现说明 ↗" },
+    { id: "film-host", en: "Virtual presenter", zh: "虚拟主播", summaryEn: "Mao Live2D sample · 101-second narrated demo with bilingual captions.", summaryZh: "Mao Live2D 示例角色 · 101 秒中文讲解，配有中英字幕。", linkEn: "Try the presenter ↗", linkZh: "操作虚拟主播 ↗" },
+    { id: "film-host-workflow", en: "Presenter controls", zh: "主播操作流程", summaryEn: "A 60-second silent walkthrough of presenter switching, chapters, pause and reduced motion.", summaryZh: "60 秒无声演示：切换角色、章节定位、暂停与减少动作。", linkEn: "Read implementation ↗", linkZh: "查看实现说明 ↗" },
     { id: "film-kapt", en: "Model early stopping", zh: "模型早停动画", summaryEn: "Synthetic validation values illustrate checkpoints and patience; not a training run.", summaryZh: "用合成验证数值演示检查点与耐心计数，非真实训练记录。", linkEn: "Adjust parameters ↗", linkZh: "亲自调节参数 ↗" },
     { id: "film-data", en: "Data quality audit", zh: "数据处理动画", summaryEn: "Follow validation, deduplication and reconciliation using fictional records.", summaryZh: "跟随虚构记录的校验、去重、隔离与汇总核对过程。", linkEn: "Try the data pipeline ↗", linkZh: "操作数据管道 ↗" },
   ];

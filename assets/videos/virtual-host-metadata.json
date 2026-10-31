@@ -1,25 +1,26 @@
 {
-  "created": "2026-10-20",
-  "kind": "Deterministic replay of public 2D component demo; not a production stream",
+  "created": "2026-11-01",
+  "kind": "Recorded public demo with Mao Live2D sample and Lin SVG; not a production stream",
   "voice": "zh-CN-XiaoxiaoNeural",
+  "attribution": "This content uses sample data owned and copyrighted by Live2D Inc.",
   "files": [
     {
       "file": "virtual-host-showcase.mp4",
-      "duration": 34.128,
+      "duration": 101.016,
       "audio": true,
       "width": 1280,
       "height": 720,
       "fps": 24,
-      "bytes": 1326609
+      "bytes": 5443986
     },
     {
       "file": "virtual-host-workflow.mp4",
-      "duration": 22,
+      "duration": 60,
       "audio": false,
       "width": 1280,
       "height": 720,
       "fps": 24,
-      "bytes": 533140
+      "bytes": 1829510
     }
   ]
 }

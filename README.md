@@ -105,7 +105,7 @@ The homepage presents a compact editorial reading desk with latest, frontend, da
 
 ## Virtual presenter videos / 虚拟主播展示
 
-新增带中文配音的 34 秒二维主播展示、22 秒操作流程回放，以及[公开交互样例](demos/virtual-host/)。原有模型早停和数据质量视频保留，首页共四段视频。每段提供封面、字幕、项目说明和下载入口。
+首版新增带中文配音的 34 秒二维主播展示、22 秒操作流程回放（已于 2026-11-01 更新为 101 秒与 60 秒），以及[公开交互样例](demos/virtual-host/)。原有模型早停和数据质量视频保留，首页共四段视频。每段提供封面、字幕、项目说明和下载入口。
 
 角色取自本地丝路智链 VirtualHost 组件，商品采用合成教学内容；配音为通用合成声音。该展示不代表写实数字人模型推理。详见[实现与项目心得](demos/virtual-host/README.md)。
 
@@ -185,3 +185,10 @@ The review covers 49 portfolio assertions plus focused checks of the existing en
 首页新增可收起的项目放映室，展示虚拟主播、操作流程、模型早停与数据处理四段现有短片。支持中英字幕、项目切换、失败重试和页面内观看；默认不播放，收起即暂停，适配手机与深色模式。
 
 [设计与验证](reviews/floating-player-20261031.md) · [播放器回归脚本](reviews/checks/floating-player.js)。视频使用范围和合成内容标注保持可见。
+
+
+## 2026-11-01 · Mao presenter and longer films
+
+新增截图中的 Mao Live2D 卡通主播，保留小林 SVG 角色切换。展示片从 34 秒延长至 101 秒，操作片从 22 秒延长至 60 秒；首页视频区和悬浮放映室同步更新。
+
+[在线演示](demos/virtual-host/) · [原理、复现与素材来源](demos/virtual-host/README.md) · [本次验证](reviews/mao-presenter-20261101.md)。Mao 为 Live2D 官方示例角色，非本人原创角色；口型由音量驱动。

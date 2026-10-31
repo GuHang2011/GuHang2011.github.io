@@ -30,3 +30,13 @@ npx --yes --package @playwright/cli playwright-cli -s=portfolio-review run-code 
 ```
 
 成功时返回 `passed: 55`、断言名称、两种配色的 axe 结果和异常列表。脚本在测试浏览器内重置语言、配色和播放器会话偏好；不会修改服务器文件。视频播放使用静音，失败重试通过拦截一条 MP4 请求模拟；打印、离页和标签页隐藏通过派发生命周期事件检查。输出桌面入口、桌面窗口及手机窗口三张截图至 `output/playwright/`。
+
+## Mao 双角色演示
+
+先在仓库根目录运行 `python tools/serve_presenter.py`，该服务在 `127.0.0.1:8778` 支持音频范围请求。使用相同 axe 依赖与浏览器会话运行：
+
+```powershell
+npx --yes --package @playwright/cli playwright-cli -s=portfolio-review run-code --filename=reviews/checks/mao-presenter.js
+```
+
+成功时返回 `passed: 27`，包括真实画布动画、暂停稳定性、角色与章节切换、模型请求失败恢复，以及四种视口检查。测试会暂时拦截模型请求模拟失败，控制台会记录这条预期的失败；`errors` 统计页面脚本异常。
