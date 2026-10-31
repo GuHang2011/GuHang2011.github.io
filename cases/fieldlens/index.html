@@ -7,7 +7,7 @@
 <h1>禾镜 FieldLens</h1><p class="lead">一个用于作物图片检测与结果复核的工作台。这次改进围绕实际操作：怎样开始、怎样看清结果、怎样导出，以及怎样找回一条记录。</p>
 <div class="actions"><a class="primary" href="/fieldlens/">打开检测工作台 ↗</a><a href="https://github.com/GuHang2011/fieldlens">GitHub 源码 ↗</a><a href="/fieldlens/#guide">本地运行指南 ↗</a></div>
 <p class="notice">公开页面是交互演示，示例图片和检测框均为预设数据。真实 YOLO 推理需要在本地配置有授权的目标检测权重；本项目没有发布模型精度或病害确诊结论。</p>
-<section class="screenshots"><h2>检测工作台</h2><figure><img src="../../assets/fieldlens/workspace.webp" width="1440" height="1309" alt="禾镜检测工作台，显示图片缩放、预设检测框与结果导出"><figcaption>浏览器实拍。示例仅用于体验检测框、阈值和导出流程。</figcaption></figure></section>
+<section class="screenshots"><h2>检测工作台</h2><figure><img src="../../assets/fieldlens/workspace.webp" width="1920" height="1099" alt="禾镜检测工作台，显示图片缩放、预设检测框与结果导出"><figcaption>浏览器实拍。示例仅用于体验检测框、阈值和导出流程。</figcaption></figure></section>
 <section><h2>从用户问题到具体修复</h2><div class="table-wrap"><table><thead><tr><th>用户会遇到的问题</th><th>改进后的操作</th></tr></thead><tbody>
 <tr><td>在线页面能直接识别自己的图片吗？</td><td>在操作前显示能力说明。在线版禁用真实检测入口，并提供 Windows、macOS / Linux 本地运行步骤。</td></tr>
 <tr><td>图片里的检测区域太小，看不清楚。</td><td>新增 50%–300% 相对缩放与适应窗口，检测框同步缩放；可隐藏框查看原图。</td></tr>
@@ -19,6 +19,6 @@
 <tr><td>选错图片或检测等太久，怎么退出？</td><td>可清除当前图片、取消等待。防止旧图片读取完成后覆盖新选择；取消后不生成成功记录。</td></tr>
 </tbody></table></div></section>
 <section class="screenshots"><h2>记录检索与人工复核</h2><figure><img src="../../assets/fieldlens/history.webp" width="1440" height="1050" loading="lazy" alt="检测记录中的搜索、来源筛选、复核状态、备注和导出入口"><figcaption>演示记录，用于展示检索与复核流程。复核状态只表示人工查看，不代表病害确诊。</figcaption></figure></section>
-<section><h2>实现与验证</h2><ul class="feature-list"><li>前端：原生 ES Modules、Vite、Canvas；参考 Element UI 的后台界面样式。</li><li>本地服务：Flask、Pillow、可选 Ultralytics YOLO。上传图片在内存中处理，不随仓库分发模型权重。</li><li>记录：浏览器本地存储，最多 30 条；导出可备份，但不跨设备同步。</li><li>验证：前端数据测试、后端接口测试和浏览器流程检查；覆盖移动端布局、导出、筛选、复核、删除与失败状态。</li><li>实际模型精度、不同设备推理速度和田间效果尚未评估。</li></ul><a href="https://github.com/GuHang2011/fieldlens/blob/main/docs/USER_REVIEW.md">查看完整问题清单与验证记录 ↗</a></section>
+<section><h2>实现与验证</h2><ul class="feature-list"><li>前端：原生 ES Modules、Vite、Canvas；对照 Element 官网色彩、导航、表格和表单规范，采用浅色分组侧栏、40px 表单、固定操作列；支持宽屏三列布局。</li><li>本地服务：Flask、Pillow、可选 Ultralytics YOLO。上传图片在内存中处理，不随仓库分发模型权重。</li><li>记录：浏览器本地存储，最多 30 条；导出可备份，但不跨设备同步。</li><li>验证：前端数据测试、后端接口测试和浏览器流程检查；覆盖 360–2560px 布局、导出、筛选、复核、删除与失败状态。</li><li>实际模型精度、不同设备推理速度和田间效果尚未评估。</li></ul><a href="https://github.com/GuHang2011/fieldlens/blob/main/docs/USER_REVIEW.md">查看完整问题清单与验证记录 ↗</a></section>
 <div class="english" lang="en"><h2>FieldLens: a user-centered inspection workflow</h2><p>Review crop images, zoom into detection regions, export annotated PNG/CSV/JSON reports, and manage inspection records with searchable notes and review status. The public demo uses synthetic artwork and preset annotations. Real YOLO inference requires an authorized local model; no crop-model accuracy claims are made.</p></div>
 </main><footer>Hang Gu · FieldLens v1.1 · <a href="../../#work">返回工程项目</a></footer></body></html>
