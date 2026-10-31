@@ -20,3 +20,13 @@ npx --yes --package @playwright/cli playwright-cli -s=portfolio-review run-code 
 脚本成功时返回 `passed: 49`、断言名称、axe 结果与异常列表。`output/playwright/functional-preview-error.png` 记录模拟图片失败后的界面。自动扫描不等于完整人工无障碍评估；模拟视口不替代真实手机验收。
 
 为复查本轮工程演示，可使用既有 `demos/checks/workflows.js`。它包含动态效果开关测试，请在系统和浏览器均未强制减少动态的上下文中开始执行；脚本会另行检查系统减少动态偏好的优先级。
+
+## 悬浮项目播放器
+
+使用相同的本机服务器和 axe 依赖执行：
+
+```powershell
+npx --yes --package @playwright/cli playwright-cli -s=portfolio-review run-code --filename=reviews/checks/floating-player.js
+```
+
+成功时返回 `passed: 55`、断言名称、两种配色的 axe 结果和异常列表。脚本在测试浏览器内重置语言、配色和播放器会话偏好；不会修改服务器文件。视频播放使用静音，失败重试通过拦截一条 MP4 请求模拟；打印、离页和标签页隐藏通过派发生命周期事件检查。输出桌面入口、桌面窗口及手机窗口三张截图至 `output/playwright/`。

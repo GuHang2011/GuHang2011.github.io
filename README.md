@@ -179,3 +179,9 @@ Added a source-based Shuyang Home case and four bilingual engineering notes. Thi
 [逐项问题与验证范围](reviews/functional-review-20261031.md) · [浏览器回归脚本](reviews/checks/functional-review.js) · [复跑方法](reviews/checks/README.md)。
 
 The review covers 49 portfolio assertions plus focused checks of the existing engineering demos. Research status and project acceptance claims are unchanged.
+
+## 2026-10-31 · Floating project cinema
+
+首页新增可收起的项目放映室，展示虚拟主播、操作流程、模型早停与数据处理四段现有短片。支持中英字幕、项目切换、失败重试和页面内观看；默认不播放，收起即暂停，适配手机与深色模式。
+
+[设计与验证](reviews/floating-player-20261031.md) · [播放器回归脚本](reviews/checks/floating-player.js)。视频使用范围和合成内容标注保持可见。
