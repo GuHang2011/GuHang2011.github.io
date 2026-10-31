@@ -1,0 +1,11 @@
+/* Scoped layout for the FieldLens portfolio entry. */
+.portfolio-home #project-fieldlens{grid-column:1/-1;display:grid;grid-template-columns:1.08fr 1fr}
+.portfolio-home #project-fieldlens .project-media{display:flex;flex-direction:column;justify-content:center;padding:26px;background:#eef3f8;border:0}
+.portfolio-home #project-fieldlens .project-media button{border:1px solid #dce3eb;border-radius:6px;overflow:hidden;box-shadow:0 8px 22px #182d4812}
+.portfolio-home #project-fieldlens .project-media img{aspect-ratio:1440/1309;object-fit:contain;background:#f0f2f5}
+.portfolio-home #project-fieldlens .project-body{padding:30px}
+.portfolio-home #project-fieldlens figcaption{background:none;padding:12px 0 0;text-align:center;font-size:11px}
+@media(max-width:760px){.portfolio-home #project-fieldlens{grid-template-columns:1fr}.portfolio-home #project-fieldlens .project-media{padding:20px}.portfolio-home #project-fieldlens .project-body{padding:22px}}
+@media print{.portfolio-home #project-fieldlens{display:block}}
+
+.portfolio-home #project-fieldlens[hidden]{display:none}
