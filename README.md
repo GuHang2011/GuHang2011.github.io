@@ -163,3 +163,10 @@ Three selected engineering projects and three actionable demos now lead the page
 ## 2026-10-30 · Portfolio visual redesign
 
 Real project previews, larger image-led case cards, a navy demo section and a quieter research / notebook layout now give the homepage a clearer visual identity. The original project screenshot remains available in the lightbox; its 47,700-byte WebP cover serves the opening and selected-work card. [Visual decisions and browser checks](reviews/visual-design-20261030.md).
+
+
+## 2026-10-31 · Engineering case and learning notes
+
+新增[沭阳之家工程案例](https://guhang2011.github.io/cases/shuyang/)及[四篇学习笔记](https://guhang2011.github.io/notebook/engineering-log-20261031.html)：目录迁移、移动端接口契约、上传队列与发布产物校验。笔记总数为 30。首页同步公开项目版本；历史验收记录仍按原版本与日期引用。
+
+Added a source-based Shuyang Home case and four bilingual engineering notes. This is a portfolio content update, not a new full application acceptance run.

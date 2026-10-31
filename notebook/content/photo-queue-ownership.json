@@ -1,0 +1,154 @@
+{
+  "slug": "photo-queue-ownership",
+  "title": {
+    "en": "Photo upload queues: retries and account changes",
+    "zh": "照片上传队列：失败重试与账号切换怎么处理"
+  },
+  "summary": {
+    "en": "Separate selected files from ready media, follow the four upload states and handle callbacks that arrive after ownership changes.",
+    "zh": "读懂 waiting、uploading、done、failed 四种状态，区分已选择与可提交，并处理迟到的上传回调。"
+  },
+  "category": "frontend",
+  "kind": "reflection",
+  "minutes": 6,
+  "date": "2026-10-31",
+  "tags": [
+    "Vue",
+    "上传队列",
+    "状态机",
+    "generation",
+    "Object URL"
+  ],
+  "basis": {
+    "en": "Based on public Shuyang Home v1.2.2 source, test fixtures and release records. Existing behavior, recorded checks and proposed tests are distinguished; this update is a source review and write-up.",
+    "zh": "依据沭阳之家 v1.2.2 的公开源码、测试夹具与版本记录整理。文中区分已有实现、历史验证和建议补测；本次是代码阅读与内容整理。"
+  },
+  "sections": [
+    {
+      "id": "states",
+      "title": {
+        "en": "Selection does not mean upload completion",
+        "zh": "选中照片，不等于上传完成"
+      },
+      "paragraphs": [
+        {
+          "en": "usePhotoUpload keeps selected photos in one queue, with waiting, uploading, done and failed states. Failed items remain visible so users can identify them and choose to retry or remove them.",
+          "zh": "usePhotoUpload 把照片保留在统一队列中，每项有 waiting、uploading、done 或 failed 状态。失败项不会立刻消失，因此用户能看到哪张失败，再选择重试或移除。"
+        },
+        {
+          "en": "The changed callback returns server media records only for done items. pending remains true for any non-done item, including failed ones. The interface needs to explain why submission can remain unavailable even when no upload is actively running.",
+          "zh": "changed 回调只返回 done 项对应的服务端媒体记录；pending 只要发现非 done 项就为 true。因此 failed 也会阻止把整组照片当作已就绪。界面应解释这一点，避免上传都停了，提交按钮却一直不可用。"
+        }
+      ],
+      "code": {
+        "language": "State transitions",
+        "text": "select → waiting → uploading → done\n                        ↓\n                      failed → retry → waiting\n\nsubmit-ready media = items with status === done\nunresolved selection = any item with status !== done"
+      }
+    },
+    {
+      "id": "queue",
+      "title": {
+        "en": "The tradeoff of a serial queue",
+        "zh": "串行队列的取舍"
+      },
+      "paragraphs": [
+        {
+          "en": "The current implementation awaits uploads one at a time. This simplifies state changes and retention of failed items, but large selections can take longer on slow networks. Bounded concurrency should be considered after measuring sizes, failure rates and waiting times.",
+          "zh": "当前实现逐张 await 上传。这样容易说明进度、控制状态更新，也便于保留失败项。代价是多张大图片在弱网上可能等待较久；是否改成有限并发，需要先测单图大小、失败率和等待时间。"
+        },
+        {
+          "en": "remove and retry are disabled while the queue is running. Files beyond the selection limit have their preview resources released. Failed items still count toward that limit until removed.",
+          "zh": "队列在运行时不允许 remove 和 retry；超出数量上限的文件直接释放预览资源。数量上限按全部选中项计算，失败项也占名额，直到用户移除。"
+        }
+      ]
+    },
+    {
+      "id": "ownership",
+      "title": {
+        "en": "Old callbacks lose ownership when identity changes",
+        "zh": "账号变了，旧回调就没有写入权"
+      },
+      "paragraphs": [
+        {
+          "en": "run captures generation at startup. An identity change calls reset, increments generation, releases previews and clears the list. A returning callback checks that generation before updating state. Unmount also invalidates the current generation.",
+          "zh": "run 开始时记住 generation。身份切换触发 reset，递增 generation、释放预览并清空列表；异步结果回来后先比较版本，不一致就返回。组件卸载也会使这一代任务失效。"
+        }
+      ],
+      "code": {
+        "language": "TypeScript",
+        "text": "// Simplified ownership guard; not the complete queue\nconst version = generation;\nconst media = await upload(file);\nif (version !== generation) return;\nitem.media = media;\nitem.status = 'done';"
+      },
+      "callout": {
+        "en": "Ignoring a callback does not cancel the upload. The request and server write may already have completed. Orphan-media cleanup needs a server policy; generation is neither server authorization nor rollback.",
+        "zh": "忽略回调不等于取消上传。网络请求和服务端保存可能已经完成，孤立媒体的清理仍需要服务端策略；不能把 generation 当作服务端授权或回滚机制。"
+      }
+    },
+    {
+      "id": "resources",
+      "title": {
+        "en": "Previews have a lifecycle too",
+        "zh": "预览也有生命周期"
+      },
+      "paragraphs": [
+        {
+          "en": "The shared logic delegates preview cleanup to a release callback. Removal, reset, unmount and rejected selections all trigger cleanup. Web object URLs created with URL.createObjectURL should be revoked when no longer used; mini-program temporary paths follow their platform rules.",
+          "zh": "共享逻辑接受 release 回调，把预览清理由平台负责。移除、重置、卸载和超过数量限制都会走清理路径。Web 端如使用 URL.createObjectURL，应在不再使用时调用 URL.revokeObjectURL；小程序临时路径则按平台规则处理。"
+        },
+        {
+          "en": "The five public logic checks cover selection limits, retry, ready-list updates after removal, identity changes and callbacks after unmount. They use a Vue stub and controlled promises, not real transfer speed, album permissions or long-running memory measurements.",
+          "zh": "公开测试覆盖了数量限制、失败重试、删除后的就绪列表、身份切换和卸载后的迟到回调，共 5 项逻辑检查。它使用 Vue 替身和受控 Promise，没有测真实上传速度、相册权限或长时间内存占用。"
+        }
+      ]
+    },
+    {
+      "id": "next",
+      "title": {
+        "en": "What to verify next",
+        "zh": "下一步值得验证什么"
+      },
+      "paragraphs": [],
+      "bullets": [
+        {
+          "en": "Repeatedly select and remove photos on real devices while observing preview-resource usage.",
+          "zh": "在真实设备上连续选择、删除照片，观察预览资源是否持续增长。"
+        },
+        {
+          "en": "Switch accounts during upload, then inspect media ownership and cleanup of unreferenced files on the server.",
+          "zh": "上传中切换账号，再查询服务端媒体归属和未引用文件的清理结果。"
+        },
+        {
+          "en": "If concurrency is added, test a new queue after reset so an old finally block cannot overwrite its running state.",
+          "zh": "如果引入并发，单独测试 reset 后的新队列，确保旧任务的 finally 不会改写新队列的运行状态。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/GuHang2011/shuyang-home/blob/7c5b1f5d6d38c3ec94159a4bc1f9860acbacfe5e/frontend/shared/usePhotoUpload.ts",
+      "label": {
+        "en": "Shared photo queue",
+        "zh": "共享照片队列"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/shuyang-home/blob/7c5b1f5d6d38c3ec94159a4bc1f9860acbacfe5e/scripts/test-photo-uploads.cjs",
+      "label": {
+        "en": "Five photo-queue logic checks",
+        "zh": "五项照片队列逻辑检查"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/shuyang-home/blob/7c5b1f5d6d38c3ec94159a4bc1f9860acbacfe5e/docs/照片上传与界面优化.md",
+      "label": {
+        "en": "Photo-upload design record",
+        "zh": "照片上传设计记录"
+      }
+    }
+  ],
+  "related": [
+    "upload-readiness",
+    "request-scope-lifecycle",
+    "mobile-response-contracts"
+  ]
+}

@@ -2,7 +2,7 @@
 
 [Read online / 在线阅读](https://guhang2011.github.io/notebook/)
 
-Twenty-six bilingual notes connect code observations, small examples, implementation tradeoffs and questions for further study. Collection updated on **2026-10-29**, with AI-assisted drafting and translation. Each article retains its compilation date. They are learning summaries, not a historical lab diary or evidence of new research results.
+Thirty bilingual notes connect code observations, small examples, implementation tradeoffs and questions for further study. Collection updated on **2026-10-31**, with AI-assisted drafting and translation. Each article retains its compilation date. They are learning summaries, not a historical lab diary or evidence of new research results.
 
 | Topic | Note | Related work |
 | --- | --- | --- |
@@ -86,3 +86,15 @@ To render selected articles and refresh the full index: `python notebook/build.p
 [AI 对前端的冲击很大，我想怎样继续学下去](ai-frontend-reflection.html) / [Learning frontend development when AI can write the code](ai-frontend-reflection.html)
 
 补充个人观点与下一步学习打算，讨论 AI 辅助开发中的基础知识、任务拆分、代码阅读与结果验证。关联前面的请求竞态、低代码与上传笔记。当前共 26 篇。
+
+
+## 31 October 2026 · Engineering notes
+
+[本次学习记录 / Latest learning log](engineering-log-20261031.html) · [沭阳之家工程案例 / Engineering case](../cases/shuyang/)
+
+- [目录改名之后：启动脚本、历史链接与 Linux 权限 / After a directory rename: scripts, history and Linux permissions](directory-rename-release.html)
+- [移动端接口：HTTP 成功之后，还要判断什么 / Mobile API contracts: what to check after HTTP succeeds](mobile-response-contracts.html)
+- [照片上传队列：失败重试与账号切换怎么处理 / Photo upload queues: retries and account changes](photo-queue-ownership.html)
+- [发布包校验：通过测试的代码，是否就是交付的文件 / Release integrity: do the delivered files match what was checked?](release-artifact-integrity.html)
+
+新增 4 篇，合计 30 篇。基于公开 v1.2.2 源码与已有发布记录整理，历史业务测试结果不计为本轮复跑结果。

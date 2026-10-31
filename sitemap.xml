@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://guhang2011.github.io/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-10-31</lastmod>
   </url>
   <url>
     <loc>https://guhang2011.github.io/research/</loc>
@@ -38,7 +38,7 @@
   </url>
   <url>
     <loc>https://guhang2011.github.io/notebook/</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-10-31</lastmod>
   </url>
   <url>
     <loc>https://guhang2011.github.io/notebook/model-selection.html</loc>
@@ -159,7 +159,7 @@
     <loc>https://guhang2011.github.io/demos/telecom-service/</loc>
     <lastmod>2026-10-28</lastmod>
   </url>
-<url><loc>https://guhang2011.github.io/notebook/journal.html</loc><lastmod>2026-10-29</lastmod></url>
+<url><loc>https://guhang2011.github.io/notebook/journal.html</loc><lastmod>2026-10-31</lastmod></url>
 <url><loc>https://guhang2011.github.io/notebook/cross-platform-boundaries.html</loc><lastmod>2026-10-29</lastmod></url>
 <url><loc>https://guhang2011.github.io/notebook/request-scope-lifecycle.html</loc><lastmod>2026-10-29</lastmod></url>
 <url><loc>https://guhang2011.github.io/notebook/weather-fallback.html</loc><lastmod>2026-10-29</lastmod></url>
@@ -167,4 +167,10 @@
 <url><loc>https://guhang2011.github.io/notebook/low-code-contracts.html</loc><lastmod>2026-10-29</lastmod></url>
 <url><loc>https://guhang2011.github.io/notebook/progressive-demo-loading.html</loc><lastmod>2026-10-29</lastmod></url>
 <url><loc>https://guhang2011.github.io/notebook/ai-frontend-reflection.html</loc><lastmod>2026-10-29</lastmod></url>
+<url><loc>https://guhang2011.github.io/cases/shuyang/</loc><lastmod>2026-10-31</lastmod></url>
+<url><loc>https://guhang2011.github.io/notebook/engineering-log-20261031.html</loc><lastmod>2026-10-31</lastmod></url>
+<url><loc>https://guhang2011.github.io/notebook/directory-rename-release.html</loc><lastmod>2026-10-31</lastmod></url>
+<url><loc>https://guhang2011.github.io/notebook/mobile-response-contracts.html</loc><lastmod>2026-10-31</lastmod></url>
+<url><loc>https://guhang2011.github.io/notebook/photo-queue-ownership.html</loc><lastmod>2026-10-31</lastmod></url>
+<url><loc>https://guhang2011.github.io/notebook/release-artifact-integrity.html</loc><lastmod>2026-10-31</lastmod></url>
 </urlset>

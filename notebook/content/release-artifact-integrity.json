@@ -1,0 +1,156 @@
+{
+  "slug": "release-artifact-integrity",
+  "title": {
+    "en": "Release integrity: do the delivered files match what was checked?",
+    "zh": "发布包校验：通过测试的代码，是否就是交付的文件"
+  },
+  "summary": {
+    "en": "Follow VERSION, SHA256SUMS and ZIP contents to understand what version checks, file inventories and digests actually establish.",
+    "zh": "从 VERSION、SHA256SUMS 到 ZIP 内容，记录版本一致性、文件集合和产物校验各自能证明什么。"
+  },
+  "category": "engineering",
+  "kind": "reflection",
+  "minutes": 6,
+  "date": "2026-10-31",
+  "tags": [
+    "SHA-256",
+    "CI",
+    "发布包",
+    "manifest",
+    "版本管理"
+  ],
+  "basis": {
+    "en": "Based on public Shuyang Home v1.2.2 source, test fixtures and release records. Existing behavior, recorded checks and proposed tests are distinguished; this update is a source review and write-up.",
+    "zh": "依据沭阳之家 v1.2.2 的公开源码、测试夹具与版本记录整理。文中区分已有实现、历史验证和建议补测；本次是代码阅读与内容整理。"
+  },
+  "sections": [
+    {
+      "id": "version",
+      "title": {
+        "en": "Give the version a single source",
+        "zh": "版本号先有一个来源"
+      },
+      "paragraphs": [
+        {
+          "en": "The root VERSION coordinates version values across the backend, Web app, mobile app and lockfiles. Editing only a README or Git tag can leave mismatched programs and archives. Version consistency belongs before the build.",
+          "zh": "根目录 VERSION 统一后端、Web、移动端和依赖锁文件中的版本。只改 README 或 Git 标签，可能留下不同版本的程序和压缩包。版本校验应成为构建前的一步。"
+        },
+        {
+          "en": "A historical package must be checked against its own VERSION, not the current repository version. verify-release.py accepts an explicit package name and uses that package’s version to locate its JAR.",
+          "zh": "校验历史发布包时，应读取包内自己的 VERSION。当前仓库版本已经前进，并不意味着旧包也应该跟着改变。verify-release.py 支持显式指定包名，按那个包的版本检查 JAR 路径。"
+        }
+      ]
+    },
+    {
+      "id": "inventory",
+      "title": {
+        "en": "Compare the file set before comparing contents",
+        "zh": "先比文件集合，再比文件内容"
+      },
+      "paragraphs": [
+        {
+          "en": "Checking only the digests listed in a manifest can miss extra files. The current verifier first requires the actual file set to equal the manifest entries plus SHA256SUMS itself, then computes each digest.",
+          "zh": "如果只逐行检查清单里的哈希，目录里混入一个没有列出的文件也可能被忽略。当前检查要求实际文件集合恰好等于清单中的文件加 SHA256SUMS 本身，再逐个计算 SHA-256。"
+        },
+        {
+          "en": "The script also excludes selected runtime directories, key-file suffixes and test content that should not ship. These rules need maintenance as the deployment changes; they are not a general scanner for every possible secret.",
+          "zh": "脚本还排除若干运行数据目录、密钥扩展名和不应打入包内的测试内容。这样的规则需要随部署结构维护；它们不是覆盖所有敏感信息的通用扫描器。"
+        }
+      ],
+      "code": {
+        "language": "Python",
+        "text": "# Simplified file-set invariant\nexpected = set(manifest) | {'SHA256SUMS'}\nif set(actual_files) != expected:\n    raise ValueError('Missing or unlisted files')\n\n# Digest checks follow only after the file set matches."
+      }
+    },
+    {
+      "id": "archive",
+      "title": {
+        "en": "Check the ZIP as well as the staging directory",
+        "zh": "打包目录正确，还要核对 ZIP"
+      },
+      "paragraphs": [
+        {
+          "en": "After checking the staging directory, the verifier opens the ZIP and compares paths and file bytes against it. This catches a stale or mismatched archive even when the directory itself is correct.",
+          "zh": "目录校验通过后，脚本打开 ZIP，比较压缩包与发布目录的文件路径和每个文件的字节。这个步骤针对“最后拿错了压缩包”或“压缩包没有重新生成”的情况。"
+        },
+        {
+          "en": "The backend JAR is inspected for expected membership classes and unwanted legacy or test classes. These are selected content constraints; behavior still depends on the relevant tests.",
+          "zh": "后端 JAR 也会被检查：关键会员系统类是否存在，是否意外带入旧业务类或测试类。这里只确认选定的内容约束，完整业务行为仍由相应测试负责。"
+        }
+      ]
+    },
+    {
+      "id": "reproduce",
+      "title": {
+        "en": "How to recheck an existing local release",
+        "zh": "如何复查已有发布包"
+      },
+      "paragraphs": [
+        {
+          "en": "Run these commands at the repository root. The last command requires release/shuyang-home-v1.2.1 and its ZIP to have been generated locally using the packaging guide. A source checkout or GitHub source archive is not that delivery directory.",
+          "zh": "以下命令从仓库根目录运行；最后一行要求本机已经按打包文档生成 release/shuyang-home-v1.2.1 及同名 ZIP。源码仓库或 GitHub 自动生成的源码压缩包并不等于这一交付目录。"
+        }
+      ],
+      "code": {
+        "language": "PowerShell",
+        "text": "python scripts/version.py check\npython scripts/verify-release.py shuyang-home-v1.2.1"
+      },
+      "callout": {
+        "en": "The recorded verification of 140 files describes the local v1.2.1 release package. The v1.2.2 file-mode repair does not constitute another full packaging acceptance run.",
+        "zh": "历史记录中的 140 份文件校验对应 v1.2.1 本地发布包。v1.2.2 的文件模式修复不能自动变成一次新的全量打包验收。"
+      }
+    },
+    {
+      "id": "meaning",
+      "title": {
+        "en": "Digests are one part of the evidence",
+        "zh": "哈希值是证据的一部分"
+      },
+      "paragraphs": [
+        {
+          "en": "Matching digests help establish content identity. They do not prove the software is correct or the report author is trustworthy. Keep the test report, revision, environment and artifact digests together, with separate release authorization.",
+          "zh": "相同哈希能帮助确认文件内容一致，但不能证明软件没有缺陷，也不能证明报告来自可信的人。测试报告、提交号、运行环境和产物校验值需要一起保存，发布权限另行管理。"
+        },
+        {
+          "en": "The current script targets trusted locally generated packages and expresses checks with assert; do not run it with Python -O. Handling externally supplied archives would require duplicate-path checks, resource limits and explicit error reporting.",
+          "zh": "当前脚本面向本机生成的可信包，且使用 assert 表达检查条件；运行时不要加 Python 的 -O 选项。如果未来用来检查外部上传包，还需处理重复 ZIP 路径、资源消耗和明确的异常报告。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/GuHang2011/shuyang-home/blob/7c5b1f5d6d38c3ec94159a4bc1f9860acbacfe5e/scripts/version.py",
+      "label": {
+        "en": "Version consistency script",
+        "zh": "版本一致性脚本"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/shuyang-home/blob/7c5b1f5d6d38c3ec94159a4bc1f9860acbacfe5e/scripts/verify-release.py",
+      "label": {
+        "en": "Release verifier",
+        "zh": "发布包校验实现"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/shuyang-home/blob/7c5b1f5d6d38c3ec94159a4bc1f9860acbacfe5e/scripts/package-release.ps1",
+      "label": {
+        "en": "Packaging script",
+        "zh": "打包脚本"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/shuyang-home/blob/7c5b1f5d6d38c3ec94159a4bc1f9860acbacfe5e/CHANGELOG.md",
+      "label": {
+        "en": "Versions associated with recorded checks",
+        "zh": "历史验证所属版本"
+      }
+    }
+  ],
+  "related": [
+    "directory-rename-release",
+    "model-version-rollback",
+    "generative-workflow"
+  ]
+}
