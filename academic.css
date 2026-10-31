@@ -385,6 +385,10 @@ details.abstract[open] { padding-bottom: 10px; }
 .lightbox-close:hover { background: var(--surface); }
 .lightbox-close svg { width: 18px; height: 18px; }
 .lightbox-close img { width: 18px; height: 18px; }
+.lightbox .preview-status { padding: 24px 12px; font-size: 14px; }
+.lightbox .preview-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px 20px; margin-top: 14px; font-size: 13px; }
+.lightbox .preview-actions button { min-height: 44px; padding: 8px 16px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); color: var(--ink); font: inherit; }
+.lightbox .preview-actions a { display: inline-flex; align-items: center; min-height: 44px; }
 .js .reveal-ready { opacity: 0; transform: translateY(12px); }
 .js .reveal-ready.is-visible { opacity: 1; transform: none; transition: opacity .45s ease, transform .45s ease; }
 

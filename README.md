@@ -170,3 +170,12 @@ Real project previews, larger image-led case cards, a navy demo section and a qu
 新增[沭阳之家工程案例](https://guhang2011.github.io/cases/shuyang/)及[四篇学习笔记](https://guhang2011.github.io/notebook/engineering-log-20261031.html)：目录迁移、移动端接口契约、上传队列与发布产物校验。笔记总数为 30。首页同步公开项目版本；历史验收记录仍按原版本与日期引用。
 
 Added a source-based Shuyang Home case and four bilingual engineering notes. This is a portfolio content update, not a new full application acceptance run.
+
+
+## 2026-10-31 · Functional review
+
+修复项目／笔记筛选与视频链接状态、截图失败恢复、图片说明翻译、键盘焦点和研究计划页打印恢复。
+
+[逐项问题与验证范围](reviews/functional-review-20261031.md) · [浏览器回归脚本](reviews/checks/functional-review.js) · [复跑方法](reviews/checks/README.md)。
+
+The review covers 49 portfolio assertions plus focused checks of the existing engineering demos. Research status and project acceptance claims are unchanged.

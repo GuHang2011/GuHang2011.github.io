@@ -87,6 +87,9 @@
     document.addEventListener("click", event => {
       if (!panel.hidden && !settings.contains(event.target)) setOpen(false);
     });
+    settings.addEventListener("focusout", event => {
+      if (event.relatedTarget && !settings.contains(event.relatedTarget)) setOpen(false);
+    });
     document.addEventListener("keydown", event => {
       if (event.key !== "Escape" || panel.hidden) return;
       event.preventDefault();

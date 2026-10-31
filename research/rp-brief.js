@@ -17,15 +17,6 @@
     });
   });
   revealHash();
-  // Include evidence in print, then restore the reader's disclosure state.
-  let printState = null;
-  window.addEventListener('beforeprint', () => {
-    if (printState) return;
-    printState = [...document.querySelectorAll('details')].map(el => [el, el.open]);
-    printState.forEach(([el]) => { el.open = true; });
-  });
-  window.addEventListener('afterprint', () => {
-    printState?.forEach(([el, wasOpen]) => { el.open = wasOpen; });
-    printState = null;
-  });
+  // academic.js owns print expansion and restoration for the whole document.
+  // Taking a second snapshot here would capture its already-expanded state.
 })();

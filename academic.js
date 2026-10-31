@@ -20,6 +20,34 @@
     return [item, [item.textContent, ...translations].join(" ").normalize("NFKC").toLowerCase()];
   }));
 
+  function readProjectView() {
+    if (!projectSearch) return;
+    const params = new URL(location.href).searchParams;
+    const requested = params.get("project");
+    const choices = [...document.querySelectorAll('[data-filter-group="projects"] [data-filter]')];
+    filterState.projects = choices.some(button => button.dataset.filter === requested) ? requested : "all";
+    projectSearch.value = params.get("project-q") || "";
+    projectsExpanded = params.get("projects") === "all";
+    choices.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.filter === filterState.projects)));
+  }
+
+  function writeProjectView(mode = "replaceState") {
+    if (!projectSearch) return;
+    const url = new URL(location.href);
+    for (const [key, value] of [
+      ["project", filterState.projects === "all" ? "" : filterState.projects],
+      ["project-q", projectSearch.value.trim()],
+      ["projects", projectsExpanded ? "all" : ""],
+    ]) {
+      if (value) url.searchParams.set(key, value); else url.searchParams.delete(key);
+    }
+    if (url.href === location.href) return;
+    try { history[mode](history.state, "", url); } catch { /* Filtering works without history access. */ }
+  }
+  readProjectView();
+  const projectFilterHelp = document.getElementById("project-filter-help");
+  if (projectFilterHelp) projectFilterHelp.hidden = false;
+
   function updateCounts() {
     const query = (projectSearch?.value || "").normalize("NFKC").trim().toLowerCase();
     const terms = query.split(/\s+/u).filter(Boolean);
@@ -68,6 +96,9 @@
     document.querySelectorAll("[data-en-placeholder][data-zh-placeholder]").forEach(el => {
       el.placeholder = el.dataset[`${next}Placeholder`];
     });
+    document.querySelectorAll("[data-en-alt][data-zh-alt]").forEach(el => {
+      el.alt = el.dataset[`${next}Alt`];
+    });
     document.querySelectorAll("[data-language]").forEach(button => {
       button.setAttribute("aria-pressed", String(button.dataset.language === next));
     });
@@ -113,13 +144,15 @@
         filterState[name] = button.dataset.filter;
         group.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b === button)));
         updateCounts();
+        if (name === "projects") writeProjectView("pushState");
       });
     });
   });
-  projectSearch?.addEventListener("input", updateCounts);
+  projectSearch?.addEventListener("input", () => { updateCounts(); writeProjectView(); });
   clearSearch?.addEventListener("click", () => {
     projectSearch.value = "";
     updateCounts();
+    writeProjectView();
     projectSearch.focus();
   });
   function resetProjects() {
@@ -130,6 +163,7 @@
       button.setAttribute("aria-pressed", String(button.dataset.filter === "all"));
     });
     updateCounts();
+    writeProjectView();
   }
   document.querySelector("[data-reset-projects]")?.addEventListener("click", () => {
     resetProjects();
@@ -138,8 +172,10 @@
   expandProjects?.addEventListener("click", () => {
     projectsExpanded = !projectsExpanded;
     updateCounts();
+    writeProjectView("pushState");
     if (!projectsExpanded) expandProjects.scrollIntoView({ block: "center", behavior: "instant" });
   });
+  addEventListener("popstate", () => { readProjectView(); updateCounts(); });
 
   // Reveal the target before native anchor navigation; also handle history and direct URLs.
   function revealTarget(hash, scroll = false) {
@@ -189,7 +225,7 @@
     function pauseVideo(video) {
       if (video && !video.paused) video.pause();
     }
-    function selectFilm(index, focus = false) {
+    function selectFilm(index, focus = false, historyMode = null) {
       tabs.forEach((tab, i) => {
         const selected = i === index;
         tab.setAttribute("aria-selected", String(selected));
@@ -199,6 +235,13 @@
         if (!selected) pauseVideo(panel.querySelector("video"));
       });
       if (focus) tabs[index].focus();
+      if (historyMode) {
+        const url = new URL(location.href);
+        url.hash = tabs[index].dataset.videoTab;
+        if (url.href !== location.href) {
+          try { history[historyMode](history.state, "", url); } catch { /* Playback still works. */ }
+        }
+      }
     }
     tabs.forEach((tab, index) => {
       tab.setAttribute("role", "tab");
@@ -207,7 +250,7 @@
       panel.setAttribute("role", "tabpanel");
       panel.setAttribute("aria-labelledby", tab.id);
       panel.tabIndex = 0;
-      tab.addEventListener("click", () => selectFilm(index));
+      tab.addEventListener("click", () => selectFilm(index, false, "pushState"));
       tab.addEventListener("keydown", event => {
         let next;
         if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
@@ -216,7 +259,7 @@
         if (event.key === "End") next = tabs.length - 1;
         if (next === undefined) return;
         event.preventDefault();
-        selectFilm(next, true);
+        selectFilm(next, true, "replaceState");
       });
     });
     gallery.querySelectorAll("video").forEach(video => {
@@ -237,6 +280,7 @@
     selectFilm(0);
     selectLinkedFilm();
     addEventListener("hashchange", selectLinkedFilm);
+    addEventListener("popstate", selectLinkedFilm);
   });
 
   function closeMenu() {
@@ -264,33 +308,90 @@
   });
   let printDetails = [];
   let printHiddenItems = [];
+  let printing = false;
   addEventListener("beforeprint", () => {
+    if (printing) return;
+    printing = true;
     printDetails = [...document.querySelectorAll("details")].map(element => [element, element.open]);
     printDetails.forEach(([element]) => { element.open = true; });
     printHiddenItems = [...document.querySelectorAll('[data-collection] [data-category][hidden], [data-desk-note][hidden]')];
     printHiddenItems.forEach(element => { element.hidden = false; });
   });
   addEventListener("afterprint", () => {
+    if (!printing) return;
     printDetails.forEach(([element, open]) => { element.open = open; });
     printDetails = [];
     printHiddenItems.forEach(element => { element.hidden = true; });
     printHiddenItems = [];
+    printing = false;
   });
   document.querySelector("[data-print]")?.addEventListener("click", () => window.print());
   document.querySelector(".back-top")?.addEventListener("click", () => {
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches || document.documentElement.dataset.readerMotion === "reduce";
+    const main = document.querySelector("main");
+    if (main) { if (!main.hasAttribute("tabindex")) main.tabIndex = -1; main.focus({ preventScroll: true }); }
     window.scrollTo({ top: 0, behavior: reduce ? "instant" : "smooth" });
   });
 
   const lightbox = document.querySelector(".lightbox");
-  document.querySelectorAll("[data-preview]").forEach(button => {
-    button.addEventListener("click", () => {
-      lightbox.querySelector(".lightbox-image").src = button.dataset.preview;
-      lightbox.querySelector(".lightbox-image").alt = button.querySelector("img").alt;
-      lightbox.querySelector("p").textContent = button.querySelector("img").alt;
-      lightbox.showModal();
+  if (lightbox) {
+    const caption = lightbox.querySelector("p");
+    const status = document.createElement("p");
+    status.className = "preview-status";
+    status.setAttribute("role", "status");
+    const actions = document.createElement("div");
+    actions.className = "preview-actions";
+    const retry = document.createElement("button");
+    retry.type = "button"; retry.dataset.previewRetry = "";
+    const original = document.createElement("a");
+    original.target = "_blank"; original.rel = "noopener";
+    actions.append(retry, original); lightbox.append(status, actions);
+    let trigger = null, generation = 0, state = "idle";
+    function updatePreviewText() {
+      const zh = language === "zh";
+      const description = trigger?.querySelector("img")?.alt || "";
+      caption.textContent = description;
+      lightbox.querySelector(".lightbox-image").alt = description;
+      status.textContent = state === "loading" ? (zh ? "正在加载完整截图…" : "Loading full screenshot…")
+        : state === "error" ? (zh ? "截图未能加载，请重试或打开原图。" : "The screenshot could not load. Retry or open the original.") : "";
+      status.hidden = state !== "loading" && state !== "error";
+      retry.hidden = state !== "error";
+      retry.textContent = zh ? "重新加载" : "Retry image";
+      original.textContent = zh ? "在新标签页打开原图 ↗" : "Open original in a new tab ↗";
+    }
+    function loadPreview() {
+      const version = ++generation;
+      state = "loading"; updatePreviewText();
+      // A fresh image owns its callbacks; a late earlier request cannot update a new preview.
+      const image = document.createElement("img");
+      image.className = "lightbox-image"; image.hidden = true;
+      image.alt = trigger.querySelector("img")?.alt || "";
+      lightbox.querySelector(".lightbox-image").replaceWith(image);
+      const finish = next => {
+        if (version !== generation || !lightbox.open) return;
+        state = next; image.hidden = next !== "ready"; updatePreviewText();
+        // Retry disappears after success; keep keyboard focus inside the modal.
+        if (next === "ready" && document.activeElement === retry) original.focus();
+      };
+      image.addEventListener("load", () => finish("ready"), { once: true });
+      image.addEventListener("error", () => finish("error"), { once: true });
+      original.href = trigger.dataset.preview;
+      image.src = trigger.dataset.preview;
+    }
+    document.querySelectorAll("[data-preview]").forEach(button => {
+      button.addEventListener("click", () => {
+        trigger = button;
+        if (!lightbox.open) lightbox.showModal();
+        loadPreview();
+      });
     });
-  });
+    retry.addEventListener("click", () => { lightbox.querySelector(".lightbox-close").focus(); loadPreview(); });
+    lightbox.addEventListener("close", () => {
+      if (lightbox.open) return; // A queued close event may belong to an earlier preview.
+      ++generation; state = "idle"; trigger?.focus({ preventScroll: true });
+    });
+    document.addEventListener("portfolio-language-change", () => { if (lightbox.open) updatePreviewText(); });
+  }
   lightbox?.querySelector(".lightbox-close").addEventListener("click", () => lightbox.close());
   lightbox?.addEventListener("click", event => { if (event.target === lightbox) lightbox.close(); });
 
