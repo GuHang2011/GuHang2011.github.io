@@ -16,7 +16,7 @@
 2. **版本保护**：每个任务带有 `version`。提交转换时携带期望版本，版本已变化时拒绝写入，避免旧页面覆盖新状态。
 3. **过期请求**：`token` 让较早的模拟响应无法覆盖较新的操作。真实服务应在服务端再次校验版本，并返回可读的冲突信息。
 4. **异步边界**：重置会取消待处理的模拟响应；请求令牌会忽略过期回调。网络错误保留可重试的操作，版本冲突要求先刷新快照。
-5. **可访问交互**：按钮使用原生控件，状态消息使用 `role=status`，状态列和错误路径都能通过键盘操作观察。
+5. **可访问交互**：使用 Ant Design 的 Button、Select、Card、Tag、Alert 与 ConfigProvider；状态消息使用 `role=status`。少量选项关闭虚拟列表，便于键盘与辅助技术访问。
 
 ## 本地运行
 
@@ -40,7 +40,7 @@ npm run dev
 
 [实现取舍与学习记录](design-notes.md) · [状态测试](tests/workflow.test.ts) · [验证记录](../frontend-verification.md) · [第三方许可](THIRD-PARTY-LICENSES.txt)。新增于 2026-10-22，采用 AI 辅助实现与整理。数据为合成任务，不是历史工作交付或论文实验。
 
-React 与 React DOM 为 18.3.1（MIT）。锁文件记录构建依赖，发布时仅包含源码、锁文件、构建产物与说明；不包含 node_modules。
+React 与 React DOM 为 18.3.1，Ant Design 为 6.6.8（MIT）。2026-11-01 接入真实 Ant Design 组件；`src/workflow.ts` 的状态转换与版本保护继续独立于界面框架。锁文件记录构建依赖，发布时仅包含源码、锁文件、构建产物与说明；不包含 node_modules。新增依赖许可见 [Ant Design 及运行时依赖许可](ANT-DESIGN-LICENSES.txt)。
 
 ## 边界与下一步
 

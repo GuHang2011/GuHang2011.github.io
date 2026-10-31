@@ -1,0 +1,10 @@
+import { createApp } from 'vue';
+import App from './App.vue';
+import 'element-plus/es/components/button/style/css';
+import 'element-plus/es/components/card/style/css';
+import 'element-plus/es/components/tag/style/css';
+import 'element-plus/es/components/select/style/css';
+import 'element-plus/es/components/option/style/css';
+import 'element-plus/es/components/switch/style/css';
+import 'element-plus/es/components/alert/style/css';
+createApp(App).mount('#workbench');

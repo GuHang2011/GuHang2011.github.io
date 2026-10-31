@@ -1,6 +1,7 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><title>BLEU Explorer · GU HANG</title><meta name="description" content="交互理解 BLEU：n-gram 裁剪计数、几何平均与短句惩罚。"><link rel="stylesheet" href="style.css"></head>
-<body><header><a href="../../#demos">← GU HANG / 学习实验室</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/demos/bleu-explorer">代码与方法 ↗</a></header>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><title>BLEU Explorer · GU HANG</title><meta name="description" content="交互理解 BLEU：n-gram 裁剪计数、几何平均与短句惩罚。"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="../element-theme.css?v=20261101"><script src="../demo-navigation.js?v=20261101" defer></script>
+</head>
+<body data-demo="bleu-explorer"><header><a href="../../#demos">← GU HANG / 学习实验室</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/demos/bleu-explorer">代码与方法 ↗</a></header>
 <main><p class="eyebrow">04 / LANGUAGE EVALUATION</p><h1>一个分数，<br><em>怎样衡量翻译？</em></h1><p class="intro">修改一句译文，观察词组匹配、长度与 BLEU 的关系。每个数字，都能向下追溯。</p>
 <div class="lab"><section class="editor" aria-label="输入译文"><div class="presets"><button type="button" data-example="exact">完全匹配</button><button type="button" data-example="repeat">重复词陷阱</button><button type="button" data-example="short">短句惩罚</button></div>
 <label for="candidate">候选译文 <span>Candidate</span></label><textarea id="candidate" rows="3" maxlength="5000">the cat is on the mat</textarea>

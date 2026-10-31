@@ -1,0 +1,35 @@
+async page => {
+  const checks=[],errors=[];const ok=(v,name)=>{if(!v)throw Error(name);checks.push(name)};
+  page.on('pageerror',e=>errors.push(e.message));
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  await page.setViewportSize({width:1440,height:1000});await page.goto('http://127.0.0.1:8778/demos/react-workflow/');
+  await page.locator('[data-language="zh"]').click();await page.waitForSelector('.ant-select');
+  const select=async(id,text)=>{await page.locator(id).scrollIntoViewIfNeeded();await page.locator(id).focus();await page.keyboard.press('ArrowDown');await page.getByRole('option',{name:text,exact:true}).click();};
+  const settle=()=>page.waitForFunction(()=>document.querySelector('#workflow-columns').getAttribute('aria-busy')==='false');
+  ok(await page.locator('.ant-card').count()===4,'Ant Design task cards mount');
+  ok(await page.locator('.ant-select-content').first().innerText()==='审核人','Role selection has a visible value');
+  await select('#role-select','负责人');
+  ok(await page.locator('#task-WF-101 [data-action="review"]').isEnabled(),'Owner can submit draft');
+  await select('#scenario-select','网络错误');await page.locator('#task-WF-101 [data-action="review"]').click();await settle();
+  ok(await page.locator('#board-status').getAttribute('data-tone')==='error'&&await page.locator('[data-status="draft"] #task-WF-101').count()===1,'Network failure preserves draft and shows feedback');
+  await select('#scenario-select','正常响应');await page.locator('#retry-action').click();await settle();
+  ok(await page.locator('[data-status="review"] #task-WF-101').count()===1,'Retry submits the same task');
+  await select('#role-select','审核人');await select('#scenario-select','版本冲突');await page.locator('#task-WF-101 [data-action="approved"]').click();await settle();
+  ok(await page.locator('#refresh-snapshot').isVisible()&&await page.locator('#task-WF-101 [data-action="approved"]').isDisabled(),'Conflict requires snapshot refresh');
+  await page.locator('#refresh-snapshot').click();await select('#scenario-select','正常响应');await page.locator('#task-WF-101 [data-action="approved"]').click();await settle();
+  ok(await page.locator('[data-status="approved"] #task-WF-101').count()===1,'Refreshed version can be approved');
+  await page.locator('#reset-board').click();await page.locator('#task-WF-104 [data-action="approved"]').click();await page.locator('#reset-board').click();await page.waitForTimeout(700);
+  ok(await page.locator('[data-status="review"] #task-WF-104').count()===1,'Reset cancels stale request');
+  await page.locator('[data-language="en"]').click();ok(await page.locator('#board-title').innerText()==='Review queue','Language switch updates React UI');
+  await page.locator('[data-language="zh"]').click();await page.setViewportSize({width:390,height:844});
+  await select('#role-select','负责人');ok(await page.locator('#task-WF-101 [data-action="review"]').isVisible(),'Mobile select remains usable');
+  await page.locator('.menu-toggle').click();ok(await page.locator('.menu-toggle').getAttribute('aria-expanded')==='true','Mobile navigation opens');await page.keyboard.press('Escape');
+  ok(await page.locator('.menu-toggle').getAttribute('aria-expanded')==='false','Escape closes mobile navigation');
+  await page.emulateMedia({reducedMotion:'reduce'});await page.setViewportSize({width:1440,height:1000});
+  await select('#role-select','审核人');
+  await page.addScriptTag({path:'output/frontend-audit/node_modules/axe-core/axe.min.js'});
+  const violations=await page.evaluate(async()=>(await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})).violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>({target:n.target,reason:n.failureSummary}))})));
+  ok(!violations.length,'No automated WCAG A/AA violations '+JSON.stringify(violations));ok(!errors.length,'No page exceptions');
+  await page.locator('#board').scrollIntoViewIfNeeded();await page.screenshot({path:'output/playwright/antd-workflow-tested.png'});
+  return {passed:checks.length,checks,errors,violations};
+}

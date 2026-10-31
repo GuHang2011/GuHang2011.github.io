@@ -12,10 +12,14 @@ Small, newly written experiments based on themes found in local study and teachi
 | Virtual presenter | [Presenter](https://guhang2011.github.io/demos/virtual-host/) | [Controls and notes](virtual-host/README.md) |
 | Production Reporting Workbench | [Demo](https://guhang2011.github.io/demos/production-workbench/) | [Code and notes](production-workbench/README.md) |
 | Telecom Service Desk | [Demo](https://guhang2011.github.io/demos/telecom-service/) | [Code and notes](telecom-service/README.md) |
+| Sentence BLEU and clipped n-grams | [Explorer](https://guhang2011.github.io/demos/bleu-explorer/) | [Protocol and tests](bleu-explorer/README.md) |
+| Evidence-aware reliability gate | [Gate lab](https://guhang2011.github.io/demos/reliability-gates/) | [Rules and limits](reliability-gates/README.md) |
 
 这些示例由本地财务分析、Spark 课程及模型代码阅读主题重新整理。公开文件不含原始业务数据、试题、教材页面、模型权重或未公开论文。第三方代码阅读来源在各示例说明中标注，不能将第三方基线归为个人原创成果。
 
 ## Reproduce
+
+2026-11-01：十个演示统一深藏蓝导航、亮蓝色操作、浅灰背景与白色面板。虚拟主播使用 Vue 3 + Element Plus，React 工作流使用 Ant Design；其他静态实验复用 `element-theme.css` 与 `demo-navigation.js`，保留各自计算与校验实现。公开示例免登录；学院真实登录、授权与资料管理仍属于本地系统，公开案例保留学院标识与脱敏截图。详见 [界面改版与验收](../reviews/element-demos-20261101.md)。
 
 - Financial analysis uses a fixed seed and scikit-learn. Run the generator and its tests with the pinned requirements in the example directory.
 - Model evaluation uses supplied synthetic probabilities, with metrics computed by scikit-learn over 101 thresholds. It does not train a model.

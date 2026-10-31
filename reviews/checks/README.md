@@ -40,3 +40,9 @@ npx --yes --package @playwright/cli playwright-cli -s=portfolio-review run-code 
 ```
 
 成功时返回 `passed: 27`，包括真实画布动画、暂停稳定性、角色与章节切换、模型请求失败恢复，以及四种视口检查。测试会暂时拦截模型请求模拟失败，控制台会记录这条预期的失败；`errors` 统计页面脚本异常。
+
+## Element Plus / Ant Design 界面更新
+
+当前组件版使用 `element-presenter.js` 替代上面的旧主播脚本，返回 35 项检查；`antd-workflow.js` 返回 14 项检查。`element-demos.js` 检查十个实验与目录页，返回布局、图片、axe 扫描和页面异常。均使用 8778 预览服务，与上面相同的 Playwright CLI / axe 运行方式。
+
+浏览器改变宽度后需等待 Chart.js 完成异步尺寸调整，再断言文档宽度。减少动作由应用和框架共同处理；工作流回归会分别检查正常与减少动作模式。
