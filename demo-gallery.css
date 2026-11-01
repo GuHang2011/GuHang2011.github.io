@@ -1,0 +1,98 @@
+/* Homepage live demos. Scoped to avoid changing project and research sections. */
+.portfolio-home #demos.demo-showcase {
+  --paper: #fff; --surface: #f5f7fb; --ink: #182b46; --muted: #53647b;
+  --subtle: #53647b; --line: #dce4ef; --accent: #205ad3; --accent-hover: #1746a7;
+  --accent-soft: #eaf0fc; --on-accent: #fff; --focus-ring: #205ad3;
+  --teal: #21685c; --teal-soft: #e7f4ee; --amber: #8a561a; --amber-soft: #fcf2df;
+  padding-block: 64px; border-block: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  /* The document already supplies 98px of scroll padding for the fixed header. */
+  scroll-margin-top: 0;
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  font-size: 15px; line-height: 1.7; letter-spacing: 0; text-shadow: none;
+}
+:root[data-reader-theme="dark"] .portfolio-home #demos.demo-showcase {
+  --paper: #192c43; --surface: #112237; --ink: #edf3fc; --muted: #b4c5db;
+  --subtle: #b4c5db; --line: #3e546f; --accent: #9bc1ff; --accent-hover: #c2d8ff;
+  --accent-soft: #223d60; --on-accent: #11233b; --focus-ring: #9bc1ff;
+  --teal: #a3d8c9; --teal-soft: #25483f; --amber: #f4d4a2; --amber-soft: #493d2c;
+}
+#demos .experience-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 30px; }
+#demos .experience-eyebrow { font-size: 12px; line-height: 1.5; font-weight: 700; letter-spacing: .08em; color: var(--accent); margin-bottom: 12px; }
+#demos #demos-title { font-family: inherit; font-size: clamp(30px,3vw,40px); line-height: 1.35; letter-spacing: 0; font-weight: 700; color: var(--ink); margin-bottom: 14px; }
+#demos .experience-intro { font-size: 16px; line-height: 1.8; color: var(--muted); }
+#demos .experience-heading-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+#demos .experience-film { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 9px 14px; border: 1px solid transparent; background: transparent; color: var(--accent); border-radius: 7px; font: inherit; font-size: 14px; cursor: pointer; }
+#demos .experience-film:hover { background: var(--accent-soft); }
+#demos .experience-directory { display: inline-flex; align-items: center; flex-shrink: 0; gap: 18px; min-height: 44px; padding: 9px 15px; border: 1px solid var(--line); border-radius: 7px; color: var(--ink); background: var(--paper); font-size: 14px; text-decoration: none; }
+#demos .experience-directory:hover { border-color: var(--accent); color: var(--accent); }
+#demos .experience-toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+#demos [hidden] { display: none !important; }
+#demos .experience-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+#demos .experience-filters button { appearance: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 16px; border: 1px solid transparent; border-radius: 7px; background: transparent; color: var(--muted); font: inherit; font-size: 14px; font-weight: 400; cursor: pointer; transition: background .18s ease,color .18s ease; }
+#demos .experience-filters button:hover { color: var(--accent); background: var(--paper); }
+#demos .experience-filters button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+#demos .experience-count { font-size: 12px; line-height: 1; font-variant-numeric: tabular-nums; opacity: .9; }
+#demos .experience-result { color: var(--muted); font-size: 13px; }
+#demos .experience-gallery { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); align-items: stretch; gap: 24px; }
+#demos .experience-card { display: flex; flex-direction: column; min-width: 0; border: 1px solid var(--line); background: var(--paper); border-radius: 12px; overflow: hidden; box-shadow: 0 2px 6px #182b4604; transition: border-color .2s ease,box-shadow .2s ease,transform .2s ease; }
+#demos .experience-card:hover { transform: translateY(-3px); border-color: color-mix(in srgb,var(--accent) 45%,var(--line)); box-shadow: 0 10px 28px #182b460d; }
+#demos .experience-card:focus-within { border-color: var(--accent); }
+#demos .experience-preview { display: block; position: relative; padding: 14px; border-bottom: 1px solid var(--line); background: var(--accent-soft); overflow: hidden; }
+#demos .experience-preview img { display: block; width: 100%; height: auto; aspect-ratio: 16/10; object-fit: contain; object-position: center; border-radius: 5px; border: 1px solid #d6e1f1; background: #f5f7fa; transition: transform .3s ease; }
+#demos .experience-preview:hover img { transform: scale(1.018); }
+#demos .experience-preview-link { display: grid; place-items: center; position: absolute; right: 23px; bottom: 23px; width: 32px; height: 32px; border: 1px solid #c4d6f2; border-radius: 6px; background: #fff; color: #205ad3; font: 22px/1 sans-serif; }
+#demos .experience-body { display: flex; flex-direction: column; flex: 1; padding: 22px; }
+#demos .experience-tech { margin-bottom: 10px; color: var(--accent); font-size: 12px; line-height: 1.7; font-weight: 400; }
+#demos .experience-card h3 { margin: 0 0 12px; color: var(--ink); font-family: inherit; font-size: 22px; line-height: 1.5; font-weight: 700; letter-spacing: 0; overflow-wrap: break-word; }
+#demos .experience-description { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.85; }
+#demos .experience-steps { display: flex; flex-wrap: wrap; gap: 8px 12px; padding: 17px 0 20px; margin: auto 0 0; list-style: none; color: var(--muted); font-size: 12px; line-height: 1.6; }
+#demos .experience-steps li { display: flex; align-items: baseline; gap: 5px; }
+#demos .experience-steps li > span:first-child { color: var(--accent); font-size: 11px; font-variant-numeric: tabular-nums; }
+#demos .experience-actions { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding-top: 18px; border-top: 1px solid var(--line); }
+#demos .experience-actions a { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; border-radius: 6px; text-decoration: none; font-size: 14px; line-height: 1.5; }
+#demos .experience-start { padding: 10px 16px; color: var(--on-accent); background: var(--accent); border: 1px solid var(--accent); }
+#demos .experience-start:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+#demos .experience-source { color: var(--muted); padding: 8px 0; }
+#demos .experience-source:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 4px; }
+#demos .experience-footer { display: flex; justify-content: space-between; gap: 12px 28px; flex-wrap: wrap; margin-top: 22px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+#demos .experience-footer a { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); min-height: 44px; }
+#demos .experience-footer p { padding-block: 10px; }
+.portfolio-home #demos.demo-showcase .film-disclosure { margin-top: 22px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); overflow: hidden; }
+.portfolio-home #demos.demo-showcase .film-disclosure > summary { color: var(--ink); padding: 18px 22px; font-family: inherit; font-weight: 400; font-size: 15px; min-height: 56px; }
+.portfolio-home #demos.demo-showcase .project-cinema { margin: 0; padding: 24px; }
+.portfolio-home #demos.demo-showcase .cinema-heading h3 { font-family: inherit; font-weight: 700; font-size: 24px; letter-spacing: 0; }
+#demos :is(a,button,summary):focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 4px; }
+#demos .experience-preview:focus-visible { outline-offset: -4px; }
+/* The in-section film button replaces the idle floating launcher while reading demos. */
+body[data-demo-reading="true"] .floating-cinema:not([data-open="true"]):not(:focus-within) { visibility: hidden; pointer-events: none; }
+#demos .experience-gallery.is-switching .experience-card:not([hidden]) { animation: demo-card-enter .22s ease both; }
+@keyframes demo-card-enter { from { opacity: .4; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width:1100px) {
+  #demos .experience-gallery { gap: 18px; grid-template-columns: repeat(2,minmax(0,1fr)); }
+  #demos .experience-body { padding: 20px; }
+}
+@media (max-width:680px) {
+  .portfolio-home #demos.demo-showcase { padding-block: 46px; }
+  #demos .experience-heading { align-items: start; flex-direction: column; gap: 18px; margin-bottom: 24px; }
+  #demos #demos-title { font-size: 30px; margin-bottom: 10px; }
+  #demos .experience-intro { font-size: 15px; }
+  #demos .experience-toolbar { gap: 12px; }
+  #demos .experience-filters { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); width: 100%; gap: 6px; }
+  #demos .experience-filters button { justify-content: center; padding-inline: 9px; }
+  #demos .experience-result { font-size: 12px; }
+  #demos .experience-gallery { grid-template-columns: minmax(0,1fr); gap: 18px; }
+  #demos .experience-card h3 { font-size: 21px; }
+  #demos .experience-body { padding: 20px; }
+  #demos .experience-footer { gap: 0; }
+  .portfolio-home #demos.demo-showcase .project-cinema { padding: 16px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  #demos .experience-card,#demos .experience-preview img,#demos .experience-filters button { animation: none !important; transition: none; transform: none !important; }
+}
+html[data-reader-motion="reduce"] #demos .experience-card,html[data-reader-motion="reduce"] #demos .experience-preview img,html[data-reader-motion="reduce"] #demos .experience-filters button { animation: none !important; transition: none; transform: none !important; }
+@media print {
+  .portfolio-home #demos.demo-showcase { background: #fff; --ink:#111; --muted:#333; --paper:#fff; --surface:#fff; --line:#bbb; --accent:#154475; --accent-soft:#fff; padding-block: 20px; }
+  #demos .experience-toolbar { display: none; }
+  #demos .experience-gallery { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  #demos .experience-card { break-inside: avoid; box-shadow: none; }
+}
