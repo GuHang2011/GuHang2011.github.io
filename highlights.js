@@ -18,6 +18,7 @@
   slides.forEach((slide, i) => {
     slide.setAttribute("role", "tabpanel");
     slide.setAttribute("aria-labelledby", dots[i].id);
+    slide.tabIndex = 0;
     slide.removeAttribute("aria-roledescription");
     slide.removeAttribute("aria-posinset");
     slide.removeAttribute("aria-setsize");
@@ -29,6 +30,7 @@
     slides.forEach((slide, i) => {
       const active = i === index;
       slide.classList.toggle("is-active", active);
+      slide.hidden = !active;
       slide.setAttribute("aria-hidden", String(!active));
       slide.inert = !active;
     });
@@ -38,6 +40,11 @@
     });
     current.textContent = String(index + 1).padStart(2, "0");
     carousel.dataset.highlightCurrent = String(index + 1);
+    announce();
+  }
+
+  function announce() {
+    status.textContent = `${String(index + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")} · ${slides[index].querySelector("h3").textContent}`;
   }
 
   function sync() {
@@ -51,6 +58,7 @@
     rotation.dataset.en = blocked ? "Motion reduced" : userPaused ? "Start autoplay" : "Pause autoplay";
     rotation.dataset.zh = blocked ? "已减少动态" : userPaused ? "开启自动播放" : "暂停自动播放";
     rotation.textContent = rotation.dataset[document.documentElement.lang.startsWith("zh") ? "zh" : "en"];
+    announce();
     if (running) timer = setInterval(() => select(index + 1), 6800);
   }
 
@@ -91,9 +99,19 @@
   media.addEventListener("change", sync);
   new MutationObserver(sync).observe(document.documentElement, { attributes: true, attributeFilter: ["data-reader-motion"] });
   if ("IntersectionObserver" in window) {
-    new IntersectionObserver(entries => { inView = entries[0].isIntersecting; sync(); }, { threshold: 0.15 }).observe(carousel);
+    new IntersectionObserver(entries => { inView = entries[0].isIntersecting; document.body.dataset.highlightReading = String(inView); sync(); }, { threshold: 0.15 }).observe(carousel);
   }
   carousel.dataset.enhanced = "true";
-  carousel.querySelector("[data-highlight-controls]").hidden = false;
+  carousel.querySelectorAll("[data-highlight-controls]").forEach(control => { control.hidden = false; });
   select(0); sync();
+  function revealLinkedSlide() {
+    const linked = slides.findIndex(slide => "#" + slide.id === location.hash);
+    if (linked < 0) return;
+    navigate(linked);
+    const disclosure = carousel.closest("details");
+    if (disclosure) disclosure.open = true;
+    requestAnimationFrame(() => carousel.scrollIntoView({block:"start",behavior:"instant"}));
+  }
+  window.addEventListener("hashchange", revealLinkedSlide);
+  revealLinkedSlide();
 })();
