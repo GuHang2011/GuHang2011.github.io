@@ -440,3 +440,15 @@ html[data-reader-motion="reduce"] .portfolio-home #demos .demo-entry:hover,html[
   .portfolio-home .header-controls { margin-left: auto; }
   .portfolio-home .admissions-entry { grid-template-columns: 1fr; }
 }
+
+/* Project facts connect a readable claim to its scope and verification. */
+.portfolio-home .about-copy .intro > span { display:block; }
+.portfolio-home .project-case-facts { display:grid; grid-template-columns:100px minmax(0,1fr); gap:10px 14px; margin:18px 0; font-size:14px; line-height:1.8; }
+.portfolio-home .project-case-facts dt { font-weight:700; color:var(--ink); }
+.portfolio-home .project-case-facts dd { margin:0; color:var(--muted); }
+.portfolio-home .research-review-entry { margin:0 0 24px; padding:14px 18px; background:var(--accent-soft); border-radius:8px; font-size:14px; }
+.portfolio-home .research-review-entry a { min-height:44px; display:inline-flex; align-items:center; }
+@media(max-width:760px) {
+ .portfolio-home .project-case-facts { grid-template-columns:1fr; gap:3px; }
+ .portfolio-home .project-case-facts dd { margin-bottom:10px; }
+}

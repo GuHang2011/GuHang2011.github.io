@@ -1,14 +1,21 @@
 # Reviewer guide | 博导快速阅读入口
 
-更新日期：2026-10-15。研究主线为**有限标注下的可靠多模态学习**，关注冻结表征适配、验证敏感性与数据伪影；前端、数据管道和工作流案例提供工程支撑。
+更新日期：2026-11-02。推荐先打开[双语导师阅读页](https://guhang2011.github.io/research/reviewer-guide.html)，集中查看研究问题、第一作者投稿、实现证据及拟研究计划。
 
-以下路线连接现有公开材料。本次文档更新未核对 GitHub 实际置顶顺序或论文最新状态；首页和 Profile README 的研究状态仍沿用 2026 年 9 月记录。
+工程实践以复杂业务系统前端、数据质量和 AI 应用为主；研究关注有限标注下的可靠多模态评估。以下状态依据本人已提供的稿件信息与作品集记录整理，不将投稿表述为录用。
+
+## 当前第一作者投稿
+
+- **Neurocomputing**：原投稿被拒后修改并重新投稿，尚未录用。修订研究重分析 344 次归档训练运行，检查融合收益、决策工作点与归档伪线索。[研究解读](https://guhang2011.github.io/research/fusion-audit.html)与 KICP 关联代码可读；修订稿完整复现材料尚未公开。
+- **Climate Risk Management**：第一作者，已投稿，尚未录用。题目为 *Hybrid AI Framework for Multi-Hazard Climate Risk Governance in Renewable Energy-Water Nexus Systems*。介绍基于已提供摘要，涉及 TFT、GNN-CRP 和中国 30 省 2005—2024 年能源—水系统风险。[研究介绍](https://guhang2011.github.io/research/climate-risk.html)包含概念方法图，不作为公开基准复现包。
+
+第一作者身份不替代细分贡献说明。合作者分工、具体实现与实验职责应结合稿件贡献记录核对，本页不从作者排序推断团队工作量。
 
 ## 1. 研究简述：先理解问题
 
 从[研究简述讨论稿](https://guhang2011.github.io/research/statement.html)开始，再查看[研究与稿件列表](https://guhang2011.github.io/#research)。重点区分已有研究实现、当前证据与未来实验问题。
 
-讨论稿用于交流研究方向，不代表已完成的新成果。稿件、录用工作和硕士论文的状态分别标注。提供的简历明确 FCP 与 ISCAIT 2026 论文为第一作者；其他论文作者排序、团队具体分工与正式出版链接仍待补充。
+讨论稿提出面向情绪识别的预算约束适配、证据感知决策与遗忘约束更新，尚待实验验证。其他会议工作、硕士论文及作者信息见公开简历中的独立记录。
 
 ## 2. KICP：查看研究实现
 
@@ -29,7 +36,15 @@
 
 ## 4. 工程案例：查看研究之外的实现能力
 
-[辅导员协作案例](https://guhang2011.github.io/cases/counselor/)展示角色范围、状态转换与[发布检查代码](https://guhang2011.github.io/cases/examples/README.md)；[资料归档案例](https://guhang2011.github.io/cases/archive/)展示授权范围、版本关系与审核流程。
+首页精选三项，按问题、公开实现、技术取舍和验证阅读：
+
+- [沭阳之家](https://guhang2011.github.io/cases/shuyang/)：共享前端状态、平台适配、上传恢复与版本化交付；当前为本地试点。
+- [React 工作流](https://guhang2011.github.io/demos/react-workflow/)：React + Ant Design，模拟失败、版本冲突与恢复；[实现复盘](https://guhang2011.github.io/notebook/workflow-recovery-review.html)对应 8 项模型测试。
+- [低代码表单](https://guhang2011.github.io/demos/low-code-form/)：稳定字段键、配置导入和校验；[导入复盘](https://guhang2011.github.io/notebook/schema-import-review.html)对应 10 项核心测试。
+
+React 与低代码表单属于 AI 辅助实现的合成数据学习示例。上述 18 项测试于 2026-11-01 重新运行通过，不能替代后端授权或生产验收。另有[异步竞态复盘](https://guhang2011.github.io/notebook/ai-code-race-review.html)及 4 项控制器测试。
+
+[辅导员协作案例](https://guhang2011.github.io/cases/counselor/)和[资料归档案例](https://guhang2011.github.io/cases/archive/)仍可从完整项目目录阅读。
 
 既有验收记录、源码审阅与合成在线演示具有不同证据范围。产物哈希用于核对一致性，不能单独证明报告真实性或生产应用成效。
 
@@ -37,6 +52,6 @@
 
 ## 继续交流
 
-已整理[公开学术简历](https://guhang2011.github.io/research/cv.html)，并提供本人同意公开的专业邮箱 [guhang2011@126.com](mailto:guhang2011@126.com)。简历中的论文与项目状态按 2026 年 9 月记录列示。
+已整理[公开学术简历](https://guhang2011.github.io/research/cv.html)，专业邮箱为 [guhang2011@126.com](mailto:guhang2011@126.com)。
 
-其他论文作者排序、正式出处或 DOI、9 月后的投稿状态、团队具体职责及可公开的真实实验报告仍待补充。可沿[问题与证据地图](https://guhang2011.github.io/research/)继续审阅已有材料。
+工程经验为数据检查、实验操作和版本追踪提供基础；研究方法的有效性仍由受控实验建立。正式出处、DOI 与完整实验材料按实际可公开情况补充。可沿[问题与证据地图](https://guhang2011.github.io/research/)继续审阅。

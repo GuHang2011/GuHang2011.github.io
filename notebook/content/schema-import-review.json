@@ -1,0 +1,131 @@
+{
+  "slug": "schema-import-review",
+  "category": "engineering",
+  "kind": "reflection",
+  "minutes": 6,
+  "title": {
+    "en": "Schema import: keep the working form until validation succeeds",
+    "zh": "导入配置前，为什么必须保住旧表单"
+  },
+  "summary": {
+    "en": "Follow invalid JSON, duplicate keys and a valid import to distinguish safe replacement from incremental mutation.",
+    "zh": "沿无效 JSON、重复字段键和合法导入三条路径，解释为什么配置替换不能边解析边修改。"
+  },
+  "tags": [
+    "Low code",
+    "Schema",
+    "Validation",
+    "Atomic replacement",
+    "低代码"
+  ],
+  "basis": {
+    "en": "Review of the public form studio, app.js and schema.mjs. Its ten core tests were rerun on 1 November 2026. This is a custom v1 teaching schema, not a complete low-code platform or JSON Schema implementation.",
+    "zh": "依据公开表单工作台 app.js 与 schema.mjs 整理，2026-11-01 重跑 10 项核心测试。使用自定义 v1 教学配置，不宣称完整低代码平台或 JSON Schema 标准实现。"
+  },
+  "sections": [
+    {
+      "id": "failure",
+      "title": {
+        "en": "01 / Preserve something worth protecting",
+        "zh": "01 / 先准备需要保留的状态"
+      },
+      "paragraphs": [
+        {
+          "en": "Enter a topic in the preview, then put invalid JSON in the configuration editor and apply it. The expected result is an error plus the original fields and input. Repeat with two fields sharing the same key: valid JSON alone does not make a valid form.",
+          "zh": "先在预览中填写主题，再在配置编辑区输入无效 JSON 并应用。预期是显示错误，同时保留原字段与输入。再尝试两个字段使用同一 key：JSON 能解析，不代表表单配置合法。"
+        }
+      ]
+    },
+    {
+      "id": "implementation",
+      "title": {
+        "en": "02 / Validate first, replace once",
+        "zh": "02 / 先验证，一次替换"
+      },
+      "paragraphs": [
+        {
+          "en": "The import handler computes next = checkSchema(JSON.parse(json.value)) before assigning schema = next. If parsing or validation throws, the current schema and values are untouched. This sequencing is what protects the existing view.",
+          "zh": "导入处理先计算 next = checkSchema(JSON.parse(json.value))，通过后才执行 schema = next。解析或校验抛错时，当前 schema 和 values 都未修改。真正保住旧界面的是这个执行顺序。"
+        },
+        {
+          "en": "A successful import intentionally clears preview values. A new schema can reuse a key with a different meaning. In contrast, ordinary reordering preserves values by key. Preservation is a product rule, not a universal default.",
+          "zh": "成功导入会主动清空预览值，因为新配置可能用相同 key 表示不同含义。普通排序则按 key 保留输入。是否保留数据应由产品规则决定，不能一律保留或一律清空。"
+        }
+      ]
+    },
+    {
+      "id": "boundaries",
+      "title": {
+        "en": "03 / Small edge cases expose the contract",
+        "zh": "03 / 用小边界检查契约"
+      },
+      "paragraphs": [
+        {
+          "en": "Zero is a valid required number. An optional blank value should not fail a minimum-length rule. A date such as 2025-02-29 has a plausible format but is not a real calendar date. These examples are more informative than a single happy-path submit.",
+          "zh": "必填数字 0 是合法值；可选字段留空不应触发最小长度错误；2025-02-29 的格式看似正确，却不是实际日期。这些边界比只验证一次正常提交更能说明规则是否清楚。"
+        },
+        {
+          "en": "The schema limits field count and accepted types and rejects duplicate or reserved keys. Labels are written as text rather than executable markup. These constraints keep the renderer understandable; richer conditional logic would need its own specification.",
+          "zh": "配置限制字段数量与类型，拒绝重复键和保留键；标签按文本写入，不解释为可执行标记。这些约束让渲染器容易理解，更复杂的条件逻辑需要单独定义规则。"
+        }
+      ]
+    },
+    {
+      "id": "checks",
+      "title": {
+        "en": "04 / Check the core and the interface separately",
+        "zh": "04 / 核心校验与界面保留分别验证"
+      },
+      "paragraphs": [
+        {
+          "en": "All ten existing core tests passed, including independent copies, key rules, field limits, zero, ranges, enums and calendar dates. These tests do not assert that browser input survives an import error; that requires a separate interaction check.",
+          "zh": "10 项既有核心测试全部通过，包括独立副本、字段键、字段数量、零值、范围、枚举与日历日期。这些测试没有断言“导入出错后浏览器输入仍在”，这一点需要另做交互检查。"
+        },
+        {
+          "en": "The next step for a service-backed version is migration and server validation. Preview validation does not authorize a submission or prove that a backend accepts the same contract.",
+          "zh": "接入服务后的下一步是配置迁移和服务端校验。预览校验不会赋予提交权限，也不能证明后端采用了同一套契约。"
+        }
+      ],
+      "code": {
+        "language": "console",
+        "text": "node --test demos/low-code-form/schema.test.mjs"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "url": "../demos/low-code-form/",
+      "label": {
+        "en": "Try the form studio",
+        "zh": "体验表单工作台"
+      }
+    },
+    {
+      "url": "../demos/low-code-form/app.js",
+      "label": {
+        "en": "Import and rendering code",
+        "zh": "导入与渲染代码"
+      }
+    },
+    {
+      "url": "../demos/low-code-form/schema.mjs",
+      "label": {
+        "en": "Schema and input validation",
+        "zh": "配置与输入校验"
+      }
+    },
+    {
+      "url": "../demos/low-code-form/schema.test.mjs",
+      "label": {
+        "en": "Ten core tests",
+        "zh": "10 项核心测试"
+      }
+    }
+  ],
+  "related": [
+    "low-code-contracts",
+    "workflow-recovery-review",
+    "data-quality"
+  ],
+  "date": "2026-11-01"
+}

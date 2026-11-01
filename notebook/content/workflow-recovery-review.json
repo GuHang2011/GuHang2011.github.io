@@ -1,0 +1,135 @@
+{
+  "slug": "workflow-recovery-review",
+  "category": "engineering",
+  "kind": "reflection",
+  "minutes": 7,
+  "title": {
+    "en": "Workflow recovery: retry, refresh and reset are different",
+    "zh": "审核失败之后：重试、刷新与重置是三条路径"
+  },
+  "summary": {
+    "en": "Trace WF-104 through a failed request and a version conflict, with precise before/after states and eight existing model tests.",
+    "zh": "沿 WF-104 追踪请求失败与版本冲突，用明确的前后状态和 8 项既有模型测试解释恢复路径。"
+  },
+  "tags": [
+    "React",
+    "Ant Design",
+    "State machine",
+    "Version conflict",
+    "工作流"
+  ],
+  "basis": {
+    "en": "A source review of the public React + Ant Design learning demo. Eight reducer tests were rerun on 1 November 2026. Tasks and responses are synthetic; no backend or real multiuser concurrency is involved.",
+    "zh": "基于公开 React + Ant Design 学习演示的源码复盘，2026-11-01 重跑 8 项 reducer 测试。任务与响应均为合成，不连接后端，也未执行真实多人并发。"
+  },
+  "sections": [
+    {
+      "id": "case",
+      "title": {
+        "en": "01 / Fix the starting state",
+        "zh": "01 / 固定一个起点"
+      },
+      "paragraphs": [
+        {
+          "en": "After reset, WF-104 is in review at version 3. As reviewer, choose Network error and approve it. The expected result is review/version 3 with a retry action; an error must not be presented as approval.",
+          "zh": "重置后，WF-104 处于审核中，版本为 3。使用审核人角色，选择“网络错误”后点击“通过”。预期仍为审核中／版本 3，并提供重试；失败不能被界面包装成审核成功。"
+        },
+        {
+          "en": "Switch the next response to Success before retrying. The task moves to approved/version 4. The next-response selector is deliberately persistent; retrying with Network error still selected should fail again.",
+          "zh": "重试前把“下次响应”改回“正常响应”。任务进入已通过／版本 4。模拟结果选择会保留；仍选“网络错误”时再次重试，应该继续失败。"
+        }
+      ]
+    },
+    {
+      "id": "conflict",
+      "title": {
+        "en": "02 / A conflict requires a new decision",
+        "zh": "02 / 冲突之后，需要重新确认"
+      },
+      "paragraphs": [
+        {
+          "en": "Reset, select Version conflict, then approve WF-104. The client keeps version 3 and records a simulated remote version 4. Further submissions are blocked. Refresh updates the snapshot to 4 but does not approve the task.",
+          "zh": "重置后选择“版本冲突”，再通过 WF-104。客户端保持版本 3，记录模拟远端版本 4，并阻止继续提交。点击“刷新快照”后版本更新为 4，但任务不会自动通过。"
+        },
+        {
+          "en": "Select Success and approve again: the task becomes approved/version 5. Refresh and approval are separate because the original decision may no longer be appropriate for the newer record. A real API must atomically verify and update the version.",
+          "zh": "选择“正常响应”并重新通过后，任务才成为已通过／版本 5。刷新和审核分开，是因为原决定可能已不适用于新记录。真实 API 还必须在同一原子操作内检查并更新版本。"
+        }
+      ]
+    },
+    {
+      "id": "reset",
+      "title": {
+        "en": "03 / Reset invalidates the old operation",
+        "zh": "03 / 重置让旧操作失效"
+      },
+      "paragraphs": [
+        {
+          "en": "Start an action and immediately reset. The UI clears its timer and advances a token; the reducer ignores callbacks without a matching pending operation. This protects local state, but it is not a general server rollback mechanism.",
+          "zh": "开始操作后立即重置。界面清除定时器并递增 token；reducer 忽略没有匹配 pending 操作的回调。它保护的是本地状态，不是通用的服务端回滚机制。"
+        },
+        {
+          "en": "Only one operation may be pending in this demo. That keeps recovery legible, at the cost of blocking edits to different tasks. Per-task concurrency would require per-task pending state and independently scoped tokens.",
+          "zh": "本例同一时刻只允许一个 pending 操作，恢复路径因此较清楚，代价是不同任务也不能同时保存。若要逐任务并发，就需要按任务维护 pending 与独立令牌。"
+        }
+      ]
+    },
+    {
+      "id": "checks",
+      "title": {
+        "en": "04 / Verification and the remaining gap",
+        "zh": "04 / 验证与仍需补齐的部分"
+      },
+      "paragraphs": [
+        {
+          "en": "All eight existing tests passed: successful transitions, roles, invalid versions, pending locks, retry, conflict recovery, late callbacks and immutable state. Browser focus is a separate concern: when a card moves, the interface returns focus to that card.",
+          "zh": "8 项既有测试全部通过，覆盖成功转换、角色、非法版本、请求锁、重试、冲突恢复、旧回调及状态不可变性。焦点属于另一层检查：卡片跨列后，界面把焦点送回该卡片。"
+        },
+        {
+          "en": "The useful lesson is to define a recoverable next action for each failure. A future service integration still needs authorization, idempotency, transaction-level version checks and real multi-tab tests.",
+          "zh": "这次复盘的重点是为每类失败定义一个可恢复的下一步。接入真实服务后，仍要补齐授权、幂等、事务内版本检查及真实多标签页测试。"
+        }
+      ],
+      "code": {
+        "language": "console",
+        "text": "node --test demos/react-workflow/tests/workflow.test.ts"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "url": "../demos/react-workflow/",
+      "label": {
+        "en": "Try the recovery paths",
+        "zh": "体验恢复路径"
+      }
+    },
+    {
+      "url": "../demos/react-workflow/src/workflow.ts",
+      "label": {
+        "en": "Pure workflow model",
+        "zh": "纯工作流模型"
+      }
+    },
+    {
+      "url": "../demos/react-workflow/src/App.tsx",
+      "label": {
+        "en": "UI lifecycle and focus",
+        "zh": "界面生命周期与焦点"
+      }
+    },
+    {
+      "url": "../demos/react-workflow/tests/workflow.test.ts",
+      "label": {
+        "en": "Eight model tests",
+        "zh": "8 项模型测试"
+      }
+    }
+  ],
+  "related": [
+    "ai-code-race-review",
+    "order-idempotency",
+    "accessible-interactions"
+  ],
+  "date": "2026-11-01"
+}

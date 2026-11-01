@@ -1,0 +1,123 @@
+{
+  "slug": "ai-code-race-review",
+  "category": "frontend",
+  "kind": "reflection",
+  "minutes": 7,
+  "title": {
+    "en": "Reviewing AI-assisted code: reproduce the late response first",
+    "zh": "审阅 AI 辅助代码：先复现“旧响应覆盖新输入”"
+  },
+  "summary": {
+    "en": "A deterministic A → AB experiment, why debounce is insufficient, and what cancellation can actually guarantee.",
+    "zh": "用 A → AB 的确定性实验审阅异步代码：防抖为什么不够，取消请求又能保证什么。"
+  },
+  "tags": [
+    "AI-assisted review",
+    "Frontend",
+    "Race condition",
+    "异步竞态"
+  ],
+  "basis": {
+    "en": "Review of the existing latest-request.mjs teaching example. Its four tests were rerun on 1 November 2026. This is an exercise for reviewing AI-assisted code, not a claimed production incident or evidence that a particular AI generated the defect.",
+    "zh": "依据既有 latest-request.mjs 教学示例整理，2026-11-01 重新运行其 4 项测试。本文是审阅 AI 辅助代码的练习，不虚构生产故障，也不声称某个 AI 曾生成这一缺陷。"
+  },
+  "sections": [
+    {
+      "id": "failure",
+      "title": {
+        "en": "01 / Make the failure observable",
+        "zh": "01 / 先让问题可以复现"
+      },
+      "paragraphs": [
+        {
+          "en": "Send query A, then AB. Resolve AB first with [new], and A later with [old]. An implementation that renders every successful response ends with old. The required outcome is that the newest query owns the visible state, regardless of completion order.",
+          "zh": "先发查询 A，再发 AB；让 AB 先返回 [new]，A 后返回 [old]。如果每次成功都直接渲染，最后会显示 old。验收条件应写成：无论完成顺序如何，页面只接受最新查询的结果。"
+        },
+        {
+          "en": "The existing fixture exposes resolve and reject functions instead of using random delays. This makes success order, rejection order and disposal repeatable without a server.",
+          "zh": "既有测试夹具把 resolve 和 reject 暴露出来，不用随机延时制造竞态。成功顺序、失败顺序和卸载时机都可以重复控制，不需要启动服务。"
+        }
+      ]
+    },
+    {
+      "id": "choices",
+      "title": {
+        "en": "02 / Compare three decisions",
+        "zh": "02 / 比较三个处理办法"
+      },
+      "paragraphs": [
+        {
+          "en": "Debounce reduces how often work starts. It cannot order work that has already started. AbortController asks an adapter to stop; a cache or test adapter may ignore the signal. A sequence ID decides whether a returned result still has permission to render.",
+          "zh": "防抖减少启动次数，不能改变已经发出的请求的完成顺序。AbortController 请求适配器停止工作，但缓存或测试适配器可能忽略 signal。递增序号则决定返回结果是否仍有权更新页面。"
+        },
+        {
+          "en": "The example uses cancellation and a sequence guard together. Clearing the input advances the sequence before returning to idle; dispose also advances it. Guarding only the success branch would still let an old failure replace current loading feedback.",
+          "zh": "示例同时使用取消和序号保护。清空输入时，先递增序号再进入 idle；dispose 也递增序号。只保护成功分支仍不够，否则旧失败可能覆盖当前加载提示。"
+        }
+      ]
+    },
+    {
+      "id": "checks",
+      "title": {
+        "en": "03 / Read the assertions, then run them",
+        "zh": "03 / 先看断言，再运行"
+      },
+      "paragraphs": [
+        {
+          "en": "The four cases cover a late success that ignores cancellation; stale versus current rejection; clearing and disposal; and empty results. All four passed in this review. They verify the controller, not DOM behavior, HTTP validation or application authorization.",
+          "zh": "4 个用例分别覆盖忽略取消的旧成功、旧失败与当前失败、清空与卸载、空结果。本轮全部通过。它们验证控制器，不验证 DOM 交互、HTTP 响应校验或业务授权。"
+        }
+      ],
+      "code": {
+        "language": "console",
+        "text": "node --test notebook/examples/latest-request.test.mjs"
+      }
+    },
+    {
+      "id": "review",
+      "title": {
+        "en": "04 / What I take from this exercise",
+        "zh": "04 / 这次练习留下的判断"
+      },
+      "paragraphs": [
+        {
+          "en": "For AI-assisted development, the useful review question is not whether the function looks complete. Ask which event owns the right to change state. A prompt can request explicit states and tests, but passing tests must be checked against the actual failure sequence.",
+          "zh": "使用 AI 辅助开发时，我更关注“谁在什么时刻有权更新状态”。提示词可以要求补齐状态和测试，但验收仍要回到具体失败顺序，不能把生成了测试当成已经覆盖问题。"
+        },
+        {
+          "en": "Next, add an adapter that validates HTTP status and payload shape, then check loading announcements and focus in the browser. For writes, canceling a browser request does not roll back a server transaction.",
+          "zh": "下一步可以补上 HTTP 状态与响应结构校验，再到浏览器检查加载播报和焦点。对于写请求，浏览器取消也不等于服务器事务回滚。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "examples/latest-request.mjs",
+      "label": {
+        "en": "Controller source",
+        "zh": "控制器源码"
+      }
+    },
+    {
+      "url": "examples/latest-request.test.mjs",
+      "label": {
+        "en": "Four deterministic tests",
+        "zh": "4 项确定性测试"
+      }
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/AbortController",
+      "label": {
+        "en": "AbortController documentation",
+        "zh": "AbortController 文档"
+      }
+    }
+  ],
+  "related": [
+    "async-interfaces",
+    "request-scope-lifecycle",
+    "ai-frontend-reflection"
+  ],
+  "date": "2026-11-01"
+}

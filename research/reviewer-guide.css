@@ -1,0 +1,39 @@
+/* Concise research entry, sharing the homepage's typography and reading themes. */
+.reviewer-page .reviewer-wrap { max-width:1120px; }
+.reviewer-page .review-opening { padding:56px 0 36px; border-bottom:1px solid var(--line); }
+.reviewer-page .review-eyebrow { color:var(--accent); font-size:13px; font-weight:700; letter-spacing:.06em; }
+.reviewer-page h1 { font-size:clamp(30px,4vw,44px); line-height:1.4; margin:14px 0 20px; }
+.reviewer-page .review-opening > p { max-width:780px; }
+.reviewer-page .review-opening > p:last-child { font-size:13px; color:var(--muted); margin-top:22px; }
+.reviewer-page .review-section { padding:36px 0; border-bottom:1px solid var(--line); scroll-margin-top:0; }
+.reviewer-page h2 { font-size:24px; line-height:1.5; margin-bottom:20px; }
+.reviewer-page h3 { font-size:20px; line-height:1.6; margin-bottom:14px; }
+.reviewer-page p { font-size:15px; line-height:1.9; overflow-wrap:anywhere; }
+.reviewer-page .review-section > p { max-width:850px; }
+.reviewer-page .review-work-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }
+.reviewer-page .review-work { background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:26px; }
+.reviewer-page .review-status { font-size:13px; color:var(--accent); font-weight:600; margin-bottom:14px; }
+.reviewer-page .review-links { display:flex; flex-wrap:wrap; gap:6px 20px; margin-top:18px; }
+.reviewer-page .review-links a { display:inline-flex; align-items:center; min-height:44px; font-size:14px; }
+.reviewer-page .review-facts { display:grid; grid-template-columns:180px minmax(0,1fr); gap:18px 30px; margin:0; }
+.reviewer-page .review-facts dt { font-weight:700; }
+.reviewer-page .review-facts dd { margin:0; line-height:1.9; color:var(--muted); }
+.reviewer-page .review-evidence-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; margin-bottom:22px; }
+.reviewer-page .review-evidence-grid article { padding-top:18px; border-top:2px solid var(--accent); }
+.reviewer-page .review-plan { padding-left:24px; margin:0; }
+.reviewer-page .review-plan li { padding:0 0 18px 8px; }
+.reviewer-page .review-plan p { margin-top:5px; color:var(--muted); }
+.reviewer-page .site-footer { margin-top:32px; }
+@media(max-width:760px) {
+ .reviewer-page .review-opening { padding:32px 0; }
+ .reviewer-page .review-section { padding:28px 0; }
+ .reviewer-page .review-work-grid,.reviewer-page .review-evidence-grid,.reviewer-page .review-facts { grid-template-columns:1fr; }
+ .reviewer-page .review-work { padding:20px; }
+ .reviewer-page .review-facts { gap:5px; }
+ .reviewer-page .review-facts dd { margin-bottom:18px; }
+}
+@media print {
+ .reviewer-page .site-header,.reviewer-page .skip-link,.reviewer-page .site-footer { display:none; }
+ .reviewer-page .wrap { width:100%; }
+ .reviewer-page .review-work,.reviewer-page .review-plan li { break-inside:avoid; }
+}
