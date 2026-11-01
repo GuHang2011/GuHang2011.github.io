@@ -1,0 +1,207 @@
+{
+  "slug": "low-code-rules",
+  "category": "frontend",
+  "kind": "study",
+  "minutes": 8,
+  "date": "2026-11-02",
+  "title": {
+    "en": "Conditional forms: visibility is not permission",
+    "zh": "低代码字段联动：隐藏、必填和权限不能混为一谈"
+  },
+  "summary": {
+    "en": "Design a conditional invoice field with explicit submission rules, dependency checks and stale-response protection.",
+    "zh": "以发票抬头的条件显示为例，讨论隐藏字段是否提交、规则依赖怎样检查，以及异步选项如何避免旧响应覆盖。"
+  },
+  "tags": [
+    "Low code",
+    "Conditional fields",
+    "Validation",
+    "Async",
+    "低代码",
+    "字段联动"
+  ],
+  "basis": {
+    "en": "A design extension of the existing form demo. It currently supports six field types, local validation and JSON import; it does not implement conditional rules, remote options or server-side authorization. Examples below are design sketches, not accepted demo configuration.",
+    "zh": "基于现有表单 Demo 的扩展设计。当前已支持六类字段、前端校验和 JSON 导入，尚未实现条件联动、远程选项及服务端授权。下文规则为设计示意，不能直接当成当前 Demo 支持的配置。"
+  },
+  "sections": [
+    {
+      "id": "question",
+      "title": {
+        "en": "01 / Begin with a product question",
+        "zh": "01 / 先问清楚“隐藏之后怎么办”"
+      },
+      "paragraphs": [
+        {
+          "en": "Suppose invoice_title appears only when needs_invoice is yes. A user fills it in and then chooses no. Removing the input from the screen does not tell us whether its value remains in memory, enters the payload or must be cleared.",
+          "zh": "假设选择“需要发票”后才显示发票抬头。用户填完又改成“不需要”，此时仅把控件隐藏，并不能说明旧值是否仍在内存、是否会提交、是否必须清除。"
+        },
+        {
+          "en": "For a low-sensitivity draft, one possible policy is retain locally but exclude from submission while hidden. Sensitive or invalidated values may instead need clearing. Choose the policy for the business field, and test switching both ways.",
+          "zh": "对低敏感的普通草稿，可以选择“本地暂存，隐藏时不提交”；敏感字段或已失效的信息则可能需要清除。策略应逐字段确定，并检查来回切换，而不是让渲染细节替产品做决定。"
+        }
+      ]
+    },
+    {
+      "id": "separate",
+      "title": {
+        "en": "02 / Separate four decisions",
+        "zh": "02 / 四个判断分别处理"
+      },
+      "paragraphs": [],
+      "bullets": [
+        {
+          "en": "Visibility decides whether a control is presented. It is not an authorization boundary.",
+          "zh": "是否显示：决定控件是否呈现，不能作为授权边界。"
+        },
+        {
+          "en": "Editability decides whether the current user can change a value. A disabled control can still have a stored value.",
+          "zh": "是否可编辑：决定当前用户能否修改；控件禁用不等于没有已有值。"
+        },
+        {
+          "en": "Validation decides whether an active field has an acceptable value. Hidden-field validation needs an explicit business rule.",
+          "zh": "是否校验：决定参与当前流程的值是否合法；隐藏字段是否校验，需要单独规定。"
+        },
+        {
+          "en": "Submission decides which fields enter the payload. The server must independently allowlist writable fields and check user permissions.",
+          "zh": "是否提交：决定进入请求的数据。后端仍需独立检查允许写入的字段和用户权限。"
+        }
+      ]
+    },
+    {
+      "id": "rule",
+      "title": {
+        "en": "03 / Prefer bounded rules to executable strings",
+        "zh": "03 / 用有限规则描述联动"
+      },
+      "paragraphs": [
+        {
+          "en": "A rule object can name a target, a source field, an operator and an effect. Validate references, types and operators when importing it. Do not interpret arbitrary configuration text with eval or new Function.",
+          "zh": "规则对象可以明确目标字段、来源字段、运算符和效果。导入时检查引用字段是否存在、比较类型是否一致、运算符是否允许。不要直接用 eval 或 new Function 执行任意配置字符串。"
+        },
+        {
+          "en": "The sketch below describes one proposed rule format. The current checkSchema does not implement these semantics; adding a rules property to a file would not activate linkage.",
+          "zh": "下例只是拟议规则格式。当前 checkSchema 不实现这些语义，即使在文件中增加 rules 属性，也不会自动获得联动能力。"
+        }
+      ],
+      "code": {
+        "language": "JSON",
+        "text": "{\n  \"target\": \"invoice_title\",\n  \"when\": {\n    \"field\": \"needs_invoice\",\n    \"op\": \"equals\",\n    \"value\": \"yes\"\n  },\n  \"effect\": \"visible-and-required\",\n  \"hiddenValuePolicy\": \"retain-local-exclude-from-submit\"\n}"
+      }
+    },
+    {
+      "id": "dependencies",
+      "title": {
+        "en": "04 / Check dependencies before execution",
+        "zh": "04 / 先检查依赖，再执行规则"
+      },
+      "paragraphs": [
+        {
+          "en": "A rule reads one or more fields and changes a target. Record these dependencies. A conservative first version can reject cycles, calculate in topological order and reject conflicting effects on the same target rather than depending on incidental rule order.",
+          "zh": "规则读取一些字段并影响目标字段，因此可以记录依赖关系。保守的第一版可以拒绝循环、按拓扑顺序计算，并拒绝对同一目标的矛盾效果，避免结果取决于配置碰巧怎样排序。"
+        },
+        {
+          "en": "A dependency rule is not automatically a state-update rule. Showing a field should not repeatedly overwrite user input with its default. Defaults should normally apply at initialization or after an explicitly defined reset.",
+          "zh": "依赖计算不等于每次都重写用户值。字段重新显示时，不应不断用默认值覆盖用户填写；默认值通常应在初始化或明确的重置时机应用。"
+        }
+      ]
+    },
+    {
+      "id": "async",
+      "title": {
+        "en": "05 / Remote options belong to a request context",
+        "zh": "05 / 异步选项也有归属"
+      },
+      "paragraphs": [
+        {
+          "en": "When a province changes, a pending city request may belong to the previous selection. Clear or invalidate the previous city, start the new request, and accept results only when its sequence and dependency context still match. Cancellation alone is not a proof that no old callback can run.",
+          "zh": "省份改变后，正在返回的城市选项可能属于上一次选择。应清除或标记原城市失效，发出新请求，并仅在请求序号与依赖上下文仍一致时接收结果。调用取消接口，不等于能证明旧回调一定不会继续执行。"
+        },
+        {
+          "en": "Account, form revision and selected parent value can all be part of that context. Distinguish loading, empty results and failed requests. A cached selection should not silently remain valid when it is absent from the new permitted options.",
+          "zh": "账号、表单版本和父级选项都可能属于请求上下文。加载中、空结果与请求失败应分别展示；旧选择如果不在新的有效选项中，不能悄悄保持为合法状态。"
+        }
+      ]
+    },
+    {
+      "id": "checks",
+      "title": {
+        "en": "06 / Checks I would add before enabling linkage",
+        "zh": "06 / 真正实现前，我会补这些检查"
+      },
+      "paragraphs": [],
+      "bullets": [
+        {
+          "en": "Switch yes → no → yes and check value retention, error messages, payload fields and keyboard focus.",
+          "zh": "按“需要 → 不需要 → 需要”切换，分别检查值保留、错误消息、提交字段和键盘焦点。"
+        },
+        {
+          "en": "Reject unknown field references, unsupported operators, cycles and contradictory effects.",
+          "zh": "拒绝不存在的字段引用、不支持的运算符、循环依赖和矛盾效果。"
+        },
+        {
+          "en": "Let the older options request finish last; verify that it cannot replace the newer options or re-enable a stale selection.",
+          "zh": "故意让旧选项请求最后返回，检查它不能替换新选项或恢复已失效选择。"
+        },
+        {
+          "en": "Submit a hidden or read-only field through a direct request; verify authorization on the server once a backend exists.",
+          "zh": "有后端后，绕过界面直接提交隐藏或只读字段，检查服务端授权。当前静态 Demo 无法验证这一项。"
+        }
+      ],
+      "callout": {
+        "en": "These are proposed checks for an unimplemented extension. Existing passing form tests do not establish that linkage or authorization is correct.",
+        "zh": "以上是尚未实现扩展的建议检查项。现有表单测试通过，不能作为联动或权限功能已经正确的证据。"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "url": "../demos/low-code-form/",
+      "label": {
+        "en": "Try the existing form studio",
+        "zh": "打开现有表单工作台"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/low-code-form/schema.mjs",
+      "label": {
+        "en": "Source: custom schema and validation",
+        "zh": "源码：自定义配置与校验核心"
+      }
+    },
+    {
+      "url": "https://ant.design/components/form/",
+      "label": {
+        "en": "Ant Design Form: dependencies and form state",
+        "zh": "Ant Design Form 官方：字段依赖与表单状态"
+      }
+    },
+    {
+      "url": "https://json-schema.org/understanding-json-schema/reference/conditionals",
+      "label": {
+        "en": "JSON Schema: conditional validation",
+        "zh": "JSON Schema 官方：条件校验"
+      }
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/AbortController",
+      "label": {
+        "en": "MDN: AbortController",
+        "zh": "MDN：AbortController"
+      }
+    },
+    {
+      "url": "async-interfaces.html",
+      "label": {
+        "en": "Existing note: asynchronous interfaces",
+        "zh": "已有笔记：异步交互"
+      }
+    }
+  ],
+  "related": [
+    "low-code-state-layers",
+    "low-code-release",
+    "async-interfaces",
+    "permission-boundaries"
+  ]
+}

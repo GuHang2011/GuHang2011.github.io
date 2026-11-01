@@ -1,0 +1,200 @@
+{
+  "slug": "low-code-state-layers",
+  "category": "frontend",
+  "kind": "study",
+  "minutes": 9,
+  "date": "2026-11-02",
+  "title": {
+    "en": "Low-code forms: separate configuration, values and interface state",
+    "zh": "低代码表单：配置、用户输入和界面状态为什么要分开"
+  },
+  "summary": {
+    "en": "Use label edits, sorting and type changes to examine state ownership; distinguish a schema-driven form from a complete low-code platform.",
+    "zh": "从改标题、调顺序、改类型三种操作出发，梳理状态归属，说明配置驱动表单与完整低代码平台之间还差什么。"
+  },
+  "tags": [
+    "Low code",
+    "Schema",
+    "State ownership",
+    "Frontend",
+    "低代码",
+    "状态分层"
+  ],
+  "basis": {
+    "en": "Based on the public form studio schema.mjs, app.js and ten existing core tests rerun on 2 November 2026. The source uses native DOM controls and a custom v1 format; it is not a JSON Schema engine, an Ant Design form, or a published business platform.",
+    "zh": "依据公开表单工作台 schema.mjs、app.js 及既有测试整理；2026-11-02 重跑 10 项核心测试通过。当前示例使用原生 DOM 控件和自定义 v1 配置，不是 JSON Schema 引擎、Ant Design 表单或已上线业务平台。"
+  },
+  "sections": [
+    {
+      "id": "why",
+      "title": {
+        "en": "01 / A form is more than a field list",
+        "zh": "01 / 能生成字段，只是第一步"
+      },
+      "paragraphs": [
+        {
+          "en": "A configuration can say that a form contains a topic, email and request type. It does not by itself specify what happens to typed values when a field is moved, renamed or removed. Those decisions are the first useful design problem to solve.",
+          "zh": "配置可以描述主题、邮箱和申请类型，却不会自动回答：字段上移后内容是否还在，改标题是否影响提交值，删掉再加回来是否恢复旧数据。学习低代码时，我更愿意从这些具体问题开始。"
+        },
+        {
+          "en": "A drag-and-drop editor is one possible configuration interface. Rendering, validation, version compatibility and persistence are separate responsibilities. The current demo uses buttons to reorder fields; calling it a visual page builder would overstate its scope.",
+          "zh": "拖拽只是编辑配置的一种方式。渲染、校验、版本兼容和持久化仍各有职责。当前 Demo 用按钮调整字段顺序，并没有页面级拖拽搭建能力。"
+        }
+      ]
+    },
+    {
+      "id": "layers",
+      "title": {
+        "en": "02 / Give each state a single owner",
+        "zh": "02 / 先分清四类状态"
+      },
+      "paragraphs": [],
+      "bullets": [
+        {
+          "en": "Definition: field keys, types, labels and validation rules describe the form. The demo keeps these in schema.",
+          "zh": "配置定义：字段 key、类型、标题和校验规则描述“表单是什么”，当前代码放在 schema 中。"
+        },
+        {
+          "en": "Values: what the user entered, indexed by field key. They belong to a particular form session or saved record, not to a reusable template.",
+          "zh": "用户输入：按字段 key 保存填写内容，属于某次填写过程或业务记录，不应混进可复用模板。"
+        },
+        {
+          "en": "Runtime state: touched fields, submission attempts, pending requests and error messages. In the demo, submitted controls when errors are shown; no backend submission is performed.",
+          "zh": "运行状态：是否触碰、是否尝试提交、请求是否进行中以及错误信息。当前 submitted 控制错误展示时机，Demo 不向后端提交数据。"
+        },
+        {
+          "en": "Editor state: selected field, open panel or focused control. Saving the template should not accidentally save the editor selection.",
+          "zh": "编辑器状态：当前选中字段、展开面板和焦点位置。保存模板时，不应把“编辑器选中了什么”一并写进业务配置。"
+        }
+      ]
+    },
+    {
+      "id": "example",
+      "title": {
+        "en": "03 / Inspect a small configuration",
+        "zh": "03 / 用一个小配置看清边界"
+      },
+      "paragraphs": [
+        {
+          "en": "This example follows the demo format and can be pasted into its JSON editor. Importing it successfully replaces the form and clears preview values. Try it after saving any configuration you want to keep.",
+          "zh": "下例符合当前 Demo 格式，可以粘贴到 JSON 编辑区。合法导入会替换表单并清空预览值；操作前可先复制需要保留的旧配置。"
+        }
+      ],
+      "code": {
+        "language": "JSON",
+        "text": "{\n  \"version\": 1,\n  \"id\": \"study_request\",\n  \"title\": \"Study request\",\n  \"fields\": [\n    {\n      \"key\": \"topic\",\n      \"label\": \"Topic\",\n      \"labelZh\": \"学习主题\",\n      \"type\": \"text\",\n      \"required\": true,\n      \"maxLength\": 80\n    },\n    {\n      \"key\": \"hours\",\n      \"label\": \"Hours\",\n      \"labelZh\": \"预计小时数\",\n      \"type\": \"number\",\n      \"required\": true,\n      \"min\": 0,\n      \"max\": 40\n    }\n  ]\n}"
+      },
+      "callout": {
+        "en": "Keep values such as topic=\"Schema design\" outside this template. Numeric zero is valid here; an empty value is a different case.",
+        "zh": "“学习主题=Schema 设计”等填写值单独保存。这里数字 0 是合法输入，不能把它与空值混为一谈。"
+      }
+    },
+    {
+      "id": "identity",
+      "title": {
+        "en": "04 / A label is not a stable identity",
+        "zh": "04 / 标题不是字段身份"
+      },
+      "paragraphs": [
+        {
+          "en": "The renderer restores values with values[field.key]. Changing the label or sorting the field therefore need not change the stored value. Using array positions would instead attach a value to whichever field occupies that position after reordering.",
+          "zh": "渲染器通过 values[field.key] 恢复输入，因此改标题或排序不必改变填写内容。如果按数组下标保存，排序后就可能把原内容显示到另一个字段上。"
+        },
+        {
+          "en": "A key must also keep its meaning. The demo clears the affected value when a field type changes, and clears all values after a valid import. Preserving a key while silently changing its unit or meaning would require an explicit migration rule.",
+          "zh": "key 还需要保持语义。当前 Demo 改类型时清除该字段值，合法导入时清空全部预览值。即使 key 不变，若把“小时数”改成“分钟数”，也不能默认旧值兼容。"
+        },
+        {
+          "en": "nextKey avoids duplicates among current fields, but it can reuse a deleted field number. It is not a globally unique identifier for database records or schema revisions. A persistent system needs a separate identity policy.",
+          "zh": "nextKey 只保证当前字段之间不重名，被删除的编号可能再次使用。它不是数据库或跨版本的全局身份机制；真正持久化时，应另行规定字段 ID 与历史映射。"
+        }
+      ]
+    },
+    {
+      "id": "walkthrough",
+      "title": {
+        "en": "05 / A short hands-on review",
+        "zh": "05 / 按这个顺序动手检查"
+      },
+      "paragraphs": [],
+      "bullets": [
+        {
+          "en": "Enter a topic, change its label, then move it down: the same input should follow the field key.",
+          "zh": "填写学习主题，修改标题，再下移字段：内容应跟随字段 key 保留。"
+        },
+        {
+          "en": "Change the field type: the old value should be cleared. This is a deliberate compatibility policy.",
+          "zh": "修改字段类型：原值应被清除。这是明确的兼容策略，而不是输入丢失故障。"
+        },
+        {
+          "en": "Enter malformed JSON or repeat a field key: the current configuration and typed values should survive.",
+          "zh": "输入错误 JSON 或重复字段 key：原配置与原填写值应保留。"
+        },
+        {
+          "en": "Apply a valid new configuration: preview values should reset. Refreshing also reloads the initial configuration; changes are tab-local.",
+          "zh": "应用合法新配置：预览值应清空。刷新会重新加载初始配置，当前修改只在标签页中保留。"
+        }
+      ]
+    },
+    {
+      "id": "reflection",
+      "title": {
+        "en": "06 / What I would improve next",
+        "zh": "06 / 我的下一步学习重点"
+      },
+      "paragraphs": [
+        {
+          "en": "I would keep the current rendering and validation core small, then make the reset/preserve rules explicit before adding a component library. React or Vue can change the rendering layer, but neither determines the semantics of importing or migrating a form.",
+          "zh": "我的下一步会先把“保留还是清空”的规则写清楚，再考虑替换组件库。React、Vue 可以改变渲染方式，却不会替我决定导入和迁移的业务含义。"
+        },
+        {
+          "en": "The same reason makes generated configuration a candidate, not a release. AI can draft fields and labels; the application still has to validate the format, permitted components, constraints and data meaning before applying it.",
+          "zh": "这也是我看待 AI 生成配置的方式：它可以帮忙起草字段和文案，但产物仍是待校验的候选配置。格式、允许的组件、规则边界和数据含义，都需要系统检查。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "../demos/low-code-form/",
+      "label": {
+        "en": "Try the existing form studio",
+        "zh": "打开现有表单工作台"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/low-code-form/schema.mjs",
+      "label": {
+        "en": "Source: custom schema and validation",
+        "zh": "源码：自定义配置与校验核心"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/low-code-form/app.js",
+      "label": {
+        "en": "Source: rendering, editing and import",
+        "zh": "源码：渲染、编辑与导入"
+      }
+    },
+    {
+      "url": "https://react.dev/learn/choosing-the-state-structure",
+      "label": {
+        "en": "React: choosing the state structure",
+        "zh": "React 官方：选择状态结构"
+      }
+    },
+    {
+      "url": "https://json-schema.org/understanding-json-schema",
+      "label": {
+        "en": "Understanding JSON Schema — a separate standard",
+        "zh": "JSON Schema 官方：标准与本 Demo 自定义配置的区别"
+      }
+    }
+  ],
+  "related": [
+    "low-code-rules",
+    "low-code-release",
+    "schema-import-review",
+    "low-code-contracts"
+  ]
+}

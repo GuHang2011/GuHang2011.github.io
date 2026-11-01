@@ -1,5 +1,20 @@
 # Learning & project reflections · 学习笔记与项目心得
 
+## 2 November 2026 · 低代码专题 / Low-code series
+
+当前笔记集共 **36 篇**。[在线目录](https://guhang2011.github.io/notebook/) · [低代码专题筛选](https://guhang2011.github.io/notebook/?q=low%20code) · [表单 Demo](../demos/low-code-form/)
+
+- [低代码表单：配置、用户输入和界面状态为什么要分开](low-code-state-layers.html) / Low-code forms: separate configuration, values and interface state
+- [低代码字段联动：隐藏、必填和权限不能混为一谈](low-code-rules.html) / Conditional forms: visibility is not permission
+- [低代码上线心得：配置也需要版本、迁移与回滚](low-code-release.html) / Publishing low-code configuration: versions, migrations and rollback
+
+第一篇结合现有源码和操作检查；字段联动、配置迁移与发布回滚为扩展设计，未表述为已实现功能。现有表单 10 项核心测试于 2026-11-02 重跑通过。
+
+此前三篇复盘：[AI 辅助代码审阅](ai-code-race-review.html) · [工作流恢复](workflow-recovery-review.html) · [安全导入配置](schema-import-review.html)。
+
+以下按整理批次保留，历史篇数只表示各批次当时的数量。
+
+
 [Read online / 在线阅读](https://guhang2011.github.io/notebook/)
 
 Thirty bilingual notes connect code observations, small examples, implementation tradeoffs and questions for further study. Collection updated on **2026-10-31**, with AI-assisted drafting and translation. Each article retains its compilation date. They are learning summaries, not a historical lab diary or evidence of new research results.

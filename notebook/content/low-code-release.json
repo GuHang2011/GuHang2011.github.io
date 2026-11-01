@@ -1,0 +1,228 @@
+{
+  "slug": "low-code-release",
+  "category": "engineering",
+  "kind": "reflection",
+  "minutes": 9,
+  "date": "2026-11-02",
+  "title": {
+    "en": "Publishing low-code configuration: versions, migrations and rollback",
+    "zh": "低代码上线心得：配置也需要版本、迁移与回滚"
+  },
+  "summary": {
+    "en": "Distinguish format versions from business revisions; follow a proposed draft-to-release workflow and explain why rollback does not reverse data changes.",
+    "zh": "区分格式版本与业务修订号，梳理草稿到发布的过程，并说明为什么配置回滚不能自动撤销数据变化。"
+  },
+  "tags": [
+    "Low code",
+    "Schema versioning",
+    "Migration",
+    "Release",
+    "低代码",
+    "配置发布"
+  ],
+  "basis": {
+    "en": "A prospective engineering reflection based on the demo rejecting version values other than 1 and resetting values on valid import. The demo has no persistent records, deployment service, migrations or rollback UI. The release process below is a proposed extension.",
+    "zh": "依据 Demo 只接受 version=1、合法导入重置预览值的行为，整理后续工程设计。当前没有持久化记录、发布服务、迁移或回滚界面；下文发布流程属于扩展方案，不是已上线能力。"
+  },
+  "sections": [
+    {
+      "id": "version",
+      "title": {
+        "en": "01 / One version number is not enough",
+        "zh": "01 / version=1 不代表业务第一版"
+      },
+      "paragraphs": [
+        {
+          "en": "The current version field identifies the supported configuration format. Changing a label, adding an optional field and changing a field unit can all happen within that format, but they have different compatibility consequences.",
+          "zh": "当前 version 标识的是支持的配置格式。改标题、新增可选字段和改变字段单位都可能发生在同一格式内，但对历史数据的影响完全不同。"
+        },
+        {
+          "en": "A persistent system should distinguish format version, stable form ID and immutable business revision. A stored record should carry enough information to identify the definition that interpreted it.",
+          "zh": "持久化系统应区分格式版本、稳定表单 ID 与不可变的业务修订号。业务记录也需要保存足够的信息，确定填写时究竟使用了哪份定义。"
+        }
+      ],
+      "code": {
+        "language": "JSON",
+        "text": "{\n  \"formatVersion\": 1,\n  \"schemaId\": \"expense_request\",\n  \"revision\": 3,\n  \"rendererVersion\": \"1.2.0\",\n  \"record\": {\n    \"schemaRevision\": 3,\n    \"values\": {\n      \"amount\": 120,\n      \"currency\": \"CNY\"\n    }\n  }\n}"
+      },
+      "callout": {
+        "en": "This is a proposed record envelope, not the current demo schema. A renderer version records an implementation; it does not by itself guarantee backward compatibility.",
+        "zh": "这是拟议的记录封装，不是当前 Demo 可导入的配置。渲染器版本用于追踪实现，本身并不能保证向后兼容。"
+      }
+    },
+    {
+      "id": "changes",
+      "title": {
+        "en": "02 / Classify changes by their data effect",
+        "zh": "02 / 按数据影响判断改动"
+      },
+      "paragraphs": [],
+      "bullets": [
+        {
+          "en": "Label or ordering: often a presentation change, provided the field meaning is unchanged.",
+          "zh": "修改标题或顺序：语义不变时通常属于展示调整。"
+        },
+        {
+          "en": "Add an optional field: decide how older records without it are read; distinguish missing from an explicit zero or false.",
+          "zh": "新增可选字段：先规定旧记录缺少该值时怎样读取，区分缺失、零值和 false。"
+        },
+        {
+          "en": "Make a field required or remove an option: existing records may no longer satisfy current rules. Decide whether to preserve historical validity or require a repair workflow.",
+          "zh": "改为必填或删除选项：旧记录可能不再满足新规则，需要选择保留历史有效性，还是进入明确的补录流程。"
+        },
+        {
+          "en": "Change type, key or unit: require a mapping and loss analysis. Do not convert a string identifier such as 00123 into a number just because it looks numeric.",
+          "zh": "改变类型、key 或单位：需要映射和信息损失分析。像 00123 这样的标识符，不能因为看着像数字就转成数值。"
+        }
+      ]
+    },
+    {
+      "id": "release",
+      "title": {
+        "en": "03 / Preview and publish are different operations",
+        "zh": "03 / 预览与发布分开"
+      },
+      "paragraphs": [
+        {
+          "en": "A possible workflow is draft → structural validation → dependency checks → preview → review → immutable revision → active-revision switch. Validation should finish before anything becomes active.",
+          "zh": "可以采用“草稿 → 结构校验 → 依赖检查 → 预览 → 审核 → 固化修订 → 切换生效版本”的流程。校验完成之前，不应让配置直接影响正在使用的表单。"
+        },
+        {
+          "en": "An editor should submit the base revision it edited. If another editor has already published a newer revision, reject the stale publish and show a comparison. Silent last-writer-wins can discard somebody else’s change.",
+          "zh": "编辑器提交时带上编辑基准版本。如果其他人已经发布新版本，应拒绝过期发布并提供差异比较；静默采用最后一次覆盖，可能丢掉别人的修改。"
+        },
+        {
+          "en": "A file hash can help identify the reviewed artifact; approval still depends on authorization and audit records. The system must not confuse matching bytes with an authorized release.",
+          "zh": "文件哈希有助于标识审核过的具体产物；发布是否被授权，仍依赖权限和审计记录，不能把“文件一致”当成“有权发布”。"
+        }
+      ]
+    },
+    {
+      "id": "migration",
+      "title": {
+        "en": "04 / Rehearse migrations before applying them",
+        "zh": "04 / 迁移先演练，再写入"
+      },
+      "paragraphs": [
+        {
+          "en": "For a unit change from hours to minutes, specify the source revision, target revision, conversion, rounding policy and failure behavior. Run a dry pass on a copy and report records that cannot be transformed without a decision.",
+          "zh": "如果把小时改成分钟，需要说明源版本、目标版本、换算、舍入策略和失败行为。先在副本上演练，单独列出无法自动决定的记录，再考虑写入。"
+        },
+        {
+          "en": "Track the revision or migration marker and make retries safe. A conversion blindly applied twice could multiply the value twice. Keep the original representation or a recoverable backup where required, and log which records were changed.",
+          "zh": "记录修订号或迁移标记，保证失败重试不会重复变换。盲目重复执行换算可能把值乘两次。按需要保留原表示或可恢复备份，并记录哪些数据发生变化。"
+        }
+      ]
+    },
+    {
+      "id": "rollback",
+      "title": {
+        "en": "05 / A rollback does not rewind business data",
+        "zh": "05 / 回滚配置，不等于回滚业务数据"
+      },
+      "paragraphs": [
+        {
+          "en": "Switching the active pointer back to revision 2 does not undo records created under revision 3 or recover a field that was already deleted. Before rollback, check whether the older renderer can read newer records and whether writes must be paused.",
+          "zh": "把生效指针切回修订 2，不会自动撤销修订 3 产生的记录，也不能恢复已经删除的字段值。回滚前要检查旧渲染器能否读取新记录，以及是否需要暂停写入。"
+        },
+        {
+          "en": "Prefer retaining immutable revisions and selecting the correct reader for historical records. When reverse migration is lossy, an explicit forward fix may be safer than pretending every change can be reversed.",
+          "zh": "更稳妥的起点是保留不可变修订，让历史记录找到对应的读取规则。若逆向迁移会丢信息，明确的前向修复可能比强行“恢复原状”更合适。"
+        }
+      ]
+    },
+    {
+      "id": "ai",
+      "title": {
+        "en": "06 / What AI changes, and what it does not",
+        "zh": "06 / AI 能加速起草，不能省略发布判断"
+      },
+      "paragraphs": [
+        {
+          "en": "AI can propose a schema, field help text and tests. I would first treat the result as a draft, compare it with the supported format, and examine required fields, defaults, hidden-value policies and migrations. A plausible JSON file is not a reviewed business change.",
+          "zh": "AI 可以帮忙生成配置、字段说明和测试思路。我会先把结果作为草稿，检查格式支持范围，再看必填、默认值、隐藏字段策略和迁移影响。一个看起来合理的 JSON 文件，还不是经过审核的业务变更。"
+        },
+        {
+          "en": "For this project, the next useful exercise is a small versioned draft store with clear failure behavior. Calling it a complete low-code platform before persistence, permission and rollback are verified would hide the most important remaining work.",
+          "zh": "对这个项目而言，下一步更有价值的练习，是做一个有明确失败行为的小型版本草稿库。持久化、权限和回滚还未验证之前，不宜把它描述为完整低代码平台。"
+        }
+      ]
+    },
+    {
+      "id": "review",
+      "title": {
+        "en": "07 / Questions for a release review",
+        "zh": "07 / 发布前值得回答的问题"
+      },
+      "paragraphs": [],
+      "bullets": [
+        {
+          "en": "Can a historical record identify and load the definition it was created with?",
+          "zh": "旧记录能否找到并加载填写时的配置？"
+        },
+        {
+          "en": "Does an unsupported format fail clearly without replacing the working form?",
+          "zh": "遇到不支持的格式，能否明确拒绝并保住正在使用的表单？"
+        },
+        {
+          "en": "What happens after a concurrent publish, interrupted migration or retried migration?",
+          "zh": "并发发布、迁移中断和重复迁移分别会发生什么？"
+        },
+        {
+          "en": "After rollback, can old and new records still be read, and are any writes incompatible?",
+          "zh": "回滚之后，新旧记录是否仍可读，继续写入是否兼容？"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "../demos/low-code-form/",
+      "label": {
+        "en": "Try the existing form studio",
+        "zh": "打开现有表单工作台"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/low-code-form/schema.mjs",
+      "label": {
+        "en": "Source: custom schema and validation",
+        "zh": "源码：自定义配置与校验核心"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/low-code-form/app.js",
+      "label": {
+        "en": "Source: rendering, editing and import",
+        "zh": "源码：渲染、编辑与导入"
+      }
+    },
+    {
+      "url": "https://json-schema.org/understanding-json-schema/reference/schema",
+      "label": {
+        "en": "JSON Schema: declaring a schema dialect",
+        "zh": "JSON Schema 官方：声明所用规范"
+      }
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-Match",
+      "label": {
+        "en": "MDN: If-Match and conditional requests",
+        "zh": "MDN：If-Match 与条件请求"
+      }
+    },
+    {
+      "url": "release-artifact-integrity.html",
+      "label": {
+        "en": "Existing note: release artifact integrity",
+        "zh": "已有笔记：发布产物一致性"
+      }
+    }
+  ],
+  "related": [
+    "low-code-state-layers",
+    "low-code-rules",
+    "schema-import-review",
+    "release-artifact-integrity"
+  ]
+}
