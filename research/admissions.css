@@ -1,0 +1,20 @@
+/* Research reading paths and executable evidence. */
+.research-reading-path{margin:24px 0;padding:22px 24px;border-left:3px solid var(--accent);background:var(--paper);border-radius:0 10px 10px 0}
+.research-reading-path p{margin:0 0 10px;line-height:1.85}
+.research-reading-path .research-path-links{display:flex;flex-wrap:wrap;gap:6px 24px}
+.research-reading-path a{display:inline-flex;align-items:center;min-height:44px;font-weight:600;font-size:14px;text-decoration:underline;text-underline-offset:3px}
+.reviewer-page .admissions-callout{padding:18px 22px;border-left:3px solid var(--accent);background:var(--paper);line-height:1.85}
+.admissions-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin:24px 0}
+.admissions-facts>div{padding:14px 0;border-top:1px solid var(--line)}
+.admissions-facts dt{font-size:13px;color:var(--muted)}
+.admissions-facts dd{margin:8px 0 0;font-size:32px;font-weight:700;color:var(--ink)}
+.admissions-code{max-width:100%;overflow:auto;padding:20px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);font-size:13px;line-height:1.85;tab-size:2}
+.admissions-code:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.admissions-hash{font-family:ui-monospace,Consolas,monospace;font-size:12px!important;overflow-wrap:anywhere}
+.admissions-evidence-note{padding:18px 22px;background:var(--paper);border-left:3px solid var(--accent);margin:20px 0}
+.admissions-evidence-note p{margin:0 0 10px;line-height:1.8}
+.admissions-evidence-note a{display:inline-flex;min-height:44px;align-items:center;margin-right:20px;text-decoration:underline;text-underline-offset:3px}
+.reviewer-page .review-section{scroll-margin-top:90px}
+.reviewer-page .review-section li{line-height:1.85;margin-bottom:10px;overflow-wrap:anywhere}
+@media(max-width:600px){.admissions-facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 22px}.research-reading-path{padding:18px}.admissions-code{font-size:12px;padding:14px}}
+@media print{.admissions-code{white-space:pre-wrap;overflow-wrap:anywhere}.admissions-facts{grid-template-columns:repeat(4,minmax(0,1fr))}.admissions-evidence-note{break-inside:avoid}}

@@ -1,0 +1,64 @@
+{
+  "date": "2026-11-02",
+  "repository": "https://github.com/GuHang2011/frozen-clip-fake-news-fusion",
+  "commit": "f06dd9d3b48ecd2bb4e3c6882d36de1ceb8cb9b5",
+  "command": "P2R=results python -I analysis/analyze3.py <output-directory>",
+  "environment": {
+    "python": "3.12.10",
+    "numpy": "2.4.1",
+    "platform": "Windows"
+  },
+  "scope": "Recompute few-shot per-run metrics from public saved hard predictions; no training or independent dataset reconstruction.",
+  "datasets": [
+    "gossipcop",
+    "politifact"
+  ],
+  "shots": [
+    "2",
+    "4",
+    "8",
+    "16"
+  ],
+  "methods": [
+    "FCP-fixed",
+    "FCP-tuned",
+    "LP(I)",
+    "LP(T)",
+    "LP(T+I)",
+    "LP(T+I+K)",
+    "MLP(T+I)",
+    "MLP(T+I+K)",
+    "Tip(T+I)"
+  ],
+  "seeds": [
+    1,
+    2,
+    42
+  ],
+  "rows": 216,
+  "metrics": [
+    "pred_fake",
+    "f1",
+    "bacc"
+  ],
+  "absolute_tolerance_percentage_points": 1e-09,
+  "max_absolute_difference_percentage_points": {
+    "pred_fake": 0.0,
+    "f1": 0.0,
+    "bacc": 0.0
+  },
+  "reference_sha256": "da6c7575df0abb789325d461d41a77ecf881c247094ccc6dfc996305d05b56c8",
+  "recomputed_sha256": "da6c7575df0abb789325d461d41a77ecf881c247094ccc6dfc996305d05b56c8",
+  "passed": true,
+  "not_run": [
+    "Original training",
+    "analyze.py bootstrap and aggregate analysis",
+    "analyze2.py balanced-accuracy bootstrap",
+    "Reconstruction of source data and original train/test splits"
+  ],
+  "limitations": [
+    "Hard labels cannot reconstruct ranking-based AUROC, score calibration or threshold sweeps.",
+    "Matching archived outputs checks this script and supplied artifacts, not independent sample alignment or causal validity.",
+    "FCP-fixed and FCP-tuned are selection views; table rows are not new training runs."
+  ]
+}

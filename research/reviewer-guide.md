@@ -6,10 +6,15 @@
 
 ## 当前第一作者投稿
 
-- **Neurocomputing**：原投稿被拒后修改并重新投稿，尚未录用。修订研究重分析 344 次归档训练运行，检查融合收益、决策工作点与归档伪线索。[研究解读](https://guhang2011.github.io/research/fusion-audit.html)与 KICP 关联代码可读；修订稿完整复现材料尚未公开。
+- **Neurocomputing**：原投稿被拒后修改并重新投稿，尚未录用。修订研究重分析 344 次归档训练运行，检查融合收益、决策工作点与归档伪线索。[研究解读](https://guhang2011.github.io/research/fusion-audit.html)与[公开重分析材料](https://github.com/GuHang2011/frozen-clip-fake-news-fusion)可读；11 月 2 日完成 216 条工作点记录的[限定范围复算](https://guhang2011.github.io/research/reproducibility.html)。原始训练与划分重建仍需额外材料，KICP 为关联实现。
 - **Climate Risk Management**：第一作者，已投稿，尚未录用。题目为 *Hybrid AI Framework for Multi-Hazard Climate Risk Governance in Renewable Energy-Water Nexus Systems*。介绍基于已提供摘要，涉及 TFT、GNN-CRP 和中国 30 省 2005—2024 年能源—水系统风险。[研究介绍](https://guhang2011.github.io/research/climate-risk.html)包含概念方法图，不作为公开基准复现包。
 
 第一作者身份不替代细分贡献说明。合作者分工、具体实现与实验职责应结合稿件贡献记录核对，本页不从作者排序推断团队工作量。
+
+## 本次补充：实际核验与起步实验
+
+- [复算记录](https://guhang2011.github.io/research/reproducibility.html)：固定源码版本、运行命令、216 条结果比较及范围说明。
+- [起步实验协议](https://guhang2011.github.io/research/first-study.html)：统一开发标注预算，先比较单模态与简单融合基线；尚未执行。
 
 ## 1. 研究简述：先理解问题
 
@@ -21,7 +26,7 @@
 
 [KICP 源码与运行要求](https://github.com/GuHang2011/KICP)整理多模态虚假新闻检测的 CLIP 表征、提示学习、协同注意力与知识检索实现。
 
-建议先看外部数据和模型资源要求，再阅读特征输入、融合路径、数据切分与模型选择方式。公开源码是实现证据；本入口没有重新运行研究实验，也不据此新增准确率、改进幅度或研究创新结论。
+建议先看外部数据和模型资源要求，再阅读特征输入、融合路径、数据切分与模型选择方式。公开源码是实现证据；本轮仅重算另一个公开重分析仓库的工作点表，未重跑 KICP 训练实验，也不据此新增准确率、改进幅度或研究创新结论。
 
 ## 3. KAPT：核对来源、复现与验证范围
 
