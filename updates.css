@@ -1,0 +1,28 @@
+/* Recent materials share the site's reading palette and type scale. */
+.latest-materials{margin:0 0 32px;border:1px solid var(--line);border-radius:12px;background:var(--paper);overflow:hidden}
+.latest-heading{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 22px;border-bottom:1px solid var(--line)}
+.latest-heading h3{font-size:16px;line-height:1.5;margin:0;color:var(--ink)}
+.latest-heading time{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.latest-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.latest-grid article{min-width:0;padding:20px 22px;border-inline-start:1px solid var(--line)}
+.latest-grid article:first-child{border-inline-start:0}
+.latest-grid .latest-meta{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:600;color:var(--accent);margin:0 0 10px}
+.latest-grid h4{font-size:17px;line-height:1.65;margin:0 0 8px;color:var(--ink)}
+.latest-grid article>p:not(.latest-meta){font-size:14px;line-height:1.85;color:var(--muted);margin:0 0 6px}
+.latest-grid a,.material-card>a,.practice-pair a{display:inline-flex;align-items:center;min-height:44px;font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:4px}
+.latest-grid a:hover,.material-card>a:hover,.practice-pair a:hover{color:var(--accent-hover)}
+#work-center .decision-entry>a{display:inline-flex;align-items:center;min-height:44px;text-decoration:underline;text-underline-offset:4px}
+.material-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-bottom:24px}
+.material-card{min-width:0;padding:24px;background:var(--paper);border:1px solid var(--line);border-radius:10px}
+.material-number{display:block;font:600 13px/1.4 ui-monospace,Consolas,monospace;color:var(--accent);margin-bottom:12px}
+.reviewer-page .material-card h3{font-size:21px;margin-bottom:10px}
+.material-card p{color:var(--muted)}
+.material-card details{padding:10px 0;border-top:1px solid var(--line);margin-top:16px}
+.material-card summary{min-height:44px;display:list-item;padding:10px 0;font-size:14px;cursor:pointer}
+.practice-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+.practice-pair>article{min-width:0;border-top:3px solid var(--accent);padding-top:20px}
+.reviewer-page .material-note{font-size:13px;color:var(--muted);margin-top:12px}
+.organization-flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 32px;margin:22px 0;padding-left:24px;color:var(--ink)}
+@media(max-width:900px){.latest-grid{grid-template-columns:1fr}.latest-grid article{border-inline-start:0;border-top:1px solid var(--line);padding:16px 20px}.latest-grid article:first-child{border-top:0}}
+@media(max-width:650px){.material-grid,.practice-pair,.organization-flow{grid-template-columns:1fr}.material-card{padding:20px}.latest-heading{padding:14px 20px}.reviewer-page .review-opening h1{font-size:30px}}
+@media print{.latest-materials,.material-card,.practice-pair>article{break-inside:avoid}.material-grid{display:block}.material-card{margin-bottom:16px}.material-card details>p{display:block}}

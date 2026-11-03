@@ -4,6 +4,10 @@ A bilingual engineering and research portfolio for **Hang Gu (顾航)**, connect
 
 **Intended website:** [guhang2011.github.io](https://guhang2011.github.io/) · **GitHub:** [@GuHang2011](https://github.com/GuHang2011)
 
+## Recent materials · 3 November 2026
+
+[Teaching and practical reading](https://guhang2011.github.io/teaching/) connects six uploaded course texts with practice suggestions and the file-organization notebook. The homepage also links the [Shuyang Home v1.6.0 work center](https://guhang2011.github.io/cases/shuyang/#work-center). Course references retain their sources; release acceptance is distinguished from checks rerun for this update. FieldLens remains a static synthetic-data demo online.
+
 ## Climate-risk research · 27 October 2026
 
 **Hybrid AI Framework for Multi-Hazard Climate Risk Governance in Renewable Energy-Water Nexus Systems** — first author, submitted to **Climate Risk Management**, **not accepted**. [Bilingual overview](https://guhang2011.github.io/research/climate-risk.html) · [Abstract and status record](research/climate-risk.md).
@@ -32,7 +36,7 @@ The opening links directly to the React workflow demo, selected projects and the
 1. **Research:** manuscripts, conference work, and master’s research, with explicit publication status.
 2. **Engineering:** public repositories and selected project descriptions.
 3. **Engineering lens:** a compact map of interface contracts, data quality, model evaluation and evidence-shaped delivery, linked to the relevant public cases and verification records.
-4. **Notebook:** [fifteen bilingual study notes and project reflections](notebook/) on frontend interaction, data quality, model validation, prompt contracts, order consistency, permission boundaries, digital-human pipelines, text-to-image diffusion and reproducible generative workflows. The three October 25 notes cover multimodal decision gates, total annotation budgets and model-version rollback. Searchable by title, summary and tag, with topic filters, source references, code examples and printable article pages. Earlier repositories remain available in the homepage's expandable reading list.
+4. **Notebook:** [36 bilingual study notes and project reflections](notebook/) on frontend interaction, data quality, model validation, prompt contracts, order consistency, permission boundaries, digital-human pipelines, text-to-image diffusion and reproducible generative workflows. The three October 25 notes cover multimodal decision gates, total annotation budgets and model-version rollback. Searchable by title, summary and tag, with topic filters, source references, code examples and printable article pages. Earlier repositories remain available in the homepage's expandable reading list.
 5. **Background:** education and professional experience.
 6. **Interactive experiments:** financial clustering, data preparation audits, model evaluation, a React workflow board and a schema-driven low-code form studio, with synthetic data, source code, notes and reproducible checks. [Reading map](demos/README.md).
 7. **AI engineering case:** a full-stack module with account-bound key handling, endpoint policy, editable presentation generation, human review and documented mocked-provider tests. [Case study](https://github.com/GuHang2011/engineering-notes/blob/main/notes/personal-ai-keys.md).
