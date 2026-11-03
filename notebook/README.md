@@ -1,5 +1,16 @@
 # Learning & project reflections · 学习笔记与项目心得
 
+## 2026-11-03 · 近期项目源码复盘
+
+目前共 **39 篇中英双语笔记**。新增内容连接可检查的源码、设计取舍和建议验证项。
+
+- [事项汇总之后，权限还要逐项检查](work-center-boundaries.html)
+- [已读不等于办完：通知与业务状态怎样分开](notification-read-state.html)
+- [备份恢复：先看差异，再决定覆盖哪些记录](backup-restore-review.html)
+
+首页新增页内关键词检索、全部主题、分批展开及可分享的筛选地址。无 JavaScript 时仍可阅读全部文章，搜索表单进入完整笔记集。
+
+
 ## 2 November 2026 · 低代码专题 / Low-code series
 
 当前笔记集共 **36 篇**。[在线目录](https://guhang2011.github.io/notebook/) · [低代码专题筛选](https://guhang2011.github.io/notebook/?q=low%20code) · [表单 Demo](../demos/low-code-form/)

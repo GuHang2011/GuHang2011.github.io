@@ -1,0 +1,144 @@
+{
+  "slug": "notification-read-state",
+  "category": "engineering",
+  "kind": "reflection",
+  "minutes": 6,
+  "date": "2026-11-03",
+  "title": {
+    "en": "Read is not done: separating notifications from tasks",
+    "zh": "已读不等于办完：通知与业务状态怎样分开"
+  },
+  "summary": {
+    "en": "Use an order reminder and a read-all race to explain separate state, deduplication and a query snapshot boundary.",
+    "zh": "从订单提醒和“全部已读”的时间差出发，整理状态分离、重复提醒与查询快照的处理方法。"
+  },
+  "tags": [
+    "Notifications",
+    "State",
+    "Idempotency",
+    "通知",
+    "快照",
+    "已读"
+  ],
+  "basis": {
+    "en": "Source observations and release documentation from Shuyang Home v1.6.0 (54ac363). The 41/42 sequence below is a teaching example, not a production event log.",
+    "zh": "基于沭阳之家 v1.6.0（54ac363）源码和发布文档整理。下文序号 41 / 42 是用于推演的示例，不是实际用户事件记录。"
+  },
+  "sections": [
+    {
+      "id": "states",
+      "title": {
+        "en": "Two states describe different facts",
+        "zh": "两个状态，各自说明一件事"
+      },
+      "paragraphs": [
+        {
+          "en": "Opening a collection reminder tells the system that a member has seen a message. It says nothing about whether the goods were collected. The order completes through the original receive action, with its own permissions and transition rules.",
+          "zh": "打开一条自提提醒，只能说明会员看过消息，不能说明已经收到商品。订单完成应由原业务中的收货操作触发，并执行原有权限和状态检查。"
+        },
+        {
+          "en": "The release separates notification read state from task completion. If the destination cannot be opened, it retains unread state; the member can still mark the message read explicitly.",
+          "zh": "这一版本把通知已读和事项办结分开处理。目标详情无法打开时保留未读，用户也可以主动标记已读。两个操作表达不同意图，界面文字应写清楚。"
+        }
+      ]
+    },
+    {
+      "id": "snapshot",
+      "title": {
+        "en": "A read-all action needs a time boundary",
+        "zh": "“全部已读”需要一个明确边界"
+      },
+      "paragraphs": [
+        {
+          "en": "Suppose the visible inbox was fetched through sequence 41. Message 42 arrives before the user presses read all. Updating every unread row at click time would clear a message the user never saw.",
+          "zh": "假设列表查到的最大序号是 41。用户还没点“全部已读”，第 42 条消息已经到达。如果点击时直接清空所有未读，就会把用户没见过的消息一起清掉。"
+        },
+        {
+          "en": "The documented operation sends the maximum sequence from the last query. That expresses which snapshot the user is acting on, while newer messages remain unread.",
+          "zh": "文档中的操作会提交上次查询的序号上限。这个参数说明用户在处理哪一批消息；超过该序号的新消息继续保持未读。"
+        }
+      ],
+      "code": {
+        "language": "Pseudocode / 简化示意",
+        "text": "visibleSnapshot.maxSequence = 41\nnewMessage.sequence = 42\n\nmarkRead(recipient = currentUser, through = 41)\n// Message 42 remains unread. Task state is unchanged."
+      }
+    },
+    {
+      "id": "duplicates",
+      "title": {
+        "en": "Duplicate reminders have a business definition",
+        "zh": "判断重复，要看业务变化"
+      },
+      "paragraphs": [
+        {
+          "en": "BusinessNotifications builds a key from the recipient, business kind, object id, businessVersion and message. Repeating a save without a meaningful change should not create another reminder, while a later business version may require one.",
+          "zh": "BusinessNotifications 使用接收人、业务类型、对象编号、businessVersion 和消息内容构成键。没有状态变化的重复保存不应再提醒；同一对象后续产生新的业务版本，则可能需要新消息。"
+        },
+        {
+          "en": "Including message text in identity is a tradeoff: a wording change can affect identity too. If this grows into a distributed service, stable event ids and storage-level uniqueness would deserve a separate design and concurrency test. They are proposed extensions here.",
+          "zh": "把文案放进标识也有代价：修改措辞可能影响去重。如果以后扩展成分布式服务，我会单独设计稳定事件编号、数据库唯一约束和并发测试。这些是后续设计问题，不能从当前键拼接直接推导出“全局恰好一次”。"
+        }
+      ]
+    },
+    {
+      "id": "checks",
+      "title": {
+        "en": "Four scenarios worth keeping",
+        "zh": "值得保留的四个检查场景"
+      },
+      "paragraphs": [],
+      "bullets": [
+        {
+          "en": "Open a reminder and verify that the underlying order is still waiting for the appropriate business action.",
+          "zh": "看完提醒后，检查订单仍等待对应业务操作，而不是自动完成。"
+        },
+        {
+          "en": "Fetch through 41, insert 42, then mark the snapshot read. Only the earlier messages should change.",
+          "zh": "先查询到 41，再加入 42，最后按旧快照标记已读，检查新消息保持未读。"
+        },
+        {
+          "en": "Repeat an unchanged operation, then make a genuine transition. Check both duplicate suppression and a new reminder.",
+          "zh": "先重复无变化操作，再执行一次有效状态迁移，同时检查去重和新通知产生。"
+        },
+        {
+          "en": "Fail the business transaction and inspect whether a notice remains. The release documents shared rollback; verify it at the transaction boundary.",
+          "zh": "让业务事务失败，检查是否留下孤立通知。原版本记录了共同回滚，应在事务边界验证，而不只观察前端提示。"
+        }
+      ]
+    },
+    {
+      "id": "reflection",
+      "title": {
+        "en": "A practical frontend lesson",
+        "zh": "给前端开发的一点提醒"
+      },
+      "paragraphs": [
+        {
+          "en": "An unread badge is a view of notification state. A task badge is a view of business state. Keeping their refresh rules separate makes retries, multiple tabs and delayed responses easier to reason about.",
+          "zh": "未读角标来自通知状态，待办数量来自业务状态。把它们的刷新规则分开，重试、多标签页和旧响应等问题才容易定位。我会避免用同一个“已处理”字段同时承担两种含义。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/GuHang2011/shuyang-home/blob/54ac3633656d1c62a7f1a8b1916f4857cb79883e/backend/src/main/java/com/example/Kcsj/membership/BusinessNotifications.java",
+      "label": {
+        "en": "Business notification generation",
+        "zh": "业务通知生成源码"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/shuyang-home/blob/54ac3633656d1c62a7f1a8b1916f4857cb79883e/docs/事项中心与互助办结-v1.6.0.md",
+      "label": {
+        "en": "Snapshot, transaction and scope documentation",
+        "zh": "快照、事务与交付范围文档"
+      }
+    }
+  ],
+  "related": [
+    "work-center-boundaries",
+    "order-idempotency",
+    "async-interfaces"
+  ]
+}

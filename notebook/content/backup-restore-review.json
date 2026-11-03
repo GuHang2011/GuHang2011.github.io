@@ -1,0 +1,173 @@
+{
+  "slug": "backup-restore-review",
+  "category": "data",
+  "kind": "reflection",
+  "minutes": 7,
+  "date": "2026-11-03",
+  "title": {
+    "en": "Restore a backup with a preview, not a blind overwrite",
+    "zh": "备份恢复：先看差异，再决定覆盖哪些记录"
+  },
+  "summary": {
+    "en": "Read the FieldLens v1.2 import path: four record categories, explicit conflict choices and a second check before saving.",
+    "zh": "沿着 FieldLens v1.2 的导入流程，梳理四类记录、冲突选择和保存前的再次检查，说明备份里包含什么。"
+  },
+  "tags": [
+    "FieldLens",
+    "JSON",
+    "Backup",
+    "Data quality",
+    "备份",
+    "冲突"
+  ],
+  "basis": {
+    "en": "A version-specific review of FieldLens v1.2 (3ab5e7f), domain.js and backup-view.js. Eighteen existing domain/practical checks passed during the preceding repository review; this note does not claim a new model or full UI evaluation.",
+    "zh": "针对 FieldLens v1.2（3ab5e7f）的 domain.js 和 backup-view.js 阅读记录。此前仓库整理已复跑 18 项现有领域逻辑与实用功能检查；本文不新增模型性能或全界面验收结论。"
+  },
+  "sections": [
+    {
+      "id": "problem",
+      "title": {
+        "en": "A valid JSON file can still be the wrong restore",
+        "zh": "能解析 JSON，不代表可以安全恢复"
+      },
+      "paragraphs": [
+        {
+          "en": "A backup may contain new samples, exact duplicates, a revised note with the same id, or a malformed region. Restoring all of them with one assignment hides the decisions that matter.",
+          "zh": "备份里可能有新样本、完全重复的记录、同编号但备注不同的记录，也可能有格式错误的检测区域。一次赋值覆盖全部内容，会把这些需要判断的差异藏起来。"
+        },
+        {
+          "en": "In this version parseBackup validates the application and schema, normalizes records, and classifies each entry before anything is persisted. The UI shows a preview so the user can choose.",
+          "zh": "该版本的 parseBackup 先检查应用标识和格式版本，规范化记录并分类。此时还没有保存数据，界面会展示预览，让用户再作选择。"
+        }
+      ]
+    },
+    {
+      "id": "classes",
+      "title": {
+        "en": "Four outcomes should lead to different actions",
+        "zh": "四种检查结果，对应不同处理"
+      },
+      "paragraphs": [],
+      "bullets": [
+        {
+          "en": "New: the id does not exist locally. Adding it is selected by default.",
+          "zh": "新增：本地不存在相同编号，默认勾选添加。"
+        },
+        {
+          "en": "Duplicate: normalized content is identical. Skip it.",
+          "zh": "重复：规范化后的内容完全一致，直接跳过。"
+        },
+        {
+          "en": "Conflict: the id exists but content differs. Keep the existing record unless the user explicitly chooses replacement.",
+          "zh": "冲突：编号相同但内容不同，默认保留本地记录；只有明确选择后才覆盖。"
+        },
+        {
+          "en": "Invalid: validation fails, or the backup itself repeats an id. Show the reason and skip the entry.",
+          "zh": "无效：字段检查失败，或备份文件内部编号重复，显示原因并跳过。"
+        }
+      ]
+    },
+    {
+      "id": "confirm",
+      "title": {
+        "en": "A preview can become stale",
+        "zh": "预览之后，数据仍可能变化"
+      },
+      "paragraphs": [
+        {
+          "en": "backup-view captures the current record list before displaying the dialog. At confirmation it compares the current list again. If it changed, the user must close and re-import, rather than apply choices to an unseen baseline.",
+          "zh": "backup-view 在打开预览时记录当前列表，确认时再比对一次。如果这期间记录发生变化，就要求关闭后重新导入，避免把之前的选择套用到已经变化的数据上。"
+        },
+        {
+          "en": "mergeBackup calculates a new list and rejects a result above the 30-record history limit before persistence. When saving fails, the dialog keeps an error visible. This is a local application guard, not a distributed transaction or an automatic multi-device merge protocol.",
+          "zh": "mergeBackup 先计算新列表；超过 30 条历史记录上限就拒绝，不先删除旧记录来腾位置。保存失败时弹窗继续显示错误。这是本地应用的保护逻辑，不能当作分布式事务或多设备自动合并协议。"
+        }
+      ]
+    },
+    {
+      "id": "scope",
+      "title": {
+        "en": "Write down what the backup does not contain",
+        "zh": "把备份范围写在操作旁边"
+      },
+      "paragraphs": [
+        {
+          "en": "The JSON backup carries record metadata and detection results, but not the original images. A restored report cannot recreate its source photograph. The existing preview states this explicitly.",
+          "zh": "JSON 备份包含记录元数据和检测结果，不包含原图片。因此恢复报告不等于恢复照片；现有导入预览明确写出了这一点。"
+        },
+        {
+          "en": "If a future version supports image bundles, it would also need file manifests, integrity checks, missing-image behavior and storage estimates. Those are follow-up design tasks, not features implied by the current export button.",
+          "zh": "如果后续支持打包图片，还需要文件清单、完整性校验、图片缺失时的显示方式和容量估算。这些应单独设计，不能从当前“导出备份”按钮推断已经实现。"
+        }
+      ]
+    },
+    {
+      "id": "exercise",
+      "title": {
+        "en": "A small recovery drill",
+        "zh": "可以亲手做的一次恢复练习"
+      },
+      "paragraphs": [],
+      "bullets": [
+        {
+          "en": "Use synthetic records. Export one, change its local note, then import the older backup and inspect the conflict comparison.",
+          "zh": "使用演示记录：先导出一条，再修改本地备注，最后导入旧备份，检查冲突对比。"
+        },
+        {
+          "en": "Keep the local record once, then repeat and explicitly replace it. Confirm the two choices have different outcomes.",
+          "zh": "先选择保留本地记录，再重复导入并明确选择覆盖，核对两次结果是否不同。"
+        },
+        {
+          "en": "Try an invalid schema version and a file with repeated ids. Neither should silently become an accepted record.",
+          "zh": "用不支持的格式版本和文件内重复编号检查失败提示，不能静默变成有效记录。"
+        },
+        {
+          "en": "At the record limit, try adding one more. Check that an error leaves the previous list intact.",
+          "zh": "达到记录上限后再尝试新增，确认提示失败且原列表完整保留。"
+        }
+      ]
+    },
+    {
+      "id": "reflection",
+      "title": {
+        "en": "Make the decision visible before the write",
+        "zh": "先让人看清楚，再写入"
+      },
+      "paragraphs": [
+        {
+          "en": "This is the same lesson I would apply to batch imports, configuration uploads and migration tools: classify the change, show its effect, and recheck the baseline before committing. A successful parser is only the beginning.",
+          "zh": "批量导入、配置上传和迁移工具，都可以沿用这一思路：先分类变化，再展示影响，提交前复查基线。能读进文件只是第一步，把覆盖和失败的后果讲清楚，才算完成交互设计。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/GuHang2011/fieldlens/blob/3ab5e7fdb6ae00968768f8661725c55456da809f/src/domain.js",
+      "label": {
+        "en": "v1.2 backup parsing and merge logic",
+        "zh": "v1.2 备份解析与合并逻辑"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/fieldlens/blob/3ab5e7fdb6ae00968768f8661725c55456da809f/src/backup-view.js",
+      "label": {
+        "en": "Preview and confirmation interface",
+        "zh": "预览与确认界面"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/fieldlens/blob/3ab5e7fdb6ae00968768f8661725c55456da809f/tests/practical.test.js",
+      "label": {
+        "en": "Existing practical feature checks",
+        "zh": "现有实用功能检查"
+      }
+    }
+  ],
+  "related": [
+    "schema-import-review",
+    "data-quality",
+    "release-artifact-integrity"
+  ]
+}

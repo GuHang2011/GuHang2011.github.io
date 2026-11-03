@@ -196,3 +196,10 @@ The review covers 49 portfolio assertions plus focused checks of the existing en
 新增截图中的 Mao Live2D 卡通主播，保留小林 SVG 角色切换。展示片从 34 秒延长至 101 秒，操作片从 22 秒延长至 60 秒；首页视频区和悬浮放映室同步更新。
 
 [在线演示](demos/virtual-host/) · [原理、复现与素材来源](demos/virtual-host/README.md) · [本次验证](reviews/mao-presenter-20261101.md)。Mao 为 Live2D 官方示例角色，非本人原创角色；口型由音量驱动。
+
+
+## 2026-11-03 · Content and reading layout
+
+近期更新采用主项目与辅助资料分层，学习区新增页内搜索、可分享筛选和每批 6 篇的展开入口。新增事项权限、通知状态、备份恢复 3 篇中英双语源码复盘，总计 39 篇。
+
+[设计与验证记录](reviews/content-layout-20261103.md) · [笔记集](notebook/)
