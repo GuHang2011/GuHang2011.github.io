@@ -1,0 +1,38 @@
+.inventory-page{font-family:var(--font-ui);background:var(--canvas);color:var(--ink);line-height:1.85}
+.inventory-page .inventory-intro{padding-block:64px 38px;display:grid;grid-template-columns:1.3fr 1fr;gap:50px;align-items:center}
+.inventory-page h1{font-size:clamp(30px,3.8vw,46px);font-family:var(--font-ui);line-height:1.4;letter-spacing:0;margin:14px 0 20px;text-wrap:balance}
+.inventory-page .inventory-intro p{font-size:16px;color:var(--muted)}
+.inventory-page .inventory-kicker{font-size:12px!important;color:var(--accent)!important;letter-spacing:.06em;font-weight:600}
+.inventory-page .inventory-links{display:flex;gap:8px 24px;flex-wrap:wrap;margin-top:22px}
+.inventory-page a{text-underline-offset:4px}.inventory-page .inventory-links a{display:inline-flex;align-items:center;min-height:44px;font-size:14px;text-decoration:underline}
+.inventory-map{border:1px solid var(--line);background:var(--paper);padding:28px;border-radius:12px;}
+.inventory-map>p{font:600 12px/1.5 ui-monospace,Consolas,monospace!important;margin:0 0 18px!important;}
+.inventory-map ol{list-style:none;padding:0;margin:0;display:grid;gap:0}
+.inventory-map li{display:grid;grid-template-columns:28px 1fr;gap:12px;border-top:1px solid var(--line);padding:13px 0;color:var(--muted);font-size:14px}
+.inventory-map li>span:first-child{color:var(--accent);font-size:12px;padding-top:2px}
+.inventory-map strong{display:block;color:var(--ink);font-size:16px}
+.inventory-page .inventory-section{border-top:1px solid var(--line);padding-block:40px}
+.inventory-page h2{font-family:var(--font-ui);font-size:26px;line-height:1.5;margin-bottom:16px}
+.inventory-page h3{font-family:var(--font-ui);font-size:18px;line-height:1.7}
+.inventory-page .inventory-lead{max-width:75ch;color:var(--muted);font-size:15px}
+.inventory-example{border:1px solid var(--line);border-radius:12px;background:var(--paper);margin-top:24px;overflow:hidden}
+.inventory-example form{display:flex;align-items:center;flex-wrap:wrap;gap:12px 24px;padding:18px 24px;background:var(--surface);border-bottom:1px solid var(--line);font-size:14px}
+.inventory-example label{display:flex;align-items:center;gap:10px;min-height:44px}
+.inventory-example input{accent-color:var(--accent);width:18px;height:18px}
+.inventory-example select,.inventory-example button{font:inherit;min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink)}
+.inventory-example button{color:var(--accent);cursor:pointer;margin-left:auto}
+.inventory-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:26px 24px}
+.inventory-metrics dt{font-size:13px;color:var(--muted)}
+.inventory-metrics dd{margin:0;font:600 32px/1.5 ui-monospace,Consolas,monospace;color:var(--ink)}
+.inventory-example table{width:calc(100% - 48px);margin:0 24px 20px;border-collapse:collapse;table-layout:fixed;font-size:14px}
+.inventory-example caption{text-align:left;font-weight:600;margin-bottom:10px}
+.inventory-example th,.inventory-example td{padding:12px 0;border-bottom:1px solid var(--line);text-align:left;overflow-wrap:anywhere}
+.inventory-example th:last-child,.inventory-example td:last-child{width:85px;text-align:right}
+.inventory-example [data-example-status]{margin:0;padding:0 24px 22px;font-size:13px;color:var(--muted)}
+.inventory-corrections{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:24px}
+.inventory-corrections article{border-left:2px solid var(--accent);padding-left:20px}
+.inventory-corrections p{font-size:14px;color:var(--muted);margin-top:7px}
+.inventory-page pre{background:var(--paper);border:1px solid var(--line);padding:20px;border-radius:8px;overflow:auto;max-width:100%;font-size:13px;line-height:1.9;color:var(--ink)}
+.inventory-page .inventory-boundary{font-size:13px;color:var(--muted);margin-top:16px}
+@media(max-width:760px){.inventory-page .inventory-intro{grid-template-columns:1fr;gap:20px;padding-block:32px}.inventory-page h1{font-size:30px}.inventory-map{padding:20px}.inventory-corrections{grid-template-columns:1fr}.inventory-example form{padding:16px;display:grid;gap:8px}.inventory-example button{margin:0;justify-self:start}.inventory-metrics{padding:20px 16px;gap:12px}.inventory-metrics dd{font-size:26px}.inventory-example table{width:calc(100% - 32px);margin-inline:16px}.inventory-example [data-example-status]{padding:0 16px 20px}.inventory-page .inventory-section{padding-block:30px}}
+@media print{.inventory-example form{display:none}.inventory-page .inventory-intro{display:block}.inventory-map{margin-top:20px}.inventory-example,.inventory-corrections article{break-inside:avoid}}

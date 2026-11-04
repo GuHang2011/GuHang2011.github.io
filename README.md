@@ -4,6 +4,10 @@ A bilingual engineering and research portfolio for **Hang Gu (顾航)**, connect
 
 **Intended website:** [guhang2011.github.io](https://guhang2011.github.io/) · **GitHub:** [@GuHang2011](https://github.com/GuHang2011)
 
+## 4 November 2026 · File inventory and current projects
+
+Added a [Python inventory case with an interactive synthetic example](cases/file-inventory/), [scope and validation reflection](notebook/inventory-scope-review.html), and current FieldLens v1.3.1 navigation. The directory now includes 15 projects and the notebook has 40 bilingual articles. [Update and checks](reviews/daily-20261104.md).
+
 ## Recent materials · 3 November 2026
 
 [Teaching and practical reading](https://guhang2011.github.io/teaching/) connects six uploaded course texts with practice suggestions and the file-organization notebook. The homepage also links the [Shuyang Home v1.6.0 work center](https://guhang2011.github.io/cases/shuyang/#work-center). Course references retain their sources; release acceptance is distinguished from checks rerun for this update. FieldLens remains a static synthetic-data demo online.
@@ -18,7 +22,7 @@ A bilingual engineering and research portfolio for **Hang Gu (顾航)**, connect
 
 The homepage's **30 October 2026 visual redesign** uses a warm ivory canvas, navy typography and restrained rust accents. A large name lockup and real project previews introduce the portfolio. Selected projects use large screenshot covers, the interactive demos sit in a contrasting navy section, and research and notes retain an editorial reading layout. Earlier academic organization was inspired by [winsleo.github.io](https://winsleo.github.io/); the current visual composition uses Hang Gu's own project material.
 
-The opening links directly to the React workflow demo, selected projects and the academic CV. Three representative projects lead the engineering section; all 13 remain searchable. Three initial demos each suggest an interaction to try. Education and work history share the experience section, while detailed research context, engineering diagrams, highlights and films expand on demand. Publication status and learning-project labels retain distinct meanings.
+The opening links directly to the React workflow demo, selected projects and the academic CV. Three representative projects lead the engineering section; all 15 remain searchable. Three initial demos each suggest an interaction to try. Education and work history share the experience section, while detailed research context, engineering diagrams, highlights and films expand on demand. Publication status and learning-project labels retain distinct meanings.
 
 - Complete English / Chinese interface with a saved language preference.
 - Research filters for manuscripts, conference work and thesis; native expandable summaries and an expand / collapse all summaries control.

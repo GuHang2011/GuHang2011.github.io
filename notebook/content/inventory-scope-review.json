@@ -1,0 +1,175 @@
+{
+  "slug": "inventory-scope-review",
+  "date": "2026-11-04",
+  "category": "engineering",
+  "kind": "reflection",
+  "minutes": 6,
+  "title": {
+    "en": "Before counting files, define the scan boundary",
+    "zh": "文件整理心得：先定义统计范围，再看容量数字"
+  },
+  "summary": {
+    "en": "A small Python inventory tool illustrates exclusions, report placement, stable sorting and why logical bytes are not freed disk space.",
+    "zh": "用 Python 目录盘点工具整理排除规则、报告位置、同体积排序，以及逻辑长度为什么不等于可释放空间。"
+  },
+  "tags": [
+    "Python",
+    "CLI",
+    "Inventory",
+    "Testing",
+    "目录盘点",
+    "回归测试"
+  ],
+  "basis": {
+    "en": "Based on the 4 November inventory changes and synthetic-file tests. No personal disk listing or large-directory benchmark is published.",
+    "zh": "基于 11 月 4 日目录盘点脚本的修改与合成文件测试整理，未公开个人磁盘清单，未进行大目录性能测试。"
+  },
+  "sections": [
+    {
+      "id": "scope",
+      "title": {
+        "en": "A number needs a boundary",
+        "zh": "一个数字，先说清楚统计了什么"
+      },
+      "paragraphs": [
+        {
+          "en": "A project directory may include source code, dependencies, caches and earlier reports. Adding their lengths is easy; explaining what the total means takes a clear scope.",
+          "zh": "项目目录里常常混着源码、依赖、缓存和以前的报告。把文件长度加起来并不难，难的是读者能否知道这个数字包括哪些东西。"
+        },
+        {
+          "en": "The updated script accepts exact root-relative exclusions. Excluding node_modules does not exclude frontend/node_modules: the latter needs its own entry. This keeps the rule predictable and visible in the report.",
+          "zh": "这次脚本使用明确的根目录相对路径作为排除规则。排除 node_modules 不会自动排除 frontend/node_modules，后者需要单独写出。规则虽然简单，但更容易解释和检查。"
+        }
+      ]
+    },
+    {
+      "id": "bugs",
+      "title": {
+        "en": "Two small bugs that change the result",
+        "zh": "两个会改变结果的小问题"
+      },
+      "paragraphs": [
+        {
+          "en": "The old summary used (root files) as the root-file bucket while allowing real directory names as other keys. A directory with that exact name would merge into the bucket. Version 2 prefixes directory keys with ./ and keeps the root bucket separate.",
+          "zh": "旧汇总用 (root files) 表示根目录文件，又直接用真实目录名作为其他键。如果恰好有一个同名目录，两类数据就混在了一起。新格式给真实目录加 ./ 前缀，并明确标注格式版本 2。"
+        },
+        {
+          "en": "Writing the report inside the scanned tree also means the next scan can count the old report. The CLI now rejects that output location before scanning. Existing destinations are still protected by exclusive creation.",
+          "zh": "把报告写在扫描目录里，下次扫描时旧报告也会被算进去。现在命令行会在扫描前拒绝这种输出位置；对于已经存在的目标文件，继续使用独占创建来拒绝覆盖。"
+        }
+      ]
+    },
+    {
+      "id": "example",
+      "title": {
+        "en": "Keep an example small enough to check by hand",
+        "zh": "示例要小到可以手工核算"
+      },
+      "paragraphs": [
+        {
+          "en": "The shared fixture has five files of 4, 12, 8, 16 and 32 bytes. The 32-byte file is in node_modules. Excluding that directory leaves four files and 40 bytes; a 10-byte threshold selects two files.",
+          "zh": "共享样例包含 4、12、8、16、32 字节五个文件，32 字节的文件位于 node_modules。排除该目录后，剩下 4 个文件、40 字节；阈值设为 10 字节时，会选出两个文件。"
+        },
+        {
+          "en": "The Python sample creates those files in a temporary directory. The web page uses the same fixture to explain filtering; it does not scan the visitor’s computer.",
+          "zh": "Python 示例在临时目录生成这些文件；网页使用同一份样例解释筛选过程，不扫描访问者的电脑。数字可以对照，但网页本身不是 Python 文件系统扫描器。"
+        }
+      ],
+      "code": {
+        "language": "Shell",
+        "text": "python examples/make_sample.py\npython -m unittest discover -s tests -v"
+      },
+      "callout": {
+        "en": "Forty bytes is a synthetic teaching total, not a storage-saving result.",
+        "zh": "40 字节只是合成教学样例的统计值，不是实际释放空间的成绩。"
+      }
+    },
+    {
+      "id": "checks",
+      "title": {
+        "en": "Test decisions, including the failures",
+        "zh": "测试要覆盖取舍，也要覆盖失败"
+      },
+      "bullets": [
+        {
+          "en": "Use equal-size files to check tie ordering. A different directory enumeration should not rearrange the report.",
+          "zh": "用同体积文件检查并列排序，避免目录枚举顺序改变后报告顺序也随之变化。"
+        },
+        {
+          "en": "Simulate an unreadable directory. Keep the readable results and record the missing path instead of pretending the scan was complete.",
+          "zh": "模拟不可读目录：保留其他可读结果，记录缺失路径，不能装作扫描完整。"
+        },
+        {
+          "en": "Reject a negative, zero or non-finite threshold before output is created.",
+          "zh": "负数、零和非有限阈值应在生成报告前被拒绝。"
+        },
+        {
+          "en": "Keep existing output and source file bytes unchanged when an operation is refused.",
+          "zh": "操作被拒绝时，检查已有报告和源文件字节内容均未改变。"
+        }
+      ],
+      "paragraphs": [
+        {
+          "en": "Local Python 3.12 ran 15 tests: 14 passed and the real-symlink test was skipped because this host does not allow creating symlinks. A simulated Windows reparse attribute check passed. Cross-platform CI has its own execution logs.",
+          "zh": "本机 Python 3.12 执行了 15 项测试：14 项通过，真实符号链接测试因主机不允许创建链接而跳过；Windows 重解析属性分支通过模拟检查。跨平台 CI 的实际结果另外记录在运行日志中。"
+        }
+      ]
+    },
+    {
+      "id": "limits",
+      "title": {
+        "en": "What I would not infer from this report",
+        "zh": "哪些结论不能从报告里直接得出"
+      },
+      "paragraphs": [
+        {
+          "en": "Logical lengths differ from allocated disk space. Hardlinks are counted by path; compressed and sparse files have other storage behavior. The report also omits excluded paths and links.",
+          "zh": "逻辑长度与实际分配的磁盘空间不同。硬链接按路径计数，压缩和稀疏文件的占用另有规律；报告也不包含排除路径和跳过的链接。"
+        },
+        {
+          "en": "A changing filesystem is not an atomic snapshot. Stable sorting improves comparison, but does not prove that two scans saw the same files at the same moment.",
+          "zh": "正在变化的文件系统也不是一致性快照。稳定排序有利于比较，但不能证明两次扫描在同一时刻观察了同一批文件。"
+        },
+        {
+          "en": "The lesson I want to retain is to write the scope and failure behavior beside a result. Even a small utility can demonstrate engineering judgment through clear inputs, reproducible examples and explicit limits.",
+          "zh": "我想保留下来的做法是：把统计范围和失败处理写在结果旁边。工具不一定要大，把输入、可复现示例和适用范围说明白，同样能体现工程判断。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/GuHang2011/windows-file-organization-toolkit/blob/8756068f891287fccf14128b3099cd43d352acf6/scripts/inventory.py",
+      "label": {
+        "en": "Updated inventory implementation",
+        "zh": "更新后的盘点实现"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/windows-file-organization-toolkit/blob/8756068f891287fccf14128b3099cd43d352acf6/tests/test_inventory.py",
+      "label": {
+        "en": "Synthetic-file regression tests",
+        "zh": "合成文件回归测试"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/windows-file-organization-toolkit/blob/8756068f891287fccf14128b3099cd43d352acf6/examples/make_sample.py",
+      "label": {
+        "en": "Reproducible tiny example",
+        "zh": "可复现微型示例"
+      }
+    },
+    {
+      "url": "https://github.com/GuHang2011/windows-file-organization-toolkit/blob/8756068f891287fccf14128b3099cd43d352acf6/docs/inventory-contract.md",
+      "label": {
+        "en": "Report contract and limitations",
+        "zh": "报告约定与使用限制"
+      }
+    }
+  ],
+  "related": [
+    "backup-restore-review",
+    "data-quality",
+    "release-artifact-integrity"
+  ]
+}
