@@ -1,0 +1,96 @@
+/* A dated reading trail. The timeline and planned work remain distinct. */
+.engineering-home .learning-journey {
+  --journey-tint: #edf3fc;
+  --journey-soft: #f5f8fc;
+  margin: 0 0 42px;
+  padding: 30px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  scroll-margin-top: 100px;
+}
+:root[data-reader-theme="dark"] .engineering-home .learning-journey {
+  --journey-tint: #182e46;
+  --journey-soft: #12283c;
+}
+.engineering-home .journey-heading { display: flex; justify-content: space-between; align-items: end; gap: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+.engineering-home .journey-kicker { margin: 0 0 8px; font-size: 11px; font-weight: 600; letter-spacing: .12em; color: var(--teal); }
+.engineering-home .journey-heading h3 { margin: 0; font-size: 26px; line-height: 1.4; letter-spacing: -.02em; color: var(--ink); }
+.engineering-home .journey-heading > p { margin: 0; max-width: 330px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+.engineering-home .journey-layout { display: grid; grid-template-columns: minmax(0,1.55fr) minmax(0,1fr); gap: 36px; padding-top: 26px; align-items: start; }
+.engineering-home .timeline-history { min-width: 0; }
+.engineering-home .timeline-controls { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.engineering-home .timeline-controls[hidden], .engineering-home .learning-trail-entry[hidden], .engineering-home .timeline-more[hidden] { display: none; }
+.engineering-home .timeline-filters { display: flex; flex-wrap: wrap; gap: 5px; }
+.engineering-home .timeline-filters button { border: 1px solid transparent; border-radius: 7px; background: transparent; color: var(--muted); font: inherit; font-size: 12px; padding: 10px 12px; cursor: pointer; min-height: 44px; transition: background .16s ease, color .16s ease; }
+.engineering-home .timeline-filters button[aria-pressed="true"] { color: var(--accent); background: var(--journey-tint); border-color: var(--line); font-weight: 600; }
+.engineering-home .timeline-filters button:hover { background: var(--journey-soft); }
+.engineering-home [data-timeline-count] { font-size: 12px; color: var(--muted); margin: 0; }
+.engineering-home .timeline-list { list-style: none; padding: 0; margin: 0; }
+.engineering-home .learning-trail-entry { display: grid; grid-template-columns: 67px minmax(0,1fr); gap: 24px; position: relative; padding: 0 0 26px; scroll-margin-top: 110px; }
+.engineering-home .learning-trail-entry::before { content: ""; position: absolute; left: 75px; top: 12px; bottom: -12px; width: 1px; background: var(--line); }
+.engineering-home .learning-trail-entry::after { content: ""; position: absolute; width: 8px; height: 8px; left: 71px; top: 7px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px var(--paper); }
+.engineering-home .learning-trail-entry:last-child::before, .engineering-home .learning-trail-entry.is-last::before { display: none; }
+.engineering-home .timeline-date { padding-top: 0; color: var(--ink); font-variant-numeric: tabular-nums; }
+.engineering-home .timeline-date time { display: block; font-size: 18px; font-weight: 600; letter-spacing: -.03em; }
+.engineering-home .timeline-date > span { display: block; font-size: 11px; color: var(--muted); margin-top: 3px; }
+.engineering-home .timeline-note { min-width: 0; }
+.engineering-home .timeline-kind { color: var(--teal); font-size: 11px; margin: 0 0 5px; letter-spacing: .02em; }
+.engineering-home .timeline-note h4 { margin: 0 0 7px; font-size: 16px; line-height: 1.65; font-weight: 600; color: var(--ink); }
+.engineering-home .timeline-note h4 a { display: flex; gap: 12px; justify-content: space-between; color: inherit; text-decoration: none; }
+.engineering-home .timeline-note h4 a > span:last-child { color: var(--accent); transition: transform .16s ease; }
+.engineering-home .timeline-note h4 a:hover { color: var(--accent); }
+.engineering-home .timeline-note h4 a:hover > span:last-child { transform: translate(2px,-2px); }
+.engineering-home .timeline-note > p:last-child { font-size: 13px; line-height: 1.85; color: var(--muted); margin: 0; }
+.engineering-home .timeline-more { display: inline-flex; align-items: center; justify-content: center; margin-left: 91px; border: 1px solid var(--line); border-radius: 7px; padding: 10px 18px; min-height: 44px; font: inherit; font-size: 12px; color: var(--accent); background: var(--paper); cursor: pointer; }
+.engineering-home .timeline-more:hover { background: var(--journey-soft); }
+.engineering-home .learning-next { padding: 24px; border-radius: 12px; background: var(--journey-tint); border-top: 3px solid var(--accent); min-width: 0; }
+.engineering-home .next-kicker { font-size: 11px; letter-spacing: .09em; color: var(--accent); font-weight: 600; margin: 0 0 12px; }
+.engineering-home .learning-next h3 { margin: 0 0 12px; font-size: 22px; line-height: 1.55; color: var(--ink); }
+.engineering-home .learning-next > p:not(.next-kicker):not(.next-status) { font-size: 13px; line-height: 1.9; color: var(--muted); margin: 0; }
+.engineering-home .next-steps { list-style: none; margin: 22px 0; padding: 0; display: grid; gap: 18px; }
+.engineering-home .next-steps li { display: flex; gap: 14px; align-items: start; }
+.engineering-home .next-steps li > span { font-size: 12px; line-height: 1.8; font-variant-numeric: tabular-nums; color: var(--accent); }
+.engineering-home .next-steps strong { display: block; font-size: 14px; color: var(--ink); font-weight: 600; }
+.engineering-home .next-steps p { font-size: 12px; color: var(--muted); line-height: 1.85; margin: 4px 0 0; }
+.engineering-home .next-reading { display: flex; justify-content: space-between; gap: 16px; align-items: center; min-height: 44px; padding-block: 10px; border-top: 1px solid var(--line); font-size: 13px; font-weight: 600; color: var(--accent); text-decoration: none; }
+.engineering-home .next-reading:hover { text-decoration: underline; text-underline-offset: 4px; }
+.engineering-home .learning-next .next-status { font-size: 11px; line-height: 1.8; color: var(--muted); margin: 12px 0 0; }
+.engineering-home .learning-journey :is(button,a):focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; border-radius: 4px; }
+.engineering-home .learning-trail-entry.is-new { animation: timeline-arrive .22s ease both; }
+@keyframes timeline-arrive { from { opacity: .45; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+@media (max-width: 980px) {
+  .engineering-home .learning-journey { padding: 24px; }
+  .engineering-home .journey-layout { gap: 24px; grid-template-columns: minmax(0,1.3fr) minmax(0,1fr); }
+  .engineering-home .learning-next { padding: 20px; }
+  .engineering-home .timeline-controls { align-items: start; flex-direction: column; }
+}
+@media (max-width: 720px) {
+  .engineering-home .journey-layout { grid-template-columns: 1fr; gap: 26px; }
+  .engineering-home .journey-heading { display: block; }
+  .engineering-home .journey-heading > p { max-width: none; margin-top: 12px; }
+  .engineering-home .learning-journey { padding: 20px 18px; border-radius: 12px; }
+  .engineering-home .journey-heading h3 { font-size: 24px; }
+  .engineering-home .learning-trail-entry { grid-template-columns: 51px minmax(0,1fr); gap: 20px; padding-bottom: 24px; }
+  .engineering-home .learning-trail-entry::before { left: 57px; }
+  .engineering-home .learning-trail-entry::after { left: 53px; width: 8px; }
+  .engineering-home .timeline-date time { font-size: 16px; }
+  .engineering-home .timeline-note h4 { font-size: 15px; }
+  .engineering-home .timeline-more { margin-left: 71px; }
+  .engineering-home .timeline-filters button { padding-inline: 10px; }
+  .engineering-home .learning-next h3 { font-size: 21px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .engineering-home .learning-trail-entry.is-new { animation: none; }
+  .engineering-home .learning-journey :is(button,a span) { transition: none; transform: none !important; }
+}
+:root[data-reader-motion="reduce"] .engineering-home .learning-trail-entry.is-new { animation: none; }
+:root[data-reader-motion="reduce"] .engineering-home .learning-journey :is(button,a span) { transition: none; transform: none !important; }
+@media print {
+  .engineering-home .learning-journey { padding: 0; border: 0; background: transparent; }
+  .engineering-home .timeline-controls, .engineering-home .timeline-more { display: none !important; }
+  .engineering-home .learning-trail-entry[hidden] { display: grid !important; }
+  .engineering-home .learning-trail-entry { break-inside: avoid; animation: none !important; }
+  .engineering-home .journey-layout { display: block; }
+  .engineering-home .learning-next { break-inside: avoid; background: transparent; }
+}

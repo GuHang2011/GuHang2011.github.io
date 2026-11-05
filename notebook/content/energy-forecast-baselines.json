@@ -1,0 +1,152 @@
+{
+  "slug": "energy-forecast-baselines",
+  "date": "2026-11-05",
+  "category": "data",
+  "kind": "note",
+  "minutes": 8,
+  "title": {
+    "en": "Before fusion: specify an energy-forecast baseline",
+    "zh": "多源融合之前：先把能源预测基线做清楚"
+  },
+  "summary": {
+    "en": "Define the target, available inputs, chronological splits and error slices before comparing forecasting models.",
+    "zh": "先写目标、输入可用时间、时间切分与分组误差，再比较模型。附一份可以直接照着准备的实验清单。"
+  },
+  "basis": {
+    "en": "A proposed first-experiment protocol informed by FPP3, ERA5 documentation and TimeSeriesSplit. It contains no newly measured forecasting results.",
+    "zh": "结合 FPP3、ERA5 文档与 TimeSeriesSplit 整理的首个实验准备方案，尚未报告新的预测性能结果。"
+  },
+  "tags": [
+    "Baseline",
+    "MAE",
+    "TimeSeriesSplit",
+    "Data leakage",
+    "Missing sources"
+  ],
+  "sections": [
+    {
+      "id": "contract",
+      "title": {
+        "en": "01 / A one-line task contract",
+        "zh": "01 / 用一句话约束实验"
+      },
+      "paragraphs": [
+        {
+          "en": "Example task specification: at each hourly issue time, predict power one hour ahead for one site, using only inputs released by that issue time. This is an illustrative setup; a real dataset must establish the site, frequency, units and availability delay.",
+          "zh": "任务设定示例：每个整点发出预报，预测某站点一小时后的功率，只使用当时已发布的输入。这只是示例设定；真实数据还要落实站点、频率、单位和发布延迟。"
+        }
+      ],
+      "bullets": [
+        {
+          "en": "Record site_id, issue_time, target_time, available_at, value, unit and quality_flag. Keep timezone explicit.",
+          "zh": "记录 site_id、issue_time、target_time、available_at、value、unit 和 quality_flag，明确时区。"
+        },
+        {
+          "en": "Separate missing observations, sensor faults and operational curtailment. A power value near zero is not automatically an invalid record.",
+          "zh": "区分观测缺失、传感器故障与限电工况。接近零的功率不一定是坏数据。"
+        }
+      ]
+    },
+    {
+      "id": "baselines",
+      "title": {
+        "en": "02 / Keep simple models in the comparison",
+        "zh": "02 / 对照里保留简单模型"
+      },
+      "paragraphs": [
+        {
+          "en": "Persistence predicts the last available power value. A seasonal baseline uses the same time on the previous day. Both may fail during rapid weather changes, but they make the added value of a complex model measurable. The seasonal interval must match the actual sampling frequency.",
+          "zh": "持续性基线使用最近可获得的功率；季节性基线使用前一天同一时刻的功率。天气突变时它们可能失效，但保留它们，才能判断复杂模型增加了什么。季节间隔必须与采样频率一致。"
+        },
+        {
+          "en": "If a required historical input is missing, mark the baseline as unavailable or apply a predeclared fallback. Compare models on a common valid subset and also report their availability over all requested predictions.",
+          "zh": "历史输入缺失时，标记基线不可用，或使用事先约定的降级方式。模型误差应在共同有效样本上比较，同时报告全部请求中的结果可用率。"
+        }
+      ]
+    },
+    {
+      "id": "split",
+      "title": {
+        "en": "03 / Split by issue time, protect the target window",
+        "zh": "03 / 按发出时间切分，检查标签窗口"
+      },
+      "paragraphs": [
+        {
+          "en": "Use chronological training, validation and final test periods. Fit imputers, scaling and feature selection on the training period only. For a forecast at t with labels through t+h, ensure that no training label reaches into the validation period. An embargo should follow the horizon and data-release rules.",
+          "zh": "按时间安排训练、验证与最终测试区间。填补、标准化与特征选择只在训练期拟合。对于 t 发出、标签延伸至 t+h 的样本，要确保训练标签没有越入验证期；隔离区长度应由预测跨度和发布规则决定。"
+        },
+        {
+          "en": "TimeSeriesSplit provides ordered folds and a gap, but does not validate forecast availability, site grouping or delayed revisions for you. Its equal-spacing assumption matters when comparing test folds of equal duration.",
+          "zh": "TimeSeriesSplit 提供顺序折叠和 gap，但不会替你检查预报可用性、站点分组或迟到修订。若要比较相同时长的测试折，还需注意等间隔样本这一前提。"
+        }
+      ]
+    },
+    {
+      "id": "metrics",
+      "title": {
+        "en": "04 / Show the error distribution, not just one mean",
+        "zh": "04 / 平均误差之外，再看几个切片"
+      },
+      "paragraphs": [],
+      "bullets": [
+        {
+          "en": "Report MAE and RMSE with the power unit. If normalizing by installed capacity, state the capacity source and how changes over time are handled.",
+          "zh": "报告带功率单位的 MAE 和 RMSE；若按装机容量归一化，应说明容量来源及容量变化的处理。"
+        },
+        {
+          "en": "Avoid unqualified MAPE near zero power. Inspect daylight/nighttime, forecast horizon and high-change intervals separately, with sample counts and an event threshold chosen before testing.",
+          "zh": "低功率接近零时，不能直接依赖 MAPE。分别查看白天／夜间、预测跨度和快速变化时段，并报告样本数；事件阈值在测试前约定。"
+        },
+        {
+          "en": "If adding prediction intervals later, report empirical coverage together with interval width. A narrow band alone is not evidence of reliability.",
+          "zh": "后续加入预测区间时，同时报告实际覆盖率和区间宽度；窄区间本身不能证明可靠。"
+        }
+      ]
+    },
+    {
+      "id": "stress",
+      "title": {
+        "en": "05 / Before adding sources, plan how they can fail",
+        "zh": "05 / 加入多源数据，也要设计缺源验证"
+      },
+      "paragraphs": [
+        {
+          "en": "A useful comparison matrix is: power history only; history plus weather; history plus weather with delayed or missing weather inputs. Keep the chronological split and target definition fixed. Randomly masking cells is not a substitute for realistic outages of an entire source.",
+          "zh": "可准备三组对照：仅功率历史；历史加气象；历史加气象但存在气象延迟或缺失。三组保持时间切分和目标定义一致。随机遮掉几个单元格，不能代替整路来源中断。"
+        },
+        {
+          "en": "Save the split manifest, source versions, configuration, prediction table and failure cases before writing a conclusion. These are planned artifacts; this note does not claim that a fusion model has already improved performance.",
+          "zh": "下结论前保存切分清单、来源版本、配置、预测明细和失败案例。这些是待完成的实验产物，本篇不声称融合模型已经取得提升。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://otexts.com/fpp3/tscv.html",
+      "label": {
+        "en": "Forecasting: Principles and Practice · Time series cross-validation",
+        "zh": "《Forecasting: Principles and Practice》· 时间序列交叉验证"
+      }
+    },
+    {
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html",
+      "label": {
+        "en": "scikit-learn · TimeSeriesSplit",
+        "zh": "scikit-learn · TimeSeriesSplit 官方文档"
+      }
+    },
+    {
+      "url": "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels",
+      "label": {
+        "en": "Copernicus CDS · ERA5 hourly data on single levels",
+        "zh": "Copernicus CDS · ERA5 单层逐小时再分析数据"
+      }
+    }
+  ],
+  "related": [
+    "energy-weather-reading",
+    "spatiotemporal-validation",
+    "data-quality"
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "slug": "weather-dashboard-contracts",
+  "date": "2026-11-05",
+  "category": "engineering",
+  "kind": "reflection",
+  "minutes": 7,
+  "title": {
+    "en": "A forecast dashboard should show what is known, and when",
+    "zh": "气象看板设计心得：让读者看清数值，也看清时效"
+  },
+  "summary": {
+    "en": "Apply frontend experience to forecast interfaces: distinguish observations from forecasts, stale responses from current ones, and unavailable data from zero.",
+    "zh": "把前端经验延伸到预测界面：区分实况与预报、旧响应与当前结果，也区分缺失与零值。"
+  },
+  "basis": {
+    "en": "Design proposals based on the existing weather-fallback and request-lifecycle notes, with ERA5 terminology checked against its documentation. This is a design note, not a deployed weather service.",
+    "zh": "从已有天气定位回退、请求生命周期笔记延伸的设计方案，数据性质参照 ERA5 文档。本篇是设计笔记，尚未部署新的气象业务服务。"
+  },
+  "tags": [
+    "Data visualization",
+    "Forecast issue time",
+    "Async state",
+    "Accessibility"
+  ],
+  "sections": [
+    {
+      "id": "times",
+      "title": {
+        "en": "01 / Put three times beside the value",
+        "zh": "01 / 数值旁边，放对三个时间"
+      },
+      "paragraphs": [
+        {
+          "en": "A number needs context: when the forecast was issued, which time it describes, and when the interface refreshed. A recent HTTP response may still contain an old forecast. Put the unit and product type beside the value rather than hiding them in a tooltip.",
+          "zh": "一个数值要说清预报何时发出、描述哪个时刻、页面何时刷新。接口刚刚响应，不等于预报刚刚更新。单位与产品类型应紧邻数值，不要只藏在悬浮提示里。"
+        },
+        {
+          "en": "Observation, forecast and reanalysis need separate labels. If a demo uses synthetic data, place that label beside the chart. A chart with a continuous curve should not silently connect periods where the source is unavailable.",
+          "zh": "实况、预报、再分析需要分别标注；演示若用合成数据，就在图表旁说明。数据来源中断时，连续曲线不应悄悄跨过空缺。"
+        }
+      ]
+    },
+    {
+      "id": "response",
+      "title": {
+        "en": "02 / An explicit response contract",
+        "zh": "02 / 先规定响应，再设计动效"
+      },
+      "paragraphs": [
+        {
+          "en": "This synthetic JSON illustrates field names only. Its timestamps and values are not actual observations or forecasts. A real response also needs a schema version and server-side validation.",
+          "zh": "下面的合成 JSON 只说明字段含义，时间与数值不是实际观测或预报。真实接口还需要版本约定与服务端校验。"
+        }
+      ],
+      "code": {
+        "language": "JSON · synthetic example",
+        "text": "{\n  \"schema_version\": 1,\n  \"site_id\": \"demo-site\",\n  \"product\": \"forecast\",\n  \"issued_at\": \"2026-11-05T00:00:00Z\",\n  \"valid_at\": \"2026-11-05T01:00:00Z\",\n  \"fetched_at\": \"2026-11-05T00:05:00Z\",\n  \"value\": null,\n  \"unit\": \"MW\",\n  \"status\": \"unavailable\",\n  \"reason\": \"source_delayed\"\n}"
+      }
+    },
+    {
+      "id": "race",
+      "title": {
+        "en": "03 / Changing a site also changes the request scope",
+        "zh": "03 / 切换站点，也切换请求归属"
+      },
+      "paragraphs": [
+        {
+          "en": "When a reader moves from site A to site B, invalidate A’s pending request before rendering B. Check site, product, horizon and request generation before writing a response. AbortController can reduce work, but ownership checks still protect against late responses.",
+          "zh": "读者从 A 站切到 B 站时，先使 A 的待返回请求失效。写入结果前，核对站点、产品、跨度和请求代次。AbortController 可以减少无效工作，但仍要检查迟到响应的归属。"
+        },
+        {
+          "en": "If retaining an older curve during refresh, label it with its original site and issue time. Do not display an old A curve under a new B title. A loading skeleton is often clearer when context has changed.",
+          "zh": "刷新时若保留旧曲线，必须保留旧站点与发出时间。不能在 B 的标题下显示 A 的曲线。上下文已变时，使用加载占位往往更清楚。"
+        }
+      ]
+    },
+    {
+      "id": "states",
+      "title": {
+        "en": "04 / Useful states and useful motion",
+        "zh": "04 / 状态先讲清，动画再补充"
+      },
+      "paragraphs": [],
+      "bullets": [
+        {
+          "en": "Loading: reserve chart height and preserve keyboard focus. Empty: explain that the time range has no records. Error: offer a retry without discarding the chosen site.",
+          "zh": "加载：预留图表高度，保留键盘焦点。空结果：说明该时间段无记录。失败：提供重试，并保留已选站点。"
+        },
+        {
+          "en": "Stale or partial: show the source and delay, and distinguish a partial response from a complete result. Missing values remain null instead of becoming zero.",
+          "zh": "过期或部分缺失：标出来源与延迟，区分部分返回和完整结果。缺失值保留 null，不转换成零。"
+        },
+        {
+          "en": "Use a short transition to explain a changed filter; respect reduced-motion settings. A textual summary and a small table make the chart usable without color or animation.",
+          "zh": "用短过渡解释筛选变化，并遵守减少动画设置。补上文字摘要和小表格，让信息不依赖颜色或动画才能理解。"
+        }
+      ]
+    },
+    {
+      "id": "checks",
+      "title": {
+        "en": "05 / The checks I would run first",
+        "zh": "05 / 优先验证哪些情况"
+      },
+      "paragraphs": [
+        {
+          "en": "Proposed checks: delay A until after B; return an old issue time in a fresh response; omit part of the series; change the horizon during loading; navigate by keyboard at phone width. The expected result should be written before the implementation.",
+          "zh": "建议先验证：A 响应晚于 B；新响应里带旧预报；序列缺一段；加载时切换跨度；手机宽度下只用键盘操作。每种情况先写预期行为，再写实现。"
+        },
+        {
+          "en": "A reliable display can help users inspect evidence. It cannot establish forecast accuracy by itself; that requires the separate evaluation protocol and prediction records.",
+          "zh": "可靠的展示帮助读者检查证据，但界面本身不能证明预测准确，仍需要独立评估方案与预测明细。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "weather-fallback.html",
+      "label": {
+        "en": "Existing note · weather location fallback",
+        "zh": "已有笔记 · 天气定位回退"
+      }
+    },
+    {
+      "url": "request-scope-lifecycle.html",
+      "label": {
+        "en": "Existing note · request ownership",
+        "zh": "已有笔记 · 请求生命周期"
+      }
+    },
+    {
+      "url": "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels",
+      "label": {
+        "en": "Copernicus CDS · ERA5 hourly data on single levels",
+        "zh": "Copernicus CDS · ERA5 单层逐小时再分析数据"
+      }
+    }
+  ],
+  "related": [
+    "energy-forecast-baselines",
+    "weather-fallback",
+    "request-scope-lifecycle"
+  ]
+}

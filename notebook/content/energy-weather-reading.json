@@ -1,0 +1,164 @@
+{
+  "slug": "energy-weather-reading",
+  "date": "2026-11-05",
+  "category": "models",
+  "kind": "note",
+  "minutes": 7,
+  "title": {
+    "en": "Energy meteorology: a reading path from data to decisions",
+    "zh": "能源气象入门：从数据、预测到业务决策"
+  },
+  "summary": {
+    "en": "A focused reading map for power forecasting, multi-source fusion and forecast correction, with a concrete question for each paper.",
+    "zh": "围绕功率预测、多源融合和预报订正整理阅读路径，每篇论文都带着一个具体问题去读。"
+  },
+  "basis": {
+    "en": "Curated from public research descriptions, Crossref title/DOI records and official learning resources, checked on 5 November 2026. Paper methods and experimental results still require full-text reading.",
+    "zh": "依据公开研究方向、Crossref 题名与 DOI 记录、官方学习资源，于 2026-11-05 整理。论文的具体方法与实验结论仍需阅读全文核对。"
+  },
+  "tags": [
+    "Energy meteorology",
+    "Forecasting",
+    "Multi-source fusion",
+    "Reading map"
+  ],
+  "sections": [
+    {
+      "id": "problem",
+      "title": {
+        "en": "01 / Start with the decision",
+        "zh": "01 / 先弄清业务要做什么"
+      },
+      "paragraphs": [
+        {
+          "en": "Energy meteorology connects weather information to decisions about power generation and operations. For a first learning task, narrow the scope to a specified site, target and forecast horizon. A point forecast of power, a warning of a rapid change and a maintenance decision require different evidence.",
+          "zh": "能源气象把天气信息转成发电与运行决策。入门时先限定一个站点、一项指标和一个预测跨度：预测功率、提醒功率突变、安排巡检，需要的证据并不相同。"
+        },
+        {
+          "en": "My engineering experience provides a starting point in input validation, asynchronous interfaces and traceable delivery. The new work is to learn the physical meaning of variables, data availability and forecast evaluation before building a larger system.",
+          "zh": "已有工程经验可以从输入校验、异步交互和可追溯交付切入；接下来要补的是变量的物理含义、数据可获得时间和预测评估方法。先把这些弄清楚，再扩展系统。"
+        }
+      ]
+    },
+    {
+      "id": "foundations",
+      "title": {
+        "en": "02 / Foundations: read before adding a model",
+        "zh": "02 / 基础层：先看数据，再看模型"
+      },
+      "paragraphs": [
+        {
+          "en": "Read the time-series cross-validation chapter in FPP3 and the ERA5 dataset description. Write down observation time, release time, timezone, units and the distinction between reanalysis and operational forecast products.",
+          "zh": "先读 FPP3 的时间序列交叉验证章节与 ERA5 数据说明，列出观测时间、发布时间、时区、单位，以及再分析数据和业务预报产品的区别。"
+        },
+        {
+          "en": "ERA5 is useful for retrospective analysis. Downloading it today does not establish that its final values were available at a historical forecast issue time. A retrospective learning exercise and an operational backtest should be labeled separately.",
+          "zh": "ERA5 适合回溯分析，但今天下载到的最终数值，不代表历史预报发出时就能获得。回溯学习实验和业务预报回测，应分别说明。"
+        }
+      ]
+    },
+    {
+      "id": "papers",
+      "title": {
+        "en": "03 / Application papers: three reading questions",
+        "zh": "03 / 应用层：三篇论文，三个阅读问题"
+      },
+      "paragraphs": [],
+      "bullets": [
+        {
+          "en": "Solar Energy (2024), DOI 10.1016/j.solener.2024.112706: which sources are fused for photovoltaic power prediction, and does each source arrive before the forecast is issued? Record the answer after reading the full text.",
+          "zh": "Solar Energy（2024），DOI 10.1016/j.solener.2024.112706：光伏预测融合了哪些来源？每个来源是否在预报发出前可得？阅读全文后再填写答案。"
+        },
+        {
+          "en": "Energy (2024), DOI 10.1016/j.energy.2024.130402: what are the two branches in the wind-power model, and what do single-branch comparisons establish? Check the comparison protocol, not just the best score.",
+          "zh": "Energy（2024），DOI 10.1016/j.energy.2024.130402：风电模型的两个分支分别处理什么？单分支对比说明了什么？重点核对比较条件。"
+        },
+        {
+          "en": "IEEE GRSL (2023), DOI 10.1109/LGRS.2023.3307717: what is being corrected in the ECMWF forecast products, and how is improvement measured against the uncorrected forecast?",
+          "zh": "IEEE GRSL（2023），DOI 10.1109/LGRS.2023.3307717：订正的是 ECMWF 产品中的什么变量？相对原始预报，改进按什么口径计算？"
+        }
+      ]
+    },
+    {
+      "id": "transfer",
+      "title": {
+        "en": "04 / Transfer methods with a baseline",
+        "zh": "04 / 方法层：迁移之前，先保留基线"
+      },
+      "paragraphs": [
+        {
+          "en": "The existing TFT input-availability note is a bridge to multi-horizon forecasting. Treat TFT, feature-level fusion and output correction as choices to compare under the same inputs and evaluation windows. This reading map does not establish that a larger model is needed.",
+          "zh": "已有 TFT 输入边界笔记可以衔接多步预测。TFT、特征层融合和输出订正，应放在相同输入、相同评估窗口下比较。仅凭这份阅读目录，不能断言需要更大的模型。"
+        },
+        {
+          "en": "For later reading, keep optimization and AI agents as a separate branch: first identify the action, cost, constraints and validation environment. Forecast quality and policy quality are different questions.",
+          "zh": "多目标优化和 AI 智能体可作为后续分支：先写清动作、代价、约束与验证环境。预测质量与决策策略质量，是两个问题。"
+        }
+      ]
+    },
+    {
+      "id": "next",
+      "title": {
+        "en": "05 / A small, inspectable next step",
+        "zh": "05 / 下一步：先交付一个能复查的小实验"
+      },
+      "paragraphs": [],
+      "bullets": [
+        {
+          "en": "Planned: make a data dictionary with source licenses, units, timestamps and missing-value rules.",
+          "zh": "计划：整理含许可、单位、时间戳和缺失规则的数据字典。"
+        },
+        {
+          "en": "Planned: compare persistence and same-time-previous-day baselines on chronological windows; retain errors by horizon and the sample count.",
+          "zh": "计划：按时间窗口比较持续性与前一天同一时刻基线，保留分跨度误差和样本数。"
+        },
+        {
+          "en": "Planned: show one successful result and one delayed-input case in a small dashboard. No new dataset or model reproduction is claimed in this note.",
+          "zh": "计划：用小看板展示一个正常结果和一个输入延迟场景。本篇尚未提供新数据集实验或论文复现结果。"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://doi.org/10.1016/j.solener.2024.112706",
+      "label": {
+        "en": "Application of multi-source data fusion on intelligent prediction of photovoltaic power · Solar Energy, 2024",
+        "zh": "光伏多源融合论文 · Solar Energy, 2024 · DOI 已核对"
+      }
+    },
+    {
+      "url": "https://doi.org/10.1016/j.energy.2024.130402",
+      "label": {
+        "en": "Research on the short-term wind power prediction with dual branch multi-source fusion strategy · Energy, 2024",
+        "zh": "双分支多源风电预测论文 · Energy, 2024 · DOI 已核对"
+      }
+    },
+    {
+      "url": "https://doi.org/10.1109/LGRS.2023.3307717",
+      "label": {
+        "en": "A Deep Learning Method Integrating Multisource Data for ECMWF Forecasting Products Correction · IEEE GRSL, 2023",
+        "zh": "ECMWF 预报订正论文 · IEEE GRSL, 2023 · DOI 已核对"
+      }
+    },
+    {
+      "url": "https://otexts.com/fpp3/tscv.html",
+      "label": {
+        "en": "Forecasting: Principles and Practice · Time series cross-validation",
+        "zh": "《Forecasting: Principles and Practice》· 时间序列交叉验证"
+      }
+    },
+    {
+      "url": "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels",
+      "label": {
+        "en": "Copernicus CDS · ERA5 hourly data on single levels",
+        "zh": "Copernicus CDS · ERA5 单层逐小时再分析数据"
+      }
+    }
+  ],
+  "related": [
+    "energy-forecast-baselines",
+    "weather-dashboard-contracts",
+    "tft-information-boundary"
+  ]
+}

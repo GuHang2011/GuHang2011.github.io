@@ -4,6 +4,18 @@ A bilingual engineering and research portfolio for **Hang Gu (顾航)**, connect
 
 **Intended website:** [guhang2011.github.io](https://guhang2011.github.io/) · **GitHub:** [@GuHang2011](https://github.com/GuHang2011)
 
+## 5 November 2026 · Learning timeline and a new reading path
+
+The [learning timeline](https://guhang2011.github.io/#learning-timeline) connects six dated note entries with the corresponding material. Dates are compilation dates, not claims about when a skill was mastered. Topic filters and earlier-entry expansion work with keyboard navigation; all entries remain visible without JavaScript and in print. Future practice is explicitly marked as planned.
+
+Three new bilingual notes bring the notebook to **43 articles**:
+
+- [Energy-meteorology reading path](notebook/energy-weather-reading.html): verified photovoltaic, wind-power and forecast-correction paper links, with reading questions.
+- [Energy-forecast baseline protocol](notebook/energy-forecast-baselines.html): input availability, chronological splits, baseline comparisons and missing-source checks.
+- [Weather dashboard design](notebook/weather-dashboard-contracts.html): forecast issue time, stale data, request ownership and accessible presentation.
+
+These are learning resources and proposed practice. They do not claim a new operational weather service, completed paper reproduction or new forecast performance. [Update scope and checks](docs/learning-path-20261105.md).
+
 ## 4 November 2026 · File inventory and current projects
 
 Added a [Python inventory case with an interactive synthetic example](cases/file-inventory/), [scope and validation reflection](notebook/inventory-scope-review.html), and current FieldLens v1.3.1 navigation. The directory now includes 15 projects and the notebook has 40 bilingual articles. [Update and checks](reviews/daily-20261104.md).
@@ -20,9 +32,9 @@ Added a [Python inventory case with an interactive synthetic example](cases/file
 
 ## Design
 
-The homepage's **30 October 2026 visual redesign** uses a warm ivory canvas, navy typography and restrained rust accents. A large name lockup and real project previews introduce the portfolio. Selected projects use large screenshot covers, the interactive demos sit in a contrasting navy section, and research and notes retain an editorial reading layout. Earlier academic organization was inspired by [winsleo.github.io](https://winsleo.github.io/); the current visual composition uses Hang Gu's own project material.
+The current homepage uses a cool white canvas, navy text and blue/teal accents. A compact introduction leads to engineering cases and live demos; a manually controlled project preview highlights FieldLens, counselor collaboration and low-code forms. The learning area combines an editorial timeline, a clearly labeled practice plan and a searchable notebook. Earlier academic organization was inspired by [winsleo.github.io](https://winsleo.github.io/); project visuals use this portfolio's own material.
 
-The opening links directly to the React workflow demo, selected projects and the academic CV. Three representative projects lead the engineering section; all 15 remain searchable. Three initial demos each suggest an interaction to try. Education and work history share the experience section, while detailed research context, engineering diagrams, highlights and films expand on demand. Publication status and learning-project labels retain distinct meanings.
+Three representative engineering projects lead the directory; all 15 remain searchable. Existing research, project demos, experience, highlights and films remain available. Publication status and learning-project labels retain distinct meanings.
 
 - Complete English / Chinese interface with a saved language preference.
 - Research filters for manuscripts, conference work and thesis; native expandable summaries and an expand / collapse all summaries control.
@@ -40,7 +52,7 @@ The opening links directly to the React workflow demo, selected projects and the
 1. **Research:** manuscripts, conference work, and master’s research, with explicit publication status.
 2. **Engineering:** public repositories and selected project descriptions.
 3. **Engineering lens:** a compact map of interface contracts, data quality, model evaluation and evidence-shaped delivery, linked to the relevant public cases and verification records.
-4. **Notebook:** [36 bilingual study notes and project reflections](notebook/) on frontend interaction, data quality, model validation, prompt contracts, order consistency, permission boundaries, digital-human pipelines, text-to-image diffusion and reproducible generative workflows. The three October 25 notes cover multimodal decision gates, total annotation budgets and model-version rollback. Searchable by title, summary and tag, with topic filters, source references, code examples and printable article pages. Earlier repositories remain available in the homepage's expandable reading list.
+4. **Notebook:** [43 bilingual study notes and project reflections](notebook/) on frontend interaction, data quality, model validation, prompt contracts, order consistency, permission boundaries, digital-human pipelines, text-to-image diffusion and reproducible generative workflows. The three October 25 notes cover multimodal decision gates, total annotation budgets and model-version rollback. Searchable by title, summary and tag, with topic filters, source references, code examples and printable article pages. Earlier repositories remain available in the homepage's expandable reading list.
 5. **Background:** education and professional experience.
 6. **Interactive experiments:** financial clustering, data preparation audits, model evaluation, a React workflow board and a schema-driven low-code form studio, with synthetic data, source code, notes and reproducible checks. [Reading map](demos/README.md).
 7. **AI engineering case:** a full-stack module with account-bound key handling, endpoint policy, editable presentation generation, human review and documented mocked-provider tests. [Case study](https://github.com/GuHang2011/engineering-notes/blob/main/notes/personal-ai-keys.md).
@@ -54,7 +66,7 @@ The Neurocomputing entry was updated on 24 October 2026 from the supplied revisi
 - [Personal AI workspace](https://github.com/GuHang2011/engineering-notes/blob/main/notes/personal-ai-keys.md): an existing archive-system module, with synthetic UI fixtures, public engineering notes and documented tests that mock the provider; no real provider key was used.
 - [Release-gate example](cases/examples/README.md): dependency-free JavaScript, tests and limitations.
 
-Project screenshots use synthetic demo content. Public cases exclude original databases, credentials, private configuration and student records. Latest notebook additions: **2026-10-25**. The Neurocomputing entry follows the October 24 revision and author confirmation; other research statuses follow the September CV. The new notes were compiled with AI-assisted drafting and translation; each distinguishes code observations, examples and proposed checks. Generative-model examples are learning guides and were not run locally for this update.
+Project screenshots use synthetic demo content. Public cases exclude original databases, credentials, private configuration and student records. Latest notebook additions: **2026-11-05**. The Neurocomputing entry follows the October 24 revision and author confirmation; other research statuses follow the September CV. The new notes were compiled with AI-assisted drafting and translation; each distinguishes code observations, examples and proposed checks. Generative-model examples are learning guides and were not run locally for this update.
 
 The React workflow and low-code form entries were added **2026-10-22**. The Personal AI Workspace case was added **2026-10-23** as an engineering highlight from an existing archive-system module: its page links to public engineering notes, synthetic screenshots and recorded mock-provider checks. It is not presented as an independently deployed product. The React page runs its locally bundled TypeScript source, and the low-code page has a schema editor and native-control renderer. Neither learning entry is a production deployment or a claim about an existing private application.
 
@@ -79,7 +91,7 @@ Push these files to the root of the `GuHang2011.github.io` repository. In **Sett
 - For translated accessible names, use paired `data-en-label` and `data-zh-label` attributes.
 - Research titles remain in their original English in both interface languages.
 - Update research statuses only when supported by evidence. Add a DOI or proceedings URL only after verifying it.
-- `academic.css` and `academic.js` provide shared layouts and interactions. Homepage refinements load afterward; `portfolio-design.css` is the final homepage-only visual layer for the ivory / navy palette, image-led cards, typography, themes, responsive layout and motion. Keep new homepage visual overrides there. `highlights.js` owns the carousel's keyboard, touch and optional autoplay behavior. Research and article pages retain their own styles.
+- `academic.css` and `academic.js` provide shared layouts and interactions. Homepage refinements load afterward; `portfolio-design.css` supplies the portfolio base; `engineering-home.css` refines the current hero and project layout. `learning-timeline.css` and `learning-timeline.js` own the dated reading path, filtering and progressive disclosure. `highlights.js` owns the carousel's keyboard, touch and optional autoplay behavior. Research and article pages retain their own styles.
 - `reader.js` manages the homepage's reading-preferences disclosure, saved appearance and motion choices, and research-summary expansion. Keep the controls' `data-reader-*` attributes and `aria-controls` targets intact. Theme and motion state are applied to the root element as `data-reader-theme` and `data-reader-motion`; preference storage is optional and controls remain usable when it fails. A short palette transition runs only for a deliberate theme change, and the page-head script restores a valid saved palette before the first paint.
 - When adding animation, respect both the system reduced-motion preference and the reader's saved choice. Use motion to clarify an action or selection, and keep the content readable before scripts run. Keep all-summary labels synchronized after individual summary toggles and language changes.
 - The learning-lab card links to the [live dashboard](https://guhang2011.github.io/frontend-data-lab/) and the [dynamic-form demo](https://guhang2011.github.io/frontend-data-lab/demos/form/). Keep these URLs aligned with the learning lab's GitHub Pages deployment; each link has both English and Chinese labels.

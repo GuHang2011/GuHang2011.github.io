@@ -4,9 +4,9 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-DATE = "2026-11-04"
-VERSION = "20261104-projects"
-ORDER = ['inventory-scope-review', 'work-center-boundaries', 'notification-read-state', 'backup-restore-review', 'low-code-state-layers', 'low-code-rules', 'low-code-release', 'ai-code-race-review', 'workflow-recovery-review', 'schema-import-review', 'directory-rename-release', 'mobile-response-contracts', 'photo-queue-ownership', 'release-artifact-integrity', 'ai-frontend-reflection', 'cross-platform-boundaries', 'request-scope-lifecycle', 'weather-fallback', 'upload-readiness', 'low-code-contracts', 'progressive-demo-loading', 'tft-information-boundary', 'gnn-risk-graphs', 'spatiotemporal-validation', 'research-demo-handoff', "multimodal-gates", "label-budget-ledger", "model-version-rollback", "rag-evaluation", "async-interfaces", "sql-windows", "model-selection", "order-idempotency", "accessible-interactions", "data-quality", "prompt-contracts", "permission-boundaries", "digital-human", "text-to-image", "generative-workflow"]
+DATE = "2026-11-05"
+VERSION = "20261105-learning-path"
+ORDER = ['energy-weather-reading', 'energy-forecast-baselines', 'weather-dashboard-contracts', 'inventory-scope-review', 'work-center-boundaries', 'notification-read-state', 'backup-restore-review', 'low-code-state-layers', 'low-code-rules', 'low-code-release', 'ai-code-race-review', 'workflow-recovery-review', 'schema-import-review', 'directory-rename-release', 'mobile-response-contracts', 'photo-queue-ownership', 'release-artifact-integrity', 'ai-frontend-reflection', 'cross-platform-boundaries', 'request-scope-lifecycle', 'weather-fallback', 'upload-readiness', 'low-code-contracts', 'progressive-demo-loading', 'tft-information-boundary', 'gnn-risk-graphs', 'spatiotemporal-validation', 'research-demo-handoff', "multimodal-gates", "label-budget-ledger", "model-version-rollback", "rag-evaluation", "async-interfaces", "sql-windows", "model-selection", "order-idempotency", "accessible-interactions", "data-quality", "prompt-contracts", "permission-boundaries", "digital-human", "text-to-image", "generative-workflow"]
 CATEGORIES = {
     "all": {"en": "All topics", "zh": "全部主题"},
     "frontend": {"en": "Frontend", "zh": "前端交互"},
@@ -50,7 +50,7 @@ def frame(title, description, path, body):
 <button type="button" data-language="zh" aria-pressed="false" aria-label="中文">中</button><button type="button" data-language="en" aria-pressed="true" aria-label="English">EN</button></div>
 <button class="menu-toggle icon-button" type="button" aria-expanded="false" aria-controls="navigation" aria-label="Menu"><img src="../assets/icons/menu.svg" alt=""></button></div></div></header>
 <main id="main">{body}</main>
-<footer class="site-footer"><div class="wrap footer-inner"><div><strong>Hang Gu · 顾航</strong>{pair('Learning through questions, code and review.','从问题、代码与复查中学习。','p')}</div><div>{pair('Collection updated 4 November 2026','笔记集更新于 2026-11-04','p')}<a href="../">{pair('Back to portfolio','返回个人主页')}</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/notebook">GitHub</a></div></div></footer>
+<footer class="site-footer"><div class="wrap footer-inner"><div><strong>Hang Gu · 顾航</strong>{pair('Learning through questions, code and review.','从问题、代码与复查中学习。','p')}</div><div>{pair('Collection updated 5 November 2026','笔记集更新于 2026-11-05','p')}<a href="../">{pair('Back to portfolio','返回个人主页')}</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/notebook">GitHub</a></div></div></footer>
 <button class="back-top icon-button" type="button" aria-label="Back to top"><img src="../assets/icons/arrow-up.svg" alt=""></button></body></html>
 '''
 
@@ -79,7 +79,7 @@ def render_index(notes):
     body = f'''<section class="notebook-intro wrap"><div><p class="notebook-kicker">{pair('Research & engineering notebook','研究与工程笔记')}</p>
 {pair('Learning, with a trail.','让学习留下可追溯的记录。','h1')}
 {pair('Questions from real code, small examples to reason with, and decisions worth revisiting.','围绕真实代码中的问题，记录小型示例、设计取舍与值得继续追问的地方。','p', 'class="notebook-lead"')}</div>
-<aside class="notebook-margin"><strong>{pair('Read the reasoning','从判断依据读起')}</strong>{pair(f'{count} notes connect implementation details to verification and open questions.',f'{count} 篇笔记把实现细节、验证方法与后续问题连接起来。','p')}<a href="work-center-boundaries.html">{pair('Read the latest engineering notes','阅读最新工程复盘')}</a></aside></section>
+<aside class="notebook-margin"><strong>{pair('Read the reasoning','从判断依据读起')}</strong>{pair(f'{count} notes connect implementation details to verification and open questions.',f'{count} 篇笔记把实现细节、验证方法与后续问题连接起来。','p')}<a href="energy-weather-reading.html">{pair('Read the energy-meteorology learning path','阅读能源气象学习路线')}</a></aside></section>
 <div class="wrap"><nav class="notebook-routes" aria-label="Suggested reading paths" data-en-label="Suggested reading paths" data-zh-label="建议阅读路径">{paths}</nav></div>
 <section class="wrap notebook-library" id="entries" aria-labelledby="library-title"><div class="library-heading">{pair('Notes & reflections','学习笔记与项目心得','h2','id="library-title"')}<span>{pair('Updated November 2026','更新于 2026 年 11 月')}</span></div>
 <form class="notebook-tools" data-notebook-tools hidden role="search"><div class="notebook-search"><label for="note-search">{pair('Search notes','搜索笔记')}</label><input id="note-search" type="search" autocomplete="off" placeholder="Try: Vue, upload, TFT" data-en-placeholder="Try: Vue, upload, TFT" data-zh-placeholder="试试：跨端、上传、TFT"><button type="button" data-note-clear>{pair('Clear','清除')}</button></div>
