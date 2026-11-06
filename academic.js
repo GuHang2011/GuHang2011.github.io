@@ -434,7 +434,7 @@
         });
       });
     }, { rootMargin: "-15% 0px -65% 0px" });
-    links.forEach(link => { const section = document.querySelector(link.hash); if (section) observer.observe(section); });
+    if (!document.querySelector("[data-browse-progress]")) links.forEach(link => { const section = document.querySelector(link.hash); if (section) observer.observe(section); });
   }
   revealTarget(location.hash, Boolean(location.hash));
 })();
