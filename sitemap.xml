@@ -1,8 +1,7 @@
-<?xml version='1.0' encoding='utf-8'?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://guhang2011.github.io/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <lastmod>2026-11-06</lastmod>
   </url>
   <url>
     <loc>https://guhang2011.github.io/research/</loc>
@@ -245,4 +244,4 @@
 <url><loc>https://guhang2011.github.io/notebook/energy-weather-reading.html</loc><lastmod>2026-11-05</lastmod></url>
 <url><loc>https://guhang2011.github.io/notebook/energy-forecast-baselines.html</loc><lastmod>2026-11-05</lastmod></url>
 <url><loc>https://guhang2011.github.io/notebook/weather-dashboard-contracts.html</loc><lastmod>2026-11-05</lastmod></url>
-</urlset>
+<url><loc>https://guhang2011.github.io/projects.html</loc><lastmod>2026-11-06</lastmod></url><url><loc>https://guhang2011.github.io/research.html</loc><lastmod>2026-11-06</lastmod></url></urlset>

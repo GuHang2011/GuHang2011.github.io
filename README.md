@@ -4,11 +4,11 @@ A bilingual engineering and research portfolio for **Hang Gu (顾航)**, connect
 
 **Intended website:** [guhang2011.github.io](https://guhang2011.github.io/) · **GitHub:** [@GuHang2011](https://github.com/GuHang2011)
 
-## 6 November 2026 · A quieter homepage
+## 6 November 2026 · A personal engineering portfolio
 
-The homepage now uses a centered introduction, large project previews, neutral surfaces and shorter headings. The layout takes cues from [Apple’s public homepage](https://www.apple.com.cn/): large imagery, concise hierarchy and restrained links. It uses this portfolio's own screenshots and identity; no Apple assets or brand marks are included.
+The homepage now focuses on three engineering projects, two submitted studies, three recent notes and a learning timeline. Each selected project groups its screenshot, demonstration or case, source and implementation scope. All 15 projects remain in [the project directory](projects.html); all five research records are in [the research directory](research.html). The [notebook](notebook/) retains all 43 articles.
 
-A compact scroll-progress strip shows the current section and position in the visible page. Project details expand on demand; all 15 projects, 43 learning notes, research statuses and demos remain accessible. [Design and verification](docs/minimal-home-20261106.md).
+The redesign adopts direct personal writing, larger body type, screenshot details and contextual interaction. A current-section progress strip, full-image previews, language switching and reduced-motion preferences remain available. [Design, migration and verification](docs/personal-portfolio-20261106.md).
 
 ## 5 November 2026 · Learning timeline and a new reading path
 
