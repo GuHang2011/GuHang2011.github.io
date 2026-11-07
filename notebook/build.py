@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 DATE = "2026-11-05"
-VERSION = "20261105-learning-path"
+VERSION = "20261107-editorial"
 ORDER = ['energy-weather-reading', 'energy-forecast-baselines', 'weather-dashboard-contracts', 'inventory-scope-review', 'work-center-boundaries', 'notification-read-state', 'backup-restore-review', 'low-code-state-layers', 'low-code-rules', 'low-code-release', 'ai-code-race-review', 'workflow-recovery-review', 'schema-import-review', 'directory-rename-release', 'mobile-response-contracts', 'photo-queue-ownership', 'release-artifact-integrity', 'ai-frontend-reflection', 'cross-platform-boundaries', 'request-scope-lifecycle', 'weather-fallback', 'upload-readiness', 'low-code-contracts', 'progressive-demo-loading', 'tft-information-boundary', 'gnn-risk-graphs', 'spatiotemporal-validation', 'research-demo-handoff', "multimodal-gates", "label-budget-ledger", "model-version-rollback", "rag-evaluation", "async-interfaces", "sql-windows", "model-selection", "order-idempotency", "accessible-interactions", "data-quality", "prompt-contracts", "permission-boundaries", "digital-human", "text-to-image", "generative-workflow"]
 CATEGORIES = {
     "all": {"en": "All topics", "zh": "全部主题"},
@@ -44,8 +44,7 @@ def frame(title, description, path, body):
 <header class="site-header" data-open="false"><div class="wrap header-inner">
 <a class="brand" href="../">Hang Gu<span> / 顾航</span></a>
 <nav class="nav-links" id="navigation" aria-label="Main navigation" data-en-label="Main navigation" data-zh-label="主导航">
-<a href="../">{pair('Portfolio','个人主页')}</a><a href="../research/">{pair('Research','研究')}</a>
-<a href="./" aria-current="page">{pair('Notebook','学习与实践')}</a><a href="../#work">{pair('Projects','项目')}</a></nav>
+<a href="../">{pair('Home','首页')}</a><a href="../projects.html">{pair('Projects','项目')}</a><a href="../research.html">{pair('Research','研究')}</a><a href="./" aria-current="page">{pair('Notes','笔记')}</a><a href="../research/cv.html">{pair('CV','简历')}</a></nav>
 <div class="header-controls"><div class="language-controls" role="group" aria-label="Language">
 <button type="button" data-language="zh" aria-pressed="false" aria-label="中文">中</button><button type="button" data-language="en" aria-pressed="true" aria-label="English">EN</button></div>
 <button class="menu-toggle icon-button" type="button" aria-expanded="false" aria-controls="navigation" aria-label="Menu"><img src="../assets/icons/menu.svg" alt=""></button></div></div></header>
@@ -77,9 +76,9 @@ def render_index(notes):
     ]
     paths = ''.join(f'<a href="?topic={key}#entries">{pair(en,zh,"strong")}{pair(sub_en,sub_zh)}</a>' for key,en,zh,sub_en,sub_zh in routes)
     body = f'''<section class="notebook-intro wrap"><div><p class="notebook-kicker">{pair('Research & engineering notebook','研究与工程笔记')}</p>
-{pair('Learning, with a trail.','让学习留下可追溯的记录。','h1')}
+{pair('Notes from practice','学习与实践笔记','h1')}
 {pair('Questions from real code, small examples to reason with, and decisions worth revisiting.','围绕真实代码中的问题，记录小型示例、设计取舍与值得继续追问的地方。','p', 'class="notebook-lead"')}</div>
-<aside class="notebook-margin"><strong>{pair('Read the reasoning','从判断依据读起')}</strong>{pair(f'{count} notes connect implementation details to verification and open questions.',f'{count} 篇笔记把实现细节、验证方法与后续问题连接起来。','p')}<a href="energy-weather-reading.html">{pair('Read the energy-meteorology learning path','阅读能源气象学习路线')}</a></aside></section>
+<aside class="notebook-margin"><strong>{pair('43 notes, four topics','43 篇笔记，四个主题')}</strong>{pair(f'{count} notes connect implementation details to verification and open questions.',f'{count} 篇笔记把实现细节、验证方法与后续问题连接起来。','p')}<a href="energy-weather-reading.html">{pair('Read the energy-meteorology learning path','阅读能源气象学习路线')}</a></aside></section>
 <div class="wrap"><nav class="notebook-routes" aria-label="Suggested reading paths" data-en-label="Suggested reading paths" data-zh-label="建议阅读路径">{paths}</nav></div>
 <section class="wrap notebook-library" id="entries" aria-labelledby="library-title"><div class="library-heading">{pair('Notes & reflections','学习笔记与项目心得','h2','id="library-title"')}<span>{pair('Updated November 2026','更新于 2026 年 11 月')}</span></div>
 <form class="notebook-tools" data-notebook-tools hidden role="search"><div class="notebook-search"><label for="note-search">{pair('Search notes','搜索笔记')}</label><input id="note-search" type="search" autocomplete="off" placeholder="Try: Vue, upload, TFT" data-en-placeholder="Try: Vue, upload, TFT" data-zh-placeholder="试试：跨端、上传、TFT"><button type="button" data-note-clear>{pair('Clear','清除')}</button></div>

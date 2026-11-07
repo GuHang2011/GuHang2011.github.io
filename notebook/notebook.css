@@ -1,9 +1,19 @@
-/* The notebook extends the existing blue, white and slate academic palette. */
+@import url("../fonts.css?v=20261107-editorial");
+/* Reading styles shared by the notebook directory and its articles. */
+.notebook-page { --ink:#24312f; --muted:#59645f; --subtle:#59645f; --paper:#fcfbf8; --surface:#f0f0e9; --line:#d5dcd5; --accent:#155f56; --accent-hover:#0d443c; --accent-soft:#e7f1e9; font-family:var(--font-ui); font-size:17px; line-height:1.85; }
+.notebook-page :is(h1,h2,h3,h4) { font-family:var(--font-ui); font-weight:600; }
+.notebook-page .wrap { width:min(1200px,calc(100% - 96px)); }
+.notebook-page .site-header { background:var(--paper); box-shadow:none; backdrop-filter:none; }
+.notebook-page .nav-links a { font-size:15px; min-height:44px; }
+.notebook-page .brand { font-size:22px; }
+.notebook-page .brand span { font-size:15px; }
+.notebook-page .language-controls { background:transparent; border:0; }
+.notebook-page .language-controls button { background:transparent; font-size:14px; }
 .notebook-page .language-controls button { min-height: 40px; min-width: 40px; }
 .notebook-page .menu-toggle { min-width: 44px; min-height: 44px; }
 .notebook-intro { display: grid; grid-template-columns: minmax(0, 1fr) 270px; gap: 64px; padding-block: 66px 42px; }
 .notebook-kicker { color: var(--accent); font-size: 14px; margin-bottom: 14px; }
-.notebook-intro h1 { max-width: 760px; font: 500 clamp(30px, 3.6vw, 46px)/1.25 Georgia, "Noto Serif CJK SC", "Microsoft YaHei", serif; text-wrap: balance; }
+.notebook-intro h1 { max-width:760px; font:600 clamp(32px,3.6vw,46px)/1.4 var(--font-ui); text-wrap:pretty; }
 .notebook-lead { margin-top: 20px; max-width: 660px; color: var(--muted); font-size: 17px; }
 .notebook-margin { align-self: end; border-left: 2px solid var(--accent); padding-left: 22px; font-size: 14px; }
 .notebook-margin p { color: var(--muted); margin-block: 10px; }
@@ -36,7 +46,7 @@
 .journal-body h2 { font-size: 20px; line-height: 1.5; margin-bottom: 8px; text-wrap: pretty; }
 .journal-body h2 a { color: var(--ink); }
 .journal-body h2 a:hover { color: var(--accent); }
-.journal-body p { color: var(--muted); font-size: 14px; max-width: 700px; }
+.journal-body p { color:var(--muted); font-size:17px; line-height:1.85; max-width:740px; }
 .journal-tags { display: flex; flex-wrap: wrap; gap: 6px 15px; margin-top: 13px; font-size: 12px; color: var(--muted); }
 .journal-read { display: flex; flex-direction: column; gap: 10px; text-align: right; font-size: 12px; color: var(--muted); }
 .journal-read > span:last-child { font-size: 23px; color: var(--accent); }
@@ -77,6 +87,27 @@
 .article-related a { display: block; padding-block: 9px; font-size: 15px; }
 .copy-status { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 40; max-width: calc(100% - 40px); background: var(--ink); color: white; border-radius: 5px; padding: 9px 16px; font-size: 14px; }
 .copy-status:empty { display: none; }
+.notebook-page .journal-meta,.notebook-page .journal-tags,.notebook-page .journal-read { font-size:14px; }
+.notebook-page .journal-body h2 { font-size:23px; line-height:1.55; }
+.notebook-page .journal-row { padding-block:30px; gap:28px; }
+.notebook-page .notebook-search input { font-family:var(--font-ui); font-size:16px; background:var(--paper); border-color:var(--line); }
+.notebook-page .notebook-routes { gap:0; background:var(--surface); border:1px solid var(--line); border-radius:6px; }
+.notebook-page .notebook-routes strong { font-size:16px; }
+.notebook-page .notebook-routes a > span { font-size:14px; }
+.notebook-page .article-prose { font-size:18px; line-height:1.95; max-width:760px; }
+.notebook-page .article-basis,.notebook-page .notebook-callout { font-size:16px; }
+.notebook-page .article-meta,.notebook-page .article-toc a,.notebook-page .code-heading,.notebook-page .article-colophon { font-size:14px; }
+.notebook-page .notebook-code pre { font-size:15px; }
+.notebook-page .notebook-context p { font-size:16px; }
+.notebook-page .notebook-margin { border-color:#9d422c; }
+.notebook-page .notebook-margin p { font-size:16px; }
+.notebook-page .notebook-margin a { font-size:15px; }
+@media(max-width:720px) {
+ .notebook-page .wrap { width:calc(100% - 40px); }
+ .notebook-page .journal-body h2 { font-size:21px; }
+ .notebook-page .article-prose { font-size:17px; }
+ .notebook-page .nav-links { background:var(--paper); }
+}
 @media (max-width: 850px) {
   .notebook-intro { grid-template-columns: 1fr; gap: 28px; padding-top: 40px; }
   .notebook-margin { max-width: 650px; }
