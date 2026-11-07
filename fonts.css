@@ -1,4 +1,4 @@
 /* IBM Plex Sans is locally hosted under SIL OFL 1.1; see assets/fonts/OFL.txt. */
 @font-face { font-family:"Portfolio Plex"; src:url("assets/fonts/IBMPlexSans-Regular.woff2") format("woff2"); font-weight:400; font-style:normal; font-display:swap; unicode-range:U+0000-024F,U+2000-206F; }
 @font-face { font-family:"Portfolio Plex"; src:url("assets/fonts/IBMPlexSans-SemiBold.woff2") format("woff2"); font-weight:600; font-style:normal; font-display:swap; unicode-range:U+0000-024F,U+2000-206F; }
-:where(.folio,.notebook-page) { --font-ui:"Portfolio Plex","PingFang SC","Microsoft YaHei UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif; font-family:var(--font-ui); }
+body.folio.engineering-home,body.notebook-page { --font-ui:"Portfolio Plex","PingFang SC","Microsoft YaHei UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif; font-family:var(--font-ui); }
