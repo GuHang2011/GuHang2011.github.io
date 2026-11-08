@@ -1,0 +1,144 @@
+{
+  "slug": "streaming-ui-decisions",
+  "date": "2026-11-08",
+  "category": "frontend",
+  "kind": "reflection",
+  "minutes": 6,
+  "title": {
+    "zh": "回答还没出现时：一次流式界面的实现练习",
+    "en": "Before the answer appears: building a streaming interface"
+  },
+  "summary": {
+    "zh": "用 React 与 Ant Design 做一个小实验，处理等待、停止、失败重试，以及旧片段迟到的问题。",
+    "en": "A React and Ant Design exercise in waiting, cancellation, retries and late chunks from an earlier attempt."
+  },
+  "tags": [
+    "React",
+    "Ant Design",
+    "AbortController",
+    "AI 应用",
+    "Streaming",
+    "状态管理"
+  ],
+  "basis": {
+    "zh": "本次新增的客户端学习示例，使用两段本地预设文本。它没有调用语言模型，不是模型能力或服务性能测试。",
+    "en": "A new client-side learning example using two local text fixtures. It calls no language model and does not measure model capability or service performance."
+  },
+  "sections": [
+    {
+      "id": "waiting",
+      "title": {
+        "zh": "先把“还没收到”说清楚",
+        "en": "Make waiting visible"
+      },
+      "paragraphs": [
+        {
+          "zh": "一个回答还没开始显示，用户已经在等待。我把等待首段和正在输出分成两个状态，两种状态都允许停止。慢速场景会故意多等一会儿，这时可以直接观察按钮是否能用。",
+          "en": "The user is already waiting before the first text appears. I separated waiting for the first chunk from streaming, and allow stopping in either state. The slow scenario adds a delay so this behaviour can be inspected."
+        },
+        {
+          "zh": "演示里没有任意提问的输入框，只有两个预设话题。这样读者不会误以为这是一套真实问答服务。速度选项改变本地片段出现的间隔，中断选项会在收到一部分文字后触发错误。",
+          "en": "The demo has two preset topics instead of an open prompt box, so it is clear that this is not a live question-answering service. Speed changes the local delay between chunks; interruption fails after some text has arrived."
+        }
+      ]
+    },
+    {
+      "id": "ownership",
+      "title": {
+        "zh": "停止之后，旧回答不能再写回来",
+        "en": "Stopping also means refusing late chunks"
+      },
+      "paragraphs": [
+        {
+          "zh": "只清除屏幕上的文字不够。底层任务可能还在执行，旧片段随后回来，又把页面写满。我让每次尝试带一个独立序号，停止、重置或新尝试都会使之前的序号失效。写入正文和修改状态前，先确认回调仍属于当前尝试。",
+          "en": "Clearing the screen is insufficient when work may still be running. A late chunk can refill it. Each attempt has its own generation number. Stop, reset and a new attempt invalidate the old number; both text and status updates check ownership."
+        },
+        {
+          "zh": "AbortController 负责通知本地模拟器停止等待，序号检查负责拦住不配合取消的旧回调。测试使用了一个故意忽略取消的源，检查它迟到成功、迟到失败和迟到完成时，都不会影响新状态。",
+          "en": "AbortController asks the local simulator to stop waiting. The generation check rejects old callbacks even when a source ignores cancellation. Tests deliberately use such a source and deliver late chunks, errors and completion after a newer action."
+        },
+        {
+          "zh": "如果以后接入真实服务，浏览器停止读取不能保证服务器已经停止推理或计费。还需要按服务协议处理取消。现在这个示例验证的是客户端归属和恢复行为。",
+          "en": "For a real service, stopping browser reads does not guarantee that server inference or billing has stopped. Cancellation would also need to follow the service contract. This example checks client ownership and recovery."
+        }
+      ]
+    },
+    {
+      "id": "recovery",
+      "title": {
+        "zh": "重试需要解释会发生什么",
+        "en": "Retry needs a clear meaning"
+      },
+      "paragraphs": [
+        {
+          "zh": "中途出错时，我保留已经出现的文字，显示“连接中断”。点击恢复连接并重试，才清空旧内容，从第一段重新开始。这里没有实现断点续传，按钮和提示也不暗示可以接着写。",
+          "en": "An error keeps the text already received and displays an interruption message. Restoring the simulated connection and retrying clears it and starts from the beginning. The demo does not implement resumable streams."
+        },
+        {
+          "zh": "正在等待或输出时，开始按钮禁用；状态层也会拒绝重复开始。这样即使非常快地连续操作，也只会保留一个进行中的尝试。清空按钮则会取消当前尝试，再回到初始界面。",
+          "en": "Start is disabled while waiting or streaming, and the state layer also rejects duplicate starts. Clearing cancels the active attempt and returns to the initial view."
+        },
+        {
+          "zh": "正文按纯文本显示，不把返回字符串当作 HTML。状态提示只在状态变化时播报，避免辅助阅读工具每收到几个字就重新读一遍。输出区域也不会自动把页面拉到底，读者可以停在自己正在看的位置。",
+          "en": "The answer is rendered as plain text, not HTML. Status announcements occur on phase changes rather than on every chunk. The page does not force the reader to the bottom as text arrives."
+        },
+        {
+          "zh": "浏览器检查还碰到一个实际问题：减少动态效果时，全局禁用动画会让 Ant Design 下拉菜单停在缩放为零的初始状态。修复时把系统设置同步到 ConfigProvider 的 motion 选项，让组件自己处理关闭动画后的显示。之后重新检查了话题选择和键盘操作。",
+          "en": "The browser check found a concrete bug: globally disabling animations for reduced motion left the Ant Design dropdown at its initial zero scale. I synchronized the system preference with ConfigProvider’s motion option so the component could handle its own final visibility, then rechecked topic selection and keyboard interaction."
+        }
+      ]
+    },
+    {
+      "id": "evidence",
+      "title": {
+        "zh": "从演示回到可检查的代码",
+        "en": "Connect the demo to code and checks"
+      },
+      "paragraphs": [
+        {
+          "zh": "实现分成两块：stream.ts 管理状态和片段归属，App.tsx 使用 React 与 Ant Design 展示控件。测试直接向状态层投递事件，不依赖真实网络速度，也不用等一整段回答播放完。",
+          "en": "The implementation separates stream.ts, which owns state and chunk identity, from App.tsx, which presents controls with React and Ant Design. Tests feed events into the state layer without relying on network speed or playing a full answer."
+        },
+        {
+          "zh": "这次运行了 10 项核心测试，覆盖分段拼接、重复开始、首段前停止、错误恢复、重置后旧片段和离开后的清理。浏览器检查另行验证按钮、实际演示和手机布局，记录附在文末。接下来若接入 SSE，还需补上跨网络分块的解析、超时、服务端错误协议和授权。",
+          "en": "Ten core tests cover chunk ordering, duplicate starts, stopping before the first chunk, recovery, stale chunks after reset and disposal. Browser checks separately cover controls, the actual simulation and mobile layout. An SSE integration would also require chunk-boundary parsing, timeouts, server error contracts and authorization."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": {
+        "zh": "打开交互演示",
+        "en": "Open the demo"
+      },
+      "url": "../demos/ai-stream/"
+    },
+    {
+      "label": {
+        "zh": "状态实现与测试",
+        "en": "State implementation and tests"
+      },
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/tree/main/demos/ai-stream"
+    },
+    {
+      "label": {
+        "zh": "验证记录",
+        "en": "Verification record"
+      },
+      "url": "../reviews/portfolio-practice-20261108.md"
+    },
+    {
+      "label": {
+        "zh": "MDN：AbortController",
+        "en": "MDN: AbortController"
+      },
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/AbortController"
+    }
+  ],
+  "related": [
+    "portfolio-rework",
+    "ai-frontend-reflection",
+    "ai-code-race-review"
+  ]
+}

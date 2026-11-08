@@ -4,6 +4,7 @@ Small, newly written experiments based on themes found in local study and teachi
 
 | Experiment | Online | Code and Notes |
 | --- | --- | --- |
+| React streaming response lab | [Demo](https://guhang2011.github.io/demos/ai-stream/) | [Source, limits and tests](ai-stream/README.md) |
 | Financial ratios, clustering and PCA | [Explorer](https://guhang2011.github.io/demos/financial-analysis/) | [Reproduction](financial-analysis/README.md) |
 | Data preparation and quality audit | [Audit](https://guhang2011.github.io/demos/data-preparation/) | [Spark notes](data-preparation/spark-notes.md) |
 | Classification thresholds and prediction ensembles | [Evaluation](https://guhang2011.github.io/demos/model-evaluation/) | [Evaluation notes](model-evaluation/note.md) |

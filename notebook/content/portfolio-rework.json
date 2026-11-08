@@ -1,0 +1,185 @@
+{
+  "slug": "portfolio-rework",
+  "date": "2026-11-08",
+  "category": "frontend",
+  "kind": "reflection",
+  "minutes": 6,
+  "title": {
+    "zh": "让 AI 做一个页面很快，让它看着舒服却改了很多次",
+    "en": "Making a page with AI was quick. Getting it to read well took several revisions."
+  },
+  "summary": {
+    "zh": "把自己的主页当作一个小案例：字该多大、颜色怎么分、内容放在哪里，以及最后怎样检查。",
+    "en": "A small case study of my own portfolio: type size, color, content placement and the checks behind the changes."
+  },
+  "tags": [
+    "前端设计",
+    "AI 编程",
+    "UI",
+    "可访问性",
+    "Typography",
+    "Portfolio"
+  ],
+  "basis": {
+    "zh": "依据本网站保存的改版截图、公开代码和检查记录整理。截图标注版本和尺寸；这是个人设计复盘，没有用户研究或转化率数据。",
+    "en": "Based on saved screenshots, public code and checks for this site. Images identify their version and viewport. This is a personal design review, without user-study or conversion data."
+  },
+  "sections": [
+    {
+      "id": "starting-point",
+      "title": {
+        "zh": "开始时，我总觉得还可以再加一点",
+        "en": "I kept wanting to add one more thing"
+      },
+      "paragraphs": [
+        {
+          "zh": "整理主页时，我提过很多次相似的要求：再加些项目、放点动画、颜色醒目一点。内容确实多起来了，但每次打开，还是会觉得有的地方不舒服。后来我把问题说得更具体，重点看字号、导航和几个模块之间的关系。",
+          "en": "While working on this site, I kept asking for more projects, more animation and stronger colors. It gained content, but parts still felt awkward. I eventually narrowed the questions to typography, navigation and how the sections worked together."
+        },
+        {
+          "zh": "下面保留的是 11 月 7 日调整前后的桌面截图，两张都是 1440 × 1000。可以直接点开原图看细节。旧版已经具备基本结构，这一轮主要改变了文字层级和项目的呈现方式。",
+          "en": "These desktop screenshots show the site before and after the 7 November revision, both at 1440 × 1000. Open either image for detail. The structure already existed; the revision changed the text hierarchy and presentation of the selected work."
+        }
+      ],
+      "figures": [
+        {
+          "src": "../assets/notes/portfolio-rework/desktop-before.webp",
+          "alt": {
+            "zh": "调整前 · 2026-11-07 存档 · 1440 × 1000",
+            "en": "Before · archived 7 Nov 2026 · 1440 × 1000"
+          },
+          "caption": {
+            "zh": "调整前 · 2026-11-07 存档 · 1440 × 1000",
+            "en": "Before · archived 7 Nov 2026 · 1440 × 1000"
+          },
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "src": "../assets/notes/portfolio-rework/desktop-after.webp",
+          "alt": {
+            "zh": "调整后 · 2026-11-07 存档 · 1440 × 1000",
+            "en": "After · archived 7 Nov 2026 · 1440 × 1000"
+          },
+          "caption": {
+            "zh": "调整后 · 2026-11-07 存档 · 1440 × 1000",
+            "en": "After · archived 7 Nov 2026 · 1440 × 1000"
+          },
+          "width": 1440,
+          "height": 1000
+        }
+      ]
+    },
+    {
+      "id": "type-color",
+      "title": {
+        "zh": "字号和颜色，要放在一起看",
+        "en": "Type size and color belong in the same decision"
+      },
+      "paragraphs": [
+        {
+          "zh": "我之前容易把“好看”理解成换一种字体或加一种颜色。实际调整时，先把正文、标题和辅助说明分开，效果更容易判断。笔记正文保持 17 像素以上，首页的介绍与项目摘要再稍大一些。英文使用本地字体，中文沿用系统可用的中文字体，避免为了一个标题把整页的阅读节奏打乱。",
+          "en": "I used to treat a different font or another color as a route to a better-looking page. Separating body text, headings and supporting information made the changes easier to judge. Note text stays at least 17 pixels, with slightly larger introduction and project copy. English uses a local font, while Chinese uses an available system font."
+        },
+        {
+          "zh": "配色也没有继续往每一块上加。暖白背景留给阅读，深绿用在第一个代表项目上，其他区域保留蓝色和暖色的小范围提示。这样读者能分清重点，页面也不会只剩一种颜色。这里的选择是我的设计取舍，不代表深绿天然比蓝色更适合学术主页。",
+          "en": "I stopped adding a new color to every section. Warm white supports the reading area; deep green gives the first selected project more weight; blue and warm accents appear in smaller areas. This is a design choice for this site, not a claim that green is inherently better for an academic portfolio."
+        }
+      ]
+    },
+    {
+      "id": "small-screen",
+      "title": {
+        "zh": "手机上再看一遍，会发现另一批问题",
+        "en": "A phone-sized view reveals different problems"
+      },
+      "paragraphs": [
+        {
+          "zh": "桌面有空间容纳联系信息、项目图片和说明，手机上需要重新排顺序。把所有东西等比例缩小，正文会难读；把内容全部往下堆，又会让项目入口离开首屏太远。我保留了介绍和明确的项目入口，联系信息在窄屏下重新排列。",
+          "en": "A desktop can hold contact information, project images and descriptions side by side. A phone needs a different order. Scaling everything down makes text harder to read, while simply stacking it all pushes the project links far down the page. The introduction and main project link stay visible, and contact information reflows."
+        },
+        {
+          "zh": "这组图使用同样的 390 × 844 英文视口，左边是改版前存档，右边是本次更新后的实拍。字体换行和联系区的位置都能直接对照。两张截图说明布局变化，不用它们推断访问量是否提高。",
+          "en": "This pair uses the same 390 × 844 English viewport: an archived image before the revision on the left and a fresh capture on the right. It shows line wrapping and the contact area. It does not establish an increase in traffic."
+        }
+      ],
+      "figures": [
+        {
+          "src": "../assets/notes/portfolio-rework/mobile-before.webp",
+          "alt": {
+            "zh": "调整前 · 英文 · 390 × 844",
+            "en": "Before · English · 390 × 844"
+          },
+          "caption": {
+            "zh": "调整前 · 英文 · 390 × 844",
+            "en": "Before · English · 390 × 844"
+          },
+          "width": 390,
+          "height": 844
+        },
+        {
+          "src": "../assets/notes/portfolio-rework/mobile-after.webp",
+          "alt": {
+            "zh": "当前页面 · 2026-11-08 · 英文 · 390 × 844",
+            "en": "Current page · 8 Nov 2026 · English · 390 × 844"
+          },
+          "caption": {
+            "zh": "当前页面 · 2026-11-08 · 英文 · 390 × 844",
+            "en": "Current page · 8 Nov 2026 · English · 390 × 844"
+          },
+          "width": 390,
+          "height": 844
+        }
+      ]
+    },
+    {
+      "id": "checking",
+      "title": {
+        "zh": "这次留下哪些检查，下一次还缺什么",
+        "en": "What I checked, and what I still need"
+      },
+      "paragraphs": [
+        {
+          "zh": "这一轮保留首页三个代表项目，把完整项目放进目录；新笔记也只在首页展示几个入口。功能没有因为精简而消失，读者需要时可以继续打开。动画保留在有反馈价值的地方，同时尊重系统的减少动态效果设置。",
+          "en": "The homepage keeps three selected projects, with the full collection in the directory. Recent notes use a small set of entry points as well. The remaining material is still accessible. Motion stays limited and follows the reduced-motion preference."
+        },
+        {
+          "zh": "检查时我会实际打开链接，切换中英文，并在窄屏下查看横向溢出。页面能打开只是第一步。搜索能否找到新内容，图片能否完整加载，回到首页后还能不能找到原来的入口，也需要一起看。具体范围保存在这次更新的验证记录里。",
+          "en": "Checks include opening links, switching languages and looking for horizontal overflow at narrow widths. Search needs to find new material, images need to load, and the route back to the homepage should remain clear. The verification record lists the scope of this update."
+        },
+        {
+          "zh": "现在还欠一次真实读者的观察。我想请别人从首页找一个项目，看看他会先点哪里、在哪儿停住。先记下过程，再决定要不要继续改布局。至于新的内容，这次先补一个可以停止和重试的流式回答实验，让上一篇关于 AI 的感触有个具体落点。",
+          "en": "I still need to observe a real reader finding a project from the homepage. I would like to note where they click and hesitate before making further layout changes. For this update, I added a small streaming-response experiment with stop and retry controls to give the earlier reflection on AI a concrete follow-up."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": {
+        "zh": "主页改版代码（固定版本）",
+        "en": "Homepage revision at a fixed commit"
+      },
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/commit/a12e9871a51744d667154f0725983c0ba02bac02"
+    },
+    {
+      "label": {
+        "zh": "本轮验证记录",
+        "en": "Verification record"
+      },
+      "url": "../reviews/portfolio-practice-20261108.md"
+    },
+    {
+      "label": {
+        "zh": "流式回答交互演示",
+        "en": "Streaming-response demo"
+      },
+      "url": "../demos/ai-stream/"
+    }
+  ],
+  "related": [
+    "ai-frontend-reflection",
+    "streaming-ui-decisions",
+    "accessible-interactions"
+  ]
+}

@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 DATE = "2026-11-08"
 VERSION = "20261107-editorial"
-ORDER = ['ai-frontend-reflection', 'energy-weather-reading', 'energy-forecast-baselines', 'weather-dashboard-contracts', 'inventory-scope-review', 'work-center-boundaries', 'notification-read-state', 'backup-restore-review', 'low-code-state-layers', 'low-code-rules', 'low-code-release', 'ai-code-race-review', 'workflow-recovery-review', 'schema-import-review', 'directory-rename-release', 'mobile-response-contracts', 'photo-queue-ownership', 'release-artifact-integrity', 'cross-platform-boundaries', 'request-scope-lifecycle', 'weather-fallback', 'upload-readiness', 'low-code-contracts', 'progressive-demo-loading', 'tft-information-boundary', 'gnn-risk-graphs', 'spatiotemporal-validation', 'research-demo-handoff', "multimodal-gates", "label-budget-ledger", "model-version-rollback", "rag-evaluation", "async-interfaces", "sql-windows", "model-selection", "order-idempotency", "accessible-interactions", "data-quality", "prompt-contracts", "permission-boundaries", "digital-human", "text-to-image", "generative-workflow"]
+ORDER = ['portfolio-rework', 'streaming-ui-decisions', 'ai-frontend-reflection', 'energy-weather-reading', 'energy-forecast-baselines', 'weather-dashboard-contracts', 'inventory-scope-review', 'work-center-boundaries', 'notification-read-state', 'backup-restore-review', 'low-code-state-layers', 'low-code-rules', 'low-code-release', 'ai-code-race-review', 'workflow-recovery-review', 'schema-import-review', 'directory-rename-release', 'mobile-response-contracts', 'photo-queue-ownership', 'release-artifact-integrity', 'cross-platform-boundaries', 'request-scope-lifecycle', 'weather-fallback', 'upload-readiness', 'low-code-contracts', 'progressive-demo-loading', 'tft-information-boundary', 'gnn-risk-graphs', 'spatiotemporal-validation', 'research-demo-handoff', "multimodal-gates", "label-budget-ledger", "model-version-rollback", "rag-evaluation", "async-interfaces", "sql-windows", "model-selection", "order-idempotency", "accessible-interactions", "data-quality", "prompt-contracts", "permission-boundaries", "digital-human", "text-to-image", "generative-workflow"]
 CATEGORIES = {
     "all": {"en": "All topics", "zh": "全部主题"},
     "frontend": {"en": "Frontend", "zh": "前端交互"},
@@ -30,6 +30,7 @@ def pair(en, zh, tag="span", attrs=""):
 
 
 def frame(title, description, path, body):
+    extra_style = '<link rel="stylesheet" href="practice.css?v=20261108">' if path in ['portfolio-rework.html', 'streaming-ui-decisions.html'] else ''
     return f'''<!doctype html>
 <html lang="en" data-title-en="{esc(title['en'])} | Hang Gu" data-title-zh="{esc(title['zh'])} | 顾航">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,7 +39,7 @@ def frame(title, description, path, body):
 <meta property="og:type" content="{'website' if path == '' else 'article'}"><meta property="og:url" content="https://guhang2011.github.io/notebook/{path}">
 <link rel="canonical" href="https://guhang2011.github.io/notebook/{path}"><link rel="icon" href="../assets/favicon.svg">
 <link rel="stylesheet" href="../academic.css?v={VERSION}"><link rel="stylesheet" href="notebook.css?v={VERSION}">
-<script src="../academic.js?v={VERSION}" defer></script><script src="notebook.js?v={VERSION}" defer></script></head>
+<script src="../academic.js?v={VERSION}" defer></script><script src="notebook.js?v={VERSION}" defer></script>{extra_style}</head>
 <body class="notebook-page"><a class="skip-link" href="#main">{pair('Skip to content','跳至正文')}</a>
 <div class="reading-progress" aria-hidden="true"><span></span></div>
 <header class="site-header" data-open="false"><div class="wrap header-inner">
@@ -78,7 +79,7 @@ def render_index(notes):
     body = f'''<section class="notebook-intro wrap"><div><p class="notebook-kicker">{pair('Research & engineering notebook','研究与工程笔记')}</p>
 {pair('Notes from practice','学习与实践笔记','h1')}
 {pair('Questions from real code, small examples to reason with, and decisions worth revisiting.','围绕真实代码中的问题，记录小型示例、设计取舍与值得继续追问的地方。','p', 'class="notebook-lead"')}</div>
-<aside class="notebook-margin"><strong>{pair('43 notes, four topics','43 篇笔记，四个主题')}</strong>{pair(f'{count} notes connect implementation details to verification and open questions.',f'{count} 篇笔记把实现细节、验证方法与后续问题连接起来。','p')}<a href="energy-weather-reading.html">{pair('Read the energy-meteorology learning path','阅读能源气象学习路线')}</a></aside></section>
+<aside class="notebook-margin"><strong>{pair(f'{count} notes, four topics',f'{count} 篇笔记，四个主题')}</strong>{pair(f'{count} notes connect implementation details to verification and open questions.',f'{count} 篇笔记把实现细节、验证方法与后续问题连接起来。','p')}<a href="energy-weather-reading.html">{pair('Read the energy-meteorology learning path','阅读能源气象学习路线')}</a></aside></section>
 <div class="wrap"><nav class="notebook-routes" aria-label="Suggested reading paths" data-en-label="Suggested reading paths" data-zh-label="建议阅读路径">{paths}</nav></div>
 <section class="wrap notebook-library" id="entries" aria-labelledby="library-title"><div class="library-heading">{pair('Notes & reflections','学习笔记与项目心得','h2','id="library-title"')}<span>{pair('Updated November 2026','更新于 2026 年 11 月')}</span></div>
 <form class="notebook-tools" data-notebook-tools hidden role="search"><div class="notebook-search"><label for="note-search">{pair('Search notes','搜索笔记')}</label><input id="note-search" type="search" autocomplete="off" placeholder="Try: Vue, upload, TFT" data-en-placeholder="Try: Vue, upload, TFT" data-zh-placeholder="试试：跨端、上传、TFT"><button type="button" data-note-clear>{pair('Clear','清除')}</button></div>
@@ -101,6 +102,9 @@ def render_article(note, by_slug):
         sid = esc(section['id'])
         toc.append(f'<a href="#{sid}">{tr(section["title"])}</a>')
         text = ''.join(tr(p, 'p') for p in section.get('paragraphs', []))
+        if section.get('figures'):
+            figures = ''.join(f'<figure><a href="{esc(f["src"])}"><img src="{esc(f["src"])}" alt="{esc(f["alt"]["en"])}" data-en-alt="{esc(f["alt"]["en"])}" data-zh-alt="{esc(f["alt"]["zh"])}" width="{int(f["width"])}" height="{int(f["height"])}" loading="lazy" decoding="async"></a>{tr(f["caption"], "figcaption")}</figure>' for f in section['figures'])
+            text += '<div class="article-comparison">' + figures + '</div>'
         if section.get('bullets'):
             text += '<ul>' + ''.join(tr(p, 'li') for p in section['bullets']) + '</ul>'
         if section.get('code'):

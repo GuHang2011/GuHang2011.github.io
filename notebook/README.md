@@ -1,5 +1,9 @@
 # Learning & project reflections · 学习笔记与项目心得
 
+## 2026-11-08 · 主页返工与流式回答实验
+
+新增[主页返工记录](portfolio-rework.html)与[流式界面实现笔记](streaming-ui-decisions.html)，附对照图、[可操作演示](../demos/ai-stream/)和[检查记录](../reviews/portfolio-practice-20261108.md)。目前共 **45 篇中英双语笔记**，下方篇数保留为历史记录。
+
 ## 2026-11-08 · 前端与 AI 的个人感触
 
 更新[AI 写代码越来越快，前端还怎么往下走](ai-frontend-reflection.html)。从整理个人主页和项目演示说起，记录对 AI 编程的压力、学习打算与项目复盘想法。沿用原文章链接，目前共 **43 篇中英双语笔记**；以下旧篇数为当时记录。
