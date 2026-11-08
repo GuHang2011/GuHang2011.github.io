@@ -1,0 +1,203 @@
+{
+  "slug": "agent-runtime-notes",
+  "date": "2026-11-08",
+  "category": "engineering",
+  "kind": "reflection",
+  "minutes": 8,
+  "title": {
+    "zh": "Agent 学习笔记：让一次运行有据可查",
+    "en": "Agent learning notes: make a run inspectable"
+  },
+  "summary": {
+    "zh": "用一个小型笔记助手记录工具边界、确认快照、重复写入和迟到结果。哪些做到了，哪些还只是下一步。",
+    "en": "A small reading assistant makes tool boundaries, approval snapshots, duplicate writes and late output concrete. What was implemented and what remains to be done."
+  },
+  "tags": [
+    "Agent",
+    "工程复盘",
+    "Tool calling",
+    "Approval",
+    "状态管理",
+    "自动化测试"
+  ],
+  "basis": {
+    "zh": "基于本次新增的离线示例与实际执行的 18 项 Node.js 测试。模型决策由固定脚本模拟，资料为合成数据，草稿只在进程内保存。这里记录实现取舍，不把它写成生产系统经验。",
+    "en": "Based on the new offline exercise and 18 executed Node.js tests. Decisions are scripted, records are synthetic and drafts are process-local. These are implementation notes, not production experience."
+  },
+  "sections": [
+    {
+      "id": "first-run",
+      "title": {
+        "zh": "第一次先看清楚发生了什么",
+        "en": "Make the first run observable"
+      },
+      "paragraphs": [
+        {
+          "zh": "这个练习没有从聊天框开始。我先让终端显示一次调用经过了哪些步骤：查资料、提出草稿、等待确认、返回结果。这样“模型说保存了”和“工具真的写入了”就不会混在同一句话里。",
+          "en": "The exercise starts with a terminal trace rather than a chat box: retrieve records, propose a draft, await approval and return the result. This separates a statement about saving from a tool that actually stored something."
+        },
+        {
+          "zh": "每个工具结果带一个 callId，错误也走同一条返回通道。没有检索结果时返回空数组，参数不合法时返回 INVALID_ARGUMENTS。调用方不必从一句自然语言里猜到底发生了什么。",
+          "en": "Every tool result carries a callId, including errors. No matches produce an empty array; invalid arguments produce INVALID_ARGUMENTS. Callers do not need to infer machine state from prose."
+        }
+      ],
+      "code": {
+        "language": "Result examples",
+        "text": "{ \"callId\": \"call-1\", \"content\": { \"ok\": true, \"data\": [] } }\n{ \"callId\": \"call-2\", \"content\": { \"ok\": false, \"error\": \"USER_DENIED\" } }"
+      }
+    },
+    {
+      "id": "small-tools",
+      "title": {
+        "zh": "工具少一点，问题反而容易看见",
+        "en": "Two tools are enough to reveal the boundaries"
+      },
+      "paragraphs": [
+        {
+          "zh": "当前只给搜索和保存草稿两个工具。读取只面对三条固定资料，保存只接受已经检索到的编号。它不能证明选中的资料真的相关，但至少不会把凭空出现的编号当成已有来源。相关性还要放到后面的检索与回答评估里。",
+          "en": "Search and draft saving are the only tools. Search reads three fixtures; saving accepts only retrieved IDs. That does not establish relevance, but it prevents invented IDs from masquerading as retrieved sources. Relevance still needs retrieval and answer evaluation."
+        },
+        {
+          "zh": "类型检查之外还有业务检查：空白字符串不是有效关键词，重复资料编号不应该形成两条阅读任务，approved:true 也不是工具允许的参数。Schema 写在说明里，执行前的检查仍然要做。",
+          "en": "There are business checks beyond types: whitespace is not a query, duplicate IDs should not create duplicate reading tasks and approved:true is not an allowed argument. Schema declarations do not remove the need for execution-time validation."
+        }
+      ]
+    },
+    {
+      "id": "snapshot",
+      "title": {
+        "zh": "确认的是哪一份内容",
+        "en": "Approval must refer to one exact proposal"
+      },
+      "paragraphs": [
+        {
+          "zh": "保存动作先留下参数快照，再让终端读者确认。测试特意修改返回给界面的预览对象，之后确认，实际写入仍然是原始标题和原始编号。这是 snapshot 返回深拷贝的原因。",
+          "en": "A write proposal is snapshotted before terminal confirmation. One test mutates the preview object and then approves it; the stored title and IDs remain the originals. That is why snapshot returns a deep copy."
+        },
+        {
+          "zh": "确认过期、编号不匹配和重复确认分别有明确结果。点错“拒绝”以后，模型收到 USER_DENIED，不会被当作“网络失败，自动再试”。把人的决定和技术失败混在一起，是恢复流程里需要留意的问题。",
+          "en": "Expiry, mismatched IDs and repeated decisions have explicit outcomes. Refusal returns USER_DENIED rather than becoming a network failure that should be retried automatically. Recovery needs to distinguish a person’s decision from a technical failure."
+        },
+        {
+          "zh": "同样的确认设计迁移到网页时，必须重新考虑登录用户、会话和权限。当前终端示例没有账号体系，随机确认编号也没有承担鉴权功能。",
+          "en": "A web version needs authenticated users, sessions and authorization. The terminal exercise has no account system and its random approval ID is not an authentication mechanism."
+        }
+      ]
+    },
+    {
+      "id": "late-results",
+      "title": {
+        "zh": "停止以后，旧结果不能继续写回来",
+        "en": "Late results must not resume a stopped run"
+      },
+      "paragraphs": [
+        {
+          "zh": "流式回答练习里，旧片段迟到会污染新页面。在 Agent 里，迟到的结果还可能触发下一次工具调用。这里把模型等待包装成可以超时和取消的 Promise；取消后再检查一次信号，才处理返回值。",
+          "en": "A late stream chunk can overwrite newer UI state. In an agent, a late result could also propose another action. The runner bounds model waiting with cancellation and timeout, then checks the signal again before consuming a result."
+        },
+        {
+          "zh": "测试让一个假模型故意不理会取消信号。宿主停止等待以后，再让它返回 save_draft；结果不会进入等待确认，也不会生成草稿。这个测试检查宿主拒收迟到结果，并没有证明后台任务本身停止了。",
+          "en": "A test model deliberately ignores abort. After the host stops waiting, it returns save_draft; no approval or draft appears. This verifies rejection of late output, not termination of the background task."
+        },
+        {
+          "zh": "示例拒绝同一个会话同时 run 两次。确认也只能在 awaiting_approval 状态处理。把这些规则放在状态层，界面即使被快速点击，或以后增加新的调用入口，也有一致的限制。",
+          "en": "A session rejects overlapping run calls and accepts decisions only while awaiting approval. State-layer checks remain effective under rapid clicks or additional callers."
+        }
+      ]
+    },
+    {
+      "id": "checks",
+      "title": {
+        "zh": "这次检查覆盖到哪里",
+        "en": "What was checked"
+      },
+      "paragraphs": [
+        {
+          "zh": "18 项测试全部通过，范围包括正常读写、拒绝、未知工具、额外参数、未检索来源、篡改预览、重复确认、过期、重复内容去重、执行上限、取消和迟到结果。测试使用确定性的脚本与事件，不依赖真实模型偶然给出某个答案。",
+          "en": "All 18 tests passed. They cover the normal path, denial, unknown tools, extra fields, unretrieved IDs, mutated previews, duplicate and expired approvals, deduplication, limits, cancellation and late output. Deterministic scripts and events avoid dependence on a model happening to emit a particular answer."
+        },
+        {
+          "zh": "这些测试没有覆盖真实检索质量、模型事实准确性、供应商限流或跨进程恢复。进程退出后状态消失，同一内容跨会话也不会自动去重。要接实际业务，持久化和权限测试需要另外补。",
+          "en": "The tests do not cover real retrieval quality, model factual accuracy, provider rate limits or cross-process recovery. State vanishes on exit and deduplication does not extend across sessions. Persistence and authorization tests are additional work."
+        },
+        {
+          "zh": "我更愿意把测试记录放在项目旁边，让读者知道具体跑过什么。只写“安全可靠”“支持智能决策”，别人仍然不知道系统遇到拒绝和中断时会怎样。",
+          "en": "A test record next to the code is more useful to a reader than broad reliability claims. It shows what happens when an action is refused or interrupted."
+        }
+      ]
+    },
+    {
+      "id": "study-card",
+      "title": {
+        "zh": "留给下一轮练习的几件事",
+        "en": "Exercises for the next iteration"
+      },
+      "paragraphs": [],
+      "bullets": [
+        {
+          "zh": "先只改 search_notes：读取一个经过明确选择的公开笔记目录，保留来源路径和段落位置。写出“没有命中”和“同名文件”的测试，再考虑向量检索。",
+          "en": "Replace search_notes with retrieval over an explicitly selected public notebook directory, retaining paths and passages. Test missing results and duplicate names before adding vectors."
+        },
+        {
+          "zh": "再接一个真实模型适配器。固定一组任务和模型参数，保留任务级输入、工具轨迹及失败原因；日志里的用户内容和密钥需要按规则隐藏或删减。",
+          "en": "Add one real-model adapter. Keep a fixed task set and model settings, record inputs, tool traces and failures, and apply redaction rules to user content and credentials."
+        },
+        {
+          "zh": "接到现有 React + Ant Design 练习上，增加“待确认”区域，展示具体改动、来源与取消入口。验收手机上的按钮能正常操作，键盘焦点也不会丢失。",
+          "en": "Connect it to the React and Ant Design exercise with a pending-approval view showing changes, sources and cancellation. Check mobile controls and keyboard focus."
+        },
+        {
+          "zh": "最后再决定是否引入 LangGraph 一类编排框架。出现需要持久化检查点、暂停恢复或复杂分支的具体需求后，再对照框架能力选择。框架不能替代工具权限与任务评估。",
+          "en": "Consider an orchestration framework such as LangGraph once persistence, resumable pauses or branching justify it. Framework selection does not replace tool authorization or task evaluation."
+        }
+      ],
+      "callout": {
+        "zh": "目前最想练熟的不是让 Agent 多做几个动作，而是把一个动作解释清楚：来源在哪里、谁允许执行、执行了几次、失败后留下了什么。",
+        "en": "The next learning goal is to explain one action clearly: its source, its authorization, how many times it ran and what remains after failure."
+      }
+    }
+  ],
+  "sources": [
+    {
+      "label": {
+        "zh": "完整入门教程",
+        "en": "Full introductory tutorial"
+      },
+      "url": "agent-development-guide.html"
+    },
+    {
+      "label": {
+        "zh": "源码、测试与运行说明",
+        "en": "Source, tests and instructions"
+      },
+      "url": "https://github.com/GuHang2011/GuHang2011.github.io/tree/main/notebook/examples/agent-learning"
+    },
+    {
+      "label": {
+        "zh": "本次验证记录",
+        "en": "Verification record"
+      },
+      "url": "../reviews/agent-learning-20261108.md"
+    },
+    {
+      "label": {
+        "zh": "Node.js：取消信号",
+        "en": "Node.js abort signals"
+      },
+      "url": "https://nodejs.org/api/globals.html"
+    },
+    {
+      "label": {
+        "zh": "LangGraph：框架能力概览",
+        "en": "LangGraph overview"
+      },
+      "url": "https://docs.langchain.com/oss/javascript/langgraph/overview"
+    }
+  ],
+  "related": [
+    "agent-development-guide",
+    "streaming-ui-decisions",
+    "permission-boundaries",
+    "order-idempotency"
+  ]
+}

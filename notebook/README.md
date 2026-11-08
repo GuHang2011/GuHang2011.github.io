@@ -1,5 +1,12 @@
 # Learning & project reflections · 学习笔记与项目心得
 
+## 2026-11-08 · Agent 开发入门
+
+新增[前端开发者的 Agent 入门教程](agent-development-guide.html)与[实现学习笔记](agent-runtime-notes.html)，附[离线示例、运行说明和测试](examples/agent-learning/README.md)。从主语言、异步与接口开始，解释工具调用、可信确认、状态、RAG／MCP 与评估。
+
+示例使用固定脚本模拟决策、三条合成资料和进程内草稿，未接入真实模型。[验证记录](../reviews/agent-learning-20261108.md)。目前共 **47 篇中英双语笔记**；以下各批次篇数保留为当时记录。
+
+
 ## 2026-11-08 · 主页返工与流式回答实验
 
 新增[主页返工记录](portfolio-rework.html)与[流式界面实现笔记](streaming-ui-decisions.html)，附对照图、[可操作演示](../demos/ai-stream/)和[检查记录](../reviews/portfolio-practice-20261108.md)。目前共 **45 篇中英双语笔记**，下方篇数保留为历史记录。
