@@ -1,5 +1,9 @@
 # Learning & project reflections · 学习笔记与项目心得
 
+## 2026-11-08 · 前端与 AI 的个人感触
+
+更新[AI 写代码越来越快，前端还怎么往下走](ai-frontend-reflection.html)。从整理个人主页和项目演示说起，记录对 AI 编程的压力、学习打算与项目复盘想法。沿用原文章链接，目前共 **43 篇中英双语笔记**；以下旧篇数为当时记录。
+
 ## 2026-11-04 · 目录盘点工程复盘
 
 新增[文件整理心得：先定义统计范围，再看容量数字](inventory-scope-review.html)，结合当天工具修复、合成样例与验证范围；目前共 **40 篇中英双语笔记**。[配套交互案例](../cases/file-inventory/)。以下按批次保留，旧篇数为当时记录。
@@ -114,7 +118,7 @@ To render selected articles and refresh the full index: `python notebook/build.p
 
 ## 29 October 2026 · AI 与前端学习感悟
 
-[AI 对前端的冲击很大，我想怎样继续学下去](ai-frontend-reflection.html) / [Learning frontend development when AI can write the code](ai-frontend-reflection.html)
+[AI 写代码越来越快，前端还怎么往下走](ai-frontend-reflection.html) / [AI writes code faster. Where do I go from here as a frontend developer?](ai-frontend-reflection.html)
 
 补充个人观点与下一步学习打算，讨论 AI 辅助开发中的基础知识、任务拆分、代码阅读与结果验证。关联前面的请求竞态、低代码与上传笔记。当前共 26 篇。
 

@@ -1,126 +1,159 @@
 {
   "slug": "ai-frontend-reflection",
   "title": {
-    "en": "Learning frontend development when AI can write the code",
-    "zh": "AI 对前端的冲击很大，我想怎样继续学下去"
+    "zh": "AI 写代码越来越快，前端还怎么往下走",
+    "en": "AI writes code faster. Where do I go from here as a frontend developer?"
   },
   "summary": {
-    "en": "A personal reflection on the pressure of AI coding, the fundamentals I want to keep, and a practical way to learn through small, reviewed changes.",
-    "zh": "代码越来越容易生成，前端还要学什么？记录我对这份压力的看法，以及接下来怎样练习用 AI 开发、读懂改动和验证结果。"
+    "zh": "做页面更快了，接下来的时间该花在哪里？从最近整理 GitHub 和项目演示说起，聊聊我的压力与打算。",
+    "en": "Making a page is getting easier. Working on my GitHub portfolio has made me think about what to study next, and what still makes me uneasy."
   },
   "category": "frontend",
   "kind": "reflection",
   "minutes": 6,
-  "date": "2026-10-29",
-  "tags": ["AI 编程", "大前端", "学习感悟", "代码审查", "Frontend", "AI-assisted development"],
+  "date": "2026-11-08",
+  "tags": [
+    "AI 编程",
+    "大前端",
+    "学习感悟",
+    "代码审查",
+    "Frontend",
+    "AI-assisted development"
+  ],
   "basis": {
-    "en": "Personal views and a proposed learning routine, connected to the project notes linked below. This is an essay about how I want to learn, rather than a measurement of jobs or productivity.",
-    "zh": "结合近期项目笔记，整理个人看法和下一步学习打算。文中的开发流程与任务说明可作为练习参考。"
+    "zh": "结合近期 GitHub 主页与项目演示的整理，记录个人想法；文中的练习是接下来准备做的事。",
+    "en": "Personal reflections from working on my GitHub portfolio and project demos. The exercises described here are plans for further study."
   },
   "sections": [
     {
       "id": "pressure",
-      "title": {"en": "The pressure feels close to the work", "zh": "以前熟悉的工作，正在变得更容易生成"},
+      "title": {
+        "zh": "省下时间以后，也会有点不安",
+        "en": "Saving time comes with some unease"
+      },
       "paragraphs": [
         {
-          "en": "AI's impact on frontend work feels substantial to me. Producing a first version of a form or page is becoming easier, and that puts pressure on skills built around implementing familiar patterns. It leaves me wondering how much of what I already know will remain useful, and what I should spend time learning next.",
-          "zh": "我觉得 AI 对前端的冲击确实很大。一个表单、一套页面，以前需要花时间逐个实现，现在借助 AI 就能先得到一个像样的版本。对于把写页面当作主要能力的开发者，这种变化很难没有压力。我也会想，原来学的东西还够不够，接下来应该把时间花在哪里。"
+          "zh": "这段时间用 AI 做项目，我的感受挺矛盾。页面生成得快，碰到不熟悉的代码也能随时问，确实方便。可看着原来需要花时间完成的东西，现在很快就能得到一个初版，心里也会有点空：以前花力气学的这些，还值不值得继续学？",
+          "en": "Using AI on projects has left me with mixed feelings. It helps me put a page together and ask about unfamiliar code as I go. That is useful. Yet seeing a first draft appear so quickly makes me wonder whether the things I spent time learning are still worth studying."
         },
         {
-          "en": "I want AI-assisted development to become part of my regular learning. There are details I still need to understand myself: why a component rerenders, where its data comes from, and what happens when a request fails. If I cannot follow the code after it is generated, the next change becomes harder to judge.",
-          "zh": "我的想法是，把 AI 辅助开发纳入日常学习，同时保持自己读代码的能力。组件为什么重新渲染、数据从哪里来、请求失败后页面怎么办，这些问题仍然要弄明白。生成完代码却看不懂，下一次需求变化时就很难判断该怎么改。"
+          "zh": "尤其是前端，变化很容易被看见。输入一段需求，页面就能打开，布局、表单、交互都有了。站在使用者的角度，能用就行，未必会关心这些代码是谁写的。对开发者来说，这件事很难完全没有压力。",
+          "en": "The change is particularly visible in frontend work. A description can become a page with a layout, forms and interactions. Someone using it may care much more about whether it works than who wrote the code. That is an uncomfortable thought for a developer."
+        },
+        {
+          "zh": "我也不太相信学会几个 AI 工具，就能从此不焦虑。工具还会变，项目要求也会变。现在比较确定的是，我得学会借助 AI 开发，同时弄明白自己到底在交付什么。",
+          "en": "I doubt that learning a few AI tools will settle that anxiety. Tools and project requirements will keep changing. For now, I want to get better at using AI while still understanding what I am handing over."
         }
       ]
     },
     {
-      "id": "fundamentals",
-      "title": {"en": "The fundamentals give me a way to judge the output", "zh": "基础知识，决定我能不能看出生成代码的问题"},
+      "id": "portfolio",
+      "title": {
+        "zh": "最近改自己的主页，让我想明白了一点",
+        "en": "Working on my own site made this clearer"
+      },
       "paragraphs": [
         {
-          "en": "The recent request-scope note provides a useful example. A search box can look finished while an older response still overwrites the latest results. After an account switch, a pending response also needs to be checked against its original identity. Recognising these cases requires an understanding of asynchronous execution and state ownership.",
-          "zh": "最近整理的请求作用域笔记，就是一个很具体的例子。搜索框看起来已经能用，旧请求却可能覆盖新结果；切换账号后，之前发出的响应也可能继续回来。要看出这类问题，需要理解异步执行和状态归属。只看截图，很容易把功能判断得过早。"
+          "zh": "最近一直在整理 GitHub 主页，也加了不少项目演示。起初总想多放一点内容，多一些动画，让页面看起来丰富些。后来反复看，还是觉得不够舒服：有的地方字号不合适，有的模块太抢眼，内容放多了，反而找不到重点。",
+          "en": "I have been working on my GitHub site and adding project demos. At first I kept wanting more content and animation. After several rounds, parts of it still felt awkward: the type size was off, some sections demanded too much attention, and adding more material made it harder to see what mattered."
         },
         {
-          "en": "I want to keep learning JavaScript's event loop, TypeScript data boundaries, browser behaviour and component lifecycles through problems like this. CSS layout, keyboard navigation and HTTP also remain part of that work. These topics help me explain a change and decide whether its behaviour matches the requirement.",
-          "zh": "所以 JavaScript 的事件循环、TypeScript 的数据边界、浏览器行为和组件生命周期，我都还要继续学。CSS 布局、键盘操作、HTTP 请求也一样。最好带着实际问题去学：遇到迟到响应，就把相关代码和异步机制一起看；遇到弹窗，就检查焦点和键盘能不能正常使用。"
+          "zh": "这让我意识到，生成页面和把页面做好，花的心思不太一样。AI 可以给出很多方案，但一个第一次进来的人会先看哪里，能不能找到项目入口，手机上读着累不累，这些都得重新看。页面一处处改完，最后还要放在一起检查，不能每个模块单看都挺好，拼起来却像几个网站。",
+          "en": "Generating a page and making it work well require different kinds of attention. AI can offer plenty of options. I still need to look at where a first-time visitor will start, whether the project links are easy to find, and how the text reads on a phone. Sections also need to work together; a set of attractive pieces can still feel like several unrelated websites."
+        },
+        {
+          "zh": "功能也是如此。比如一个搜索框，正常输入时能返回结果，还要看看连续搜索会发生什么。前一次请求回来得晚，会不会把后一次的结果盖掉？这种问题藏在操作过程里，靠截图看不出来。我觉得前端经验在这些时候仍然用得上。",
+          "en": "The same applies to behaviour. A search box may return results for an ordinary query, but what happens when someone searches again before the first request finishes? A late response might replace the newer results. A screenshot cannot show that. This is one place where frontend experience still helps."
         }
       ]
     },
     {
-      "id": "workflow",
-      "title": {"en": "Give AI a task that can be reviewed", "zh": "把任务说小一点，把验收说清楚一点"},
+      "id": "learning",
+      "title": {
+        "zh": "接下来，我想换一种学法",
+        "en": "How I want to study from here"
+      },
       "paragraphs": [
         {
-          "en": "A workflow I want to practise starts with a small change. I would give the assistant the relevant files, dependency versions, expected behaviour and known constraints, then ask it to explain the current implementation before editing. A bounded change is easier to inspect in a diff and easier to undo if the approach is wrong.",
-          "zh": "接下来我想练习的方式，是先选一个范围清楚的小改动，把相关文件、依赖版本、预期行为和现有限制提供给 AI，再让它说明当前实现。一次改动控制得小一些，自己看 diff 时更容易弄清楚每一处为什么要改，方案不合适时也方便回退。"
+          "zh": "前端我会继续学。不过，再遇到一个新框架，我想先问问自己，手里的项目是不是真的需要它。我更愿意留点时间，把已经用着的东西弄清楚。异步请求为什么会串，组件状态该放在哪一层，浏览器为什么会卡，这些问题一旦没想明白，换个工具通常还会再碰到。",
+          "en": "I will keep learning frontend development. Before picking up another framework, though, I want to ask whether a project actually needs it. I would like to spend more time understanding the tools already in use: why requests interfere with each other, where component state belongs, or what makes the browser slow. Changing tools does not automatically resolve those questions."
         },
         {
-          "en": "For an asynchronous search exercise, the task brief below makes the expected behaviour explicit. It is a proposed exercise based on the request-scope discussion, and would still need to be adapted to the project's actual API and test commands.",
-          "zh": "例如练习修复搜索竞态时，可以用下面这样的任务说明。它需要结合项目实际接口和测试命令调整，重点是把“怎样才算修好”提前说清楚。"
-        }
-      ],
-      "bullets": [
-        {
-          "en": "Read the search component and its request helper. Explain how results, errors and loading state are currently updated.",
-          "zh": "先阅读搜索组件与请求封装，说明结果、错误提示和加载状态分别在哪里更新。"
+          "zh": "AI 写代码这件事，也得认真练。一个模糊的要求交过去，得到一大批改动，自己看不懂，再继续让它修，我不想把开发做成这样。以后尽量把问题说小一点，先弄清楚现有代码，再让它修改。改完看看差异，亲手跑一遍，遇到解释不通的地方就停下来查。",
+          "en": "Using AI to write code takes practice too. I do not want to hand over a vague request, receive a large change I cannot follow, and keep asking for fixes. I want to work on smaller problems, understand the existing code first, then read the changes and run them myself. If an explanation does not make sense, I need to stop and investigate."
         },
         {
-          "en": "For rapid searches A then B, only B may update the current results, error or loading state, even if A finishes later. Preserve the existing interface and visual layout.",
-          "zh": "快速依次搜索 A、B 时，只允许 B 更新当前结果、错误提示和加载状态，即使 A 更晚结束。保留现有接口与页面布局。"
+          "zh": "还有一些时间，我想花在前端之外。比如页面上的数据从哪里来，接口失败后怎么恢复，AI 生成的回答该怎样展示。如果做一个 AI 应用，只有输入框和一段能返回的文字还不够。用户等待时看到什么，想中途停止怎么办，回答出错后还能不能继续操作，都得有人认真处理。前端和这些环节放在一起学，我觉得会更有意思。",
+          "en": "I also want to spend some time beyond the frontend itself: where the data comes from, how a failed request recovers, and how an AI response should be presented. An AI application needs more than a text box that returns an answer. What does someone see while waiting? Can they stop it? Can they continue after an error? Studying those parts together with the interface interests me."
         },
         {
-          "en": "Cover stale success and stale failure, and check what happens when the page is left. Use the existing test setup and report the commands and their actual output.",
-          "zh": "覆盖旧请求迟到成功、迟到失败，并检查离开页面后的回调。沿用项目测试方式，提供实际运行的命令和输出。"
-        },
-        {
-          "en": "Explain each changed file and any remaining gaps. Keep unrelated cleanup out of this change so the diff stays reviewable.",
-          "zh": "说明每个文件的修改原因和仍未覆盖的情况，让这次 diff 只围绕当前问题展开。"
+          "zh": "当然，时间有限，我也不可能什么都学透。眼下还是从熟悉的业务系统和交互功能入手，遇到问题再往下补。总比一口气收藏很多教程，过几天又忘了自己准备学什么，要踏实一些。",
+          "en": "There is only so much time, and I cannot study everything in depth. For now I will start with the business systems and interactions I know, then follow the questions that come up. That feels more manageable than collecting courses and losing track of why I saved them."
         }
       ]
     },
     {
-      "id": "review",
-      "title": {"en": "I need to be able to explain the change", "zh": "AI 写完之后，我要能讲清楚这段代码"},
+      "id": "next",
+      "title": {
+        "zh": "先把手头的项目做扎实",
+        "en": "Start with the projects already in hand"
+      },
       "paragraphs": [
         {
-          "en": "After a change, I would read the diff and run the checks myself. A useful review asks where data enters, which state can change, and how failure is handled. If I cannot explain an unfamiliar helper, I can ask for a walkthrough and then check the explanation against the code and the relevant documentation.",
-          "zh": "AI 写完之后，我需要自己读改动、运行检查。数据从哪里进入，哪些状态会改变，失败后怎样处理，至少要能顺着代码讲清楚。遇到不熟悉的函数，可以让 AI 解释，再对照源码和官方文档核实。解释听起来顺畅，并不能代替这个过程。"
+          "zh": "至于前端岗位以后会变成什么样，我现在说不准。重复工作变得容易了，原来靠熟练度积累的一些优势，确实需要重新想想。但我也不愿意因为担心，就把学过的东西全放下。",
+          "en": "I cannot say what frontend jobs will look like in the future. As routine work gets easier, I need to reconsider some advantages that came from practice. I do not want that uncertainty to make me abandon everything I have learned."
         },
         {
-          "en": "The low-code form notes suggest concrete cases to try: required numeric zero, invalid dates, and duplicate field keys. For an upload component, reaching 100% transfer progress still leaves the question of whether processing is complete. These cases help me connect a feature's appearance to its actual contract.",
-          "zh": "低代码表单笔记里提到的零值、无效日期、重复字段标识，都可以拿来做检查。上传组件的进度到了 100%，也还要确认后续处理是否完成。这些问题很细，却直接影响使用体验。我希望能把这类检查习惯带进 AI 辅助开发，而不是每次只确认页面打开了。"
+          "zh": "接下来更新 GitHub，我想少一点为了凑数量而增加的演示，多留一些修改过程。比如一次低代码表单的状态处理，我为什么采用这个方案，AI 提的建议哪里没用上，改完又发现了什么问题。记录不用写得多漂亮，过一段时间再看，能看懂自己当时为什么这么做就够了。",
+          "en": "For future GitHub updates, I want fewer demos added just to increase the count and more records of changes. For a low-code form, for example, I could explain why I chose a state design, which AI suggestion I left out, and what I found after making the change. The record only needs to be clear enough for me to understand my reasoning when I return to it."
         },
         {
-          "en": "When asking an assistant to diagnose a problem, I can use a minimal example and synthetic data. The useful context is the interface shape, failure and surrounding code; real account details and private business records do not need to accompany the example.",
-          "zh": "向 AI 描述问题时，可以使用最小示例和模拟数据，提供接口结构、报错和相关代码。真实账号信息和业务记录无需跟着示例一起提交。这样也能逼着自己先把问题提炼清楚。"
-        }
-      ]
-    },
-    {
-      "id": "practice",
-      "title": {"en": "What I want to practise next", "zh": "接下来，给自己留一些能做下去的练习"},
-      "paragraphs": [
-        {
-          "en": "For the next round of study, I want to choose one small feature in an existing project, write down the acceptance conditions, work through an AI-assisted change, and leave a short review. The review can record which suggestion was useful, which was rejected, and which part I still cannot explain. That should give the next learning session somewhere specific to start.",
-          "zh": "下一轮学习，我想从现有项目中选一个小功能，先写验收条件，再尝试用 AI 完成修改，最后留下一段复盘：哪条建议有用，哪条没有采用，还有哪段代码自己说不清楚。这样下一次学习就有明确的起点，也能看出自己究竟补上了什么。"
-        },
-        {
-          "en": "There are already suitable questions in the recent notes: test an old request that fails after a newer request succeeds, reduce the shared layer's broad any types, or observe memory use while hashing a large file. I would keep a brief record of the environment, changes and actual results, including anything that remains unresolved.",
-          "zh": "近期笔记中已经有合适的题目：补测新请求成功后旧请求才报错的情况，逐步收紧共享层的 any 类型，或者观察大文件计算哈希时的内存占用。每次记下环境、改动与实际结果，没解决的地方也保留下来。"
-        },
-        {
-          "en": "Learning new AI tools matters to me, but I also want time to finish and understand these exercises. My next note should be able to show a specific change, explain why I accepted it, and link to a check that someone else can repeat.",
-          "zh": "新的 AI 工具需要了解，已经开始的练习也要留时间做完、弄懂。我希望下一篇笔记能够拿出一个具体改动，解释自己为什么接受它，再附上别人可以复跑的检查。用这样的记录，看看自己有没有真的学会。"
+          "zh": "我还是喜欢把一个想法做成可以点、可以用的东西。AI 让开始这件事容易了很多，后面那些需要耐心的部分，我想继续做下去。下一次就从现有演示里挑一个小问题，修好它，把经过写下来。",
+          "en": "I still enjoy turning an idea into something people can click and use. AI has made it much easier to begin. I want to keep working on the parts that take patience afterwards. Next time, I will pick a small problem in an existing demo, fix it and write down what happened."
         }
       ]
     }
   ],
   "sources": [
-    {"label": {"en": "Request scope: stale responses and identity changes", "zh": "请求作用域：迟到响应与身份切换"}, "url": "request-scope-lifecycle.html"},
-    {"label": {"en": "Low-code forms: configuration and validation", "zh": "低代码表单：配置协议与字段校验"}, "url": "low-code-contracts.html"},
-    {"label": {"en": "Attachment transfer and readiness", "zh": "附件传输与就绪状态"}, "url": "upload-readiness.html"},
-    {"label": {"en": "Cross-platform boundaries and shared types", "zh": "跨端边界与共享层类型"}, "url": "cross-platform-boundaries.html"},
-    {"label": {"en": "29 October learning log", "zh": "10 月 29 日学习日志"}, "url": "journal.html"}
+    {
+      "label": {
+        "en": "Request scope: stale responses and identity changes",
+        "zh": "请求作用域：迟到响应与身份切换"
+      },
+      "url": "request-scope-lifecycle.html"
+    },
+    {
+      "label": {
+        "en": "Low-code forms: configuration and validation",
+        "zh": "低代码表单：配置协议与字段校验"
+      },
+      "url": "low-code-contracts.html"
+    },
+    {
+      "label": {
+        "en": "Attachment transfer and readiness",
+        "zh": "附件传输与就绪状态"
+      },
+      "url": "upload-readiness.html"
+    },
+    {
+      "label": {
+        "en": "AI-assisted coding: review the race",
+        "zh": "AI 辅助编码：复查并发竞态"
+      },
+      "url": "ai-code-race-review.html"
+    },
+    {
+      "label": {
+        "en": "Cross-platform boundaries and shared types",
+        "zh": "跨端边界与共享层类型"
+      },
+      "url": "cross-platform-boundaries.html"
+    }
   ],
-  "related": ["request-scope-lifecycle", "low-code-contracts", "progressive-demo-loading"]
+  "related": [
+    "ai-code-race-review",
+    "request-scope-lifecycle",
+    "low-code-state-layers"
+  ]
 }
