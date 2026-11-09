@@ -12,6 +12,7 @@
   if (!meter || !fill || !percent || !current) return;
   const sections = [
     ["about", "About", "关于我"], ["work", "Projects", "工程项目"],
+    ["home-lab", "Live demos", "在线体验"],
     ["demos", "Live demos", "在线体验"], ["research", "Research", "研究工作"],
     ["notebook", "Learning", "学习记录"], ["background", "Experience", "教育与经历"],
     ["skills", "Skills", "技术能力"], ["contact", "Contact", "联系信息"],

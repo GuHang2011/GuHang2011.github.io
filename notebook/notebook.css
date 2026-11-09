@@ -1,6 +1,6 @@
 @import url("../fonts.css?v=20261107-editorial");
 /* Reading styles shared by the notebook directory and its articles. */
-.notebook-page { --ink:#24312f; --muted:#59645f; --subtle:#59645f; --paper:#fcfbf8; --surface:#f0f0e9; --line:#d5dcd5; --accent:#155f56; --accent-hover:#0d443c; --accent-soft:#e7f1e9; font-family:var(--font-ui); font-size:17px; line-height:1.85; }
+.notebook-page { --ink:#192d49; --muted:#53657c; --subtle:#53657c; --paper:#f9fbfe; --surface:#edf3fa; --line:#d4dfed; --accent:#245fc1; --accent-hover:#174991; --accent-soft:#e5efff; --teal:#2b669f; font-family:var(--font-ui); font-size:17px; line-height:1.85; }
 .notebook-page :is(h1,h2,h3,h4) { font-family:var(--font-ui); font-weight:600; }
 .notebook-page .wrap { width:min(1200px,calc(100% - 96px)); }
 .notebook-page .site-header { background:var(--paper); box-shadow:none; backdrop-filter:none; }
@@ -107,7 +107,7 @@
 .notebook-page .article-meta,.notebook-page .article-toc a,.notebook-page .code-heading,.notebook-page .article-colophon { font-size:14px; }
 .notebook-page .notebook-code pre { font-size:15px; }
 .notebook-page .notebook-context p { font-size:16px; }
-.notebook-page .notebook-margin { border-color:#9d422c; }
+.notebook-page .notebook-margin { border-color:var(--accent); }
 .notebook-page .notebook-margin p { font-size:16px; }
 .notebook-page .notebook-margin a { font-size:15px; }
 @media(max-width:720px) {

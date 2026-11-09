@@ -1,437 +1,874 @@
 <!doctype html>
+
 <html lang="en" data-title-en="Projects &amp; demos · Hang Gu" data-title-zh="项目与演示 · 顾航">
+
 <head>
+
   <meta charset="utf-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#faf9f6">
+
+  <meta name="theme-color" content="#245fc1">
+
   <meta name="description" content="Hang Gu: selected engineering projects, public demonstrations, research records and learning notes.">
+
   <meta property="og:title" content="Projects &amp; demos · Hang Gu">
+
   <meta property="og:description" content="Hang Gu: selected engineering projects, public demonstrations, research records and learning notes.">
+
   <meta property="og:type" content="website">
+
   <meta property="og:url" content="https://guhang2011.github.io/projects.html">
+
   <link rel="canonical" href="https://guhang2011.github.io/projects.html">
+
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
   <script>
+
     try {
+
       const savedTheme = localStorage.getItem("hang-gu-reader-theme");
+
       if (savedTheme === "light" || savedTheme === "dark") document.documentElement.dataset.readerTheme = savedTheme;
+
       if (localStorage.getItem("hang-gu-reader-motion") === "reduce") document.documentElement.dataset.readerMotion = "reduce";
+
     } catch { /* The default reading palette works without local storage. */ }
+
   </script>
+
   <link rel="stylesheet" href="academic.css?v=20261031-functional-review">
+
   <link rel="stylesheet" href="homepage.css?v=20261030-reader-review">
+
   <link rel="stylesheet" href="research-refresh.css?v=20261024">
+
   <script src="academic.js?v=20261109-reading" defer></script>
+
   <script src="highlights.js?v=20261101-decisions" defer></script>
+
   <script src="reader.js?v=20261031-functional-review" defer></script>
+
   <title>Projects &amp; demos · Hang Gu</title>
+
   <link rel="stylesheet" href="demos/operations-cards.css?v=20261028">
-<link rel="stylesheet" href="expert-polish.css?v=20261101-ui-audit"><link rel="stylesheet" href="portfolio-design.css?v=20261101-evidence"><link rel="stylesheet" href="project-cinema.css?v=20261101-ui-audit"><script src="project-cinema.js?v=20261101" defer></script><link rel="stylesheet" href="fieldlens-portfolio.css?v=20261109-reading"><link rel="stylesheet" href="demo-gallery.css?v=20261101-evidence"><script src="demo-gallery.js?v=20261101" defer></script><link rel="stylesheet" href="highlight-design.css?v=20261101"><link rel="stylesheet" href="research/admissions.css?v=20261102">
+
+<link rel="stylesheet" href="expert-polish.css?v=20261101-ui-audit"><link rel="stylesheet" href="portfolio-design.css?v=20261101-evidence"><link rel="stylesheet" href="project-cinema.css?v=20261101-ui-audit"><script src="project-cinema.js?v=20261101" defer></script><link rel="stylesheet" href="fieldlens-portfolio.css?v=20261109-engineering"><link rel="stylesheet" href="demo-gallery.css?v=20261101-evidence"><script src="demo-gallery.js?v=20261101" defer></script><link rel="stylesheet" href="highlight-design.css?v=20261101"><link rel="stylesheet" href="research/admissions.css?v=20261102">
+
 <link rel="stylesheet" href="updates.css?v=20261103-reading">
+
   <link rel="stylesheet" href="engineering-home.css?v=20261105">
-  <link rel="stylesheet" href="learning-timeline.css?v=20261106-minimal"><link rel="stylesheet" href="reading-progress.css?v=20261106-minimal"><link rel="stylesheet" href="minimal-home.css?v=20261106-minimal"><script src="reading-progress.js?v=20261106-minimal" defer></script><link rel="stylesheet" href="portfolio.css?v=20261109-reading"></head>
+
+  <link rel="stylesheet" href="learning-timeline.css?v=20261106-minimal"><link rel="stylesheet" href="reading-progress.css?v=20261106-minimal"><link rel="stylesheet" href="minimal-home.css?v=20261106-minimal"><script src="reading-progress.js?v=20261106-minimal" defer></script><link rel="stylesheet" href="portfolio.css?v=20261109-engineering"></head>
+
 <body class="folio engineering-home portfolio-home minimal-home folio-directory">
+
   <a class="skip-link" href="#main" data-en="Skip to content" data-zh="跳至正文">Skip to content</a>
+
   <header class="site-header" data-open="false">
+
     <div class="wrap header-inner">
+
       <a class="brand" href="index.html" aria-label="Hang Gu · Home" data-en-label="Hang Gu · Home" data-zh-label="顾航 · 返回首页"><span class="brand-wordmark" data-en="Hang Gu" data-zh="顾航">Hang Gu</span></a>
+
       <noscript><style>.portfolio-home .nav-links{display:flex;position:static;flex-wrap:wrap}.portfolio-home .header-inner{flex-wrap:wrap}.portfolio-home .menu-toggle,.portfolio-home .project-toolbar,.portfolio-home .research-filter-bar{display:none}.portfolio-home .header-controls{margin-left:auto}</style></noscript><nav class="nav-links" id="navigation" aria-label="Main navigation" data-en-label="Main navigation" data-zh-label="主导航">
+
         <a href="index.html" data-en="Home" data-zh="首页">Home</a><a href="projects.html" data-en="Projects" data-zh="项目" aria-current="page">Projects</a><a href="research.html" data-en="Research" data-zh="研究">Research</a><a href="notebook/" data-en="Notes" data-zh="笔记">Notes</a><a href="research/cv.html" data-en="CV" data-zh="简历">CV</a></nav>
+
       <div class="header-controls">
+
         <div class="language-controls" role="group" aria-label="Language">
+
           <button type="button" data-language="zh" aria-pressed="false" aria-label="中文">中</button>
+
           <button type="button" data-language="en" aria-pressed="true" aria-label="English">EN</button>
+
         </div>
+
         <div class="reader-settings" data-reader-settings hidden>
+
           <button type="button" class="reader-toggle" data-reader-toggle aria-expanded="false" aria-controls="reader-panel" aria-label="Reading preferences" data-en-label="Reading preferences" data-zh-label="阅读设置"><svg viewbox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 7h16M4 17h16"></path><circle cx="9" cy="7" r="3"></circle><circle cx="15" cy="17" r="3"></circle></svg><span class="reader-label" data-en="Read" data-zh="阅读">Read</span></button>
+
           <div id="reader-panel" class="reader-panel" data-reader-panel hidden>
+
             <fieldset><legend data-en="Reading palette" data-zh="阅读配色">Reading palette</legend><div class="reader-theme-options"><button type="button" data-reader-theme="light" aria-pressed="true"><span class="theme-swatch light-swatch" aria-hidden="true"></span><span data-en="Light" data-zh="明亮">Light</span></button><button type="button" data-reader-theme="dark" aria-pressed="false"><span class="theme-swatch dark-swatch" aria-hidden="true"></span><span data-en="Dark" data-zh="深色">Dark</span></button></div></fieldset>
+
             <label class="reader-motion"><input type="checkbox" data-reduce-motion><span data-en="Reduce motion" data-zh="减少动态效果">Reduce motion</span></label>
+
             <p id="motion-system-note" hidden data-en="Your system preference limits motion." data-zh="已遵循系统的减少动态效果设置。">Your system preference limits motion.</p>
+
           </div>
+
         </div>
+
         <button class="menu-toggle icon-button" type="button" aria-expanded="false" aria-controls="navigation" aria-label="Menu" title="Menu"><img src="assets/icons/menu.svg" alt=""></button>
+
       </div>
+
     </div>
+
   <div class="browse-progress" data-browse-progress hidden>
+
+
 
 <div class="wrap browse-progress-inner">
 
+
+
 <p class="browse-context"><span class="browse-context-label" data-en="Viewing" data-zh="正在浏览">Viewing</span><strong data-browse-section>About</strong></p>
+
+
 
 <div class="browse-meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Page scroll progress" data-en-label="Page scroll progress" data-zh-label="页面浏览进度" aria-describedby="browse-progress-help"><span class="browse-meter-fill" data-browse-fill></span></div>
 
+
+
 <span class="browse-percentage" data-browse-percent aria-hidden="true">0<span>%</span></span>
+
+
 
 <span id="browse-progress-help" class="visually-hidden" data-en="Scroll position within the currently visible page. Expanding or filtering content changes its length." data-zh="按当前可见页面的滚动位置计算；展开或筛选内容后会重新计算。">Scroll position within the currently visible page. Expanding or filtering content changes its length.</span>
 
+
+
 </div></div></header>
+
   <main id="main"><section class="section" id="work" aria-labelledby="projects-title">
+
       <div class="wrap">
+
         <div class="section-heading"><div><h1 id="projects-title" data-en="Projects &amp; engineering cases" data-zh="项目与工程案例">Projects &amp; engineering cases</h1></div><p data-en="Business systems, development tools and learning experiments, with demos and implementation notes." data-zh="业务系统、开发工具与学习实验，附演示和实现说明。">Business systems, development tools and learning experiments, with demos and implementation notes.</p></div>
+
         <details class="project-directory"><summary><span data-en="Find a project by the part you want to inspect" data-zh="按你想看的部分找项目">Find a project by the part you want to inspect</span></summary><nav class="project-routes" aria-label="Project reading paths" data-en-label="Project reading paths" data-zh-label="项目阅读入口"><a href="#project-file-inventory"><span class="route-number">NEW / PYTHON</span><strong data-en="File inventory tool" data-zh="文件盘点工具">File inventory tool</strong><span data-en="Scope · reproducible reports · CI" data-zh="统计范围 · 可复现报告 · CI">Scope · reproducible reports · CI</span></a><a href="#project-fieldlens"><span class="route-number">NEW / VISION</span><strong data-en="Crop image inspection" data-zh="作物图像检测">Crop image inspection</strong><span data-en="YOLO · image review · report exports" data-zh="YOLO · 图片复核 · 报告导出">YOLO · image review · report exports</span></a>
+
           <a href="#project-shuyang"><span class="route-number">NEW / COMMUNITY</span><strong data-en="Shuyang Home" data-zh="沭阳之家">Shuyang Home</strong><span data-en="Vue · uni-app · member workflows" data-zh="Vue · uni-app · 会员社区">Vue · uni-app · member workflows</span></a>
+
           <a href="#project-kicp"><span class="route-number">01 / RESEARCH</span><strong data-en="Multimodal research" data-zh="多模态研究">Multimodal research</strong><span data-en="CLIP · adaptation · evaluation" data-zh="CLIP · 特征适配 · 评估">CLIP · adaptation · evaluation</span></a>
+
           <a href="#project-kapt"><span class="route-number">02 / REPRODUCIBILITY</span><strong data-en="Model learning &amp; verification" data-zh="模型学习与验证">Model learning &amp; verification</strong><span data-en="Prompt contracts · aligned predictions" data-zh="提示模块契约 · 预测对齐">Prompt contracts · aligned predictions</span></a>
+
           <a href="#project-counselor"><span class="route-number">03 / ENGINEERING</span><strong data-en="Reliable workflows" data-zh="可靠的工程工作流">Reliable workflows</strong><span data-en="Role scopes · release evidence" data-zh="角色范围 · 发布证据">Role scopes · release evidence</span></a>
+
           <a href="#project-react-workflow"><span class="route-number">04 / REACT</span><strong data-en="Typed interaction states" data-zh="类型化交互状态">Typed interaction states</strong><span data-en="React · TypeScript · conflict recovery" data-zh="React · TypeScript · 冲突恢复">React · TypeScript · conflict recovery</span></a>
+
           <a href="#project-low-code"><span class="route-number">05 / LOW-CODE</span><strong data-en="Schema-driven interfaces" data-zh="配置驱动界面">Schema-driven interfaces</strong><span data-en="Schema · renderer · validation" data-zh="Schema · 渲染器 · 校验">Schema · renderer · validation</span></a>
+
           <a href="#demos"><span class="route-number">06 / DATA QUALITY</span><strong data-en="Auditable pipelines" data-zh="可审计的数据管道">Auditable pipelines</strong><span data-en="Validation · quarantine · reconciliation" data-zh="校验 · 隔离 · 汇总核对">Validation · quarantine · reconciliation</span></a>
+
           <a href="#project-ai-office"><span class="route-number">07 / AI ENGINEERING</span><strong data-en="Human-reviewed AI workflows" data-zh="人工把关的 AI 工作流">Human-reviewed AI workflows</strong><span data-en="Secret handling · editable artifacts" data-zh="密钥处理 · 可编辑产物">Secret handling · editable artifacts</span></a>
+
         </nav></details>
+
         <div class="filter-bar project-toolbar">
+
           <div class="segmented" data-filter-group="projects" role="group" aria-label="Filter projects" data-en-label="Filter projects" data-zh-label="筛选项目"><button type="button" data-filter="all" aria-pressed="true" data-en="All" data-zh="全部">All</button><button type="button" data-filter="research" aria-pressed="false" data-en="Research" data-zh="研究">Research</button><button type="button" data-filter="learning" aria-pressed="false" data-en="Learning" data-zh="学习">Learning</button><button type="button" data-filter="engineering" aria-pressed="false" data-en="Engineering" data-zh="工程">Engineering</button></div>
+
           <div class="project-search"><label class="visually-hidden" for="project-search" data-en="Search projects" data-zh="搜索项目">Search projects</label><input id="project-search" type="search" placeholder="Project or technology" data-en-placeholder="Project or technology" data-zh-placeholder="项目名称或技术" aria-controls="project-results" aria-describedby="project-filter-help" autocomplete="off"><button class="search-clear icon-button" type="button" data-clear-search aria-label="Clear search" title="Clear search" disabled><img src="assets/icons/x.svg" alt=""></button></div>
+
           <span class="filter-count" data-count="projects" aria-live="polite" aria-atomic="true">16 items</span>
+
         </div>
+
         <p class="source-note" id="project-filter-help" hidden data-en="Search by project or technology. The address preserves your filters for sharing and returning." data-zh="可按项目或技术搜索；地址栏链接会保留筛选条件，方便分享和返回。">Search by project or technology. The address preserves your filters for sharing and returning.</p>
+
         <div class="project-list" data-collection="projects" id="project-results"><article data-featured="true" class="project-item" data-category="engineering" id="project-fieldlens" data-case-index="04">
+
             <figure class="project-media"><button type="button" data-preview="/fieldlens/home-workspace.webp?v=1.9.1" aria-label="Preview FieldLens crop inspection" data-en-label="Preview FieldLens crop inspection" data-zh-label="查看禾镜检测工作台截图"><img src="/fieldlens/home-workspace.webp?v=1.9.1" alt="FieldLens crop inspection workspace with readable type and clear status colors" data-en-alt="FieldLens crop inspection workspace with readable type and clear status colors" data-zh-alt="禾镜农业专业型工作台：清晰字号、分色状态和检测结果" loading="lazy" width="1440" height="960" decoding="async"></button><figcaption data-en="Crop inspection · Preset demonstration" data-zh="作物巡检 · 预设演示数据">Crop inspection · Preset demonstration</figcaption></figure><div class="project-body"><p class="project-evidence-label" data-en="LIVE DEMO · OPTIONAL LOCAL YOLO" data-zh="在线演示 · 可接入本地 YOLO">LIVE DEMO · OPTIONAL LOCAL YOLO</p><h3 data-en="FieldLens · Crop inspection" data-zh="禾镜 FieldLens · 作物巡检">FieldLens · Crop inspection</h3><p data-en="A crop inspection workspace for capturing images, reviewing regions and keeping follow-up records. Includes printable reports, presentation views and a review assistant with optional AI provider access." data-zh="从图片采集到区域复核、复查安排和报告导出。支持大屏展示与复核助手，通用 AI 平台按需接入。">A crop inspection workspace for capturing images, reviewing regions and keeping follow-up records. Includes printable reports, presentation views and a review assistant with optional AI provider access.</p><p class="source-note" data-en="The public site uses preset demo data and does not collect passwords. Real sign-in needs the backend; inference needs an authorized model. Records stay in the browser." data-zh="公开页面使用预设演示数据，不收集密码。真实登录需部署后端，推理需授权模型；巡检记录仍保存在当前浏览器。">The public site uses preset demo data and does not collect passwords. Real sign-in needs the backend; inference needs an authorized model. Records stay in the browser.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><p data-en="Version 1.9.1 makes the demo scope and setup steps clearer. The review assistant brings usage search, local checklists and optional provider access together. Readable type, four themes, camera capture and presentation views remain available." data-zh="v1.9.1 补全演示范围和接入说明；复核助手集中提供操作搜索、本地清单和可选平台问答。保留清晰字号、四套主题、摄像头拍照和大屏展示。">Version 1.9.1 makes the demo scope and setup steps clearer. The review assistant brings usage search, local checklists and optional provider access together. Readable type, four themes, camera capture and presentation views remain available.</p><div class="tags"><span>JavaScript</span><span>YOLO</span><span>Flask</span><span>Canvas</span><span>Playwright</span></div><p><a href="/fieldlens/?v=1.9.1" data-en="Open product home ↗" data-zh="打开新版首页 ↗">Open product home ↗</a></p><p><a href="/fieldlens/?demo=1&amp;v=1.9.1#assistant" data-en="Open review assistant ↗" data-zh="打开复核助手 ↗">Open review assistant ↗</a></p></details><div class="project-links"><a href="/fieldlens/?demo=1&amp;v=1.9.1#demo" data-en="Try the inspection demo ↗" data-zh="试用巡检工作台 ↗">Try the inspection demo ↗</a><a href="cases/fieldlens/" data-en="User review &amp; fixes ↗" data-zh="用户问题与修复 ↗">User review &amp; fixes ↗</a><a href="https://github.com/GuHang2011/fieldlens" data-en="Source &amp; setup ↗" data-zh="源码与部署 ↗">Source &amp; setup ↗</a></div></div></article>
+
           <article data-featured="true" class="project-item" data-category="engineering" id="project-counselor" data-case-index="02">
+
             <figure class="project-media"><button type="button" data-preview="assets/counselor-desktop.png" aria-label="Preview counselor dashboard"><img src="assets/optimized/counselor-desktop.webp" alt="Counselor dashboard with synthetic Demo counselor account and tasks" data-en-alt="Counselor dashboard with synthetic Demo counselor account and tasks" data-zh-alt="辅导员工作台：合成演示账号与任务" loading="lazy" width="1280" height="853" decoding="async"></button><figcaption data-en="Current application · Synthetic demonstration" data-zh="当前应用 · 合成演示内容">Current application · Synthetic demonstration</figcaption></figure>
+
             <div class="project-body"><p class="project-evidence-label" data-en="ENGINEERING CASE · RELEASE CHECKS" data-zh="工程案例 · 发布校验代码">ENGINEERING CASE · RELEASE CHECKS</p><h3 data-en="Counselor workspace" data-zh="辅导员协作系统">Counselor workspace</h3><p data-en="Organize campus tasks, progress, conversations and attachments. The case explains role permissions and includes checks for release packages." data-zh="围绕任务分配、处理进度、聊天和附件组织校园协作。案例说明不同角色能查看和处理哪些资料，也附上发布包校验方法。">Organize campus tasks, progress, conversations and attachments. The case explains role permissions and includes checks for release packages.</p><p class="source-note" data-en="Public excerpts updated to v1.1.1 with frontend/backend paths and a refreshed 37-file source manifest. The case keeps its dated acceptance records; the excerpt is not a complete deployable system." data-zh="公开代码节选已更新至 v1.1.1，统一 frontend／backend 路径并更新 37 份源码清单。案例保留原日期的验收记录；节选不等于完整可部署系统。">Public excerpts updated to v1.1.1 with frontend/backend paths and a refreshed 37-file source manifest. The case keeps its dated acceptance records; the excerpt is not a complete deployable system.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>Vue 3</span><span>Spring Boot</span><span>Playwright</span><span>SHA-256</span></div></details><div class="project-links"><a href="https://github.com/GuHang2011/counselor-workflow-showcase/releases/tag/v1.1.1"><span data-en="Latest source excerpt ↗" data-zh="最新代码节选 ↗">Latest source excerpt ↗</span></a><a href="cases/counselor/" data-en="Read case study ↗" data-zh="阅读案例 ↗">Read case study ↗</a><a href="cases/examples/README.md" data-en="Release-check code ↗" data-zh="发布校验代码 ↗">Release-check code ↗</a></div></div>
-          </article>
-          <article data-featured="true" class="project-item" data-category="engineering" id="project-low-code" data-case-index="03">
-            <figure class="project-media"><a href="demos/low-code-form/"><img src="assets/demo-gallery/low-code-form.webp" alt="Schema-driven Form Studio: preview and field configuration" data-en-alt="Schema-driven Form Studio: preview and field configuration" data-zh-alt="配置驱动表单工作台：预览与字段设置" loading="lazy" width="948" height="744" decoding="async"></a><figcaption data-en="Actual browser capture · Synthetic example" data-zh="浏览器实拍 · 合成示例">Actual browser capture · Synthetic example</figcaption></figure>
-            <div class="project-body"><p class="project-evidence-label" data-en="INTERACTIVE PROTOTYPE · SYNTHETIC DATA" data-zh="交互原型 · 合成数据">INTERACTIVE PROTOTYPE · SYNTHETIC DATA</p><h3 data-en="Configurable form editor" data-zh="配置化表单编辑器">Configurable form editor</h3><p data-zh="增删和排列字段，设置必填规则，预览申请表。导入配置出错时，保留正在编辑的内容。" data-en="Add, remove and reorder fields, set required rules and preview a form. An invalid import preserves the current draft.">Add, remove and reorder fields, set required rules and preview a form. An invalid import preserves the current draft.</p><p class="source-note" data-en="Learning prototype with synthetic data. The checks here cover the browser, not backend authorization." data-zh="学习原型，使用合成数据；这里的检查只覆盖浏览器端。">Learning prototype with synthetic data. The checks here cover the browser, not backend authorization.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>Schema</span><span>Dynamic forms</span><span>Validation</span><span>Vue patterns</span></div><dl class="project-case-facts"><dt data-en="Problem" data-zh="问题">Problem</dt><dd data-en="Keep configuration, rendered fields and validation in agreement." data-zh="让配置、渲染字段和校验规则保持一致。">Keep configuration, rendered fields and validation in agreement.</dd><dt data-en="Public implementation" data-zh="公开实现">Public implementation</dt><dd data-en="Six field types, stable keys, JSON import and an independent validation core." data-zh="六类字段、稳定字段键、JSON 导入与独立校验核心。">Six field types, stable keys, JSON import and an independent validation core.</dd><dt data-en="Trade-off" data-zh="取舍">Trade-off</dt><dd data-en="Validate before replacing a schema; a valid import resets preview values." data-zh="先验证再替换配置；合法导入后清空预览值，避免语义错配。">Validate before replacing a schema; a valid import resets preview values.</dd><dt data-en="Evidence" data-zh="验证">Evidence</dt><dd data-en="10 core tests rerun on 1 Nov; inspect invalid-import recovery in the demo." data-zh="11 月 1 日重跑 10 项核心测试；演示可检查错误导入的恢复。">10 core tests rerun on 1 Nov; inspect invalid-import recovery in the demo.</dd></dl></details><div class="project-links"><a href="demos/low-code-form/" data-en="Online form studio ↗" data-zh="在线表单工作台 ↗">Online form studio ↗</a><a href="notebook/schema-import-review.html" data-en="Decisions &amp; checks ↗" data-zh="复盘与验证 ↗">Decisions &amp; checks ↗</a><a href="demos/low-code-form/schema.json" data-en="Schema ↗" data-zh="Schema 配置 ↗">Schema ↗</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/low-code-form/README.md" data-en="Design notes ↗" data-zh="设计说明 ↗">Design notes ↗</a></div></div>
-          </article>
-<article class="project-item" data-category="engineering" id="project-shuyang" data-case-index="01">
-            <figure class="project-media"><button type="button" data-preview="assets/shuyang-home/desktop-home.png" aria-label="Preview Shuyang Home" data-en-label="Preview Shuyang Home" data-zh-label="放大沭阳之家界面"><img src="assets/optimized/shuyang-portfolio-cover.webp" alt="Shuyang Home desktop interface in navy, cream and warm gold" data-en-alt="Shuyang Home desktop interface in navy, cream and warm gold" data-zh-alt="沭阳之家电脑首页：深蓝、米白与暖金配色的会员社区界面" loading="lazy" width="1200" height="750" decoding="async"><span class="cover-expand" aria-hidden="true" data-en="View full screenshot ↗" data-zh="查看完整截图 ↗">View full screenshot ↗</span></button><figcaption data-en="Working application · Desktop, mobile H5 and WeChat source" data-zh="可运行系统 · 电脑网页、手机 H5 与微信小程序源码">Working application · Desktop, mobile H5 and WeChat source</figcaption></figure>
-            <div class="project-body">
-              <p class="project-evidence-label" data-en="LOCAL PILOT · SOURCE &amp; CHECKS" data-zh="本地试点 · 源码与验收记录">LOCAL PILOT · SOURCE &amp; CHECKS</p><h3 data-en="Shuyang community" data-zh="沭阳之家 · 会员社区">Shuyang community</h3>
-              <p data-zh="会员可以查看社区信息、发布互助内容，并在事项中心处理待办。项目记录 Web 与移动端共享逻辑、上传重试和消息已读的处理。" data-en="Members can browse community information, publish help requests and handle tasks. The case covers shared web/mobile logic, upload retries and read receipts.">Members can browse community information, publish help requests and handle tasks. The case covers shared web/mobile logic, upload retries and read receipts.</p><p class="source-note" data-zh="公开源码的本地试点；正式部署和真机验收另行开展。" data-en="Public source from a local pilot; production deployment and device acceptance are separate work.">Public source from a local pilot; production deployment and device acceptance are separate work.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><p class="source-note" data-en="v1.6.0 · 3 Nov. The release record reports 198 frontend checks, 94 backend tests and 48 browser assertions. This portfolio update reviewed source and records; it did not rerun that suite." data-zh="v1.6.0 · 11 月 3 日。发布记录包含 198 项前端检查、94 项后端测试和 48 项浏览器断言；本轮主页整理核对源码与记录，未重跑该套验收。">v1.6.0 · 3 Nov. The release record reports 198 frontend checks, 94 backend tests and 48 browser assertions. This portfolio update reviewed source and records; it did not rerun that suite.</p>
-              <div class="tags"><span>Vue 3</span><span>TypeScript</span><span>uni-app</span><span>Spring Boot</span><span>Playwright</span></div>
-              <dl class="project-case-facts"><dt data-en="Problem" data-zh="问题">Problem</dt><dd data-en="Follow member, event and order progress without searching separate modules." data-zh="让会员、活动和订单进度集中可查，减少在不同模块间寻找入口。">Follow member, event and order progress without searching separate modules.</dd><dt data-en="Public implementation" data-zh="公开实现">Public implementation</dt><dd data-en="Shared state, a permission-scoped work center, business notifications and reviewed help-request edits." data-zh="共享状态、按权限汇总的事项中心、业务通知与互助修改重审。">Shared state, a permission-scoped work center, business notifications and reviewed help-request edits.</dd><dt data-en="Trade-off" data-zh="取舍">Trade-off</dt><dd data-en="Aggregate the reading view; retain the original action and permission checks. Read is not completed." data-zh="汇总阅读入口，保留原操作与权限检查；已读不等于办完。">Aggregate the reading view; retain the original action and permission checks. Read is not completed.</dd><dt data-en="Evidence" data-zh="验证">Evidence</dt><dd data-en="v1.6.0 source and versioned acceptance; local pilot, real-device checks still pending." data-zh="v1.6.0 源码与按版本保存的验收记录；本地试点，真机验收仍待补齐。">v1.6.0 source and versioned acceptance; local pilot, real-device checks still pending.</dd></dl></details><div class="project-links"><a href="cases/shuyang/"><span data-en="Read engineering case ↗" data-zh="阅读工程案例 ↗">Read engineering case ↗</span></a><a href="https://github.com/GuHang2011/shuyang-home" data-en="Source &amp; setup ↗" data-zh="源码与部署 ↗">Source &amp; setup ↗</a><a href="https://github.com/GuHang2011/shuyang-home/tree/main/docs/screenshots" data-en="Desktop &amp; mobile gallery ↗" data-zh="电脑与手机图集 ↗">Desktop &amp; mobile gallery ↗</a><a href="https://github.com/GuHang2011/shuyang-home/blob/54ac3633656d1c62a7f1a8b1916f4857cb79883e/docs/%E4%BA%8B%E9%A1%B9%E4%B8%AD%E5%BF%83%E4%B8%8E%E4%BA%92%E5%8A%A9%E5%8A%9E%E7%BB%93-v1.6.0.md" data-en="Validation record ↗" data-zh="验收记录 ↗">Validation record ↗</a><a href="cases/shuyang/#work-center" data-en="New work center ↗" data-zh="事项中心亮点 ↗">New work center ↗</a></div>
-            </div>
-          </article>
-          <article class="project-item" data-category="learning" id="project-ai-stream" data-featured="true"><figure class="project-media"><a href="demos/ai-stream/"><img src="assets/notes/portfolio-rework/stream-cover.webp" width="1200" height="780" loading="lazy" decoding="async" alt="流式回答交互实验"></a><figcaption><span data-en="Local text fixtures · Learning example" data-zh="本地预设文本 · 学习示例">Local text fixtures · Learning example</span></figcaption></figure><div class="project-body"><p class="project-evidence-label">REACT · ANT DESIGN</p><h3 data-en="Streaming response demo" data-zh="流式回答交互实验">Streaming response demo</h3><p data-en="Switch between normal, slow and interrupted responses. Try stop, retry and clear; request IDs keep old chunks out of new answers." data-zh="切换正常、慢速和中断场景，试试停止、重试与清空回答。代码用请求序号隔开新旧片段。">Switch between normal, slow and interrupted responses. Try stop, retry and clear; request IDs keep old chunks out of new answers.</p><p class="source-note" data-en="Two local text fixtures, with no model connection. Added 8 Nov 2026 with AI-assisted implementation and ten core tests published alongside the source." data-zh="两段本地预设文本，不连接语言模型。新增于 2026-11-08，采用 AI 辅助实现，10 项核心测试随源码公开。">Two local text fixtures, with no model connection. Added 8 Nov 2026 with AI-assisted implementation and ten core tests published alongside the source.</p><div class="project-links"><a href="demos/ai-stream/"><span data-en="Open demo ↗" data-zh="在线演示 ↗">Open demo ↗</span></a><a href="notebook/streaming-ui-decisions.html"><span data-en="Implementation notes ↗" data-zh="实现笔记 ↗">Implementation notes ↗</span></a><a href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/demos/ai-stream"><span data-en="Source &amp; tests ↗" data-zh="源码与测试 ↗">Source &amp; tests ↗</span></a></div><details class="project-details"><summary data-zh="技术细节与使用说明" data-en="Technical details and usage">Technical details and usage</summary><div class="tags"><span>React</span><span>Ant Design</span><span>TypeScript</span><span>AbortController</span></div></details></div></article>
-          <article class="project-item" data-category="research" id="project-kicp">
-            <div class="project-media code-preview"><p class="preview-label">KICP / RESEARCH IMPLEMENTATION</p><pre><code>models/
-  CLIP representations
-  learned prompts
-  co-attention fusion
-knowledge/
-  retrieval embeddings
-train.py  →  test.py</code></pre><p class="preview-foot" data-en="Illustrative implementation map" data-zh="示意性实现地图">Illustrative implementation map</p><p class="preview-note" data-en="A conceptual guide to method components; the complete repository structure and personal code contributions remain to be verified." data-zh="用于说明方法组件的对应关系；完整仓库结构与个人代码贡献仍待核实。">A conceptual guide to method components; the complete repository structure and personal code contributions remain to be verified.</p></div>
-            <div class="project-body"><h3 data-zh="KICP · 多模态虚假新闻检测" data-en="KICP · Multimodal fake-news detection">KICP · Multimodal fake-news detection</h3><p data-en="Classification experiments using CLIP image/text features, prompt learning and co-attention. The repository lists required data and models; the research page explains its relation to the paper archive." data-zh="用 CLIP 图文特征、提示学习和协同注意力开展分类实验。仓库列出所需数据与模型，研究页解释与论文实验存档的对应关系。">Classification experiments using CLIP image/text features, prompt learning and co-attention. The repository lists required data and models; the research page explains its relation to the paper archive.</p><p class="source-note research-role-note" data-en="Related implementation for the revised Neurocomputing study. Read the study overview for findings, scope and the distinction between this code and the complete experimental archive." data-zh="修订后投稿 Neurocomputing 研究的关联实现。研究解读说明发现、适用边界，以及本仓库与完整实验存档的区别。">Related implementation for the revised Neurocomputing study. Read the study overview for findings, scope and the distinction between this code and the complete experimental archive.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>PyTorch</span><span>CLIP</span><span>Prompt learning</span></div></details><div class="project-links"><a href="https://github.com/GuHang2011/KICP" data-en="Code &amp; requirements ↗" data-zh="代码与运行要求 ↗">Code &amp; requirements ↗</a><a href="index.html#research" data-en="Related research ↑" data-zh="关联研究 ↑">Related research ↑</a></div></div>
-          </article>
-          <article class="project-item" data-category="engineering" id="project-file-inventory"><figure class="project-media"><a href="cases/file-inventory/" aria-label="File inventory case" data-en-label="File inventory case" data-zh-label="文件盘点工具案例"><img src="assets/inventory-report.svg" width="800" height="500" loading="lazy" alt="Synthetic inventory report: 4 files, 40 bytes" data-en-alt="Synthetic inventory report: 4 files, 40 bytes" data-zh-alt="合成盘点报告示意：4 个文件，40 字节"></a><figcaption data-en="Synthetic example · not a personal disk report" data-zh="合成示例 · 非个人磁盘报告">Synthetic example · not a personal disk report</figcaption></figure><div class="project-body"><h3 data-en="File inventory tool" data-zh="文件目录盘点工具">File inventory tool</h3><p data-en="Choose a directory and exclusions to produce a grouped file report. Read errors are recorded and results use a stable order. The tool does not move or delete files." data-zh="指定目录和排除规则，生成按类型分组的文件报告。读取失败会留下记录，报告按固定顺序输出；工具不移动或删除文件。">Choose a directory and exclusions to produce a grouped file report. Read errors are recorded and results use a stable order. The tool does not move or delete files.</p><p class="source-note" data-en="Includes a synthetic example and regression checks. Logical length is not allocated space; no large-directory performance claim." data-zh="提供合成示例与回归检查；逻辑长度不等于实际占用，未进行大目录性能测试。">Includes a synthetic example and regression checks. Logical length is not allocated space; no large-directory performance claim.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>Python</span><span>CLI</span><span>unittest</span><span>GitHub Actions</span></div></details><div class="project-links"><a href="cases/file-inventory/"><span data-en="Case &amp; interactive example ↗" data-zh="案例与交互样例 ↗">Case &amp; interactive example ↗</span></a><a href="https://github.com/GuHang2011/windows-file-organization-toolkit"><span data-en="Source &amp; usage ↗" data-zh="源码与用法 ↗">Source &amp; usage ↗</span></a><a href="notebook/inventory-scope-review.html"><span data-en="Engineering reflection ↗" data-zh="工程心得 ↗">Engineering reflection ↗</span></a></div></div></article>
-          <article class="project-item" data-category="learning" id="project-kapt">
-            <div class="project-media kapt-preview"><p class="preview-label">KAPT / REPRODUCIBILITY LAB</p><ol class="kapt-preview-route"><li><span>01</span><strong data-en="Validation selection" data-zh="验证集选择">Validation selection</strong></li><li><span>02</span><strong data-en="ID-aligned predictions" data-zh="样本对齐的预测">ID-aligned predictions</strong></li><li><span>03</span><strong data-en="Reproducible checks" data-zh="可复现检查">Reproducible checks</strong></li></ol><p class="preview-foot" data-en="KANO-derived local study · Synthetic fixtures" data-zh="基于 KANO 的本地学习 · 合成样例">KANO-derived local study · Synthetic fixtures</p></div>
-            <div class="project-body"><h3 data-zh="KAPT · 模型评估学习案例" data-en="KAPT · Model evaluation exercises">KAPT · Model evaluation exercises</h3><p data-en="Small tools adapted from a local KANO/KAPT project: replay early stopping, align predictions by sample ID and calculate an ensemble." data-zh="从本地 KANO/KAPT 项目整理的小工具：回放早停过程，按样本编号对齐预测，再计算集成结果。">Small tools adapted from a local KANO/KAPT project: replay early stopping, align predictions by sample ID and calculate an ensemble.</p><p class="source-note" data-en="KANO is the third-party upstream. The public lab documents local changes; it does not claim a reproduced molecular benchmark or an original KANO model." data-zh="KANO 为第三方上游；公开实验室说明本地改造，不宣称已复现分子基准成绩或原创 KANO 模型。">KANO is the third-party upstream. The public lab documents local changes; it does not claim a reproduced molecular benchmark or an original KANO model.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>Python</span><span>PyTorch</span><span>Prediction ensembles</span></div></details><div class="project-links"><a href="cases/kapt/" data-en="Case &amp; early-stopping demo ↗" data-zh="案例与早停演示 ↗">Case &amp; early-stopping demo ↗</a><a href="https://github.com/GuHang2011/KAPT" data-en="Source &amp; reproduction ↗" data-zh="代码与复现说明 ↗">Source &amp; reproduction ↗</a><a href="https://github.com/GuHang2011/KAPT/blob/main/docs/reproduction.md" data-en="Reproduction guide ↗" data-zh="复现指南 ↗">Reproduction guide ↗</a><a href="https://github.com/GuHang2011/KAPT/blob/main/docs/verification.json" data-en="Verification records ↗" data-zh="验证记录 ↗">Verification records ↗</a></div></div>
-          </article>
-          <article class="project-item" data-category="engineering" id="project-silkroad">
-            <figure class="project-media"><button type="button" data-preview="assets/silkroad/login-desktop.jpg" aria-label="Preview Silk Road Intelligence" data-en-label="Preview Silk Road Intelligence" data-zh-label="放大丝路智链截图"><img src="assets/optimized/silkroad-login-desktop.webp" alt="Silk Road Intelligence login: China–Kazakhstan theme and empty sign-in form" data-en-alt="Silk Road Intelligence login: China–Kazakhstan theme and empty sign-in form" data-zh-alt="丝路智链登录界面：中哈主题与空白登录表单" loading="lazy" width="1280" height="720" decoding="async"></button><figcaption data-en="Application interface · Empty sign-in form" data-zh="应用实拍界面 · 空白登录表单">Application interface · Empty sign-in form</figcaption></figure>
-            <div class="project-body"><h3 data-en="Silk Road · Order workflow teaching system" data-zh="丝路智链 · 订单教学系统">Silk Road · Order workflow teaching system</h3><p data-en="Follow an order through marketing review, checkout, inspection, logistics and after-sales. Includes desktop/mobile screens and a virtual presenter demo." data-zh="围绕一笔订单练习营销审核、下单、质检、物流和售后。可查看桌面与手机界面，以及虚拟主播组件演示。">Follow an order through marketing review, checkout, inspection, logistics and after-sales. Includes desktop/mobile screens and a virtual presenter demo.</p><p class="source-note" data-en="Desktop and mobile interface gallery; business views use synthetic fixtures. Payment and device flows are simulations." data-zh="展示桌面与手机界面，业务截图使用合成样例；支付与设备流程为教学仿真。">Desktop and mobile interface gallery; business views use synthetic fixtures. Payment and device flows are simulations.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>Vue 3</span><span>Spring Boot</span><span>MySQL</span><span>Idempotency</span></div></details><div class="project-links"><a href="cases/silkroad/" data-en="Explore screenshots &amp; case ↗" data-zh="查看截图与案例 ↗">Explore screenshots &amp; case ↗</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/cases/silkroad" data-en="Engineering notes &amp; evidence ↗" data-zh="工程笔记与证据 ↗">Engineering notes &amp; evidence ↗</a></div></div>
-          </article>
-          <article class="project-item" data-category="engineering" id="project-archive">
-            <div class="project-media archive-preview" aria-label="Archive lifecycle"><p class="preview-label">COLLEGE ARCHIVE / FILE LIFECYCLE</p><div class="file-row"><span class="file-icon">PDF</span><div><strong>teaching-material.pdf</strong><small data-en="Version 02 · Synthetic sample" data-zh="版本 02 · 合成样例">Version 02 · Synthetic sample</small></div><span class="status" data-tone="green" data-en="Approved" data-zh="已审核">Approved</span></div><ol class="archive-steps"><li data-en="Upload &amp; scope check" data-zh="上传与范围检查">Upload &amp; scope check</li><li data-en="Version relationship" data-zh="版本关系">Version relationship</li><li data-en="Review &amp; audit trail" data-zh="审核与操作留痕">Review &amp; audit trail</li></ol><p class="preview-foot" data-en="Interface concept · Not an application screenshot" data-zh="流程示意 · 非应用截图">Interface concept · Not an application screenshot</p></div>
-            <div class="project-body"><h3 data-en="College Materials Archive" data-zh="学院资料归档系统">College Materials Archive</h3><p data-en="Organize teaching files by person and college, manage versions and record reviews. The case explains permission checks for search, download and export." data-zh="按教师和学院整理资料，处理同名文件版本与审核记录。案例重点说明搜索、下载和导出时的权限检查。">Organize teaching files by person and college, manage versions and record reviews. The case explains permission checks for search, download and export.</p><p class="source-note" data-en="Source-reviewed case; no integration test rerun. Original configurations, attachments and database are excluded." data-zh="依据源码审阅整理，未重跑集成测试。原始配置、附件与数据库不公开。">Source-reviewed case; no integration test rerun. Original configurations, attachments and database are excluded.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>Vue 3</span><span>Spring Boot</span><span>File versioning</span><span>Authorization</span></div></details><div class="project-links"><a href="cases/archive/" data-en="Case &amp; synthetic demo ↗" data-zh="案例与合成演示 ↗">Case &amp; synthetic demo ↗</a><a href="cases/college-archive.md" data-en="Engineering note ↗" data-zh="工程笔记 ↗">Engineering note ↗</a></div></div>
-          </article>
-          <article class="project-item" data-category="learning" id="project-frontend-data">
-            <div class="project-media lab-preview"><p class="preview-label">FRONTEND &amp; DATA LAB</p><dl><div><dt>01</dt><dd>CSV → SQLite → JSON</dd></div><div><dt>02</dt><dd data-en="Dashboard &amp; dynamic form" data-zh="数据看板与动态表单">Dashboard &amp; dynamic form</dd></div><div><dt>03</dt><dd data-en="Annotation &amp; model evaluation" data-zh="标注与模型评估">Annotation &amp; model evaluation</dd></div></dl><p class="preview-foot" data-en="Synthetic data · Reproducible examples" data-zh="合成数据 · 可复现示例">Synthetic data · Reproducible examples</p></div>
-            <div class="project-body"><h3 data-zh="前端与数据实验集" data-en="Frontend and data exercises">Frontend and data exercises</h3><p data-en="Practise interfaces with small dashboards and forms, then explore data cleaning, annotation checks and web crawling. Includes fixed examples and study notes." data-zh="用小型看板和表单练习前端交互，再做数据清洗、标注质量检查和网页采集。代码附固定样例与学习笔记。">Practise interfaces with small dashboards and forms, then explore data cleaning, annotation checks and web crawling. Includes fixed examples and study notes.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>SQLite</span><span>JavaScript</span><span>Data quality</span></div></details><div class="project-links"><a href="https://guhang2011.github.io/frontend-data-lab/" data-en="Online dashboard ↗" data-zh="在线看板 ↗">Online dashboard ↗</a><a href="https://guhang2011.github.io/frontend-data-lab/demos/form/" data-en="Dynamic form ↗" data-zh="动态表单 ↗">Dynamic form ↗</a><a href="https://github.com/GuHang2011/frontend-data-lab" data-en="Code &amp; notes ↗" data-zh="代码与笔记 ↗">Code &amp; notes ↗</a><a href="https://github.com/GuHang2011/frontend-data-lab/blob/main/REVIEWER_ENTRY.md" data-en="Reviewer reading guide ↗" data-zh="评审阅读指南 ↗">Reviewer reading guide ↗</a></div></div>
-          </article>
-          <article class="project-item" data-category="learning" id="project-react-workflow">
-            <figure class="project-media"><a href="demos/react-workflow/"><img src="assets/demo-gallery/react-workflow.webp" alt="React Workflow Board: four synthetic workflow states" data-en-alt="React Workflow Board: four synthetic workflow states" data-zh-alt="React 工作流面板：四种合成任务状态" loading="lazy" width="1036" height="511" decoding="async"></a><figcaption data-en="Actual browser capture · Synthetic example" data-zh="浏览器实拍 · 合成示例">Actual browser capture · Synthetic example</figcaption></figure>
-            <div class="project-body"><h3 data-en="React review workspace" data-zh="React 审核工作台">React review workspace</h3><p data-zh="筛选待审核记录，提交处理意见，模拟请求失败和版本冲突，再比较重试、刷新与重置的结果。" data-en="Filter a review queue and submit decisions. Simulate request failures or version conflicts, then compare retry, refresh and reset.">Filter a review queue and submit decisions. Simulate request failures or version conflicts, then compare retry, refresh and reset.</p><p class="source-note" data-en="Learning prototype with synthetic data. The checks here cover the browser, not backend authorization." data-zh="学习原型，使用合成数据；这里的检查只覆盖浏览器端。">Learning prototype with synthetic data. The checks here cover the browser, not backend authorization.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>React</span><span>TypeScript</span><span>State machine</span><span>Accessibility</span></div><dl class="project-case-facts"><dt data-en="Problem" data-zh="问题">Problem</dt><dd data-en="Explain what happens when an approval fails or its version is stale." data-zh="审核失败或版本过期时，让用户知道如何恢复。">Explain what happens when an approval fails or its version is stale.</dd><dt data-en="Public implementation" data-zh="公开实现">Public implementation</dt><dd data-en="React + Ant Design UI, pure reducer, request tokens and keyboard focus." data-zh="React + Ant Design 界面、纯 reducer、请求令牌与键盘焦点。">React + Ant Design UI, pure reducer, request tokens and keyboard focus.</dd><dt data-en="Trade-off" data-zh="取舍">Trade-off</dt><dd data-en="One pending action; a conflict requires refresh and a fresh decision." data-zh="单个待处理操作；冲突后先刷新，再重新确认审核。">One pending action; a conflict requires refresh and a fresh decision.</dd><dt data-en="Evidence" data-zh="验证">Evidence</dt><dd data-en="8 model tests rerun on 1 Nov; interactive review linked below." data-zh="11 月 1 日重跑 8 项模型测试；下方附可操作的复盘。">8 model tests rerun on 1 Nov; interactive review linked below.</dd></dl></details><div class="project-links"><a href="demos/react-workflow/" data-en="Online interaction ↗" data-zh="在线交互 ↗">Online interaction ↗</a><a href="notebook/workflow-recovery-review.html" data-en="Decisions &amp; checks ↗" data-zh="复盘与验证 ↗">Decisions &amp; checks ↗</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/react-workflow/src/App.tsx" data-en="React source ↗" data-zh="React 源码 ↗">React source ↗</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/react-workflow/README.md" data-en="Engineering notes ↗" data-zh="工程说明 ↗">Engineering notes ↗</a></div></div>
+
           </article>
 
-          <article class="project-item" data-category="engineering" id="project-ai-office">
-            <figure class="project-media"><a href="https://github.com/GuHang2011/engineering-notes/blob/main/notes/personal-ai-keys.md"><img src="assets/ai-settings-desktop.png" alt="AI workspace settings with hidden personal key, endpoint controls and connection feedback" data-en-alt="AI workspace settings with hidden personal key, endpoint controls and connection feedback" data-zh-alt="AI 工作区设置：隐藏的个人密钥、服务地址配置与连接反馈" loading="lazy"></a><figcaption data-en="Local UI test fixture · Synthetic connection response" data-zh="本地界面测试夹具 · 模拟连接响应">Local UI test fixture · Synthetic connection response</figcaption></figure>
-            <div class="project-body"><h3 data-en="Personal AI workspace" data-zh="个人 AI 工作台">Personal AI workspace</h3><p data-en="An AI module inside the archive system: connect a personal model endpoint and generate editable presentation drafts. Credentials belong to individual accounts; users confirm send and save actions." data-zh="资料归档系统内的 AI 模块：连接个人模型接口，生成可编辑的 PPT 草稿。模型密钥按账号保存，发送和保存由用户确认。">An AI module inside the archive system: connect a personal model endpoint and generate editable presentation drafts. Credentials belong to individual accounts; users confirm send and save actions.</p><p class="source-note" data-en="Existing feature within the archive system, not a standalone deployed product. Public material is an engineering case, notes and synthetic evidence; mock-provider tests did not use a real key." data-zh="这是归档系统既有功能模块，并非独立部署产品。公开材料是工程案例、笔记和合成证据；模拟服务测试未使用真实密钥。">Existing feature within the archive system, not a standalone deployed product. Public material is an engineering case, notes and synthetic evidence; mock-provider tests did not use a real key.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>Spring Boot</span><span>AES-GCM</span><span>Endpoint policy</span><span>Human review</span><span>PPTX</span></div></details><div class="project-links"><a href="https://github.com/GuHang2011/engineering-notes/blob/main/notes/personal-ai-keys.md" data-en="Read architecture &amp; evidence ↗" data-zh="阅读架构与证据 ↗">Read architecture &amp; evidence ↗</a><a href="https://github.com/GuHang2011/engineering-notes/blob/main/notes/personal-ai-keys.md" data-en="Key-handling notes ↗" data-zh="密钥处理笔记 ↗">Key-handling notes ↗</a><a href="https://github.com/GuHang2011/engineering-notes/blob/main/notes/human-reviewed-ai-workflows.md" data-en="Human-review notes ↗" data-zh="人工审核笔记 ↗">Human-review notes ↗</a></div></div>
+          <article data-featured="true" class="project-item" data-category="engineering" id="project-low-code" data-case-index="03">
+
+            <figure class="project-media"><a href="demos/low-code-form/"><img src="assets/demo-gallery/low-code-form.webp" alt="Schema-driven Form Studio: preview and field configuration" data-en-alt="Schema-driven Form Studio: preview and field configuration" data-zh-alt="配置驱动表单工作台：预览与字段设置" loading="lazy" width="948" height="744" decoding="async"></a><figcaption data-en="Actual browser capture · Synthetic example" data-zh="浏览器实拍 · 合成示例">Actual browser capture · Synthetic example</figcaption></figure>
+
+            <div class="project-body"><p class="project-evidence-label" data-en="INTERACTIVE PROTOTYPE · SYNTHETIC DATA" data-zh="交互原型 · 合成数据">INTERACTIVE PROTOTYPE · SYNTHETIC DATA</p><h3 data-en="Configurable form editor" data-zh="配置化表单编辑器">Configurable form editor</h3><p data-zh="增删和排列字段，设置必填规则，预览申请表。导入配置出错时，保留正在编辑的内容。" data-en="Add, remove and reorder fields, set required rules and preview a form. An invalid import preserves the current draft.">Add, remove and reorder fields, set required rules and preview a form. An invalid import preserves the current draft.</p><p class="source-note" data-en="Learning prototype with synthetic data. The checks here cover the browser, not backend authorization." data-zh="学习原型，使用合成数据；这里的检查只覆盖浏览器端。">Learning prototype with synthetic data. The checks here cover the browser, not backend authorization.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>Schema</span><span>Dynamic forms</span><span>Validation</span><span>Vue patterns</span></div><dl class="project-case-facts"><dt data-en="Problem" data-zh="问题">Problem</dt><dd data-en="Keep configuration, rendered fields and validation in agreement." data-zh="让配置、渲染字段和校验规则保持一致。">Keep configuration, rendered fields and validation in agreement.</dd><dt data-en="Public implementation" data-zh="公开实现">Public implementation</dt><dd data-en="Six field types, stable keys, JSON import and an independent validation core." data-zh="六类字段、稳定字段键、JSON 导入与独立校验核心。">Six field types, stable keys, JSON import and an independent validation core.</dd><dt data-en="Trade-off" data-zh="取舍">Trade-off</dt><dd data-en="Validate before replacing a schema; a valid import resets preview values." data-zh="先验证再替换配置；合法导入后清空预览值，避免语义错配。">Validate before replacing a schema; a valid import resets preview values.</dd><dt data-en="Evidence" data-zh="验证">Evidence</dt><dd data-en="10 core tests rerun on 1 Nov; inspect invalid-import recovery in the demo." data-zh="11 月 1 日重跑 10 项核心测试；演示可检查错误导入的恢复。">10 core tests rerun on 1 Nov; inspect invalid-import recovery in the demo.</dd></dl></details><div class="project-links"><a href="demos/low-code-form/" data-en="Online form studio ↗" data-zh="在线表单工作台 ↗">Online form studio ↗</a><a href="notebook/schema-import-review.html" data-en="Decisions &amp; checks ↗" data-zh="复盘与验证 ↗">Decisions &amp; checks ↗</a><a href="demos/low-code-form/schema.json" data-en="Schema ↗" data-zh="Schema 配置 ↗">Schema ↗</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/low-code-form/README.md" data-en="Design notes ↗" data-zh="设计说明 ↗">Design notes ↗</a></div></div>
+
           </article>
+
+<article class="project-item" data-category="engineering" id="project-shuyang" data-case-index="01">
+
+            <figure class="project-media"><button type="button" data-preview="assets/shuyang-home/desktop-home.png" aria-label="Preview Shuyang Home" data-en-label="Preview Shuyang Home" data-zh-label="放大沭阳之家界面"><img src="assets/optimized/shuyang-portfolio-cover.webp" alt="Shuyang Home desktop interface in navy, cream and warm gold" data-en-alt="Shuyang Home desktop interface in navy, cream and warm gold" data-zh-alt="沭阳之家电脑首页：深蓝、米白与暖金配色的会员社区界面" loading="lazy" width="1200" height="750" decoding="async"><span class="cover-expand" aria-hidden="true" data-en="View full screenshot ↗" data-zh="查看完整截图 ↗">View full screenshot ↗</span></button><figcaption data-en="Working application · Desktop, mobile H5 and WeChat source" data-zh="可运行系统 · 电脑网页、手机 H5 与微信小程序源码">Working application · Desktop, mobile H5 and WeChat source</figcaption></figure>
+
+            <div class="project-body">
+
+              <p class="project-evidence-label" data-en="LOCAL PILOT · SOURCE &amp; CHECKS" data-zh="本地试点 · 源码与验收记录">LOCAL PILOT · SOURCE &amp; CHECKS</p><h3 data-en="Shuyang community" data-zh="沭阳之家 · 会员社区">Shuyang community</h3>
+
+              <p data-zh="会员可以查看社区信息、发布互助内容，并在事项中心处理待办。项目记录 Web 与移动端共享逻辑、上传重试和消息已读的处理。" data-en="Members can browse community information, publish help requests and handle tasks. The case covers shared web/mobile logic, upload retries and read receipts.">Members can browse community information, publish help requests and handle tasks. The case covers shared web/mobile logic, upload retries and read receipts.</p><p class="source-note" data-zh="公开源码的本地试点；正式部署和真机验收另行开展。" data-en="Public source from a local pilot; production deployment and device acceptance are separate work.">Public source from a local pilot; production deployment and device acceptance are separate work.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><p class="source-note" data-en="v1.6.0 · 3 Nov. The release record reports 198 frontend checks, 94 backend tests and 48 browser assertions. This portfolio update reviewed source and records; it did not rerun that suite." data-zh="v1.6.0 · 11 月 3 日。发布记录包含 198 项前端检查、94 项后端测试和 48 项浏览器断言；本轮主页整理核对源码与记录，未重跑该套验收。">v1.6.0 · 3 Nov. The release record reports 198 frontend checks, 94 backend tests and 48 browser assertions. This portfolio update reviewed source and records; it did not rerun that suite.</p>
+
+              <div class="tags"><span>Vue 3</span><span>TypeScript</span><span>uni-app</span><span>Spring Boot</span><span>Playwright</span></div>
+
+              <dl class="project-case-facts"><dt data-en="Problem" data-zh="问题">Problem</dt><dd data-en="Follow member, event and order progress without searching separate modules." data-zh="让会员、活动和订单进度集中可查，减少在不同模块间寻找入口。">Follow member, event and order progress without searching separate modules.</dd><dt data-en="Public implementation" data-zh="公开实现">Public implementation</dt><dd data-en="Shared state, a permission-scoped work center, business notifications and reviewed help-request edits." data-zh="共享状态、按权限汇总的事项中心、业务通知与互助修改重审。">Shared state, a permission-scoped work center, business notifications and reviewed help-request edits.</dd><dt data-en="Trade-off" data-zh="取舍">Trade-off</dt><dd data-en="Aggregate the reading view; retain the original action and permission checks. Read is not completed." data-zh="汇总阅读入口，保留原操作与权限检查；已读不等于办完。">Aggregate the reading view; retain the original action and permission checks. Read is not completed.</dd><dt data-en="Evidence" data-zh="验证">Evidence</dt><dd data-en="v1.6.0 source and versioned acceptance; local pilot, real-device checks still pending." data-zh="v1.6.0 源码与按版本保存的验收记录；本地试点，真机验收仍待补齐。">v1.6.0 source and versioned acceptance; local pilot, real-device checks still pending.</dd></dl></details><div class="project-links"><a href="cases/shuyang/"><span data-en="Read engineering case ↗" data-zh="阅读工程案例 ↗">Read engineering case ↗</span></a><a href="https://github.com/GuHang2011/shuyang-home" data-en="Source &amp; setup ↗" data-zh="源码与部署 ↗">Source &amp; setup ↗</a><a href="https://github.com/GuHang2011/shuyang-home/tree/main/docs/screenshots" data-en="Desktop &amp; mobile gallery ↗" data-zh="电脑与手机图集 ↗">Desktop &amp; mobile gallery ↗</a><a href="https://github.com/GuHang2011/shuyang-home/blob/54ac3633656d1c62a7f1a8b1916f4857cb79883e/docs/%E4%BA%8B%E9%A1%B9%E4%B8%AD%E5%BF%83%E4%B8%8E%E4%BA%92%E5%8A%A9%E5%8A%9E%E7%BB%93-v1.6.0.md" data-en="Validation record ↗" data-zh="验收记录 ↗">Validation record ↗</a><a href="cases/shuyang/#work-center" data-en="New work center ↗" data-zh="事项中心亮点 ↗">New work center ↗</a></div>
+
+            </div>
+
+          </article>
+
+          <article class="project-item" data-category="learning" id="project-ai-stream" data-featured="true"><figure class="project-media"><a href="demos/ai-stream/"><img src="assets/notes/portfolio-rework/stream-cover.webp" width="1200" height="780" loading="lazy" decoding="async" alt="流式回答交互实验"></a><figcaption><span data-en="Local text fixtures · Learning example" data-zh="本地预设文本 · 学习示例">Local text fixtures · Learning example</span></figcaption></figure><div class="project-body"><p class="project-evidence-label">REACT · ANT DESIGN</p><h3 data-en="Streaming response demo" data-zh="流式回答交互实验">Streaming response demo</h3><p data-en="Switch between normal, slow and interrupted responses. Try stop, retry and clear; request IDs keep old chunks out of new answers." data-zh="切换正常、慢速和中断场景，试试停止、重试与清空回答。代码用请求序号隔开新旧片段。">Switch between normal, slow and interrupted responses. Try stop, retry and clear; request IDs keep old chunks out of new answers.</p><p class="source-note" data-en="Two local text fixtures, with no model connection. Added 8 Nov 2026 with AI-assisted implementation and ten core tests published alongside the source." data-zh="两段本地预设文本，不连接语言模型。新增于 2026-11-08，采用 AI 辅助实现，10 项核心测试随源码公开。">Two local text fixtures, with no model connection. Added 8 Nov 2026 with AI-assisted implementation and ten core tests published alongside the source.</p><div class="project-links"><a href="demos/ai-stream/"><span data-en="Open demo ↗" data-zh="在线演示 ↗">Open demo ↗</span></a><a href="notebook/streaming-ui-decisions.html"><span data-en="Implementation notes ↗" data-zh="实现笔记 ↗">Implementation notes ↗</span></a><a href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/demos/ai-stream"><span data-en="Source &amp; tests ↗" data-zh="源码与测试 ↗">Source &amp; tests ↗</span></a></div><details class="project-details"><summary data-zh="技术细节与使用说明" data-en="Technical details and usage">Technical details and usage</summary><div class="tags"><span>React</span><span>Ant Design</span><span>TypeScript</span><span>AbortController</span></div></details></div></article>
+
+          <article class="project-item" data-category="research" id="project-kicp">
+
+            <div class="project-media code-preview"><p class="preview-label">KICP / RESEARCH IMPLEMENTATION</p><pre><code>models/
+
+  CLIP representations
+
+  learned prompts
+
+  co-attention fusion
+
+knowledge/
+
+  retrieval embeddings
+
+train.py  →  test.py</code></pre><p class="preview-foot" data-en="Illustrative implementation map" data-zh="示意性实现地图">Illustrative implementation map</p><p class="preview-note" data-en="A conceptual guide to method components; the complete repository structure and personal code contributions remain to be verified." data-zh="用于说明方法组件的对应关系；完整仓库结构与个人代码贡献仍待核实。">A conceptual guide to method components; the complete repository structure and personal code contributions remain to be verified.</p></div>
+
+            <div class="project-body"><h3 data-zh="KICP · 多模态虚假新闻检测" data-en="KICP · Multimodal fake-news detection">KICP · Multimodal fake-news detection</h3><p data-en="Classification experiments using CLIP image/text features, prompt learning and co-attention. The repository lists required data and models; the research page explains its relation to the paper archive." data-zh="用 CLIP 图文特征、提示学习和协同注意力开展分类实验。仓库列出所需数据与模型，研究页解释与论文实验存档的对应关系。">Classification experiments using CLIP image/text features, prompt learning and co-attention. The repository lists required data and models; the research page explains its relation to the paper archive.</p><p class="source-note research-role-note" data-en="Related implementation for the revised Neurocomputing study. Read the study overview for findings, scope and the distinction between this code and the complete experimental archive." data-zh="修订后投稿 Neurocomputing 研究的关联实现。研究解读说明发现、适用边界，以及本仓库与完整实验存档的区别。">Related implementation for the revised Neurocomputing study. Read the study overview for findings, scope and the distinction between this code and the complete experimental archive.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>PyTorch</span><span>CLIP</span><span>Prompt learning</span></div></details><div class="project-links"><a href="https://github.com/GuHang2011/KICP" data-en="Code &amp; requirements ↗" data-zh="代码与运行要求 ↗">Code &amp; requirements ↗</a><a href="index.html#research" data-en="Related research ↑" data-zh="关联研究 ↑">Related research ↑</a></div></div>
+
+          </article>
+
+          <article class="project-item" data-category="engineering" id="project-file-inventory"><figure class="project-media"><a href="cases/file-inventory/" aria-label="File inventory case" data-en-label="File inventory case" data-zh-label="文件盘点工具案例"><img src="assets/inventory-report.svg" width="800" height="500" loading="lazy" alt="Synthetic inventory report: 4 files, 40 bytes" data-en-alt="Synthetic inventory report: 4 files, 40 bytes" data-zh-alt="合成盘点报告示意：4 个文件，40 字节"></a><figcaption data-en="Synthetic example · not a personal disk report" data-zh="合成示例 · 非个人磁盘报告">Synthetic example · not a personal disk report</figcaption></figure><div class="project-body"><h3 data-en="File inventory tool" data-zh="文件目录盘点工具">File inventory tool</h3><p data-en="Choose a directory and exclusions to produce a grouped file report. Read errors are recorded and results use a stable order. The tool does not move or delete files." data-zh="指定目录和排除规则，生成按类型分组的文件报告。读取失败会留下记录，报告按固定顺序输出；工具不移动或删除文件。">Choose a directory and exclusions to produce a grouped file report. Read errors are recorded and results use a stable order. The tool does not move or delete files.</p><p class="source-note" data-en="Includes a synthetic example and regression checks. Logical length is not allocated space; no large-directory performance claim." data-zh="提供合成示例与回归检查；逻辑长度不等于实际占用，未进行大目录性能测试。">Includes a synthetic example and regression checks. Logical length is not allocated space; no large-directory performance claim.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>Python</span><span>CLI</span><span>unittest</span><span>GitHub Actions</span></div></details><div class="project-links"><a href="cases/file-inventory/"><span data-en="Case &amp; interactive example ↗" data-zh="案例与交互样例 ↗">Case &amp; interactive example ↗</span></a><a href="https://github.com/GuHang2011/windows-file-organization-toolkit"><span data-en="Source &amp; usage ↗" data-zh="源码与用法 ↗">Source &amp; usage ↗</span></a><a href="notebook/inventory-scope-review.html"><span data-en="Engineering reflection ↗" data-zh="工程心得 ↗">Engineering reflection ↗</span></a></div></div></article>
+
+          <article class="project-item" data-category="learning" id="project-kapt">
+
+            <div class="project-media kapt-preview"><p class="preview-label">KAPT / REPRODUCIBILITY LAB</p><ol class="kapt-preview-route"><li><span>01</span><strong data-en="Validation selection" data-zh="验证集选择">Validation selection</strong></li><li><span>02</span><strong data-en="ID-aligned predictions" data-zh="样本对齐的预测">ID-aligned predictions</strong></li><li><span>03</span><strong data-en="Reproducible checks" data-zh="可复现检查">Reproducible checks</strong></li></ol><p class="preview-foot" data-en="KANO-derived local study · Synthetic fixtures" data-zh="基于 KANO 的本地学习 · 合成样例">KANO-derived local study · Synthetic fixtures</p></div>
+
+            <div class="project-body"><h3 data-zh="KAPT · 模型评估学习案例" data-en="KAPT · Model evaluation exercises">KAPT · Model evaluation exercises</h3><p data-en="Small tools adapted from a local KANO/KAPT project: replay early stopping, align predictions by sample ID and calculate an ensemble." data-zh="从本地 KANO/KAPT 项目整理的小工具：回放早停过程，按样本编号对齐预测，再计算集成结果。">Small tools adapted from a local KANO/KAPT project: replay early stopping, align predictions by sample ID and calculate an ensemble.</p><p class="source-note" data-en="KANO is the third-party upstream. The public lab documents local changes; it does not claim a reproduced molecular benchmark or an original KANO model." data-zh="KANO 为第三方上游；公开实验室说明本地改造，不宣称已复现分子基准成绩或原创 KANO 模型。">KANO is the third-party upstream. The public lab documents local changes; it does not claim a reproduced molecular benchmark or an original KANO model.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>Python</span><span>PyTorch</span><span>Prediction ensembles</span></div></details><div class="project-links"><a href="cases/kapt/" data-en="Case &amp; early-stopping demo ↗" data-zh="案例与早停演示 ↗">Case &amp; early-stopping demo ↗</a><a href="https://github.com/GuHang2011/KAPT" data-en="Source &amp; reproduction ↗" data-zh="代码与复现说明 ↗">Source &amp; reproduction ↗</a><a href="https://github.com/GuHang2011/KAPT/blob/main/docs/reproduction.md" data-en="Reproduction guide ↗" data-zh="复现指南 ↗">Reproduction guide ↗</a><a href="https://github.com/GuHang2011/KAPT/blob/main/docs/verification.json" data-en="Verification records ↗" data-zh="验证记录 ↗">Verification records ↗</a></div></div>
+
+          </article>
+
+          <article class="project-item" data-category="engineering" id="project-silkroad">
+
+            <figure class="project-media"><button type="button" data-preview="assets/silkroad/login-desktop.jpg" aria-label="Preview Silk Road Intelligence" data-en-label="Preview Silk Road Intelligence" data-zh-label="放大丝路智链截图"><img src="assets/optimized/silkroad-login-desktop.webp" alt="Silk Road Intelligence login: China–Kazakhstan theme and empty sign-in form" data-en-alt="Silk Road Intelligence login: China–Kazakhstan theme and empty sign-in form" data-zh-alt="丝路智链登录界面：中哈主题与空白登录表单" loading="lazy" width="1280" height="720" decoding="async"></button><figcaption data-en="Application interface · Empty sign-in form" data-zh="应用实拍界面 · 空白登录表单">Application interface · Empty sign-in form</figcaption></figure>
+
+            <div class="project-body"><h3 data-en="Silk Road · Order workflow teaching system" data-zh="丝路智链 · 订单教学系统">Silk Road · Order workflow teaching system</h3><p data-en="Follow an order through marketing review, checkout, inspection, logistics and after-sales. Includes desktop/mobile screens and a virtual presenter demo." data-zh="围绕一笔订单练习营销审核、下单、质检、物流和售后。可查看桌面与手机界面，以及虚拟主播组件演示。">Follow an order through marketing review, checkout, inspection, logistics and after-sales. Includes desktop/mobile screens and a virtual presenter demo.</p><p class="source-note" data-en="Desktop and mobile interface gallery; business views use synthetic fixtures. Payment and device flows are simulations." data-zh="展示桌面与手机界面，业务截图使用合成样例；支付与设备流程为教学仿真。">Desktop and mobile interface gallery; business views use synthetic fixtures. Payment and device flows are simulations.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>Vue 3</span><span>Spring Boot</span><span>MySQL</span><span>Idempotency</span></div></details><div class="project-links"><a href="cases/silkroad/" data-en="Explore screenshots &amp; case ↗" data-zh="查看截图与案例 ↗">Explore screenshots &amp; case ↗</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/cases/silkroad" data-en="Engineering notes &amp; evidence ↗" data-zh="工程笔记与证据 ↗">Engineering notes &amp; evidence ↗</a></div></div>
+
+          </article>
+
+          <article class="project-item" data-category="engineering" id="project-archive">
+
+            <div class="project-media archive-preview" aria-label="Archive lifecycle"><p class="preview-label">COLLEGE ARCHIVE / FILE LIFECYCLE</p><div class="file-row"><span class="file-icon">PDF</span><div><strong>teaching-material.pdf</strong><small data-en="Version 02 · Synthetic sample" data-zh="版本 02 · 合成样例">Version 02 · Synthetic sample</small></div><span class="status" data-tone="green" data-en="Approved" data-zh="已审核">Approved</span></div><ol class="archive-steps"><li data-en="Upload &amp; scope check" data-zh="上传与范围检查">Upload &amp; scope check</li><li data-en="Version relationship" data-zh="版本关系">Version relationship</li><li data-en="Review &amp; audit trail" data-zh="审核与操作留痕">Review &amp; audit trail</li></ol><p class="preview-foot" data-en="Interface concept · Not an application screenshot" data-zh="流程示意 · 非应用截图">Interface concept · Not an application screenshot</p></div>
+
+            <div class="project-body"><h3 data-en="College Materials Archive" data-zh="学院资料归档系统">College Materials Archive</h3><p data-en="Organize teaching files by person and college, manage versions and record reviews. The case explains permission checks for search, download and export." data-zh="按教师和学院整理资料，处理同名文件版本与审核记录。案例重点说明搜索、下载和导出时的权限检查。">Organize teaching files by person and college, manage versions and record reviews. The case explains permission checks for search, download and export.</p><p class="source-note" data-en="Source-reviewed case; no integration test rerun. Original configurations, attachments and database are excluded." data-zh="依据源码审阅整理，未重跑集成测试。原始配置、附件与数据库不公开。">Source-reviewed case; no integration test rerun. Original configurations, attachments and database are excluded.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>Vue 3</span><span>Spring Boot</span><span>File versioning</span><span>Authorization</span></div></details><div class="project-links"><a href="cases/archive/" data-en="Case &amp; synthetic demo ↗" data-zh="案例与合成演示 ↗">Case &amp; synthetic demo ↗</a><a href="cases/college-archive.md" data-en="Engineering note ↗" data-zh="工程笔记 ↗">Engineering note ↗</a></div></div>
+
+          </article>
+
+          <article class="project-item" data-category="learning" id="project-frontend-data">
+
+            <div class="project-media lab-preview"><p class="preview-label">FRONTEND &amp; DATA LAB</p><dl><div><dt>01</dt><dd>CSV → SQLite → JSON</dd></div><div><dt>02</dt><dd data-en="Dashboard &amp; dynamic form" data-zh="数据看板与动态表单">Dashboard &amp; dynamic form</dd></div><div><dt>03</dt><dd data-en="Annotation &amp; model evaluation" data-zh="标注与模型评估">Annotation &amp; model evaluation</dd></div></dl><p class="preview-foot" data-en="Synthetic data · Reproducible examples" data-zh="合成数据 · 可复现示例">Synthetic data · Reproducible examples</p></div>
+
+            <div class="project-body"><h3 data-zh="前端与数据实验集" data-en="Frontend and data exercises">Frontend and data exercises</h3><p data-en="Practise interfaces with small dashboards and forms, then explore data cleaning, annotation checks and web crawling. Includes fixed examples and study notes." data-zh="用小型看板和表单练习前端交互，再做数据清洗、标注质量检查和网页采集。代码附固定样例与学习笔记。">Practise interfaces with small dashboards and forms, then explore data cleaning, annotation checks and web crawling. Includes fixed examples and study notes.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>SQLite</span><span>JavaScript</span><span>Data quality</span></div></details><div class="project-links"><a href="https://guhang2011.github.io/frontend-data-lab/" data-en="Online dashboard ↗" data-zh="在线看板 ↗">Online dashboard ↗</a><a href="https://guhang2011.github.io/frontend-data-lab/demos/form/" data-en="Dynamic form ↗" data-zh="动态表单 ↗">Dynamic form ↗</a><a href="https://github.com/GuHang2011/frontend-data-lab" data-en="Code &amp; notes ↗" data-zh="代码与笔记 ↗">Code &amp; notes ↗</a><a href="https://github.com/GuHang2011/frontend-data-lab/blob/main/REVIEWER_ENTRY.md" data-en="Reviewer reading guide ↗" data-zh="评审阅读指南 ↗">Reviewer reading guide ↗</a></div></div>
+
+          </article>
+
+          <article class="project-item" data-category="learning" id="project-react-workflow">
+
+            <figure class="project-media"><a href="demos/react-workflow/"><img src="assets/demo-gallery/react-workflow.webp" alt="React Workflow Board: four synthetic workflow states" data-en-alt="React Workflow Board: four synthetic workflow states" data-zh-alt="React 工作流面板：四种合成任务状态" loading="lazy" width="1036" height="511" decoding="async"></a><figcaption data-en="Actual browser capture · Synthetic example" data-zh="浏览器实拍 · 合成示例">Actual browser capture · Synthetic example</figcaption></figure>
+
+            <div class="project-body"><h3 data-en="React review workspace" data-zh="React 审核工作台">React review workspace</h3><p data-zh="筛选待审核记录，提交处理意见，模拟请求失败和版本冲突，再比较重试、刷新与重置的结果。" data-en="Filter a review queue and submit decisions. Simulate request failures or version conflicts, then compare retry, refresh and reset.">Filter a review queue and submit decisions. Simulate request failures or version conflicts, then compare retry, refresh and reset.</p><p class="source-note" data-en="Learning prototype with synthetic data. The checks here cover the browser, not backend authorization." data-zh="学习原型，使用合成数据；这里的检查只覆盖浏览器端。">Learning prototype with synthetic data. The checks here cover the browser, not backend authorization.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>React</span><span>TypeScript</span><span>State machine</span><span>Accessibility</span></div><dl class="project-case-facts"><dt data-en="Problem" data-zh="问题">Problem</dt><dd data-en="Explain what happens when an approval fails or its version is stale." data-zh="审核失败或版本过期时，让用户知道如何恢复。">Explain what happens when an approval fails or its version is stale.</dd><dt data-en="Public implementation" data-zh="公开实现">Public implementation</dt><dd data-en="React + Ant Design UI, pure reducer, request tokens and keyboard focus." data-zh="React + Ant Design 界面、纯 reducer、请求令牌与键盘焦点。">React + Ant Design UI, pure reducer, request tokens and keyboard focus.</dd><dt data-en="Trade-off" data-zh="取舍">Trade-off</dt><dd data-en="One pending action; a conflict requires refresh and a fresh decision." data-zh="单个待处理操作；冲突后先刷新，再重新确认审核。">One pending action; a conflict requires refresh and a fresh decision.</dd><dt data-en="Evidence" data-zh="验证">Evidence</dt><dd data-en="8 model tests rerun on 1 Nov; interactive review linked below." data-zh="11 月 1 日重跑 8 项模型测试；下方附可操作的复盘。">8 model tests rerun on 1 Nov; interactive review linked below.</dd></dl></details><div class="project-links"><a href="demos/react-workflow/" data-en="Online interaction ↗" data-zh="在线交互 ↗">Online interaction ↗</a><a href="notebook/workflow-recovery-review.html" data-en="Decisions &amp; checks ↗" data-zh="复盘与验证 ↗">Decisions &amp; checks ↗</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/react-workflow/src/App.tsx" data-en="React source ↗" data-zh="React 源码 ↗">React source ↗</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/react-workflow/README.md" data-en="Engineering notes ↗" data-zh="工程说明 ↗">Engineering notes ↗</a></div></div>
+
+          </article>
+
+
+
+          <article class="project-item" data-category="engineering" id="project-ai-office">
+
+            <figure class="project-media"><a href="https://github.com/GuHang2011/engineering-notes/blob/main/notes/personal-ai-keys.md"><img src="assets/ai-settings-desktop.png" alt="AI workspace settings with hidden personal key, endpoint controls and connection feedback" data-en-alt="AI workspace settings with hidden personal key, endpoint controls and connection feedback" data-zh-alt="AI 工作区设置：隐藏的个人密钥、服务地址配置与连接反馈" loading="lazy"></a><figcaption data-en="Local UI test fixture · Synthetic connection response" data-zh="本地界面测试夹具 · 模拟连接响应">Local UI test fixture · Synthetic connection response</figcaption></figure>
+
+            <div class="project-body"><h3 data-en="Personal AI workspace" data-zh="个人 AI 工作台">Personal AI workspace</h3><p data-en="An AI module inside the archive system: connect a personal model endpoint and generate editable presentation drafts. Credentials belong to individual accounts; users confirm send and save actions." data-zh="资料归档系统内的 AI 模块：连接个人模型接口，生成可编辑的 PPT 草稿。模型密钥按账号保存，发送和保存由用户确认。">An AI module inside the archive system: connect a personal model endpoint and generate editable presentation drafts. Credentials belong to individual accounts; users confirm send and save actions.</p><p class="source-note" data-en="Existing feature within the archive system, not a standalone deployed product. Public material is an engineering case, notes and synthetic evidence; mock-provider tests did not use a real key." data-zh="这是归档系统既有功能模块，并非独立部署产品。公开材料是工程案例、笔记和合成证据；模拟服务测试未使用真实密钥。">Existing feature within the archive system, not a standalone deployed product. Public material is an engineering case, notes and synthetic evidence; mock-provider tests did not use a real key.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>Spring Boot</span><span>AES-GCM</span><span>Endpoint policy</span><span>Human review</span><span>PPTX</span></div></details><div class="project-links"><a href="https://github.com/GuHang2011/engineering-notes/blob/main/notes/personal-ai-keys.md" data-en="Read architecture &amp; evidence ↗" data-zh="阅读架构与证据 ↗">Read architecture &amp; evidence ↗</a><a href="https://github.com/GuHang2011/engineering-notes/blob/main/notes/personal-ai-keys.md" data-en="Key-handling notes ↗" data-zh="密钥处理笔记 ↗">Key-handling notes ↗</a><a href="https://github.com/GuHang2011/engineering-notes/blob/main/notes/human-reviewed-ai-workflows.md" data-en="Human-review notes ↗" data-zh="人工审核笔记 ↗">Human-review notes ↗</a></div></div>
+
+          </article>
+
 <article class="project-item" data-category="learning" id="project-reliability-gates">
+
+
 
             <div class="project-media lab-preview"><p class="preview-label">RELIABILITY GATE / LEARNING LAB</p><dl><div><dt>01</dt><dd data-en="Input quality and missing data" data-zh="输入质量与缺失">Input quality and missing data</dd></div><div><dt>02</dt><dd data-en="Confidence and disagreement" data-zh="置信度与分歧">Confidence and disagreement</dd></div><div><dt>03</dt><dd data-en="Output or request review" data-zh="自动输出或请求复核">Output or request review</dd></div></dl><p class="preview-foot" data-en="Synthetic inputs · Inspectable rules" data-zh="合成输入 · 可查看规则">Synthetic inputs · Inspectable rules</p></div><div class="project-body"><h3 data-en="Multimodal review decision demo" data-zh="多模态结果复核实验">Multimodal review decision demo</h3><p data-en="Adjust quality, confidence and disagreement to see which synthetic examples produce an output and which require human review." data-zh="拖动质量、置信度和分歧参数，观察哪些合成样例会自动输出，哪些需要人工复核。">Adjust quality, confidence and disagreement to see which synthetic examples produce an output and which require human review.</p><p class="source-note" data-en="Synthetic educational example. It explains state logic and does not report a trained emotion-recognition result." data-zh="合成教学示例，用于解释状态逻辑，不报告已训练情绪识别模型的结果。">Synthetic educational example. It explains state logic and does not report a trained emotion-recognition result.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>JavaScript</span><span>Calibration</span><span>Risk–coverage</span><span>Accessibility</span></div></details><div class="project-links"><a href="demos/reliability-gates/" data-en="Open online lab ↗" data-zh="打开在线实验 ↗">Open online lab ↗</a><a href="notebook/multimodal-gates.html" data-en="Read the learning note ↗" data-zh="阅读配套笔记 ↗">Read the learning note ↗</a><a href="research/statement.html" data-en="See proposed question ↗" data-zh="查看拟研究问题 ↗">See proposed question ↗</a></div></div>
 
+
+
           </article>
+
           <article class="project-item" data-category="engineering" id="project-counselor-demo">
+
             <figure class="project-media"><button type="button" data-preview="assets/counselor-mobile.png" aria-label="Preview mobile dashboard"><img class="mobile-shot" src="assets/optimized/counselor-mobile.webp" alt="Mobile counselor dashboard with synthetic demonstration content" data-en-alt="Mobile counselor dashboard with synthetic demonstration content" data-zh-alt="手机端辅导员工作台，使用合成演示内容" loading="lazy" width="390" height="1275" decoding="async"></button><figcaption data-en="Responsive workflow · Mobile evidence" data-zh="响应式工作流 · 手机布局证据">Responsive workflow · Mobile evidence</figcaption></figure>
+
             <div class="project-body"><h3 data-zh="辅导员任务流转演示" data-en="Counselor task workflow demo">Counselor task workflow demo</h3><p data-en="Switch roles and inspect task transfers, version conflicts and retries. Try the workflow before reading the counselor case." data-zh="切换角色，查看任务移交、版本冲突和失败重试的处理。适合先体验流程，再阅读辅导员系统案例。">Switch roles and inspect task transfers, version conflicts and retries. Try the workflow before reading the counselor case.</p><p class="source-note" data-en="The online showcase is a static synthetic sample. The screenshot above comes from the newer local application, not the static demo." data-zh="在线展示为静态合成样例。图片来自较新的本地应用，并非静态演示的截图。">The online showcase is a static synthetic sample. The screenshot above comes from the newer local application, not the static demo.</p><div class="project-links"><a href="https://guhang2011.github.io/counselor-workflow-showcase/" data-en="Open showcase ↗" data-zh="打开交互展示 ↗">Open showcase ↗</a><a href="https://github.com/GuHang2011/counselor-workflow-showcase" data-en="Contracts &amp; tests ↗" data-zh="契约与测试 ↗">Contracts &amp; tests ↗</a></div></div>
+
           </article>
+
 <article class="project-item" data-category="engineering" id="project-early-frontend"><div class="project-media lab-preview"><p class="preview-label">FRONTEND ENGINEERING / ARCHIVE</p><dl><div><dt>01 / 02</dt><dd><span data-en="Desktop &amp; mobile production reporting" data-zh="PC / 移动端生产反馈">Desktop &amp; mobile production reporting</span></dd></div><div><dt>03</dt><dd><span data-en="Factory administration" data-zh="工厂后台管理">Factory administration</span></dd></div><div><dt>04</dt><dd><span data-en="Telecom service interfaces" data-zh="电信业务界面">Telecom service interfaces</span></dd></div></dl><p class="preview-foot"><span data-en="Historical experience · CV-based descriptions" data-zh="历史项目经历 · 依据旧简历整理">Historical experience · CV-based descriptions</span></p></div><div class="project-body"><h3 data-en="Earlier frontend projects" data-zh="早期前端项目">Earlier frontend projects</h3><p data-en="Desktop and mobile production reporting, the Siyue administration system and fixed-network services. Each case describes the pages, business logic and technology stack I worked on." data-zh="生产反馈 PC 端与移动端、思悦后台管理系统、固网开发平台。按项目整理当时负责的页面、业务逻辑和技术栈。">Desktop and mobile production reporting, the Siyue administration system and fixed-network services. Each case describes the pages, business logic and technology stack I worked on.</p><p class="source-note" data-en="Descriptions from a historical CV. Related public demos are separate learning examples." data-zh="根据旧简历整理；关联公开 Demo 属于独立学习示例。">Descriptions from a historical CV. Related public demos are separate learning examples.</p><details class="project-details"><summary data-en="Technical details and usage" data-zh="技术细节与使用说明">Technical details and usage</summary><div class="tags"><span>Vue / Vuex</span><span>Element UI</span><span>Mobile CSS</span><span>Fish / Handlebars</span></div></details><div class="project-links"><a href="cases/early-frontend/"><span data-en="Read four project cases ↗" data-zh="阅读四个项目案例 ↗">Read four project cases ↗</span></a><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/cases/early-frontend/README.md"><span data-en="Project documentation ↗" data-zh="项目整理文档 ↗">Project documentation ↗</span></a></div></div></article>
+
         </div>
+
         <details class="latest-materials latest-editorial latest-disclosure" aria-labelledby="latest-materials-title"><summary class="latest-heading"><span id="latest-materials-title" data-en="Updates worth a closer look" data-zh="近期值得一看">Updates worth a closer look</span><time datetime="2026-11-04">2026.11.04</time><span class="latest-disclosure-mark" aria-hidden="true">+</span></summary><div class="latest-grid"><article class="latest-lead"><p class="latest-meta">PYTHON / FILE INVENTORY</p><h4 data-en="File inventory tool" data-zh="文件盘点工具">File inventory tool</h4><p data-en="Exact exclusions, stable reports and regression checks. Explore a five-file example before running it on your own project." data-zh="新增路径排除、稳定排序和回归检查。先用 5 个合成文件读懂报告，再用于自己的项目。">Exact exclusions, stable reports and regression checks. Explore a five-file example before running it on your own project.</p><ul class="latest-topics"><li data-en="Standard library" data-zh="标准库实现">Standard library</li><li data-en="Synthetic example" data-zh="合成样例">Synthetic example</li><li data-en="Windows + Linux CI" data-zh="跨平台 CI">Windows + Linux CI</li></ul><div class="latest-links"><a href="cases/file-inventory/#example"><span data-en="Try the example ↗" data-zh="体验交互样例 ↗">Try the example ↗</span></a><a href="https://github.com/GuHang2011/windows-file-organization-toolkit"><span data-en="Read the source →" data-zh="查看工具源码 →">Read the source →</span></a></div></article><article><p class="latest-meta">FIELDLENS / v1.9.1</p><h4 data-en="A complete demo, without login" data-zh="禾镜：免登录体验完整巡检流程">A complete demo, without login</h4><p data-en="Twelve preset inspection cases connect detection, region reviews, reports and dashboard views. Demo edits stay in an isolated tab session with a reset option." data-zh="12 条预置案例串起检测、区域复核、报告和大屏；演示修改仅在当前标签页的独立空间暂存，并可重置。">Twelve preset inspection cases connect detection, region reviews, reports and dashboard views. Demo edits stay in an isolated tab session with a reset option.</p><a href="cases/fieldlens/#online-demo"><span data-en="Explore the demo workflow ↗" data-zh="查看演示流程 ↗">Explore the demo workflow ↗</span></a></article><article><p class="latest-meta"><span data-en="READING / 47 NOTES" data-zh="学习记录 / 47 篇">READING / 47 NOTES</span></p><h4 data-en="Read the reasoning behind a feature" data-zh="从功能实现读到工程取舍">Read the reasoning behind a feature</h4><p data-en="New inventory reflections join notes on task permissions, read state and backup recovery." data-zh="新增文件统计范围心得，连接事项权限、通知状态和备份恢复复盘。">New inventory reflections join notes on task permissions, read state and backup recovery.</p><div class="latest-links"><a href="notebook/inventory-scope-review.html"><span data-en="Read the inventory note ↗" data-zh="阅读文件盘点笔记 ↗">Read the inventory note ↗</span></a><a href="teaching/"><span data-en="Teaching materials →" data-zh="教学资料 →">Teaching materials →</span></a></div></article></div></details>
 
+
+
 <div class="project-empty" data-project-empty hidden><p data-en="No matching projects." data-zh="没有匹配的项目。">No matching projects.</p><button type="button" data-reset-projects data-en="Show all projects" data-zh="查看全部项目">Show all projects</button></div>
+
         <div class="verification-strip" id="verification-records"><span class="section-number" data-en="VERIFICATION RECORDS" data-zh="验证记录">VERIFICATION RECORDS</span><a href="https://github.com/GuHang2011/KAPT/blob/main/docs/verification.json"><strong>KAPT</strong><span data-en="31 Python checks · synthetic fixtures" data-zh="31 项 Python 检查 · 合成样例">31 Python checks · synthetic fixtures</span><span aria-hidden="true">↗</span></a><a href="cases/examples/README.md"><strong data-en="Release gate" data-zh="发布校验">Release gate</strong><span data-en="Artifact hashes &amp; acceptance scope" data-zh="产物哈希与验收范围">Artifact hashes &amp; acceptance scope</span><span aria-hidden="true">↗</span></a></div>
+
       <details class="portfolio-depth visual-disclosure"><summary data-en="How the engineering pieces fit together" data-zh="展开工程能力与交付流程">How the engineering pieces fit together</summary><section class="section engineering-section" id="engineering" aria-labelledby="engineering-title">
+
       <div class="wrap">
+
         <div class="section-heading engineering-heading">
+
           <div><h2 id="engineering-title" data-en="Find projects by technical topic" data-zh="按技术问题找项目">Find projects by technical topic</h2></div>
+
           <p data-en="Browse interface, data, model and release examples below." data-zh="下面按界面、数据、模型和发布整理阅读入口。">Browse interface, data, model and release examples below.</p>
+
         </div>
+
         <div class="engineering-grid">
+
           <article class="engineering-card engineering-card-ui">
+
             <div class="engineering-card-top"><span class="engineering-mark">UI</span><span class="engineering-index">01</span></div>
+
             <h3 data-en="Forms and interface state" data-zh="表单与交互状态">Forms and interface state</h3>
+
             <p data-en="Dynamic forms, role-scoped states, accessible controls and browser checks make interaction rules visible before release." data-zh="用动态表单、角色状态、无障碍控件和浏览器检查，把交互规则在发布前变得可见。">Dynamic forms, role-scoped states, accessible controls and browser checks make interaction rules visible before release.</p>
+
             <a href="#project-counselor" data-en="Open workflow case ↗" data-zh="查看工作流案例 ↗">Open workflow case ↗</a>
+
           </article>
+
           <article class="engineering-card engineering-card-data">
+
             <div class="engineering-card-top"><span class="engineering-mark">DATA</span><span class="engineering-index">02</span></div>
+
             <h3 data-en="Cleaning and annotation checks" data-zh="数据清洗与标注检查">Cleaning and annotation checks</h3>
+
             <p data-en="Deterministic cleaning, annotation agreement, quarantine records and bounded crawling turn messy inputs into traceable examples." data-zh="用固定种子清洗、标注一致性、隔离记录和有边界采集，把杂乱输入变成可追溯样例。">Deterministic cleaning, annotation agreement, quarantine records and bounded crawling turn messy inputs into traceable examples.</p>
+
             <a href="#project-frontend-data" data-en="Open data lab ↗" data-zh="查看数据实验室 ↗">Open data lab ↗</a>
+
           </article>
+
           <article class="engineering-card engineering-card-model">
+
             <div class="engineering-card-top"><span class="engineering-mark">MODEL</span><span class="engineering-index">03</span></div>
+
             <h3 data-en="Evaluation before storytelling" data-zh="先评估，再讲故事">Evaluation before storytelling</h3>
+
             <p data-en="Baselines, validation sensitivity, threshold choice and error analysis keep model demos separate from unsupported performance claims." data-zh="用基线、验证敏感性、阈值选择和误差分析，让模型演示与未经支持的性能主张分开。">Baselines, validation sensitivity, threshold choice and error analysis keep model demos separate from unsupported performance claims.</p>
+
             <a href="#demos" data-en="Try model experiments ↗" data-zh="试用模型实验 ↗">Try model experiments ↗</a>
+
           </article>
+
           <article class="engineering-card engineering-card-release">
+
             <div class="engineering-card-top"><span class="engineering-mark">SHIP</span><span class="engineering-index">04</span></div>
+
             <h3 data-en="Evidence-shaped delivery" data-zh="让交付带着证据">Evidence-shaped delivery</h3>
+
             <p data-en="Release gates, hashes, scope notes and synthetic fixtures make it clear what was checked, what was excluded and what remains open." data-zh="用发布门禁、哈希、范围说明和合成样例，清楚交代检查了什么、排除了什么、还缺什么。">Release gates, hashes, scope notes and synthetic fixtures make it clear what was checked, what was excluded and what remains open.</p>
+
             <a href="#verification-records" data-en="See verification records ↗" data-zh="查看验证记录 ↗">See verification records ↗</a>
+
           </article>
+
         </div>
+
         <div class="engineering-loop" aria-label="Engineering delivery loop">
+
           <div class="engineering-loop-label"><span class="section-number" data-en="REUSABLE DELIVERY LOOP" data-zh="可复用交付循环">REUSABLE DELIVERY LOOP</span><strong data-en="Question → contract → check → explain" data-zh="问题 → 契约 → 检查 → 解释">Question → contract → check → explain</strong></div>
+
           <ol class="engineering-loop-steps">
+
             <li><span>01</span><strong data-en="Frame" data-zh="定义问题">Frame</strong><small data-en="state the user or research question" data-zh="说清用户或研究问题">state the user or research question</small></li>
+
             <li><span>02</span><strong data-en="Specify" data-zh="写下契约">Specify</strong><small data-en="make inputs, states and limits explicit" data-zh="明确输入、状态和边界">make inputs, states and limits explicit</small></li>
+
             <li><span>03</span><strong data-en="Check" data-zh="执行检查">Check</strong><small data-en="run focused tests and inspect failures" data-zh="运行重点测试并检查失败">run focused tests and inspect failures</small></li>
+
             <li><span>04</span><strong data-en="Explain" data-zh="留下证据">Explain</strong><small data-en="publish scope, evidence and next work" data-zh="公开范围、证据与下一步">publish scope, evidence and next work</small></li>
+
           </ol>
+
         </div>
+
       </div>
+
     </section>
+
     </details><details class="portfolio-depth visual-disclosure decision-disclosure"><summary><span data-en="Project highlights &amp; design notes" data-zh="项目亮点与设计复盘">Project highlights &amp; design notes</span><span data-en="4 examples" data-zh="4 个实例" class="decision-summary-count">4 examples</span></summary><section class="section highlight-section decision-section" id="highlights" aria-labelledby="highlights-title"><div class="wrap">
+
   <div class="decision-heading"><div><h2 data-en="The decisions behind the work" data-zh="项目里的关键设计" id="highlights-title">The decisions behind the work</h2></div><p data-en="Explore the implementation, checks and design choices." data-zh="从实现到验证，看看项目背后的设计取舍。">Explore the implementation, checks and design choices.</p></div>
+
   <div class="highlight-carousel decision-carousel" data-highlight-carousel tabindex="0" role="region" aria-roledescription="carousel" aria-label="Project decisions" data-en-label="Project decisions" data-zh-label="项目设计亮点">
+
     <div class="decision-navigation" data-highlight-controls hidden><div class="decision-tabs" role="tablist" aria-label="Choose a project highlight" data-en-label="Choose a project highlight" data-zh-label="选择项目亮点"><button type="button" role="tab" id="highlight-dot-research" data-highlight-dot="0" aria-controls="highlight-slide-research" aria-selected="true"><span class="decision-tab-number" aria-hidden="true">01</span><span data-en="Research audit" data-zh="研究复核">Research audit</span></button><button type="button" role="tab" id="highlight-dot-delivery" data-highlight-dot="1" aria-controls="highlight-slide-delivery" aria-selected="false"><span class="decision-tab-number" aria-hidden="true">02</span><span data-en="Engineering delivery" data-zh="工程交付">Engineering delivery</span></button><button type="button" role="tab" id="highlight-dot-data" data-highlight-dot="2" aria-controls="highlight-slide-data" aria-selected="false"><span class="decision-tab-number" aria-hidden="true">03</span><span data-en="Data quality" data-zh="数据质量">Data quality</span></button><button type="button" role="tab" id="highlight-dot-review" data-highlight-dot="3" aria-controls="highlight-slide-review" aria-selected="false"><span class="decision-tab-number" aria-hidden="true">04</span><span data-en="Human review" data-zh="人工审核">Human review</span></button></div></div>
+
     <div class="highlight-viewport" data-highlight-viewport><article class="highlight-slide is-active" id="highlight-slide-research" data-highlight-slide="0" aria-labelledby="highlight-title-research">
+
   <div class="highlight-copy"><p data-en="RESEARCH / 01" data-zh="研究 / 01" class="highlight-kicker">RESEARCH / 01</p><h3 data-en="Revisit the training evidence" data-zh="重新检查训练结果" id="highlight-title-research">Revisit the training evidence</h3><p data-en="Reanalyze 344 archived runs to distinguish fusion effects, operating-point changes and data artifacts." data-zh="重分析 344 次归档训练运行，区分融合机制、决策工作点变化和数据伪线索。" class="decision-description">Reanalyze 344 archived runs to distinguish fusion effects, operating-point changes and data artifacts.</p><p data-en="Submitted to Neurocomputing; not accepted." data-zh="已投稿 Neurocomputing，尚未录用。" class="highlight-evidence">Submitted to Neurocomputing; not accepted.</p><a href="research/fusion-audit.html"><span data-en="Read the research analysis" data-zh="查看研究分析">Read the research analysis</span><span aria-hidden="true">↗</span></a></div>
+
   <div class="decision-visual decision-visual--research"><div class="decision-visual-heading"><span data-en="ANALYSIS MAP" data-zh="复核路径">ANALYSIS MAP</span><span class="decision-label">Frozen CLIP</span></div>
+
 <div class="audit-sample"><strong>344</strong><div><span data-en="archived training runs" data-zh="次归档训练运行">archived training runs</span><small data-en="Reanalysis of existing experiments" data-zh="对已有实验重新分析">Reanalysis of existing experiments</small></div></div>
+
 <ul class="decision-checklist"><li><span class="decision-step-number" aria-hidden="true">01</span><div><strong data-en="Fusion mechanism" data-zh="融合机制">Fusion mechanism</strong><p data-en="Compare representation and fusion choices" data-zh="比较表示与融合方式">Compare representation and fusion choices</p></div></li><li><span class="decision-step-number" aria-hidden="true">02</span><div><strong data-en="Operating point" data-zh="决策工作点">Operating point</strong><p data-en="Separate threshold effects from model effects" data-zh="区分阈值变化与模型效果">Separate threshold effects from model effects</p></div></li><li><span class="decision-step-number" aria-hidden="true">03</span><div><strong data-en="Data artifacts" data-zh="数据伪线索">Data artifacts</strong><p data-en="Inspect patterns that can distort evaluation" data-zh="检查可能影响评估的数据特征">Inspect patterns that can distort evaluation</p></div></li></ul></div>
+
 </article><article class="highlight-slide" id="highlight-slide-delivery" data-highlight-slide="1" aria-labelledby="highlight-title-delivery">
+
   <div class="highlight-copy"><p data-en="ENGINEERING / 02" data-zh="工程 / 02" class="highlight-kicker">ENGINEERING / 02</p><h3 data-en="U Mobile: integration and first load" data-zh="U Mobile：联调与首屏优化" id="highlight-title-delivery">U Mobile: integration and first load</h3><p data-en="Interface contracts and performance work supported onboarding-system delivery. The comparison shows the project figures recorded in my CV." data-zh="围绕开户系统的接口契约和页面性能开展优化，让联调边界更清楚、首屏加载更快。右侧为简历中记录的前后指标。" class="decision-description">Interface contracts and performance work supported onboarding-system delivery. The comparison shows the project figures recorded in my CV.</p><p data-en="Historical project figures from my CV." data-zh="历史项目指标，来源为个人简历。" class="highlight-evidence">Historical project figures from my CV.</p><a href="index.html#background"><span data-en="View engineering experience" data-zh="查看工程经历">View engineering experience</span><span aria-hidden="true">↗</span></a></div>
+
   <div class="decision-visual decision-visual--delivery"><div class="decision-visual-heading"><span data-en="BEFORE / AFTER" data-zh="项目记录 · 前后对比">BEFORE / AFTER</span><span class="decision-label">U Mobile</span></div>
+
 <div class="delivery-comparison"><div class="comparison-heading"><span></span><span data-en="Before" data-zh="优化前">Before</span><span data-en="After" data-zh="优化后">After</span></div>
+
 <div class="comparison-row"><strong data-en="Integration" data-zh="接口联调">Integration</strong><div><b>15</b><span data-en="days" data-zh="天">days</span></div><div class="comparison-after"><b>10</b><span data-en="days" data-zh="天">days</span></div></div>
+
 <div class="comparison-row"><strong data-en="First load" data-zh="首屏加载">First load</strong><div><b>2.8</b><span data-en="sec" data-zh="秒">sec</span></div><div class="comparison-after"><b>1.2</b><span data-en="sec" data-zh="秒">sec</span></div></div></div>
+
 <p data-en="Source: project figures in my CV; measurement logs are not public." data-zh="来源：简历中的项目记录，测量日志未公开。" class="decision-visual-note">Source: project figures in my CV; measurement logs are not public.</p></div>
+
 </article><article class="highlight-slide" id="highlight-slide-data" data-highlight-slide="2" aria-labelledby="highlight-title-data">
+
   <div class="highlight-copy"><p data-en="DATA / 03" data-zh="数据 / 03" class="highlight-kicker">DATA / 03</p><h3 data-en="Make every processing decision traceable" data-zh="让每条数据的处理可追溯" id="highlight-title-data">Make every processing decision traceable</h3><p data-en="Inspect validation and conflicts record by record. This teaching example retains 10 records and quarantines 7, with a reason for each decision." data-zh="逐条检查字段与冲突。在这份教学样例中，10 条记录保留、7 条记录隔离，每一步都有可查的处理原因。" class="decision-description">Inspect validation and conflicts record by record. This teaching example retains 10 records and quarantines 7, with a reason for each decision.</p><p data-en="Synthetic data; runnable teaching example." data-zh="合成数据，可运行的教学样例。" class="highlight-evidence">Synthetic data; runnable teaching example.</p><a href="demos/data-preparation/"><span data-en="Try the data workflow" data-zh="体验数据工作流">Try the data workflow</span><span aria-hidden="true">↗</span></a></div>
+
   <div class="decision-visual decision-visual--data"><div class="decision-visual-heading"><span data-en="TRACEABLE PROCESSING" data-zh="每条记录都有去向">TRACEABLE PROCESSING</span><span data-en="Synthetic example" data-zh="合成样例" class="decision-label">Synthetic example</span></div>
+
 <div class="quality-input"><strong>17</strong><span data-en="input records" data-zh="条输入记录">input records</span></div>
+
 <div class="quality-check"><span data-en="Validation · deduplication · conflict checks" data-zh="字段校验 · 去重 · 冲突检查">Validation · deduplication · conflict checks</span></div>
+
 <div class="quality-branches"><div><span data-en="Retained" data-zh="保留">Retained</span><strong>10</strong><small data-en="Valid records for aggregation" data-zh="合格记录进入汇总">Valid records for aggregation</small></div><div><span data-en="Quarantined" data-zh="隔离">Quarantined</span><strong>7</strong><small data-en="Reasons kept for review" data-zh="记录原因，等待复核">Reasons kept for review</small></div></div>
+
 <p data-en="Reconciliation: 10 + 7 = 17. Every record is accounted for." data-zh="数量核对：10 + 7 = 17，每条记录都可追溯。" class="decision-visual-note">Reconciliation: 10 + 7 = 17. Every record is accounted for.</p></div>
+
 </article><article class="highlight-slide" id="highlight-slide-review" data-highlight-slide="3" aria-labelledby="highlight-title-review">
+
   <div class="highlight-copy"><p data-en="AI ENGINEERING / 04" data-zh="AI 工程 / 04" class="highlight-kicker">AI ENGINEERING / 04</p><h3 data-en="Put review between drafting and sending" data-zh="让 AI 草稿经过人工审核" id="highlight-title-review">Put review between drafting and sending</h3><p data-en="Keep drafts editable and save/send actions separate. The interface makes review an explicit step and limits the scope of provider keys." data-zh="保留可编辑草稿，把保存、发送做成独立操作。通过明确的审核步骤与密钥使用范围，让用户掌握内容的最终操作。" class="decision-description">Keep drafts editable and save/send actions separate. The interface makes review an explicit step and limits the scope of provider keys.</p><p data-en="Engineering module; checks use a mocked model provider." data-zh="工程模块；验证使用模拟模型服务。" class="highlight-evidence">Engineering module; checks use a mocked model provider.</p><a href="https://github.com/GuHang2011/engineering-notes/blob/main/notes/personal-ai-keys.md"><span data-en="Read the implementation" data-zh="阅读实现说明">Read the implementation</span><span aria-hidden="true">↗</span></a></div>
+
   <div class="decision-visual decision-visual--review"><div class="decision-visual-heading"><span data-en="REVIEW WORKFLOW" data-zh="从草稿到发送">REVIEW WORKFLOW</span><span data-en="Human in control" data-zh="人工确认" class="decision-label">Human in control</span></div>
+
 <ol class="review-path"><li><span class="decision-step-number" aria-hidden="true">01</span><div><strong data-en="Generate a draft" data-zh="生成草稿">Generate a draft</strong><p data-en="Keep the result editable" data-zh="保留可编辑的生成结果">Keep the result editable</p></div></li><li><span class="decision-step-number" aria-hidden="true">02</span><div><strong data-en="Review and edit" data-zh="人工核对与修改">Review and edit</strong><p data-en="Check the content before it is used" data-zh="核对内容，再决定是否采用">Check the content before it is used</p></div></li><li><span class="decision-step-number" aria-hidden="true">03</span><div><strong data-en="Confirm the action" data-zh="明确确认操作">Confirm the action</strong><p data-en="Save or send through separate actions" data-zh="保存与发送是独立动作">Save or send through separate actions</p></div></li></ol>
+
 <p data-en="Generation does not trigger sending. Provider access stays scoped." data-zh="生成草稿不会触发发送；模型服务密钥按范围使用。" class="decision-visual-note">Generation does not trigger sending. Provider access stays scoped.</p></div>
+
 </article></div>
+
     <div class="decision-playback" data-highlight-controls hidden><button type="button" class="decision-rotation" data-highlight-rotation>Start autoplay</button><div class="decision-pagination"><span class="decision-position" aria-hidden="true"><span data-highlight-current>01</span> / 04</span><button class="decision-arrow" type="button" data-highlight-prev aria-label="Previous highlight" data-en-label="Previous highlight" data-zh-label="上一项亮点">←</button><button class="decision-arrow" type="button" data-highlight-next aria-label="Next highlight" data-en-label="Next highlight" data-zh-label="下一项亮点">→</button></div></div>
+
     <p class="sr-only" data-highlight-status aria-live="polite" aria-atomic="true"></p>
+
   </div>
+
 </div></section>
 
+
+
     </details></div>
+
     </section>
+
     <section class="section surface demo-showcase" id="demos" aria-labelledby="demos-title"><div class="wrap">
+
   <div class="experience-heading">
+
     <div><h2 data-en="Try it yourself" data-zh="在线体验" id="demos-title">Try it yourself</h2><p data-en="Forms, workflows and data tools. Open a demo to explore." data-zh="表单、流程和数据工具，可以直接在浏览器里试用。" class="experience-intro">Forms, workflows and data tools. Open a demo to explore.</p></div>
+
     <div class="experience-heading-actions"><button class="experience-film" type="button" data-cinema-open aria-controls="cinema-panel" aria-expanded="false" hidden><span aria-hidden="true">▷</span><span data-en="Watch films" data-zh="观看短片">Watch films</span></button><a class="experience-directory" href="demos/"><span data-en="All 10 demos" data-zh="全部 10 个演示">All 10 demos</span><span aria-hidden="true">↗</span></a></div>
+
   </div>
+
   <div class="experience-toolbar" hidden data-demo-toolbar><div class="experience-filters" role="group" aria-label="Demo categories" data-en-label="Demo categories" data-zh-label="演示分类"><button type="button" data-demo-filter="featured" aria-pressed="true" aria-controls="experience-gallery"><span data-en="Selected" data-zh="精选体验">Selected</span><span class="experience-count" aria-hidden="true">4</span></button><button type="button" data-demo-filter="engineering" aria-pressed="false" aria-controls="experience-gallery"><span data-en="Engineering" data-zh="工程交互">Engineering</span><span class="experience-count" aria-hidden="true">4</span></button><button type="button" data-demo-filter="data" aria-pressed="false" aria-controls="experience-gallery"><span data-en="Data &amp; models" data-zh="数据与模型">Data &amp; models</span><span class="experience-count" aria-hidden="true">6</span></button><button type="button" data-demo-filter="creative" aria-pressed="false" aria-controls="experience-gallery"><span data-en="Virtual presenter" data-zh="虚拟主播">Virtual presenter</span><span class="experience-count" aria-hidden="true">1</span></button></div><p class="experience-result" data-demo-result role="status" aria-live="polite" aria-atomic="true"></p></div>
+
   <div class="experience-gallery" id="experience-gallery"><article class="experience-card" id="demo-meteoformer" data-demo-group="data" data-demo-featured="true" aria-labelledby="demo-title-meteoformer">
+
   <a class="experience-preview" href="https://guhang2011.github.io/meteoformer-weather-system/" aria-label="Open MeteoFormer weather demo" data-en-label="Open MeteoFormer weather demo" data-zh-label="打开 MeteoFormer 气象演示">
+
     <img src="https://raw.githubusercontent.com/GuHang2011/meteoformer-weather-system/main/assets/workspace-desktop.png" alt="Weather workspace with a map and point forecast; synthetic data" data-en-alt="Weather workspace with a map and point forecast; synthetic data" data-zh-alt="气象工作台：地图与单点预报，使用合成数据" width="1280" height="880" loading="lazy" decoding="async">
+
     <span class="experience-preview-link" aria-hidden="true">↗</span>
+
   </a>
+
   <div class="experience-body">
+
     <p class="experience-tech">Vue 3 · FastAPI · PyTorch</p>
+
     <h3 data-en="MeteoFormer weather workspace" data-zh="MeteoFormer 气象工作台" id="demo-title-meteoformer">MeteoFormer weather workspace</h3>
+
     <p data-en="View five forecast fields over NASA Blue Marble terrain and Natural Earth waterways. Switch basemaps, move the 24-hour timeline and query a grid point." data-zh="在 NASA Blue Marble 静态地形与 Natural Earth 水系上查看五种预报要素，切换底图、拖动 24 小时时效并查询格点。" class="experience-description">View five forecast fields over NASA Blue Marble terrain and Natural Earth waterways. Switch basemaps, move the 24-hour timeline and query a grid point.</p>
+
     <ol class="experience-steps" aria-label="Suggested steps" data-en-label="Suggested steps" data-zh-label="建议体验步骤"><li><span>01</span><span data-en="Choose a field" data-zh="切换要素">Choose a field</span></li><li><span>02</span><span data-en="Move the timeline" data-zh="拖动时效">Move the timeline</span></li><li><span>03</span><span data-en="Query a point" data-zh="查询单点">Query a point</span></li></ol>
+
     <p class="experience-description" data-en="Read-only synthetic snapshot; not live weather. Training and imports run in the local system." data-zh="在线版为合成数据只读快照，非实时天气；训练与导入在本地完整版运行。">Read-only synthetic snapshot; not live weather. Training and imports run in the local system.</p>
+
     <div class="experience-actions"><a class="experience-start" href="https://guhang2011.github.io/meteoformer-weather-system/"><span data-en="Start demo" data-zh="开始体验">Start demo</span><span aria-hidden="true">↗</span></a><a class="experience-source" href="https://github.com/GuHang2011/meteoformer-weather-system"><span data-en="Code &amp; notes" data-zh="代码与说明">Code &amp; notes</span><span aria-hidden="true">↗</span></a></div>
+
   </div>
+
 </article>
+
 <article class="experience-card" id="demo-production-workbench" data-demo-group="engineering" data-demo-featured="false" aria-labelledby="demo-title-production-workbench">
+
   <a class="experience-preview" href="demos/production-workbench/" aria-label="Open Production workbench" data-en-label="Open Production workbench" data-zh-label="打开生产报工工作台">
+
     <img src="assets/demo-gallery/production-workbench.webp" alt="Production workbench: current demo interface" data-en-alt="Production workbench: current demo interface" data-zh-alt="生产报工工作台：当前演示界面截图" width="1036" height="729" loading="lazy" decoding="async">
+
     <span class="experience-preview-link" aria-hidden="true">↗</span>
+
   </a>
+
   <div class="experience-body">
+
     <p data-en="Form states · recovery" data-zh="表单状态 · 故障恢复" class="experience-tech">Form states · recovery</p>
+
     <h3 data-en="Production workbench" data-zh="生产报工工作台" id="demo-title-production-workbench">Production workbench</h3>
+
     <p data-en="Submit a sample production report and follow validation, progress and recovery." data-zh="模拟一笔生产报工，观察输入校验、提交进度与失败后的重试。" class="experience-description">Submit a sample production report and follow validation, progress and recovery.</p>
+
     <ol class="experience-steps" aria-label="Suggested steps" data-en-label="Suggested steps" data-zh-label="建议体验步骤"><li><span aria-hidden="true">01</span><span data-en="Load sample" data-zh="载入示例">Load sample</span></li><li><span aria-hidden="true">02</span><span data-en="Simulate failure" data-zh="模拟失败">Simulate failure</span></li><li><span aria-hidden="true">03</span><span data-en="Retry" data-zh="重试提交">Retry</span></li></ol>
+
     <div class="experience-actions"><a class="experience-start" href="demos/production-workbench/"><span data-en="Start demo" data-zh="开始体验">Start demo</span><span aria-hidden="true">↗</span></a><a class="experience-source" href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/demos/production-workbench"><span data-en="Code &amp; notes" data-zh="代码与说明">Code &amp; notes</span><span aria-hidden="true">↗</span></a></div>
+
   </div>
+
 </article>
+
 <article class="experience-card" id="demo-react-workflow" data-demo-group="engineering" data-demo-featured="true" aria-labelledby="demo-title-react-workflow">
+
   <a class="experience-preview" href="demos/react-workflow/" aria-label="Open React workflow board" data-en-label="Open React workflow board" data-zh-label="打开React 工作流面板">
+
     <img src="assets/demo-gallery/react-workflow.webp" alt="React workflow board: current demo interface" data-en-alt="React workflow board: current demo interface" data-zh-alt="React 工作流面板：当前演示界面截图" width="1036" height="511" loading="lazy" decoding="async">
+
     <span class="experience-preview-link" aria-hidden="true">↗</span>
+
   </a>
+
   <div class="experience-body">
+
     <p data-en="React · Ant Design" data-zh="React · Ant Design" class="experience-tech">React · Ant Design</p>
+
     <h3 data-en="React workflow board" data-zh="React 工作流面板" id="demo-title-react-workflow">React workflow board</h3>
+
     <p data-en="Review tasks, switch roles and resolve a simulated version conflict." data-zh="切换审核角色，处理任务流转；主动触发版本冲突，查看恢复过程。" class="experience-description">Review tasks, switch roles and resolve a simulated version conflict.</p>
+
     <details class="experience-task"><summary data-en="Task · Recover a failed approval" data-zh="体验任务 · 恢复一次审核失败">Task · Recover a failed approval</summary><ol><li data-en="Reset; choose Network error, then approve WF-104." data-zh="重置；选择“网络错误”，通过 WF-104。">Reset; choose Network error, then approve WF-104.</li><li data-en="Choose Success and retry the action." data-zh="切回“正常响应”，再点击重试。">Choose Success and retry the action.</li><li data-en="Reset and try Version conflict; refresh before approving again." data-zh="重置后试“版本冲突”；先刷新快照，再重新通过。">Reset and try Version conflict; refresh before approving again.</li></ol><p class="experience-expected" data-en="Failure retains review/version 3; a successful retry reaches approved/version 4. Responses are simulated." data-zh="失败保留审核中／版本 3；成功重试后为已通过／版本 4。响应均为模拟。">Failure retains review/version 3; a successful retry reaches approved/version 4. Responses are simulated.</p></details><div class="experience-actions"><a class="experience-start" href="demos/react-workflow/"><span data-en="Start demo" data-zh="开始体验">Start demo</span><span aria-hidden="true">↗</span></a><a class="experience-source" href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/demos/react-workflow"><span data-en="Code &amp; notes" data-zh="代码与说明">Code &amp; notes</span><span aria-hidden="true">↗</span></a></div>
+
   </div>
+
 </article>
+
 <article class="experience-card" id="demo-virtual-host" data-demo-group="creative" data-demo-featured="false" aria-labelledby="demo-title-virtual-host">
+
   <a class="experience-preview" href="demos/virtual-host/" aria-label="Open Virtual presenter" data-en-label="Open Virtual presenter" data-zh-label="打开虚拟主播工作台">
+
     <img src="assets/demo-gallery/virtual-host.webp" alt="Virtual presenter: current demo interface" data-en-alt="Virtual presenter: current demo interface" data-zh-alt="虚拟主播工作台：当前演示界面截图" width="844" height="525" loading="lazy" decoding="async">
+
     <span class="experience-preview-link" aria-hidden="true">↗</span>
+
   </a>
+
   <div class="experience-body">
+
     <p data-en="Vue · Element Plus · Live2D" data-zh="Vue · Element Plus · Live2D" class="experience-tech">Vue · Element Plus · Live2D</p>
+
     <h3 data-en="Virtual presenter" data-zh="虚拟主播工作台" id="demo-title-virtual-host">Virtual presenter</h3>
+
     <p data-en="Meet the cartoon presenter, switch characters and follow synchronized narration and captions." data-zh="让卡通主播讲解项目，体验角色切换、章节定位和语音字幕联动。" class="experience-description">Meet the cartoon presenter, switch characters and follow synchronized narration and captions.</p>
+
     <ol class="experience-steps" aria-label="Suggested steps" data-en-label="Suggested steps" data-zh-label="建议体验步骤"><li><span aria-hidden="true">01</span><span data-en="Start narration" data-zh="开始讲解">Start narration</span></li><li><span aria-hidden="true">02</span><span data-en="Pick a chapter" data-zh="切换章节">Pick a chapter</span></li><li><span aria-hidden="true">03</span><span data-en="Adjust speed" data-zh="调整语速">Adjust speed</span></li></ol>
+
     <div class="experience-actions"><a class="experience-start" href="demos/virtual-host/"><span data-en="Start demo" data-zh="开始体验">Start demo</span><span aria-hidden="true">↗</span></a><a class="experience-source" href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/demos/virtual-host"><span data-en="Code &amp; notes" data-zh="代码与说明">Code &amp; notes</span><span aria-hidden="true">↗</span></a></div>
+
   </div>
+
 </article>
+
 <article class="experience-card" id="demo-telecom-service" data-demo-group="engineering" data-demo-featured="false" aria-labelledby="demo-title-telecom-service">
+
   <a class="experience-preview" href="demos/telecom-service/" aria-label="Open Telecom service desk" data-en-label="Open Telecom service desk" data-zh-label="打开电信业务办理台">
+
     <img src="assets/demo-gallery/telecom-service.webp" alt="Telecom service desk: current demo interface" data-en-alt="Telecom service desk: current demo interface" data-zh-alt="电信业务办理台：当前演示界面截图" width="1036" height="643" loading="lazy" decoding="async">
+
     <span class="experience-preview-link" aria-hidden="true">↗</span>
+
   </a>
+
   <div class="experience-body">
+
     <p data-en="Multi-step forms · review" data-zh="多步表单 · 订单复核" class="experience-tech">Multi-step forms · review</p>
+
     <h3 data-en="Telecom service desk" data-zh="电信业务办理台" id="demo-title-telecom-service">Telecom service desk</h3>
+
     <p data-en="Try installation, suspension or relocation, then review and resolve duplicate orders." data-zh="体验新装、停机与移机流程，在提交前复核订单并处理重复冲突。" class="experience-description">Try installation, suspension or relocation, then review and resolve duplicate orders.</p>
+
     <ol class="experience-steps" aria-label="Suggested steps" data-en-label="Suggested steps" data-zh-label="建议体验步骤"><li><span aria-hidden="true">01</span><span data-en="Find customer" data-zh="查询客户">Find customer</span></li><li><span aria-hidden="true">02</span><span data-en="Choose service" data-zh="选择业务">Choose service</span></li><li><span aria-hidden="true">03</span><span data-en="Review order" data-zh="复核订单">Review order</span></li></ol>
+
     <div class="experience-actions"><a class="experience-start" href="demos/telecom-service/"><span data-en="Start demo" data-zh="开始体验">Start demo</span><span aria-hidden="true">↗</span></a><a class="experience-source" href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/demos/telecom-service"><span data-en="Code &amp; notes" data-zh="代码与说明">Code &amp; notes</span><span aria-hidden="true">↗</span></a></div>
+
   </div>
+
 </article>
+
 <article class="experience-card" id="demo-low-code-form" data-demo-group="engineering" data-demo-featured="true" aria-labelledby="demo-title-low-code-form">
+
   <a class="experience-preview" href="demos/low-code-form/" aria-label="Open Low-code form studio" data-en-label="Open Low-code form studio" data-zh-label="打开低代码表单工作台">
+
     <img src="assets/demo-gallery/low-code-form.webp" alt="Low-code form studio: current demo interface" data-en-alt="Low-code form studio: current demo interface" data-zh-alt="低代码表单工作台：当前演示界面截图" width="948" height="744" loading="lazy" decoding="async">
+
     <span class="experience-preview-link" aria-hidden="true">↗</span>
+
   </a>
+
   <div class="experience-body">
+
     <p data-en="Schema · validation" data-zh="Schema · 字段校验" class="experience-tech">Schema · validation</p>
+
     <h3 data-en="Low-code form studio" data-zh="低代码表单工作台" id="demo-title-low-code-form">Low-code form studio</h3>
+
     <p data-en="Edit fields and rules, preview the form and inspect the generated JSON." data-zh="增删字段、调整校验规则，实时预览表单并检查生成的 JSON。" class="experience-description">Edit fields and rules, preview the form and inspect the generated JSON.</p>
+
     <details class="experience-task"><summary data-en="Task · Protect a form from a bad import" data-zh="体验任务 · 让错误导入保住原表单">Task · Protect a form from a bad import</summary><ol><li data-en="Enter a topic in the preview." data-zh="先在预览中填写主题。">Enter a topic in the preview.</li><li data-en="Apply invalid JSON or a schema with duplicate field keys." data-zh="应用无效 JSON，或含重复字段键的配置。">Apply invalid JSON or a schema with duplicate field keys.</li><li data-en="Apply a valid schema and compare the result." data-zh="再应用合法配置，比较结果。">Apply a valid schema and compare the result.</li></ol><p class="experience-expected" data-en="Invalid imports retain fields and input; valid imports reset preview values. Uses a custom teaching schema." data-zh="错误导入保留字段与输入；合法导入清空预览值。使用自定义教学配置。">Invalid imports retain fields and input; valid imports reset preview values. Uses a custom teaching schema.</p></details><div class="experience-actions"><a class="experience-start" href="demos/low-code-form/"><span data-en="Start demo" data-zh="开始体验">Start demo</span><span aria-hidden="true">↗</span></a><a class="experience-source" href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/demos/low-code-form"><span data-en="Code &amp; notes" data-zh="代码与说明">Code &amp; notes</span><span aria-hidden="true">↗</span></a></div>
+
   </div>
+
 </article>
+
 <article class="experience-card" id="demo-financial-analysis" data-demo-group="data" data-demo-featured="false" aria-labelledby="demo-title-financial-analysis">
+
   <a class="experience-preview" href="demos/financial-analysis/" aria-label="Open Financial ratio explorer" data-en-label="Open Financial ratio explorer" data-zh-label="打开财务比率探索">
+
     <img src="assets/demo-gallery/financial-analysis.webp" alt="Financial ratio explorer: current demo interface" data-en-alt="Financial ratio explorer: current demo interface" data-zh-alt="财务比率探索：当前演示界面截图" width="1120" height="744" loading="lazy" decoding="async">
+
     <span class="experience-preview-link" aria-hidden="true">↗</span>
+
   </a>
+
   <div class="experience-body">
+
     <p data-en="KMeans · PCA" data-zh="KMeans · PCA" class="experience-tech">KMeans · PCA</p>
+
     <h3 data-en="Financial ratio explorer" data-zh="财务比率探索" id="demo-title-financial-analysis">Financial ratio explorer</h3>
+
     <p data-en="Compare ratios for 24 fictional companies and explore clusters in a PCA projection." data-zh="比较 24 家虚构企业的财务比率，调整聚类参数，观察二维投影。" class="experience-description">Compare ratios for 24 fictional companies and explore clusters in a PCA projection.</p>
+
     <ol class="experience-steps" aria-label="Suggested steps" data-en-label="Suggested steps" data-zh-label="建议体验步骤"><li><span aria-hidden="true">01</span><span data-en="Select metrics" data-zh="选择指标">Select metrics</span></li><li><span aria-hidden="true">02</span><span data-en="Set clusters" data-zh="调整聚类">Set clusters</span></li><li><span aria-hidden="true">03</span><span data-en="Compare groups" data-zh="比较分布">Compare groups</span></li></ol>
+
     <div class="experience-actions"><a class="experience-start" href="demos/financial-analysis/"><span data-en="Start demo" data-zh="开始体验">Start demo</span><span aria-hidden="true">↗</span></a><a class="experience-source" href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/demos/financial-analysis"><span data-en="Code &amp; notes" data-zh="代码与说明">Code &amp; notes</span><span aria-hidden="true">↗</span></a></div>
+
   </div>
+
 </article>
+
 <article class="experience-card" id="demo-data-preparation" data-demo-group="data" data-demo-featured="true" aria-labelledby="demo-title-data-preparation">
+
   <a class="experience-preview" href="demos/data-preparation/" aria-label="Open Data quality audit" data-en-label="Open Data quality audit" data-zh-label="打开数据清洗与质量审计">
+
     <img src="assets/demo-gallery/data-preparation.webp" alt="Data quality audit: current demo interface" data-en-alt="Data quality audit: current demo interface" data-zh-alt="数据清洗与质量审计：当前演示界面截图" width="1120" height="744" loading="lazy" decoding="async">
+
     <span class="experience-preview-link" aria-hidden="true">↗</span>
+
   </a>
+
   <div class="experience-body">
+
     <p data-en="Data pipeline · traceability" data-zh="数据管道 · 可追溯处理" class="experience-tech">Data pipeline · traceability</p>
+
     <h3 data-en="Data quality audit" data-zh="数据清洗与质量审计" id="demo-title-data-preparation">Data quality audit</h3>
+
     <p data-en="Process missing values, duplicates and conflicts with a reason for every excluded row." data-zh="逐步处理缺失、重复与冲突记录，查看每条数据保留或隔离的原因。" class="experience-description">Process missing values, duplicates and conflicts with a reason for every excluded row.</p>
+
     <details class="experience-task"><summary data-en="Task · Trace one quarantined record" data-zh="体验任务 · 追踪一条被隔离的数据">Task · Trace one quarantined record</summary><ol><li data-en="Use the mixed synthetic fixture and the default policies." data-zh="使用混合合成样例与默认策略。">Use the mixed synthetic fixture and the default policies.</li><li data-en="Run through aggregation, then inspect the quarantine view." data-zh="运行到聚合阶段，查看隔离记录。">Run through aggregation, then inspect the quarantine view.</li><li data-en="Compare a missing amount with an observed zero." data-zh="比较缺失金额与实际零值的处理。">Compare a missing amount with an observed zero.</li></ol><p class="experience-expected" data-en="The default fixture yields 10 retained and 7 quarantined rows; observed zeros remain valid. No CSV upload is required." data-zh="默认样例保留 10 条、隔离 7 条；实际零值仍有效。无需上传 CSV。">The default fixture yields 10 retained and 7 quarantined rows; observed zeros remain valid. No CSV upload is required.</p></details><div class="experience-actions"><a class="experience-start" href="demos/data-preparation/"><span data-en="Start demo" data-zh="开始体验">Start demo</span><span aria-hidden="true">↗</span></a><a class="experience-source" href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/demos/data-preparation"><span data-en="Code &amp; notes" data-zh="代码与说明">Code &amp; notes</span><span aria-hidden="true">↗</span></a></div>
+
   </div>
+
 </article>
+
 <article class="experience-card" id="demo-model-evaluation" data-demo-group="data" data-demo-featured="false" aria-labelledby="demo-title-model-evaluation">
+
   <a class="experience-preview" href="demos/model-evaluation/" aria-label="Open Model evaluation lab" data-en-label="Open Model evaluation lab" data-zh-label="打开模型评估实验室">
+
     <img src="assets/demo-gallery/model-evaluation.webp" alt="Model evaluation lab: current demo interface" data-en-alt="Model evaluation lab: current demo interface" data-zh-alt="模型评估实验室：当前演示界面截图" width="1120" height="744" loading="lazy" decoding="async">
+
     <span class="experience-preview-link" aria-hidden="true">↗</span>
+
   </a>
+
   <div class="experience-body">
+
     <p data-en="ROC / PR · confusion matrix" data-zh="ROC / PR · 混淆矩阵" class="experience-tech">ROC / PR · confusion matrix</p>
+
     <h3 data-en="Model evaluation lab" data-zh="模型评估实验室" id="demo-title-model-evaluation">Model evaluation lab</h3>
+
     <p data-en="Adjust the classification threshold and compare precision, recall and confusion matrices." data-zh="拖动分类阈值，对照混淆矩阵与曲线，理解精确率和召回率的取舍。" class="experience-description">Adjust the classification threshold and compare precision, recall and confusion matrices.</p>
+
     <ol class="experience-steps" aria-label="Suggested steps" data-en-label="Suggested steps" data-zh-label="建议体验步骤"><li><span aria-hidden="true">01</span><span data-en="Pick a model" data-zh="选择模型">Pick a model</span></li><li><span aria-hidden="true">02</span><span data-en="Set threshold" data-zh="调整阈值">Set threshold</span></li><li><span aria-hidden="true">03</span><span data-en="Compare metrics" data-zh="比较指标">Compare metrics</span></li></ol>
+
     <div class="experience-actions"><a class="experience-start" href="demos/model-evaluation/"><span data-en="Start demo" data-zh="开始体验">Start demo</span><span aria-hidden="true">↗</span></a><a class="experience-source" href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/demos/model-evaluation"><span data-en="Code &amp; notes" data-zh="代码与说明">Code &amp; notes</span><span aria-hidden="true">↗</span></a></div>
+
   </div>
+
 </article>
+
 <article class="experience-card" id="demo-bleu-explorer" data-demo-group="data" data-demo-featured="false" aria-labelledby="demo-title-bleu-explorer">
+
   <a class="experience-preview" href="demos/bleu-explorer/" aria-label="Open BLEU score explorer" data-en-label="Open BLEU score explorer" data-zh-label="打开BLEU 翻译指标探索">
+
     <img src="assets/demo-gallery/bleu-explorer.webp" alt="BLEU score explorer: current demo interface" data-en-alt="BLEU score explorer: current demo interface" data-zh-alt="BLEU 翻译指标探索：当前演示界面截图" width="1120" height="744" loading="lazy" decoding="async">
+
     <span class="experience-preview-link" aria-hidden="true">↗</span>
+
   </a>
+
   <div class="experience-body">
+
     <p data-en="N-gram · brevity penalty" data-zh="N-gram · 长度惩罚" class="experience-tech">N-gram · brevity penalty</p>
+
     <h3 data-en="BLEU score explorer" data-zh="BLEU 翻译指标探索" id="demo-title-bleu-explorer">BLEU score explorer</h3>
+
     <p data-en="Edit a candidate translation and inspect n-gram matches and the brevity penalty." data-zh="修改候选译文，拆解 N-gram 匹配和长度惩罚，看看分数为何变化。" class="experience-description">Edit a candidate translation and inspect n-gram matches and the brevity penalty.</p>
+
     <ol class="experience-steps" aria-label="Suggested steps" data-en-label="Suggested steps" data-zh-label="建议体验步骤"><li><span aria-hidden="true">01</span><span data-en="Edit translation" data-zh="编辑译文">Edit translation</span></li><li><span aria-hidden="true">02</span><span data-en="Inspect matches" data-zh="查看匹配">Inspect matches</span></li><li><span aria-hidden="true">03</span><span data-en="Explain score" data-zh="分析得分">Explain score</span></li></ol>
+
     <div class="experience-actions"><a class="experience-start" href="demos/bleu-explorer/"><span data-en="Start demo" data-zh="开始体验">Start demo</span><span aria-hidden="true">↗</span></a><a class="experience-source" href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/demos/bleu-explorer"><span data-en="Code &amp; notes" data-zh="代码与说明">Code &amp; notes</span><span aria-hidden="true">↗</span></a></div>
+
   </div>
+
 </article>
+
 <article class="experience-card" id="demo-reliability-gates" data-demo-group="data" data-demo-featured="false" aria-labelledby="demo-title-reliability-gates">
+
   <a class="experience-preview" href="demos/reliability-gates/" aria-label="Open Reliability gate lab" data-en-label="Open Reliability gate lab" data-zh-label="打开多模态可靠性门禁">
+
     <img src="assets/demo-gallery/reliability-gates.webp" alt="Reliability gate lab: current demo interface" data-en-alt="Reliability gate lab: current demo interface" data-zh-alt="多模态可靠性门禁：当前演示界面截图" width="1120" height="744" loading="lazy" decoding="async">
+
     <span class="experience-preview-link" aria-hidden="true">↗</span>
+
   </a>
+
   <div class="experience-body">
+
     <p data-en="Evidence thresholds · review" data-zh="证据阈值 · 人工复核" class="experience-tech">Evidence thresholds · review</p>
+
     <h3 data-en="Reliability gate lab" data-zh="多模态可靠性门禁" id="demo-title-reliability-gates">Reliability gate lab</h3>
+
     <p data-en="Adjust evidence quality and missing modalities to inspect output, clarification and review gates." data-zh="调整证据质量与缺失模态，观察何时输出、补充信息或转人工复核。" class="experience-description">Adjust evidence quality and missing modalities to inspect output, clarification and review gates.</p>
+
     <ol class="experience-steps" aria-label="Suggested steps" data-en-label="Suggested steps" data-zh-label="建议体验步骤"><li><span aria-hidden="true">01</span><span data-en="Adjust evidence" data-zh="调整证据">Adjust evidence</span></li><li><span aria-hidden="true">02</span><span data-en="Toggle modalities" data-zh="切换模态">Toggle modalities</span></li><li><span aria-hidden="true">03</span><span data-en="Inspect decision" data-zh="查看决策">Inspect decision</span></li></ol>
+
     <div class="experience-actions"><a class="experience-start" href="demos/reliability-gates/"><span data-en="Start demo" data-zh="开始体验">Start demo</span><span aria-hidden="true">↗</span></a><a class="experience-source" href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/demos/reliability-gates"><span data-en="Code &amp; notes" data-zh="代码与说明">Code &amp; notes</span><span aria-hidden="true">↗</span></a></div>
+
   </div>
+
 </article></div>
+
   <div class="experience-footer"><p data-en="Public learning prototypes with synthetic data; network failures and order conflicts are simulated." data-zh="公开学习原型，使用合成数据；网络故障与订单冲突均为模拟。">Public learning prototypes with synthetic data; network failures and order conflicts are simulated.</p><a href="cases/kapt/#early-stopping"><span data-en="Also try: training early-stopping replay" data-zh="还可以试试：模型早停过程回放">Also try: training early-stopping replay</span><span aria-hidden="true">↗</span></a></div>
+
     <details class="portfolio-depth film-disclosure"><summary data-en="Watch four short project films" data-zh="观看四段项目短片">Watch four short project films</summary><div class="project-cinema" id="project-films" data-video-gallery>
+
         <div class="cinema-heading"><div><p class="section-number" data-en="PROJECTS IN MOTION" data-zh="用动画理解项目">PROJECTS IN MOTION</p><h3 data-en="Watch the reasoning unfold." data-zh="让过程，看得见。">Watch the reasoning unfold.</h3></div><p data-en="Four project videos · presenter demo &amp; engineering explainers" data-zh="四段项目短片 · 主播展示与工程讲解">Four project videos · presenter demo &amp; engineering explainers</p></div>
+
         <div class="film-tabs" data-video-tabs aria-label="Project walkthroughs" data-en-label="Project walkthroughs" data-zh-label="项目动画选择" hidden>
+
 <button type="button" id="film-tab-host" data-video-tab="film-host"><span class="film-number" aria-hidden="true">01</span><span data-en="Virtual presenter" data-zh="虚拟主播">Virtual presenter</span><span class="film-duration">1:41</span></button>
+
 <button type="button" id="film-tab-host-workflow" data-video-tab="film-host-workflow"><span class="film-number" aria-hidden="true">02</span><span data-en="Playback workflow" data-zh="主播操作流程">Playback workflow</span><span class="film-duration">1:00</span></button>
+
           <button type="button" id="film-tab-kapt" data-video-tab="film-kapt"><span class="film-number" aria-hidden="true">03</span><span data-en="Early stopping" data-zh="模型早停">Early stopping</span><span class="film-duration">18s</span></button>
+
           <button type="button" id="film-tab-data" data-video-tab="film-data"><span class="film-number" aria-hidden="true">04</span><span data-en="Data quality audit" data-zh="数据质量审计">Data quality audit</span><span class="film-duration">18s</span></button>
+
         </div>
+
 <div class="film-panel" id="film-host" data-video-panel><div class="film-screen"><video controls playsinline preload="none" width="1280" height="720" poster="assets/optimized/videos-virtual-host-showcase.webp?v=20261101" aria-labelledby="film-host-title" aria-describedby="film-host-summary"><source src="assets/videos/virtual-host-showcase.mp4?v=20261101" type="video/mp4"><track kind="captions" src="assets/videos/virtual-host-showcase.zh.vtt?v=20261101" srclang="zh" label="中文"><track kind="captions" src="assets/videos/virtual-host-showcase.en.vtt?v=20261101" srclang="en" label="English"><a href="assets/videos/virtual-host-showcase.mp4?v=20261101">Download MP4 / 下载视频</a></track></track></source></video></div><div class="film-copy"><p class="section-number">SILK ROAD / VIRTUAL PRESENTER</p><h4 data-en="Meet the presenter. Follow the implementation." data-zh="虚拟主播，讲清项目。" id="film-host-title">Meet the presenter. Follow the implementation.</h4><p data-en="Mao, an official Live2D sample character, presents six chapters in 101 seconds: product checks, script preparation, human review and playback control." data-zh="Mao 卡通主播用 101 秒讲解六个章节，涵盖商品核对、讲稿组织、人工检查与播放控制。" id="film-host-summary">Mao, an official Live2D sample character, presents six chapters in 101 seconds: product checks, script preparation, human review and playback control.</p><ol class="film-takeaways"><li data-en="Chinese synthesized narration" data-zh="中文合成配音">Chinese synthesized narration</li><li data-en="Six chapters with coordinated motion" data-zh="六个章节与联动动作">Six chapters with coordinated motion</li><li data-en="Bilingual script and playback controls" data-zh="双语讲稿与播放控制">Bilingual script and playback controls</li></ol><p data-en="Mao sample character © Live2D Inc. Public engineering demo with synthetic speech and amplitude-driven mouth movement; no photorealistic model inference." data-zh="Mao 为 Live2D Inc. 官方示例角色。展示合成语音与音量驱动口型的工程集成，未运行写实数字人模型。" class="source-note">Mao sample character © Live2D Inc. Public engineering demo with synthetic speech and amplitude-driven mouth movement; no photorealistic model inference.</p><div class="project-links"><a data-en="Try the presenter ↗" data-zh="在线操作主播 ↗" href="demos/virtual-host/">Try the presenter ↗</a><a data-en="Download MP4 ↓" data-zh="下载 MP4 ↓" href="assets/videos/virtual-host-showcase.mp4?v=20261101" download>Download MP4 ↓</a></div></div></div>
+
 <div class="film-panel" id="film-host-workflow" data-video-panel><div class="film-screen"><video controls playsinline preload="none" width="1280" height="720" poster="assets/optimized/videos-virtual-host-workflow.webp?v=20261101" aria-labelledby="film-host-workflow-title" aria-describedby="film-host-workflow-summary"><source src="assets/videos/virtual-host-workflow.mp4?v=20261101" type="video/mp4"><track kind="captions" src="assets/videos/virtual-host-workflow.zh.vtt?v=20261101" srclang="zh" label="中文"><track kind="captions" src="assets/videos/virtual-host-workflow.en.vtt?v=20261101" srclang="en" label="English"><a href="assets/videos/virtual-host-workflow.mp4?v=20261101">Download MP4 / 下载视频</a></track></track></source></video></div><div class="film-copy"><p class="section-number">SILK ROAD / VIRTUAL PRESENTER</p><h4 data-en="Pause, switch chapters, replay." data-zh="暂停、切换、重新播放。" id="film-host-workflow-title">Pause, switch chapters, replay.</h4><p data-en="A 60-second silent walkthrough: start, pause, choose chapters, compare Mao with Lin, reduce motion and restart." data-zh="60 秒操作回放：开始、暂停、章节定位、Mao 与小林切换、减少动作和重新播放。" id="film-host-workflow-summary">A 60-second silent walkthrough: start, pause, choose chapters, compare Mao with Lin, reduce motion and restart.</p><ol class="film-takeaways"><li data-en="Pause without losing position" data-zh="暂停并保留当前位置">Pause without losing position</li><li data-en="Switch presenters and chapters" data-zh="切换角色并定位章节">Switch presenters and chapters</li><li data-en="Restart the narration" data-zh="回到起点重新讲解">Restart the narration</li></ol><p data-en="Recorded walkthrough of the public demo with synthetic content. Each step has a text guide. Mao sample character © Live2D Inc." data-zh="公开交互样例的流程回放，使用合成内容，每一步附有文字说明。Mao 素材版权归 Live2D Inc.。" class="source-note">Recorded walkthrough of the public demo with synthetic content. Each step has a text guide. Mao sample character © Live2D Inc.</p><div class="project-links"><a data-en="Read the implementation ↗" data-zh="阅读实现说明 ↗" href="demos/virtual-host/README.md">Read the implementation ↗</a><a data-en="Download MP4 ↓" data-zh="下载 MP4 ↓" href="assets/videos/virtual-host-workflow.mp4?v=20261101" download>Download MP4 ↓</a></div></div></div>
+
         <div class="film-panel" id="film-kapt" data-video-panel>
+
           <div class="film-screen"><video controls playsinline preload="none" width="1280" height="720" poster="assets/optimized/videos-kapt-early-stopping.webp" aria-labelledby="film-kapt-title" aria-describedby="film-kapt-summary"><source src="assets/videos/kapt-early-stopping.mp4" type="video/mp4"><track kind="captions" src="assets/videos/kapt-early-stopping.en.vtt" srclang="en" label="English"><track kind="captions" src="assets/videos/kapt-early-stopping.zh.vtt" srclang="zh" label="中文"><a href="assets/videos/kapt-early-stopping.mp4" data-en="Download the early-stopping video" data-zh="下载早停演示视频">Download the early-stopping video</a></track></track></source></video></div>
+
           <div class="film-copy"><p class="section-number">KAPT / LEARNING LAB</p><h4 id="film-kapt-title" data-en="When should training stop?" data-zh="训练应该何时停止？">When should training stop?</h4><p id="film-kapt-summary" data-en="Follow validation loss, the best checkpoint and the patience counter. The best epoch is 5; the stop signal arrives at epoch 8." data-zh="跟随验证损失、最佳检查点与耐心计数器的变化：第 5 轮最优，第 8 轮触发停止。">Follow validation loss, the best checkpoint and the patience counter. The best epoch is 5; the stop signal arrives at epoch 8.</p><ol class="film-takeaways"><li data-en="Track validation loss" data-zh="观察验证损失">Track validation loss</li><li data-en="Count rounds without improvement" data-zh="累计未改善的轮次">Count rounds without improvement</li><li data-en="Keep the best checkpoint" data-zh="保留最佳检查点">Keep the best checkpoint</li></ol><p class="source-note" data-en="Computed by the interactive demo's logic with synthetic values; not a training run." data-zh="根据互动演示逻辑与合成数值生成，非真实训练记录。">Computed by the interactive demo's logic with synthetic values; not a training run.</p><div class="project-links"><a href="cases/kapt/#early-stopping" data-en="Adjust the parameters ↗" data-zh="亲自调节参数 ↗">Adjust the parameters ↗</a><a href="assets/videos/kapt-early-stopping.mp4" download data-en="Download MP4 ↓" data-zh="下载 MP4 ↓">Download MP4 ↓</a></div></div>
+
         </div>
+
         <div class="film-panel" id="film-data" data-video-panel>
+
           <div class="film-screen"><video controls playsinline preload="none" width="1280" height="720" poster="assets/optimized/videos-data-preparation-audit.webp" aria-labelledby="film-data-title" aria-describedby="film-data-summary"><source src="assets/videos/data-preparation-audit.mp4" type="video/mp4"><track kind="captions" src="assets/videos/data-preparation-audit.en.vtt" srclang="en" label="English"><track kind="captions" src="assets/videos/data-preparation-audit.zh.vtt" srclang="zh" label="中文"><a href="assets/videos/data-preparation-audit.mp4" data-en="Download the data quality video" data-zh="下载数据质量演示视频">Download the data quality video</a></track></track></source></video></div>
+
           <div class="film-copy"><p class="section-number">DATA / QUALITY AUDIT</p><h4 id="film-data-title" data-en="Every excluded row has a reason." data-zh="每条被隔离的数据，都有原因。">Every excluded row has a reason.</h4><p id="film-data-summary" data-en="Watch 17 input rows move through validation, deduplication and conflict checks: 10 retained, 7 quarantined, with an exact total of 47.50." data-zh="17 条输入依次经过校验、去重与冲突检查：保留 10 条，隔离 7 条，金额精确汇总为 47.50。">Watch 17 input rows move through validation, deduplication and conflict checks: 10 retained, 7 quarantined, with an exact total of 47.50.</p><ol class="film-takeaways"><li data-en="Validate fields and missing values" data-zh="检查字段与缺失值">Validate fields and missing values</li><li data-en="Separate duplicates and conflicts" data-zh="区分重复与冲突">Separate duplicates and conflicts</li><li data-en="Reconcile rows and totals" data-zh="核对行数与汇总金额">Reconcile rows and totals</li></ol><p class="source-note" data-en="Generated from the demo pipeline using fictional records; no production data." data-zh="根据演示管道与虚构记录生成，不包含生产数据。">Generated from the demo pipeline using fictional records; no production data.</p><div class="project-links"><a href="demos/data-preparation/" data-en="Inspect each stage ↗" data-zh="逐步检查数据 ↗">Inspect each stage ↗</a><a href="assets/videos/data-preparation-audit.mp4" download data-en="Download MP4 ↓" data-zh="下载 MP4 ↓">Download MP4 ↓</a></div></div>
+
         </div>
+
       </div>
+
       </details></div></section>
+
     </main><footer class="site-footer"><div class="wrap folio-footer"><p>Hang Gu · 顾航</p><nav aria-label="Site directory"><a href="projects.html" data-en="Projects" data-zh="全部项目">Projects</a><a href="notebook/" data-en="Notes" data-zh="全部笔记">Notes</a><a href="research/cv.html" data-en="CV" data-zh="简历">CV</a><a href="https://github.com/GuHang2011" data-en="GitHub" data-zh="GitHub">GitHub</a></nav><p><span data-en="Updated" data-zh="更新于">Updated</span> 2026.11.07</p></div></footer><button type="button" class="back-top icon-button" aria-label="Back to top" title="Back to top"><img src="assets/icons/arrow-up.svg" alt=""></button>
+
   <dialog class="lightbox" aria-label="Project screenshot"><button class="lightbox-close icon-button" type="button" aria-label="Close preview" title="Close preview"><img src="assets/icons/x.svg" alt=""></button><img class="lightbox-image" alt=""><p></p></dialog>
 
+
+
   <aside class="floating-cinema" data-project-cinema data-open="false" hidden aria-label="Project cinema" data-en-label="Project cinema" data-zh-label="项目放映室">
+
     <div class="cinema-launcher" data-cinema-launcher>
+
       <button type="button" class="cinema-launch" aria-label="Open project films" data-en-label="Open project films" data-zh-label="打开项目短片" data-cinema-toggle aria-controls="cinema-panel" aria-expanded="false">
+
         <span class="cinema-launch-icon" aria-hidden="true"><svg viewbox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="4"></rect><path d="m10 9 5 3-5 3Z" fill="currentColor" stroke="none"></path></svg></span>
+
         <span><strong data-en="Project cinema" data-zh="项目放映室">Project cinema</strong><small data-en="4 short films · open to watch" data-zh="4 段项目短片 · 点击观看">4 short films · open to watch</small></span>
+
         <span class="cinema-launch-arrow" aria-hidden="true">↗</span>
+
       </button>
+
       <button type="button" class="cinema-icon-button cinema-dismiss" data-cinema-dismiss aria-label="Hide player for this visit" data-en-label="Hide player for this visit" data-zh-label="本次访问隐藏播放器"><span aria-hidden="true">×</span></button>
+
     </div>
+
     <section class="cinema-panel" id="cinema-panel" data-cinema-panel hidden aria-labelledby="cinema-heading" tabindex="-1">
+
       <header class="cinema-header"><div><p>PROJECTS / IN MOTION</p><h2 id="cinema-heading" data-en="Project cinema" data-zh="项目放映室">Project cinema</h2></div><div class="cinema-window-actions">
+
         <button type="button" class="cinema-icon-button" data-cinema-minimize aria-label="Minimize and pause" data-en-label="Minimize and pause" data-zh-label="收起并暂停"><span aria-hidden="true">−</span></button>
+
         <button type="button" class="cinema-icon-button" data-cinema-dismiss aria-label="Hide player for this visit" data-en-label="Hide player for this visit" data-zh-label="本次访问隐藏播放器"><span aria-hidden="true">×</span></button>
+
       </div></header>
+
       <div class="cinema-screen" data-cinema-screen></div>
+
       <div class="cinema-content">
+
         <div class="cinema-current"><span class="cinema-counter" data-cinema-counter>01 / 04</span><h3 id="cinema-title" data-cinema-title></h3></div>
+
         <p id="cinema-summary" class="cinema-summary" data-cinema-summary></p>
+
         <label class="visually-hidden" for="cinema-select" data-en="Choose a project film" data-zh="选择项目短片">Choose a project film</label>
+
         <div class="cinema-navigation"><button type="button" class="cinema-icon-button" data-cinema-prev aria-label="Previous film" data-en-label="Previous film" data-zh-label="上一段短片"><span aria-hidden="true">←</span></button><select id="cinema-select" data-cinema-select></select><button type="button" class="cinema-icon-button" data-cinema-next aria-label="Next film" data-en-label="Next film" data-zh-label="下一段短片"><span aria-hidden="true">→</span></button></div>
+
         <p class="cinema-status" data-cinema-status role="status" aria-live="polite" hidden></p>
+
         <div class="cinema-error-actions" data-cinema-error-actions hidden><button type="button" data-cinema-retry data-en="Reload video" data-zh="重新加载视频">Reload video</button><a data-cinema-file data-en="Open video file ↗" data-zh="打开视频文件 ↗">Open video file ↗</a></div>
+
         <div class="cinema-links"><a data-cinema-demo></a><a data-cinema-gallery data-en="Watch in page ↗" data-zh="在页面中观看 ↗">Watch in page ↗</a></div>
+
         <p class="cinema-note" data-en="Playback starts when you choose. Minimize to pause." data-zh="点击播放后开始；收起即暂停。">Playback starts when you choose. Minimize to pause.</p>
+
       </div>
+
     </section>
+
   </aside>
+
 </body>
+
 </html>
+
