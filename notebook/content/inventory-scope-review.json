@@ -5,8 +5,8 @@
   "kind": "reflection",
   "minutes": 6,
   "title": {
-    "en": "Before counting files, define the scan boundary",
-    "zh": "文件整理心得：先定义统计范围，再看容量数字"
+    "zh": "文件盘点：排除规则与容量统计",
+    "en": "File inventory: exclusions and size totals"
   },
   "summary": {
     "en": "A small Python inventory tool illustrates exclusions, report placement, stable sorting and why logical bytes are not freed disk space.",

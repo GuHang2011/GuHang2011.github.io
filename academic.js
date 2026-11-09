@@ -2,7 +2,7 @@
 
 (() => {
   const storageKey = "hang-gu-language";
-  let language = "en";
+  let language = (navigator.language || "").toLowerCase().startsWith("zh") ? "zh" : "en";
   const progress = document.querySelector(".reading-progress span");
   const menu = document.querySelector(".menu-toggle");
   const header = document.querySelector(".site-header");
@@ -124,7 +124,7 @@
   document.querySelectorAll("[data-language]").forEach(button => {
     button.addEventListener("click", () => setLanguage(button.dataset.language));
   });
-  try { if (localStorage.getItem(storageKey) === "zh") language = "zh"; } catch { /* Keep English by default. */ }
+  try { const saved = localStorage.getItem(storageKey); if (saved === "zh" || saved === "en") language = saved; } catch { /* Use the browser language when storage is unavailable. */ }
   setLanguage(language);
 
   document.querySelectorAll("[data-filter-group]").forEach(group => {

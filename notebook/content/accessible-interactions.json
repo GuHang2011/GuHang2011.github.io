@@ -1,8 +1,8 @@
 {
   "slug": "accessible-interactions",
   "title": {
-    "zh": "主页交互复盘：搜索、定位与可访问性",
-    "en": "Interface reflection: search, navigation and accessibility"
+    "zh": "主页交互检查：搜索、焦点与键盘操作",
+    "en": "Homepage interaction checks: search, focus and keyboard use"
   },
   "summary": {
     "zh": "从双语搜索和视频切换出发，梳理状态、焦点与减少动态效果之间的约束。",
@@ -11,7 +11,12 @@
   "category": "frontend",
   "kind": "reflection",
   "minutes": 8,
-  "tags": ["JavaScript", "Accessibility", "State", "Progressive enhancement"],
+  "tags": [
+    "JavaScript",
+    "Accessibility",
+    "State",
+    "Progressive enhancement"
+  ],
   "basis": {
     "zh": "依据本主页现有源码与交互测试整理的工程复盘；代码片段为教学简化，不是用户研究或性能实验。",
     "en": "An engineering reflection based on this site's source and interaction tests. The snippet is a simplified teaching example, not a user study or performance experiment."
@@ -19,7 +24,10 @@
   "sections": [
     {
       "id": "question",
-      "title": { "zh": "01 · 好看的页面，还要保住阅读位置", "en": "01 · Preserve the reader's place" },
+      "title": {
+        "zh": "01 · 好看的页面，还要保住阅读位置",
+        "en": "01 · Preserve the reader's place"
+      },
       "paragraphs": [
         {
           "zh": "导师可能先搜索技术词，再切换语言，最后通过链接跳到项目。若切换语言就丢失筛选条件，或链接指向仍被隐藏的内容，视觉再精致也会打断阅读。本次复盘把问题收敛为三件事：搜索状态是否稳定、定位是否可达、动态效果是否可跳过。",
@@ -29,7 +37,10 @@
     },
     {
       "id": "search-state",
-      "title": { "zh": "02 · 展示语言与搜索索引分开", "en": "02 · Separate display language from the search index" },
+      "title": {
+        "zh": "02 · 展示语言与搜索索引分开",
+        "en": "02 · Separate display language from the search index"
+      },
       "paragraphs": [
         {
           "zh": "academic.js 在初始化时把中英文说明合并成索引；切换语言只更新显示文字，不重建用户条件。查询与索引同时做 NFKC 规范化和小写转换，多个词采用全部匹配，再与类别条件相交。因此全角英文可以匹配，混合中英文查询也不会随语言切换消失。",
@@ -47,7 +58,10 @@
     },
     {
       "id": "navigation-focus",
-      "title": { "zh": "03 · URL、可见面板和焦点各有职责", "en": "03 · URLs, visible panels and focus serve different roles" },
+      "title": {
+        "zh": "03 · URL、可见面板和焦点各有职责",
+        "en": "03 · URLs, visible panels and focus serve different roles"
+      },
       "paragraphs": [
         {
           "zh": "视频区读取 #film-data 等锚点来选择面板，并响应 hashchange；方向键、Home 和 End 则同时移动选中项与键盘焦点。只有当前标签进入常规 Tab 顺序，隐藏面板的视频会暂停。清空搜索后焦点回到输入框，让键盘操作能自然接着进行。",
@@ -61,7 +75,10 @@
     },
     {
       "id": "motion",
-      "title": { "zh": "04 · 动画不应成为阅读前提", "en": "04 · Reading must not depend on animation" },
+      "title": {
+        "zh": "04 · 动画不应成为阅读前提",
+        "en": "04 · Reading must not depend on animation"
+      },
       "paragraphs": [
         {
           "zh": "内容默认出现在 HTML 中，脚本确认可以观察滚动后才添加入场状态。检测到 prefers-reduced-motion 时，跳过入场隐藏；CSS 也取消位移和延迟。偏好在页面打开后发生变化时，已有隐藏项会显现。视频使用原生控件，不自动播放。",
@@ -75,7 +92,10 @@
     },
     {
       "id": "verification",
-      "title": { "zh": "05 · 验证用户能完成的动作", "en": "05 · Verify actions a reader can complete" },
+      "title": {
+        "zh": "05 · 验证用户能完成的动作",
+        "en": "05 · Verify actions a reader can complete"
+      },
       "paragraphs": [
         {
           "zh": "既有交互测试覆盖混合语言查询、清空后的焦点、视频方向键、直接锚点和无脚本内容。复查时应按操作序列检查：先筛选，再切语言，再清空；不能只断言某个按钮存在。教学片段另用正例、负例、空查询和全角输入检查匹配规则。",
@@ -85,7 +105,10 @@
     },
     {
       "id": "limits-next",
-      "title": { "zh": "06 · 尚未回答的问题", "en": "06 · Questions still open" },
+      "title": {
+        "zh": "06 · 尚未回答的问题",
+        "en": "06 · Questions still open"
+      },
       "paragraphs": [
         {
           "zh": "DOM 测试能验证状态，却不能证明真实读屏体验、视频解码或手机触控都正确。后续应在浏览器中完成一次纯键盘阅读，并用读屏工具检查名称与状态播报。若笔记数量增长，再评估索引更新和搜索排序，而不是提前引入复杂框架。",
@@ -96,13 +119,21 @@
   ],
   "sources": [
     {
-      "label": { "zh": "本站 academic.js：搜索、焦点、视频与锚点逻辑", "en": "Site academic.js: search, focus, video and fragment handling" },
+      "label": {
+        "zh": "本站 academic.js：搜索、焦点、视频与锚点逻辑",
+        "en": "Site academic.js: search, focus, video and fragment handling"
+      },
       "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/academic.js"
     },
     {
-      "label": { "zh": "本站 academic.css：焦点样式与减少动态效果", "en": "Site academic.css: focus styles and reduced motion" },
+      "label": {
+        "zh": "本站 academic.css：焦点样式与减少动态效果",
+        "en": "Site academic.css: focus styles and reduced motion"
+      },
       "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/academic.css"
     }
   ],
-  "related": ["data-quality"]
+  "related": [
+    "data-quality"
+  ]
 }

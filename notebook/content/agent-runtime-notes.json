@@ -5,12 +5,12 @@
   "kind": "reflection",
   "minutes": 8,
   "title": {
-    "zh": "Agent 学习笔记：让一次运行有据可查",
-    "en": "Agent learning notes: make a run inspectable"
+    "zh": "笔记助手的实现记录：确认、重试和取消",
+    "en": "Building a note assistant: approval, retries and cancellation"
   },
   "summary": {
-    "zh": "用一个小型笔记助手记录工具边界、确认快照、重复写入和迟到结果。哪些做到了，哪些还只是下一步。",
-    "en": "A small reading assistant makes tool boundaries, approval snapshots, duplicate writes and late output concrete. What was implemented and what remains to be done."
+    "zh": "保存前如何确认，重复点击怎么处理，取消后迟到的结果会怎样？结合离线代码和 18 项测试逐个看。",
+    "en": "How does approval work? What happens after duplicate clicks or a late response? Walk through the offline implementation and its 18 tests."
   },
   "tags": [
     "Agent",
@@ -21,20 +21,20 @@
     "自动化测试"
   ],
   "basis": {
-    "zh": "基于本次新增的离线示例与实际执行的 18 项 Node.js 测试。模型决策由固定脚本模拟，资料为合成数据，草稿只在进程内保存。这里记录实现取舍，不把它写成生产系统经验。",
-    "en": "Based on the new offline exercise and 18 executed Node.js tests. Decisions are scripted, records are synthetic and drafts are process-local. These are implementation notes, not production experience."
+    "zh": "基于离线笔记助手及其 18 项 Node.js 测试。模型回复由脚本模拟，资料为合成数据，保存只发生在内存中。",
+    "en": "Based on the offline reading assistant and its 18 Node.js tests. Model responses are scripted, data is synthetic and saving is in memory."
   },
   "sections": [
     {
       "id": "first-run",
       "title": {
-        "zh": "第一次先看清楚发生了什么",
-        "en": "Make the first run observable"
+        "zh": "在终端里看一次调用",
+        "en": "Follow a call in the terminal"
       },
       "paragraphs": [
         {
-          "zh": "这个练习没有从聊天框开始。我先让终端显示一次调用经过了哪些步骤：查资料、提出草稿、等待确认、返回结果。这样“模型说保存了”和“工具真的写入了”就不会混在同一句话里。",
-          "en": "The exercise starts with a terminal trace rather than a chat box: retrieve records, propose a draft, await approval and return the result. This separates a statement about saving from a tool that actually stored something."
+          "zh": "运行示例时，终端会依次显示查找资料、提出草稿、等待确认和返回结果。检查是否保存成功，要看 drafts 里的记录；模型回复中的一句“已保存”不能代替写入结果。",
+          "en": "The terminal shows retrieval, a proposed draft, approval and the result. Check the drafts records to see whether saving succeeded; a model response saying “saved” is not a write result."
         },
         {
           "zh": "每个工具结果带一个 callId，错误也走同一条返回通道。没有检索结果时返回空数组，参数不合法时返回 INVALID_ARGUMENTS。调用方不必从一句自然语言里猜到底发生了什么。",
@@ -49,8 +49,8 @@
     {
       "id": "small-tools",
       "title": {
-        "zh": "工具少一点，问题反而容易看见",
-        "en": "Two tools are enough to reveal the boundaries"
+        "zh": "搜索和保存分别检查什么",
+        "en": "Checks for search and save"
       },
       "paragraphs": [
         {
@@ -119,10 +119,6 @@
         {
           "zh": "这些测试没有覆盖真实检索质量、模型事实准确性、供应商限流或跨进程恢复。进程退出后状态消失，同一内容跨会话也不会自动去重。要接实际业务，持久化和权限测试需要另外补。",
           "en": "The tests do not cover real retrieval quality, model factual accuracy, provider rate limits or cross-process recovery. State vanishes on exit and deduplication does not extend across sessions. Persistence and authorization tests are additional work."
-        },
-        {
-          "zh": "我更愿意把测试记录放在项目旁边，让读者知道具体跑过什么。只写“安全可靠”“支持智能决策”，别人仍然不知道系统遇到拒绝和中断时会怎样。",
-          "en": "A test record next to the code is more useful to a reader than broad reliability claims. It shows what happens when an action is refused or interrupted."
         }
       ]
     },
@@ -150,11 +146,7 @@
           "zh": "最后再决定是否引入 LangGraph 一类编排框架。出现需要持久化检查点、暂停恢复或复杂分支的具体需求后，再对照框架能力选择。框架不能替代工具权限与任务评估。",
           "en": "Consider an orchestration framework such as LangGraph once persistence, resumable pauses or branching justify it. Framework selection does not replace tool authorization or task evaluation."
         }
-      ],
-      "callout": {
-        "zh": "目前最想练熟的不是让 Agent 多做几个动作，而是把一个动作解释清楚：来源在哪里、谁允许执行、执行了几次、失败后留下了什么。",
-        "en": "The next learning goal is to explain one action clearly: its source, its authorization, how many times it ran and what remains after failure."
-      }
+      ]
     }
   ],
   "sources": [

@@ -133,8 +133,8 @@
       },
       "paragraphs": [
         {
-          "en": "The first question is not the number of GNN layers: it is whether the edge represents a defensible relationship at the time of prediction. A graph provenance sheet and a simple edge-removal example make that assumption easier to inspect than a visually dense network diagram.",
-          "zh": "首先要问的不是 GNN 堆了几层，而是预测当时这条边是否代表有依据的关系。构图来源表与简单删边例子，比一张密集网络图更方便读者检查假设。"
+          "zh": "构图时要记下每条边的来源，并确认这种关系在预测当时已经可知。可以先删去一类边比较输出，再考虑增加 GNN 层数。",
+          "en": "Record the source of each edge and check that the relationship was known at prediction time. Try removing one edge type and comparing outputs before adding GNN layers."
         }
       ]
     }

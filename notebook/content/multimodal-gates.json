@@ -1,12 +1,12 @@
 {
   "slug": "multimodal-gates",
   "title": {
-    "zh": "证据感知多模态决策：从质量信号到人工复核",
-    "en": "Evidence-aware multimodal decisions: from quality signals to review"
+    "zh": "多模态结果不一致时，怎样决定是否复核",
+    "en": "When multimodal results disagree: deciding what to review"
   },
   "summary": {
-    "zh": "把模态质量、缺失、跨模态分歧和校准置信度拆开，再用一个可操作的门禁决定自动输出还是请求复核。",
-    "en": "Separate modality quality, missing inputs, cross-modal disagreement and calibrated confidence, then use an inspectable gate to decide whether to output or request review."
+    "zh": "用合成数值调整模态质量、缺失和分歧，查看自动输出与人工复核的规则。附可操作示例。",
+    "en": "Adjust synthetic modality quality, missing inputs and disagreement to inspect rules for automatic output and human review. Includes an interactive example."
   },
   "category": "models",
   "kind": "study",

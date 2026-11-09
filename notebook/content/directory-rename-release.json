@@ -104,11 +104,7 @@
           "en": "The release history records Web/mobile type checks, 68 frontend logic checks, 63 backend tests, three builds and verification of 140 packaged files for v1.2.1. Version 1.2.2 repairs file mode and version consistency while referencing those earlier business checks.",
           "zh": "版本记录中，v1.2.1 在新目录下完成了 Web／移动端类型检查、68 项前端逻辑检查、63 项后端测试、三端构建，以及 140 份包内文件的校验。v1.2.2 修复文件模式和版本一致性，沿用此前的业务验证记录。"
         }
-      ],
-      "callout": {
-        "en": "The practical lesson is to treat a directory rename as a small migration: it changes both the paths readers follow and the paths machines execute.",
-        "zh": "这次整理最值得保留的经验：目录改名是一项小迁移。它同时影响读者找到代码的路径和机器执行代码的路径。"
-      }
+      ]
     }
   ],
   "sources": [

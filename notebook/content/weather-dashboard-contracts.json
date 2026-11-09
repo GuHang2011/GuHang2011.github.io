@@ -5,8 +5,8 @@
   "kind": "reflection",
   "minutes": 7,
   "title": {
-    "en": "A forecast dashboard should show what is known, and when",
-    "zh": "气象看板设计心得：让读者看清数值，也看清时效"
+    "zh": "气象看板：实况、预报和更新时间",
+    "en": "Weather dashboards: observations, forecasts and update times"
   },
   "summary": {
     "en": "Apply frontend experience to forecast interfaces: distinguish observations from forecasts, stale responses from current ones, and unavailable data from zero.",

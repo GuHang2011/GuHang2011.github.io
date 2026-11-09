@@ -1,5 +1,9 @@
 # Learning & project reflections · 学习笔记与项目心得
 
+## 2026-11-09 · 阅读整理
+
+目录每次展示 12 篇，搜索覆盖全部 47 篇；主题、关键词与展开数量保存在网址中。精简重复标签，将整理依据放在文末资料区，中英标题同步更新。文章含 AI 辅助起草与翻译，技术示例、来源和已执行的检查保留。[本轮记录](../reviews/site-reading-20261109.md)。
+
 ## 2026-11-08 · Agent 开发入门
 
 新增[前端开发者的 Agent 入门教程](agent-development-guide.html)与[实现学习笔记](agent-runtime-notes.html)，附[离线示例、运行说明和测试](examples/agent-learning/README.md)。从主语言、异步与接口开始，解释工具调用、可信确认、状态、RAG／MCP 与评估。

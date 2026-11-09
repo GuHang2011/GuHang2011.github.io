@@ -5,14 +5,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 DATE = "2026-11-08"
-VERSION = "20261107-editorial"
+VERSION = "20261109-reading"
 ORDER = ['agent-development-guide', 'agent-runtime-notes', 'portfolio-rework', 'streaming-ui-decisions', 'ai-frontend-reflection', 'energy-weather-reading', 'energy-forecast-baselines', 'weather-dashboard-contracts', 'inventory-scope-review', 'work-center-boundaries', 'notification-read-state', 'backup-restore-review', 'low-code-state-layers', 'low-code-rules', 'low-code-release', 'ai-code-race-review', 'workflow-recovery-review', 'schema-import-review', 'directory-rename-release', 'mobile-response-contracts', 'photo-queue-ownership', 'release-artifact-integrity', 'cross-platform-boundaries', 'request-scope-lifecycle', 'weather-fallback', 'upload-readiness', 'low-code-contracts', 'progressive-demo-loading', 'tft-information-boundary', 'gnn-risk-graphs', 'spatiotemporal-validation', 'research-demo-handoff', "multimodal-gates", "label-budget-ledger", "model-version-rollback", "rag-evaluation", "async-interfaces", "sql-windows", "model-selection", "order-idempotency", "accessible-interactions", "data-quality", "prompt-contracts", "permission-boundaries", "digital-human", "text-to-image", "generative-workflow"]
 CATEGORIES = {
     "all": {"en": "All topics", "zh": "全部主题"},
     "frontend": {"en": "Frontend", "zh": "前端交互"},
     "data": {"en": "Data & SQL", "zh": "数据与 SQL"},
     "models": {"en": "Model learning", "zh": "模型学习"},
-    "engineering": {"en": "Project reflections", "zh": "项目心得"},
+    "engineering": {"en": "Engineering", "zh": "工程开发"},
 }
 
 
@@ -50,7 +50,7 @@ def frame(title, description, path, body):
 <button type="button" data-language="zh" aria-pressed="false" aria-label="中文">中</button><button type="button" data-language="en" aria-pressed="true" aria-label="English">EN</button></div>
 <button class="menu-toggle icon-button" type="button" aria-expanded="false" aria-controls="navigation" aria-label="Menu"><img src="../assets/icons/menu.svg" alt=""></button></div></div></header>
 <main id="main">{body}</main>
-<footer class="site-footer"><div class="wrap footer-inner"><div><strong>Hang Gu · 顾航</strong>{pair('Learning through questions, code and review.','从问题、代码与复查中学习。','p')}</div><div>{pair('Collection updated 8 November 2026','笔记集更新于 2026-11-08','p')}<a href="../">{pair('Back to portfolio','返回个人主页')}</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/notebook">GitHub</a></div></div></footer>
+<footer class="site-footer"><div class="wrap footer-inner"><div><strong>Hang Gu · 顾航</strong>{pair('Development and study notes.','开发与学习记录。','p')}</div><div>{pair('Collection updated 9 November 2026','笔记集更新于 2026-11-09','p')}<a href="../">{pair('Back to portfolio','返回个人主页')}</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/notebook">GitHub</a></div></div></footer>
 <button class="back-top icon-button" type="button" aria-label="Back to top"><img src="../assets/icons/arrow-up.svg" alt=""></button></body></html>
 '''
 
@@ -59,9 +59,9 @@ def note_row(note):
     note_date = note.get("date", "2026-10-19")
     search = " ".join([note['title']['en'], note['title']['zh'], note['summary']['en'], note['summary']['zh']] + note['tags'])
     kind = pair('Project reflection', '项目心得') if note['kind'] == 'reflection' else pair('Study note', '学习笔记')
-    tags = ''.join('<span>' + esc(tag) + '</span>' for tag in note['tags'])
+    tags = ''.join('<span>' + esc(tag) + '</span>' for tag in note['tags'][:3])
     return f'''<article class="journal-row" data-note data-topic="{note['category']}" data-search="{esc(search)}">
-<div class="journal-meta">{tr(CATEGORIES[note['category']])}<span>{kind}</span><time datetime="{note_date}">{note_date.replace('-', '.')}</time></div>
+<div class="journal-meta">{tr(CATEGORIES[note['category']])}<time datetime="{note_date}">{note_date.replace('-', '.')}</time></div>
 <div class="journal-body"><h2><a href="{note['slug']}.html">{tr(note['title'])}</a></h2>{tr(note['summary'],'p')}<div class="journal-tags">{tags}</div></div>
 <div class="journal-read">{pair(str(note['minutes']) + ' min read', '约 ' + str(note['minutes']) + ' 分钟')}<span aria-hidden="true">↗</span></div></article>'''
 
@@ -70,25 +70,26 @@ def render_index(notes):
     count = len(notes)
     controls = ''.join(f'<button type="button" data-note-topic="{key}" aria-pressed="{str(key == "all").lower()}">{tr(label)}</button>' for key, label in CATEGORIES.items())
     routes = [
-        ('frontend', 'From input to a reliable interface', '从输入到可靠交互', 'Async responses · focus · accessibility', '异步响应 · 焦点 · 可访问性'),
-        ('models', 'From model code to credible evaluation', '从模型实现到可信评估', 'TFT inputs · graph edges · model selection', 'TFT 输入 · 图边语义 · 模型选择'),
-        ('engineering', 'From a working system to clear boundaries', '从功能实现到工程边界', 'State transitions · retries · authorization', '状态迁移 · 重试 · 权限'),
-        ('data', 'From collected records to usable samples', '从采集记录到可用样本', 'SQL windows · conflicts · traceability', 'SQL 窗口 · 冲突处理 · 可追溯性'),
+        ('frontend', 'Frontend interaction', '前端交互', 'Async responses · focus · accessibility', '异步响应 · 焦点 · 可访问性'),
+        ('models', 'Models and evaluation', '模型与评估', 'TFT inputs · graph edges · model selection', 'TFT 输入 · 图边语义 · 模型选择'),
+        ('engineering', 'Engineering practice', '工程开发', 'State transitions · retries · authorization', '状态迁移 · 重试 · 权限'),
+        ('data', 'Data processing', '数据处理', 'SQL windows · conflicts · traceability', 'SQL 窗口 · 冲突处理 · 可追溯性'),
     ]
     paths = ''.join(f'<a href="?topic={key}#entries">{pair(en,zh,"strong")}{pair(sub_en,sub_zh)}</a>' for key,en,zh,sub_en,sub_zh in routes)
     body = f'''<section class="notebook-intro wrap"><div><p class="notebook-kicker">{pair('Research & engineering notebook','研究与工程笔记')}</p>
 {pair('Notes from practice','学习与实践笔记','h1')}
-{pair('Questions from real code, small examples to reason with, and decisions worth revisiting.','围绕真实代码中的问题，记录小型示例、设计取舍与值得继续追问的地方。','p', 'class="notebook-lead"')}</div>
-<aside class="notebook-margin"><strong>{pair(f'{count} notes, four topics',f'{count} 篇笔记，四个主题')}</strong>{pair(f'{count} notes connect implementation details to verification and open questions.',f'{count} 篇笔记把实现细节、验证方法与后续问题连接起来。','p')}<a href="energy-weather-reading.html">{pair('Read the energy-meteorology learning path','阅读能源气象学习路线')}</a></aside></section>
+{pair('Notes on frontend development, data processing and models, with code and references.','记录前端开发、数据处理和模型学习中的具体问题，附代码和参考资料。','p', 'class="notebook-lead"')}</div>
+<aside class="notebook-margin"><strong>{pair(f'{count} notes, four topics',f'{count} 篇笔记，四个主题')}</strong>{pair('Choose a topic, or search by the problem you are working on.','可以按主题阅读，也可以搜索正在遇到的问题。','p')}<a href="energy-weather-reading.html">{pair('Read the energy-meteorology learning path','阅读能源气象学习路线')}</a></aside></section>
 <div class="wrap"><nav class="notebook-routes" aria-label="Suggested reading paths" data-en-label="Suggested reading paths" data-zh-label="建议阅读路径">{paths}</nav></div>
 <section class="wrap notebook-library" id="entries" aria-labelledby="library-title"><div class="library-heading">{pair('Notes & reflections','学习笔记与项目心得','h2','id="library-title"')}<span>{pair('Updated November 2026','更新于 2026 年 11 月')}</span></div>
 <form class="notebook-tools" data-notebook-tools hidden role="search"><div class="notebook-search"><label for="note-search">{pair('Search notes','搜索笔记')}</label><input id="note-search" type="search" autocomplete="off" placeholder="Try: Vue, upload, TFT" data-en-placeholder="Try: Vue, upload, TFT" data-zh-placeholder="试试：跨端、上传、TFT"><button type="button" data-note-clear>{pair('Clear','清除')}</button></div>
 <div class="notebook-filters" role="group" aria-label="Note topics" data-en-label="Note topics" data-zh-label="笔记主题">{controls}</div>
 <p data-note-count role="status" aria-live="polite" aria-atomic="true"></p></form>
-<div class="journal-list">{''.join(note_row(n) for n in notes)}</div>
+<div class="journal-list" id="note-results">{''.join(note_row(n) for n in notes)}</div>
+<div class="notebook-pagination" data-note-pagination hidden><button type="button" data-note-more aria-controls="note-results"></button></div>
 <div class="notebook-empty" data-note-empty hidden>{pair('No matching notes. Try another keyword or view all topics.','没有匹配的笔记。可以更换关键词，或查看全部主题。','p')}<button type="button" data-note-reset>{pair('Show all notes','显示全部笔记')}</button></div>
 </section><section class="wrap notebook-context">{pair('How to read these notes','关于这些记录','h2')}
-{pair('These learning summaries were compiled from public code and project documents, with AI assistance in drafting and translation. They distinguish source observations, simplified examples and proposed checks. They are not a dated lab log or evidence of new benchmark results.','这些学习总结结合公开代码与项目文档整理，使用 AI 辅助起草和翻译，区分源码观察、简化示例与建议验证项；不作为逐日实验日志或新增模型成绩的证据。','p')}
+{pair('These notes use AI-assisted drafting and translation. Code sources, teaching examples and completed checks are identified in each article. Dates refer to when a note was compiled.','笔记使用 AI 辅助起草与翻译。各篇注明代码来源、教学示例和实际检查范围，日期为整理时间。','p')}
 <a href="../#notebook">{pair('More learning repositories and earlier notes','更多学习仓库与已有笔记')}</a></section>'''
     title = {'en':'Learning & project reflections','zh':'学习笔记与项目心得'}
     description = {'en':'Frontend interaction, data quality, model validation and engineering reflections with source links.', 'zh':'前端交互、数据质量、模型验证与工程复盘，附来源和阅读路径。'}
@@ -119,9 +120,9 @@ def render_article(note, by_slug):
 <header class="wrap article-heading"><div class="article-meta">{tr(CATEGORIES[note['category']])}<time datetime="{note_date}">{note_date.replace('-', '.')}</time>{pair(str(note['minutes'])+' min read','约 '+str(note['minutes'])+' 分钟')}</div>
 {tr(note['title'],'h1')}{tr(note['summary'],'p','class="article-deck"')}</header>
 <div class="wrap article-layout"><aside class="article-sidebar"><details class="article-directory" open><summary>{pair('On this page','本页目录')}</summary><nav class="article-toc" aria-label="On this page" data-en-label="On this page" data-zh-label="本页目录">{pair('On this page','本页目录','h2')}{''.join(toc)}<a href="#sources">{pair('Sources & further reading','来源与延伸阅读')}</a></nav></details></aside>
-<article class="article-prose"><div class="article-basis">{pair('Basis of this note','整理依据','strong')}{tr(note['basis'],'p')}</div>{''.join(sections)}
-<section id="sources" class="article-section article-sources">{pair('Sources & further reading','来源与延伸阅读','h2')}<ul>{sources}</ul></section>
-<div class="article-colophon">{pair('Compiled from code and documents, with AI-assisted drafting and translation. Examples and proposed checks are learning material; only linked evidence establishes what was run.','结合代码与文档整理，使用 AI 辅助起草和翻译。示例及建议验证项属于学习材料，实际执行范围以链接中的证据为准。','p')}</div>
+<article class="article-prose">{''.join(sections)}
+<section id="sources" class="article-section article-sources"><details class="article-basis"><summary>{pair('About this example','示例与整理依据')}</summary>{tr(note['basis'],'p')}</details>{pair('Sources & further reading','来源与延伸阅读','h2')}<ul>{sources}</ul></section>
+<div class="article-colophon">{pair('Drafting and translation assisted by AI. See the sources and example scope above.','本文含 AI 辅助起草与翻译，来源与示例范围见上方说明。','p')}</div>
 <nav class="article-related" aria-label="Related notes" data-en-label="Related notes" data-zh-label="相关笔记">{pair('Continue reading','继续阅读','h2')}{related}<a href="./">{pair('Browse all notes','浏览全部笔记')}</a></nav>
 <p class="copy-status" role="status" aria-live="polite" data-copy-status></p></article></div>'''
     (ROOT / (note['slug'] + '.html')).write_text(frame(note['title'], note['summary'], note['slug']+'.html', body), encoding='utf-8')

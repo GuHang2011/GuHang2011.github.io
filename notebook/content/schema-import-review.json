@@ -45,7 +45,7 @@
       "paragraphs": [
         {
           "en": "The import handler computes next = checkSchema(JSON.parse(json.value)) before assigning schema = next. If parsing or validation throws, the current schema and values are untouched. This sequencing is what protects the existing view.",
-          "zh": "导入处理先计算 next = checkSchema(JSON.parse(json.value))，通过后才执行 schema = next。解析或校验抛错时，当前 schema 和 values 都未修改。真正保住旧界面的是这个执行顺序。"
+          "zh": "导入处理先计算 next = checkSchema(JSON.parse(json.value))，通过后才执行 schema = next。解析或校验抛错时，当前 schema 和 values 都未修改。"
         },
         {
           "en": "A successful import intentionally clears preview values. A new schema can reuse a key with a different meaning. In contrast, ordinary reordering preserves values by key. Preservation is a product rule, not a universal default.",

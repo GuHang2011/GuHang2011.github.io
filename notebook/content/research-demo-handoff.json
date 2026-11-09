@@ -1,8 +1,8 @@
 {
   "slug": "research-demo-handoff",
   "title": {
-    "en": "Project reflection: what should accompany a research demo?",
-    "zh": "项目心得：一个研究 Demo，交付时还应该带上什么？"
+    "zh": "研究 Demo 的运行说明怎么写",
+    "en": "Writing setup instructions for a research demo"
   },
   "summary": {
     "en": "Turn a demo into a reviewable handoff with input contracts, versioned evidence, failure behavior and a clear separation between teaching output and paper results.",

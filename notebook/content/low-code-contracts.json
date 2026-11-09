@@ -1,8 +1,8 @@
 {
   "slug": "low-code-contracts",
   "title": {
-    "en": "A low-code form starts with a configuration contract",
-    "zh": "低代码表单心得：先规定配置，再生成界面"
+    "zh": "配置化表单：字段校验与异常导入",
+    "en": "Configurable forms: field validation and invalid imports"
   },
   "summary": {
     "en": "Review schema validation, stable field keys, numeric zero and calendar dates using the existing form demo.",

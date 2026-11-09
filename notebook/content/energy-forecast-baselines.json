@@ -5,8 +5,8 @@
   "kind": "note",
   "minutes": 8,
   "title": {
-    "en": "Before fusion: specify an energy-forecast baseline",
-    "zh": "多源融合之前：先把能源预测基线做清楚"
+    "zh": "能源预测实验：目标、时间切分与基线",
+    "en": "Energy forecasting: targets, time splits and baselines"
   },
   "summary": {
     "en": "Define the target, available inputs, chronological splits and error slices before comparing forecasting models.",

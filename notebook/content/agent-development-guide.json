@@ -5,12 +5,12 @@
   "kind": "study",
   "minutes": 18,
   "title": {
-    "zh": "前端开发者的 Agent 入门：需要会什么，第一步怎么做",
-    "en": "Agent development for frontend engineers: skills and a first exercise"
+    "zh": "前端转向 Agent 开发，先学什么",
+    "en": "Getting started with Agent development from frontend work"
   },
   "summary": {
-    "zh": "从异步编程、模型接口和工具调用开始，做一个可运行的笔记助手，再学习权限、状态恢复与评估。附离线代码和分阶段练习。",
-    "en": "Start with asynchronous code, model interfaces and tools. Build a runnable note assistant, then study authorization, recovery and evaluation. Includes an offline exercise and a staged learning path."
+    "zh": "用一个查笔记、保存阅读草稿的例子，学习模型接口、工具调用和异步处理。示例在本地运行，模型回复由脚本模拟。",
+    "en": "Learn model interfaces, tool calls and asynchronous handling with a note-search and draft-saving exercise. It runs locally with scripted model responses."
   },
   "tags": [
     "Agent",
@@ -23,8 +23,8 @@
     "学习路线"
   ],
   "basis": {
-    "zh": "面向有前端经验的开发者整理的入门教程。配套代码使用固定脚本模拟模型决策，检索三条合成笔记，草稿只保存在进程内存中。未接入真实语言模型，也不代表已上线的 Agent 服务。",
-    "en": "An introductory tutorial for developers with frontend experience. The companion uses scripted decisions, three synthetic notes and process-memory drafts. It is not connected to a language model or deployed as an Agent service."
+    "zh": "配套代码使用固定脚本模拟模型回复，搜索三条合成笔记，草稿只保存在进程内存。18 项测试的运行记录见文末；这些测试检查控制流程。",
+    "en": "The code scripts model responses, searches three synthetic notes and keeps drafts in process memory. The 18 control-flow tests are documented at the end."
   },
   "sections": [
     {
@@ -35,12 +35,12 @@
       },
       "paragraphs": [
         {
-          "zh": "如果已经做过 Vue、React、表单、权限和接口联调，进入 Agent 开发并不需要把这些经验推倒重来。请求会失败、页面要展示过程、一次操作不能提交两遍，这些问题仍然在。需要补上的，是让模型参与决策之后，程序怎样约束和检查它。",
-          "en": "Experience with Vue, React, forms, authorization and API integration still applies. Requests fail, interfaces need progress feedback and repeated submissions matter. The additional task is to constrain and inspect decisions proposed by a model."
+          "zh": "写过 Vue、React 和表单页面，再学 Agent 时，异步请求、错误处理和状态管理都用得上。新的部分是工具调用：模型提出一个操作后，程序需要检查参数、执行操作，再把结果交回模型。",
+          "en": "Vue, React and form experience carries over to Agent development through asynchronous requests, error handling and state management. Tool calling adds a step: the model proposes an action, the application validates and executes it, then returns the result."
         },
         {
-          "zh": "我会先做一个范围很小的“学习笔记助手”：查找笔记，列出阅读材料，确认后保存一份草稿。它不需要替人操作电脑，也不需要多个 Agent 互相讨论。这个范围已经足够练习一条完整的工具执行链。",
-          "en": "I would start with a small reading assistant: find notes, suggest reading and save a draft after confirmation. It does not need desktop control or multiple agents. This scope is enough to practise a complete tool execution path."
+          "zh": "这里用一个笔记助手练习：查找资料，列出阅读材料，用户确认后保存草稿。两种工具就能把执行流程跑通，接下来再考虑怎样连接真实模型。",
+          "en": "This exercise uses a reading assistant: find notes, suggest reading and save a draft after confirmation. Two tools are enough to run the flow before connecting a real model."
         },
         {
           "zh": "判断要不要引入 Agent，可以先问：下一步是否真的需要模型结合当前结果来选择？如果任务只是按顺序读文件、提取字段、导出表格，固定工作流通常更容易解释和维护。Anthropic 的相关工程文章也明确区分了固定工作流与由模型动态决定步骤的 Agent。",
@@ -51,8 +51,8 @@
     {
       "id": "skills",
       "title": {
-        "zh": "哪些内容要熟练，哪些可以后学",
-        "en": "What to practise first"
+        "zh": "需要掌握的基础",
+        "en": "Foundations to practise"
       },
       "paragraphs": [],
       "bullets": [
@@ -110,8 +110,8 @@
     {
       "id": "contract",
       "title": {
-        "zh": "先把工具做窄，再写提示词",
-        "en": "Start with a narrow tool contract"
+        "zh": "定义搜索与保存工具",
+        "en": "Define search and save tools"
       },
       "paragraphs": [
         {
@@ -177,8 +177,8 @@
     {
       "id": "state",
       "title": {
-        "zh": "状态、预算和重试比多一个框架更早遇到",
-        "en": "State, budgets and retries"
+        "zh": "运行状态、超时与重试",
+        "en": "Run state, timeouts and retries"
       },
       "paragraphs": [
         {
@@ -324,11 +324,7 @@
           "zh": "继续往研究方向走时，可以围绕能源气象阅读做一个资料助手：每次回答附论文出处，区分已有结论与自己的假设。它适合作为工程与研究之间的小练习，不能替代原始实验或论文结果。",
           "en": "For a research-oriented extension, build a reading assistant for energy meteorology with paper sources and a distinction between reported findings and hypotheses. It is an engineering exercise, not a substitute for original experiments."
         }
-      ],
-      "callout": {
-        "zh": "判断自己是否入门，不看装了几个框架。拿到一次失败记录，能解释模型建议了什么、程序实际做了什么、为什么停下，以及怎样验证修复，这个标准更有用。",
-        "en": "A useful beginner milestone is the ability to explain a failed run: what the model proposed, what the program executed, why it stopped and how a fix was verified."
-      }
+      ]
     }
   ],
   "sources": [

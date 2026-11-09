@@ -10,6 +10,11 @@
     const count = document.querySelector("[data-note-count]");
     const clear = document.querySelector("[data-note-clear]");
     const empty = document.querySelector("[data-note-empty]");
+    const pagination = document.querySelector("[data-note-pagination]");
+    const more = document.querySelector("[data-note-more]");
+    const batchSize = 12;
+    let limit = batchSize;
+    let matches = [];
     const normalize = value => value.normalize("NFKC").trim().toLowerCase();
     let topic = "all";
     let urlTimer;
@@ -17,30 +22,43 @@
       const params = new URL(location.href).searchParams;
       topic = buttons.some(b => b.dataset.noteTopic === params.get("topic")) ? params.get("topic") : "all";
       input.value = params.get("q") || "";
+      const requested = Number(params.get("shown"));
+      limit = Number.isInteger(requested) && requested > batchSize ? Math.min(requested, rows.length) : batchSize;
     }
     function writeURL() {
       const url = new URL(location.href);
       if (topic === "all") url.searchParams.delete("topic"); else url.searchParams.set("topic", topic);
       if (input.value.trim()) url.searchParams.set("q", input.value.trim()); else url.searchParams.delete("q");
+      if (limit > batchSize) url.searchParams.set("shown", String(limit)); else url.searchParams.delete("shown");
       try { history.replaceState(null, "", url); } catch { /* Filtering still works without history access. */ }
     }
     function filter() {
       const terms = normalize(input.value).split(/\s+/u).filter(Boolean);
-      rows.forEach(row => { row.hidden = (topic !== "all" && row.dataset.topic !== topic) || !terms.every(term => normalize(row.dataset.search).includes(term)); });
+      matches = rows.filter(row => (topic === "all" || row.dataset.topic === topic) && terms.every(term => normalize(row.dataset.search).includes(term)));
+      const shown = new Set(matches.slice(0, limit));
+      rows.forEach(row => { row.hidden = !shown.has(row); });
       buttons.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.noteTopic === topic)));
       const visible = rows.filter(row => !row.hidden).length;
-      count.textContent = text(`${visible} of ${rows.length} notes`, `${visible} / ${rows.length} 篇笔记`);
-      empty.hidden = visible > 0;
+      count.textContent = text(`Showing ${visible} of ${matches.length} matching notes`, `找到 ${matches.length} 篇，当前显示 ${visible} 篇`);
+      empty.hidden = matches.length > 0;
+      pagination.hidden = visible >= matches.length;
+      more.textContent = text(`Show ${Math.min(batchSize, matches.length - visible)} more`, `再显示 ${Math.min(batchSize, matches.length - visible)} 篇`);
       clear.disabled = input.value.length === 0;
     }
     tools.hidden = false;
     readURL();
     filter();
     tools.addEventListener("submit", event => { event.preventDefault(); clearTimeout(urlTimer); writeURL(); });
-    buttons.forEach(button => button.addEventListener("click", () => { topic = button.dataset.noteTopic; clearTimeout(urlTimer); filter(); writeURL(); }));
-    input.addEventListener("input", () => { filter(); clearTimeout(urlTimer); urlTimer = setTimeout(writeURL, 250); });
-    clear.addEventListener("click", () => { input.value = ""; clearTimeout(urlTimer); filter(); writeURL(); input.focus(); });
-    document.querySelector("[data-note-reset]").addEventListener("click", () => { topic = "all"; input.value = ""; clearTimeout(urlTimer); filter(); writeURL(); input.focus(); });
+    buttons.forEach(button => button.addEventListener("click", () => { topic = button.dataset.noteTopic; limit = batchSize; clearTimeout(urlTimer); filter(); writeURL(); }));
+    input.addEventListener("input", () => { limit = batchSize; filter(); clearTimeout(urlTimer); urlTimer = setTimeout(writeURL, 250); });
+    clear.addEventListener("click", () => { input.value = ""; limit = batchSize; clearTimeout(urlTimer); filter(); writeURL(); input.focus(); });
+    document.querySelector("[data-note-reset]").addEventListener("click", () => { topic = "all"; input.value = ""; limit = batchSize; clearTimeout(urlTimer); filter(); writeURL(); input.focus(); });
+    more.addEventListener("click", () => {
+      const next = matches[limit]?.querySelector("h2 a");
+      limit = Math.min(limit + batchSize, matches.length);
+      clearTimeout(urlTimer); filter(); writeURL();
+      next?.focus();
+    });
     addEventListener("popstate", () => { clearTimeout(urlTimer); readURL(); filter(); });
     document.addEventListener("portfolio-language-change", filter);
   }
