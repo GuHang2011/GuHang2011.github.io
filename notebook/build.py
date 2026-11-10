@@ -4,9 +4,9 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-DATE = "2026-11-08"
+DATE = "2026-11-10"
 VERSION = "20261109-blue"
-ORDER = ['agent-development-guide', 'agent-runtime-notes', 'portfolio-rework', 'streaming-ui-decisions', 'ai-frontend-reflection', 'energy-weather-reading', 'energy-forecast-baselines', 'weather-dashboard-contracts', 'inventory-scope-review', 'work-center-boundaries', 'notification-read-state', 'backup-restore-review', 'low-code-state-layers', 'low-code-rules', 'low-code-release', 'ai-code-race-review', 'workflow-recovery-review', 'schema-import-review', 'directory-rename-release', 'mobile-response-contracts', 'photo-queue-ownership', 'release-artifact-integrity', 'cross-platform-boundaries', 'request-scope-lifecycle', 'weather-fallback', 'upload-readiness', 'low-code-contracts', 'progressive-demo-loading', 'tft-information-boundary', 'gnn-risk-graphs', 'spatiotemporal-validation', 'research-demo-handoff', "multimodal-gates", "label-budget-ledger", "model-version-rollback", "rag-evaluation", "async-interfaces", "sql-windows", "model-selection", "order-idempotency", "accessible-interactions", "data-quality", "prompt-contracts", "permission-boundaries", "digital-human", "text-to-image", "generative-workflow"]
+ORDER = ['list-selection-scope', 'agent-development-guide', 'agent-runtime-notes', 'portfolio-rework', 'streaming-ui-decisions', 'ai-frontend-reflection', 'energy-weather-reading', 'energy-forecast-baselines', 'weather-dashboard-contracts', 'inventory-scope-review', 'work-center-boundaries', 'notification-read-state', 'backup-restore-review', 'low-code-state-layers', 'low-code-rules', 'low-code-release', 'ai-code-race-review', 'workflow-recovery-review', 'schema-import-review', 'directory-rename-release', 'mobile-response-contracts', 'photo-queue-ownership', 'release-artifact-integrity', 'cross-platform-boundaries', 'request-scope-lifecycle', 'weather-fallback', 'upload-readiness', 'low-code-contracts', 'progressive-demo-loading', 'tft-information-boundary', 'gnn-risk-graphs', 'spatiotemporal-validation', 'research-demo-handoff', "multimodal-gates", "label-budget-ledger", "model-version-rollback", "rag-evaluation", "async-interfaces", "sql-windows", "model-selection", "order-idempotency", "accessible-interactions", "data-quality", "prompt-contracts", "permission-boundaries", "digital-human", "text-to-image", "generative-workflow"]
 CATEGORIES = {
     "all": {"en": "All topics", "zh": "全部主题"},
     "frontend": {"en": "Frontend", "zh": "前端交互"},
@@ -50,7 +50,7 @@ def frame(title, description, path, body):
 <button type="button" data-language="zh" aria-pressed="false" aria-label="中文">中</button><button type="button" data-language="en" aria-pressed="true" aria-label="English">EN</button></div>
 <button class="menu-toggle icon-button" type="button" aria-expanded="false" aria-controls="navigation" aria-label="Menu"><img src="../assets/icons/menu.svg" alt=""></button></div></div></header>
 <main id="main">{body}</main>
-<footer class="site-footer"><div class="wrap footer-inner"><div><strong>Hang Gu · 顾航</strong>{pair('Development and study notes.','开发与学习记录。','p')}</div><div>{pair('Collection updated 9 November 2026','笔记集更新于 2026-11-09','p')}<a href="../">{pair('Back to portfolio','返回个人主页')}</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/notebook">GitHub</a></div></div></footer>
+<footer class="site-footer"><div class="wrap footer-inner"><div><strong>Hang Gu · 顾航</strong>{pair('Development and study notes.','开发与学习记录。','p')}</div><div>{pair('Collection updated 10 November 2026','笔记集更新于 2026-11-10','p')}<a href="../">{pair('Back to portfolio','返回个人主页')}</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/tree/main/notebook">GitHub</a></div></div></footer>
 <button class="back-top icon-button" type="button" aria-label="Back to top"><img src="../assets/icons/arrow-up.svg" alt=""></button></body></html>
 '''
 
