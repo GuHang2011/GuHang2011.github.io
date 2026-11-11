@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 DATE = "2026-11-10"
-VERSION = "20261109-blue"
+VERSION = "20261111-type"
 ORDER = ['list-selection-scope', 'agent-development-guide', 'agent-runtime-notes', 'portfolio-rework', 'streaming-ui-decisions', 'ai-frontend-reflection', 'energy-weather-reading', 'energy-forecast-baselines', 'weather-dashboard-contracts', 'inventory-scope-review', 'work-center-boundaries', 'notification-read-state', 'backup-restore-review', 'low-code-state-layers', 'low-code-rules', 'low-code-release', 'ai-code-race-review', 'workflow-recovery-review', 'schema-import-review', 'directory-rename-release', 'mobile-response-contracts', 'photo-queue-ownership', 'release-artifact-integrity', 'cross-platform-boundaries', 'request-scope-lifecycle', 'weather-fallback', 'upload-readiness', 'low-code-contracts', 'progressive-demo-loading', 'tft-information-boundary', 'gnn-risk-graphs', 'spatiotemporal-validation', 'research-demo-handoff', "multimodal-gates", "label-budget-ledger", "model-version-rollback", "rag-evaluation", "async-interfaces", "sql-windows", "model-selection", "order-idempotency", "accessible-interactions", "data-quality", "prompt-contracts", "permission-boundaries", "digital-human", "text-to-image", "generative-workflow"]
 CATEGORIES = {
     "all": {"en": "All topics", "zh": "全部主题"},
@@ -79,9 +79,9 @@ def render_index(notes):
     body = f'''<section class="notebook-intro wrap"><div><p class="notebook-kicker">{pair('Research & engineering notebook','研究与工程笔记')}</p>
 {pair('Notes from practice','学习与实践笔记','h1')}
 {pair('Notes on frontend development, data processing and models, with code and references.','记录前端开发、数据处理和模型学习中的具体问题，附代码和参考资料。','p', 'class="notebook-lead"')}</div>
-<aside class="notebook-margin"><strong>{pair(f'{count} notes, four topics',f'{count} 篇笔记，四个主题')}</strong>{pair('Choose a topic, or search by the problem you are working on.','可以按主题阅读，也可以搜索正在遇到的问题。','p')}<a href="energy-weather-reading.html">{pair('Read the energy-meteorology learning path','阅读能源气象学习路线')}</a></aside></section>
+<aside class="notebook-margin"><strong>{pair(f'{count} notes, four topics',f'{count} 篇笔记，四个主题')}</strong><a href="energy-weather-reading.html">{pair('Read the energy-meteorology learning path','阅读能源气象学习路线')}</a></aside></section>
 <div class="wrap"><nav class="notebook-routes" aria-label="Suggested reading paths" data-en-label="Suggested reading paths" data-zh-label="建议阅读路径">{paths}</nav></div>
-<section class="wrap notebook-library" id="entries" aria-labelledby="library-title"><div class="library-heading">{pair('Notes & reflections','学习笔记与项目心得','h2','id="library-title"')}<span>{pair('Updated November 2026','更新于 2026 年 11 月')}</span></div>
+<section class="wrap notebook-library" id="entries" aria-labelledby="library-title"><div class="library-heading">{pair('All notes','全部笔记','h2','id="library-title"')}<span>{pair('Updated November 2026','更新于 2026 年 11 月')}</span></div>
 <form class="notebook-tools" data-notebook-tools hidden role="search"><div class="notebook-search"><label for="note-search">{pair('Search notes','搜索笔记')}</label><input id="note-search" type="search" autocomplete="off" placeholder="Try: Vue, upload, TFT" data-en-placeholder="Try: Vue, upload, TFT" data-zh-placeholder="试试：跨端、上传、TFT"><button type="button" data-note-clear>{pair('Clear','清除')}</button></div>
 <div class="notebook-filters" role="group" aria-label="Note topics" data-en-label="Note topics" data-zh-label="笔记主题">{controls}</div>
 <p data-note-count role="status" aria-live="polite" aria-atomic="true"></p></form>
