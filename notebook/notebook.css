@@ -1,4 +1,4 @@
-@import url("../fonts.css?v=20261111-type");
+@import url("../fonts.css?v=20261112-updates");
 /* Reading styles shared by the notebook directory and its articles. */
 .notebook-page { --ink:#202d40; --muted:#566273; --subtle:#566273; --paper:#fff; --surface:#f4f7fb; --line:#dce3ec; --accent:#245fc1; --accent-hover:#174991; --accent-soft:#e5efff; --teal:#2b669f; font-family:var(--font-ui); font-size:17px; line-height:1.85; }
 .notebook-page :is(h1,h2,h3,h4) { font-family:var(--font-ui); font-weight:600; }

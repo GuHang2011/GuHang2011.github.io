@@ -1,0 +1,112 @@
+{
+  "slug": "mobile-workspace-reading",
+  "date": "2026-11-12",
+  "category": "frontend",
+  "kind": "reflection",
+  "minutes": 7,
+  "title": {
+    "zh": "手机工作台：第一条记录为什么这么靠下",
+    "en": "Mobile workspaces: why is the first record so far down?"
+  },
+  "summary": {
+    "zh": "从禾镜的筛选折叠、归档系统的字号设置和气象图表的刻度调整，记录手机工作台的阅读与操作取舍。",
+    "en": "Reading and interaction decisions from FieldLens filters, archive reading settings and responsive weather-chart labels."
+  },
+  "basis": {
+    "zh": "整理于 2026-11-12，依据 FieldLens 7bb7239、college-archive-demo e93ee1f 和 MeteoFormer e53ce06 的公开源码。禾镜的历史位置数字来自 v1.9.3 README，不是本次重新测量的前后对照。文末为建议复查项；公开演示使用预设或合成数据。",
+    "en": "Compiled on 12 November 2026 from public commits FieldLens 7bb7239, college-archive-demo e93ee1f and MeteoFormer e53ce06. Historical FieldLens positions come from the v1.9.3 README, not a repeated before/after measurement. The final section lists suggested checks. Public demos use preset or synthetic data."
+  },
+  "tags": ["Responsive UI", "CSS", "Vue", "Accessibility", "Mobile"],
+  "sections": [
+    {
+      "id": "first-record",
+      "title": {"zh": "字体清楚了，记录却被挤到下面", "en": "Larger text can push the records away"},
+      "paragraphs": [
+        {
+          "zh": "这次看几个项目的手机页面，我更在意打开之后能先看到什么。标题、说明、统计和筛选单独看都合理，叠在一起却会占掉整屏。用户想找一条记录，先要滑过一大段工具。只把字体调大，这个问题还会更明显。",
+          "en": "When reviewing the mobile pages, I looked at what appears before the first record. A heading, introduction, statistics and filters can each make sense while taking up an entire screen together. Enlarging the text can make that delay worse."
+        },
+        {
+          "zh": "禾镜 v1.9.3 的 README 记录：在 390px 宽的浏览器视口中，第一条记录从约 1368px 提前到 765px。这个数字只描述该演示页面的布局变化，不能据此声称所有任务都变快了。对应代码把搜索留在外面，其他筛选按需展开，备份操作移到列表下方。",
+          "en": "The FieldLens v1.9.3 README records the first row moving from about 1368px to 765px in a 390px-wide browser viewport. This describes one demo layout, not an improvement in every task. The code keeps search visible, folds the other filters and places backup controls below the list."
+        }
+      ]
+    },
+    {
+      "id": "filter-state",
+      "title": {"zh": "收起的是控件，筛选状态要留着", "en": "Fold the controls while keeping the filter visible"},
+      "paragraphs": [
+        {
+          "zh": "筛选面板收起来以后，用户仍要知道列表为什么只剩几条。禾镜保留已应用的筛选标签和数量。展开、收起只改变控件的显示，切换到桌面宽度时，筛选值和已选记录继续保留。这样缩小界面不会偷偷改变操作范围。",
+          "en": "After the filter panel closes, the user still needs to know why only a few rows remain. FieldLens keeps active filter chips and a count visible. Opening or closing the panel changes presentation; resizing to desktop keeps the filter values and selection."
+        },
+        {
+          "zh": "仓库里的阅读布局检查也沿着这个流程走：在手机宽度选择“待复核”，勾选记录，收起筛选，再切到 1440px，检查条件与勾选是否还在。这个用例比只看页面有没有横向滚动更接近实际操作。",
+          "en": "The repository's layout check follows that sequence: select pending review on mobile, select a record, fold the filters, then resize to 1440px and verify both values. It checks more than whether the page has horizontal overflow."
+        }
+      ],
+      "code": {
+        "language": "JavaScript · FieldLens browser-check excerpt",
+        "text": "await page.setViewportSize({ width: 1440, height: 960 });\nok(await page.locator(\"#record-review\").isVisible(),\n  \"desktop exposes filter controls after resizing\");\nok(await page.locator(\"#record-review\").inputValue() === \"pending\",\n  \"resizing preserves filters\");\nok(await page.locator(\"[data-select-record]\").first().isChecked(),\n  \"resizing preserves selected records\");"
+      }
+    },
+    {
+      "id": "reading-size",
+      "title": {"zh": "大字号要连同表格和弹窗一起试", "en": "Try larger text in tables and dialogs too"},
+      "paragraphs": [
+        {
+          "zh": "学院归档演示增加了 16、18、20px 三档正文大小，也能切换黑体和宋体。源码把字号换算成 --reader-scale，再由各层级字号使用这个比例。相比只改正文，标题、按钮和说明更容易保持相对关系。",
+          "en": "The archive demo offers 16, 18 and 20px body-text settings, plus sans-serif and serif choices. Its component converts the chosen size to --reader-scale, which the type sizes use to retain their relationship."
+        },
+        {
+          "zh": "选择会尝试保存在当前浏览器。存储被禁用时，当前页面仍能切换，只是不能保证刷新后记住。真正需要复查的是长文件名、审核意见、详情侧栏和确认按钮：字变大以后，按钮是否被推到看不到的位置，长内容还能否读完。",
+          "en": "The selection is saved in the current browser when storage permits. With storage blocked, the current page can still change size, but the preference may not survive a reload. Long filenames, review comments, detail panels and confirmation buttons need inspection at the largest setting."
+        }
+      ]
+    },
+    {
+      "id": "chart-labels",
+      "title": {"zh": "图表少画几个标签，不要少掉数据", "en": "Show fewer labels without dropping the data"},
+      "paragraphs": [
+        {
+          "zh": "MeteoFormer 的逐小时曲线用 ResizeObserver 读取容器宽度。窄于 480px 时，横轴每隔 8 个数据点取一个标签，宽屏每隔 4 个，同时保留最后一个标签。这只减少刻度文字；温度曲线和降水柱仍遍历原始行，完整数值可以在表格里看。",
+          "en": "MeteoFormer's hourly chart measures its container with ResizeObserver. Below 480px it labels every eighth row; wider containers use every fourth row. The final label is retained. This changes labels only: the temperature path and rainfall bars still use the input rows, with full values available in a table."
+        },
+        {
+          "zh": "这种处理适合这里的逐小时数据，不能直接当作所有时间序列的通用办法。如果采样间隔不规则，横坐标和刻度都应按时间值计算。源码还在缺失气温的位置断开曲线，避免画出并不存在的连续变化。",
+          "en": "That choice fits the hourly data here. For irregular samples, positions and labels should be calculated from timestamps. The source also breaks the temperature path at missing values instead of drawing an unsupported continuous line."
+        }
+      ],
+      "code": {
+        "language": "TypeScript · MeteoFormer source excerpt",
+        "text": "const tickIndices = computed(() => {\n  const last = props.rows.length - 1;\n  if (last < 0) return [];\n  const step = width.value < 480 ? 8 : 4;\n  return [...new Set([\n    ...Array.from({ length: Math.floor(last / step) + 1 },\n      (_, i) => i * step),\n    last,\n  ])];\n});"
+      }
+    },
+    {
+      "id": "review",
+      "title": {"zh": "下次改布局，按一次完整操作复查", "en": "Review the layout through a complete task"},
+      "paragraphs": [
+        {
+          "zh": "我准备把检查顺序固定下来：先找到记录，再筛选、打开详情，最后返回列表。截图能看到层级和间距，走完这个过程才能发现状态丢失、按钮被遮挡或关闭弹窗后找不到焦点的问题。",
+          "en": "For the next layout review, I would follow one task: find a record, filter, open its details and return to the list. Screenshots reveal hierarchy and spacing; the sequence exposes lost state, obscured buttons and misplaced focus."
+        }
+      ],
+      "bullets": [
+        {"zh": "在 390px 和 1440px 之间来回切换，检查搜索条件、当前页和勾选是否符合产品约定。", "en": "Switch between 390px and 1440px and check filters, pagination and selection against the product rules."},
+        {"zh": "使用最长的文件名和大字设置，检查详情内容、关闭按钮和下一步操作。", "en": "Use long filenames and the largest text setting to inspect details, close controls and the next action."},
+        {"zh": "用键盘打开并关闭筛选或弹窗；手机上补查横屏、软键盘和真实触控。浏览器视口模拟不能代替这些检查。", "en": "Open and close panels with the keyboard, then check landscape orientation, the software keyboard and touch on a phone. A simulated viewport does not replace those checks."}
+      ]
+    }
+  ],
+  "sources": [
+    {"label": {"zh": "禾镜 v1.9.3：改动与历史布局测量", "en": "FieldLens v1.9.3: changes and recorded layout measurements"}, "url": "https://github.com/GuHang2011/fieldlens/blob/7bb723972650c843591b1f41e2bedbcf9427f6bc/README.md"},
+    {"label": {"zh": "禾镜：筛选与记录列表源码", "en": "FieldLens: filter and record-list implementation"}, "url": "https://github.com/GuHang2011/fieldlens/blob/7bb723972650c843591b1f41e2bedbcf9427f6bc/src/history-view.js"},
+    {"label": {"zh": "禾镜：阅读布局浏览器检查", "en": "FieldLens: browser layout checks"}, "url": "https://github.com/GuHang2011/fieldlens/blob/7bb723972650c843591b1f41e2bedbcf9427f6bc/tests/browser/reading-layout-workflow.js"},
+    {"label": {"zh": "学院归档：字号与字体设置组件", "en": "Archive: text size and font settings"}, "url": "https://github.com/GuHang2011/college-archive-demo/blob/e93ee1fa1495e70eaf2ef9e125c31b121a0b7352/src/components/ReadingSettings.vue"},
+    {"label": {"zh": "MeteoFormer：响应式逐小时曲线", "en": "MeteoFormer: responsive hourly chart"}, "url": "https://github.com/GuHang2011/meteoformer-weather-system/blob/e53ce06a8cab169c9be7bebdbfeccf9baf493cba/frontend/src/weather/ForecastChart.vue"},
+    {"label": {"zh": "打开禾镜预设数据演示", "en": "Try the FieldLens preset-data demo"}, "url": "https://guhang2011.github.io/fieldlens/?demo=1&v=1.9.3#history"},
+    {"label": {"zh": "打开学院归档演示", "en": "Try the archive demo"}, "url": "https://guhang2011.github.io/college-archive-demo/"},
+    {"label": {"zh": "打开 MeteoFormer 合成数据演示", "en": "Try the MeteoFormer synthetic-data demo"}, "url": "https://guhang2011.github.io/meteoformer-weather-system/"}
+  ],
+  "related": ["list-selection-scope", "accessible-interactions", "weather-dashboard-contracts"]
+}

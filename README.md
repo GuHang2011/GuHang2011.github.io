@@ -2,9 +2,9 @@
 
 [个人主页](https://guhang2011.github.io/) · [项目与演示](https://guhang2011.github.io/projects.html) · [学习笔记](https://guhang2011.github.io/notebook/) · [简历](https://guhang2011.github.io/research/cv.html)
 
-这里整理我的前端与应用开发项目、教学案例和研究记录。先从首页的作物巡检、辅导员协作和配置化表单看起；项目目录收录 16 个项目入口，笔记集有 47 篇中英双语文章。
+这里整理我的前端与应用开发项目、教学案例和研究记录。先从首页的作物巡检、辅导员协作和配置化表单看起；项目目录收录 17 个项目入口，笔记集有 49 篇中英双语文章。
 
-This repository contains my engineering portfolio, project demonstrations and bilingual study notes. The homepage starts with crop inspection, campus collaboration and configurable forms. The directory includes 16 projects; the notebook contains 47 articles.
+This repository contains my engineering portfolio, project demonstrations and bilingual study notes. The homepage starts with crop inspection, campus collaboration and configurable forms. The directory includes 17 projects; the notebook contains 49 articles.
 
 ## 可以看什么
 
@@ -40,6 +40,9 @@ python -m http.server 8000
 - 投稿状态、作者信息和实验结果按实际材料更新。
 
 ## 本轮整理
+
+2026-11-12：同步禾镜、沭阳之家、资料归档与丝路演示的近期信息；将 MeteoFormer 补入项目目录，新增手机工作台阅读笔记。
+
 
 2026-11-09：重排首页图文，改写项目简介，减少文章中的重复引导语，修复中文样式选择器和项目目录错位，并增加笔记分批展开。
 
