@@ -1,8 +1,8 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://guhang2011.github.io/</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-13</lastmod>
   </url>
   <url>
     <loc>https://guhang2011.github.io/research/</loc>
@@ -10,15 +10,15 @@
   </url>
   <url>
     <loc>https://guhang2011.github.io/cases/counselor/</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-11-13</lastmod>
   </url>
   <url>
     <loc>https://guhang2011.github.io/cases/archive/</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-11-13</lastmod>
   </url>
   <url>
     <loc>https://guhang2011.github.io/cases/ai-office/</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-13</lastmod>
   </url>
   <url>
     <loc>https://guhang2011.github.io/demos/</loc>
@@ -90,7 +90,7 @@
   </url>
   <url>
     <loc>https://guhang2011.github.io/demos/virtual-host/</loc>
-    <lastmod>2026-10-20</lastmod>
+    <lastmod>2026-11-13</lastmod>
   </url>
   <url>
     <loc>https://guhang2011.github.io/demos/react-workflow/</loc>
@@ -193,7 +193,7 @@
   </url>
   <url>
     <loc>https://guhang2011.github.io/cases/shuyang/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-13</lastmod>
   </url>
   <url>
     <loc>https://guhang2011.github.io/notebook/engineering-log-20261031.html</loc>
@@ -231,23 +231,100 @@
     <loc>https://guhang2011.github.io/notebook/schema-import-review.html</loc>
     <lastmod>2026-11-02</lastmod>
   </url>
-  <url><loc>https://guhang2011.github.io/notebook/low-code-state-layers.html</loc><lastmod>2026-11-02</lastmod></url>
-  <url><loc>https://guhang2011.github.io/notebook/low-code-rules.html</loc><lastmod>2026-11-02</lastmod></url>
-  <url><loc>https://guhang2011.github.io/notebook/low-code-release.html</loc><lastmod>2026-11-02</lastmod></url>
-  <url><loc>https://guhang2011.github.io/research/reproducibility.html</loc><lastmod>2026-11-02</lastmod></url>
-  <url><loc>https://guhang2011.github.io/research/first-study.html</loc><lastmod>2026-11-02</lastmod></url>
-  <url><loc>https://guhang2011.github.io/teaching/</loc><lastmod>2026-11-03</lastmod></url>
-<url><loc>https://guhang2011.github.io/notebook/work-center-boundaries.html</loc><lastmod>2026-11-03</lastmod></url>
-<url><loc>https://guhang2011.github.io/notebook/notification-read-state.html</loc><lastmod>2026-11-03</lastmod></url>
-<url><loc>https://guhang2011.github.io/notebook/backup-restore-review.html</loc><lastmod>2026-11-03</lastmod></url>
-<url><loc>https://guhang2011.github.io/cases/file-inventory/</loc><lastmod>2026-11-04</lastmod></url>
-<url><loc>https://guhang2011.github.io/notebook/inventory-scope-review.html</loc><lastmod>2026-11-04</lastmod></url>
-<url><loc>https://guhang2011.github.io/notebook/energy-weather-reading.html</loc><lastmod>2026-11-05</lastmod></url>
-<url><loc>https://guhang2011.github.io/notebook/energy-forecast-baselines.html</loc><lastmod>2026-11-05</lastmod></url>
-<url><loc>https://guhang2011.github.io/notebook/weather-dashboard-contracts.html</loc><lastmod>2026-11-05</lastmod></url>
-<url><loc>https://guhang2011.github.io/projects.html</loc><lastmod>2026-11-10</lastmod></url><url><loc>https://guhang2011.github.io/research.html</loc><lastmod>2026-11-06</lastmod></url>  <url><loc>https://guhang2011.github.io/notebook/portfolio-rework.html</loc><lastmod>2026-11-08</lastmod></url>
-  <url><loc>https://guhang2011.github.io/notebook/streaming-ui-decisions.html</loc><lastmod>2026-11-08</lastmod></url>
-  <url><loc>https://guhang2011.github.io/demos/ai-stream/</loc><lastmod>2026-11-08</lastmod></url>
-  <url><loc>https://guhang2011.github.io/notebook/agent-development-guide.html</loc><lastmod>2026-11-08</lastmod></url>
-  <url><loc>https://guhang2011.github.io/notebook/agent-runtime-notes.html</loc><lastmod>2026-11-08</lastmod></url>
-<url><loc>https://guhang2011.github.io/notebook/list-selection-scope.html</loc><lastmod>2026-11-10</lastmod></url><url><loc>https://guhang2011.github.io/notebook/mobile-workspace-reading.html</loc><lastmod>2026-11-12</lastmod></url></urlset>
+  <url>
+    <loc>https://guhang2011.github.io/notebook/low-code-state-layers.html</loc>
+    <lastmod>2026-11-02</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/notebook/low-code-rules.html</loc>
+    <lastmod>2026-11-02</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/notebook/low-code-release.html</loc>
+    <lastmod>2026-11-02</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/research/reproducibility.html</loc>
+    <lastmod>2026-11-02</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/research/first-study.html</loc>
+    <lastmod>2026-11-02</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/teaching/</loc>
+    <lastmod>2026-11-03</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/notebook/work-center-boundaries.html</loc>
+    <lastmod>2026-11-03</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/notebook/notification-read-state.html</loc>
+    <lastmod>2026-11-03</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/notebook/backup-restore-review.html</loc>
+    <lastmod>2026-11-03</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/cases/file-inventory/</loc>
+    <lastmod>2026-11-04</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/notebook/inventory-scope-review.html</loc>
+    <lastmod>2026-11-04</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/notebook/energy-weather-reading.html</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/notebook/energy-forecast-baselines.html</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/notebook/weather-dashboard-contracts.html</loc>
+    <lastmod>2026-11-05</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/projects.html</loc>
+    <lastmod>2026-11-13</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/research.html</loc>
+    <lastmod>2026-11-06</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/notebook/portfolio-rework.html</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/notebook/streaming-ui-decisions.html</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/demos/ai-stream/</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/notebook/agent-development-guide.html</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/notebook/agent-runtime-notes.html</loc>
+    <lastmod>2026-11-08</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/notebook/list-selection-scope.html</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/notebook/mobile-workspace-reading.html</loc>
+    <lastmod>2026-11-12</lastmod>
+  </url>
+  <url>
+    <loc>https://guhang2011.github.io/project-screenshots.html</loc>
+    <lastmod>2026-11-13</lastmod>
+  </url>
+</urlset>

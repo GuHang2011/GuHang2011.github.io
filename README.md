@@ -41,6 +41,8 @@ python -m http.server 8000
 
 ## 本轮整理
 
+2026-11-13：重新拍摄项目界面，同步首页、项目目录、案例页及个人页的缩略图与大图；修复虚拟主播预览区下移。[最新截图图集](project-screenshots.html) · [截图来源与维护](assets/project-previews/20261113/README.md)。
+
 2026-11-12：同步禾镜、沭阳之家、资料归档与丝路演示的近期信息；将 MeteoFormer 补入项目目录，新增手机工作台阅读笔记。
 
 

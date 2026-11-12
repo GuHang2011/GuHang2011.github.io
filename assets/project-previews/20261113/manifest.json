@@ -1,0 +1,821 @@
+{
+  "captureDate": "2026-11-13",
+  "timezone": "Asia/Shanghai",
+  "projectCount": 20,
+  "images": [
+    {
+      "id": "fieldlens-workspace-desktop",
+      "title": "禾镜 FieldLens 图像检测",
+      "url": "https://guhang2011.github.io/fieldlens/?demo=1&v=1.9.4#workspace",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "v1.9.4; preset leaf image with three synthetic annotation boxes; model service not connected.",
+      "capturedAt": "2026-11-12T18:29:07.108Z",
+      "asset": "assets/project-previews/20261113/fieldlens-workspace-desktop.webp",
+      "provenance": "Public demo using synthetic/local sample data. Captured from live UI, not a design mock-up.",
+      "sourceRepository": "https://github.com/GuHang2011/fieldlens",
+      "sourceCommit": "67af0350696bdc05823f440c420c1dbf3cdf0536",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 75610,
+      "sha256": "76c398ee011e0e74f0ff7968b0c248437911d01f9a820f63a6b46826a8ca0d0a"
+    },
+    {
+      "id": "fieldlens-records-desktop",
+      "title": "禾镜 FieldLens 检测记录",
+      "url": "https://guhang2011.github.io/fieldlens/?demo=1&v=1.9.4#history",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "v1.9.4; twelve preset inspection records; no real inference.",
+      "capturedAt": "2026-11-12T18:29:07.700Z",
+      "asset": "assets/project-previews/20261113/fieldlens-records-desktop.webp",
+      "provenance": "Public demo using synthetic/local sample data. Captured from live UI, not a design mock-up.",
+      "sourceRepository": "https://github.com/GuHang2011/fieldlens",
+      "sourceCommit": "67af0350696bdc05823f440c420c1dbf3cdf0536",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 89182,
+      "sha256": "2a03c055d87eb8146cf260f4e3a94f773f00397b123ba3150a920c483e9f2f0a"
+    },
+    {
+      "id": "meteoformer-workspace-desktop",
+      "title": "MeteoFormer 气象工作台",
+      "url": "https://guhang2011.github.io/meteoformer-weather-system/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Synthetic forecast snapshot: regional map, lead-time controls and point forecast.",
+      "capturedAt": "2026-11-12T18:23:32.944Z",
+      "asset": "assets/project-previews/20261113/meteoformer-workspace-desktop.webp",
+      "provenance": "Public demo using synthetic/local sample data. Captured from live UI, not a design mock-up.",
+      "sourceRepository": "https://github.com/GuHang2011/meteoformer-weather-system",
+      "sourceCommit": "72b9c251652a2ca1d17b7c0ffe2f7accf4ef6b4e",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 103384,
+      "sha256": "d69a7ef02115a2208b44294cc78f1c2ed9a9d8af49b6b8d91d12c6709e2afd7f"
+    },
+    {
+      "id": "shuyang-home-desktop",
+      "title": "沭阳之家社区首页",
+      "url": "https://guhang2011.github.io/shuyang-home/#home",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Public synthetic member demo. Dismissed broadcast banner and celebration popup with their UI close controls.",
+      "capturedAt": "2026-11-12T18:23:35.828Z",
+      "asset": "assets/project-previews/20261113/shuyang-home-desktop.webp",
+      "provenance": "Public demo using synthetic/local sample data. Captured from live UI, not a design mock-up.",
+      "sourceRepository": "https://github.com/GuHang2011/shuyang-home",
+      "sourceCommit": "cb62f91f26dd340d3b4a4029135e8db40ea0fd88",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 91954,
+      "sha256": "398531c39e174d03d8afef92e7071caea02ca5ec194cf60f838197ba315c7187"
+    },
+    {
+      "id": "shuyang-railway-desktop",
+      "title": "沭阳之家高铁专题",
+      "url": "https://guhang2011.github.io/shuyang-home/#railway",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Railway forum in public synthetic demo.",
+      "capturedAt": "2026-11-12T18:29:11.495Z",
+      "asset": "assets/project-previews/20261113/shuyang-railway-desktop.webp",
+      "provenance": "Public demo using synthetic/local sample data. Captured from live UI, not a design mock-up.",
+      "sourceRepository": "https://github.com/GuHang2011/shuyang-home",
+      "sourceCommit": "cb62f91f26dd340d3b4a4029135e8db40ea0fd88",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 96188,
+      "sha256": "b5d49e937b1b4a8e86bd0a668288c1779c6d84088f31a8c4f071fabcc665bf80"
+    },
+    {
+      "id": "silkroad-store-desktop",
+      "title": "丝路商城商品浏览",
+      "url": "https://guhang2011.github.io/silkroad-online-demo/#/customer",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Logged in with the documented public demo customer account. Products, payment and AI are synthetic demos.",
+      "capturedAt": "2026-11-12T18:23:42.909Z",
+      "asset": "assets/project-previews/20261113/silkroad-store-desktop.webp",
+      "provenance": "Public demo using synthetic/local sample data. Captured from live UI, not a design mock-up.",
+      "sourceRepository": "https://github.com/GuHang2011/silkroad-online-demo",
+      "sourceCommit": "788fe679288c0df04b22ec20936159d610ef17d4",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 136570,
+      "sha256": "e8bd0a3b16ce37bc8ecc3f15a912cfe0d2cda1b92f49b5d8a6b265747a525bff"
+    },
+    {
+      "id": "archive-workspace-desktop",
+      "title": "学院资料归档工作台",
+      "url": "https://guhang2011.github.io/college-archive-demo/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Five synthetic local archive files and task list; no real institutional data.",
+      "capturedAt": "2026-11-12T18:26:38.783Z",
+      "asset": "assets/project-previews/20261113/archive-workspace-desktop.webp",
+      "provenance": "Public demo using synthetic/local sample data. Captured from live UI, not a design mock-up.",
+      "sourceRepository": "https://github.com/GuHang2011/college-archive-demo",
+      "sourceCommit": "e93ee1fa1495e70eaf2ef9e125c31b121a0b7352",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 76066,
+      "sha256": "a287419807c86dd58cb47325cea207b81842a9fd35ac16612f4589478c4b7a85"
+    },
+    {
+      "id": "archive-records-desktop",
+      "title": "学院资料归档列表",
+      "url": "https://guhang2011.github.io/college-archive-demo/#archives",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Browser-local synthetic archive file list and status/category filters.",
+      "capturedAt": "2026-11-12T18:26:39.402Z",
+      "asset": "assets/project-previews/20261113/archive-records-desktop.webp",
+      "provenance": "Public demo using synthetic/local sample data. Captured from live UI, not a design mock-up.",
+      "sourceRepository": "https://github.com/GuHang2011/college-archive-demo",
+      "sourceCommit": "e93ee1fa1495e70eaf2ef9e125c31b121a0b7352",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 78920,
+      "sha256": "a0c29f27ec8ea7f98016f538325283ae6e2ba19479dd36acd60dd355238b5c7d"
+    },
+    {
+      "id": "fieldlens-workspace-mobile",
+      "title": "禾镜 FieldLens 图像检测",
+      "url": "https://guhang2011.github.io/fieldlens/?demo=1&v=1.9.4#workspace",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "v1.9.4; preset leaf image with three synthetic annotation boxes; model service not connected.",
+      "capturedAt": "2026-11-12T18:29:18.271Z",
+      "asset": "assets/project-previews/20261113/fieldlens-workspace-mobile.webp",
+      "provenance": "Public demo using synthetic/local sample data. Captured from live UI, not a design mock-up.",
+      "sourceRepository": "https://github.com/GuHang2011/fieldlens",
+      "sourceCommit": "67af0350696bdc05823f440c420c1dbf3cdf0536",
+      "width": 390,
+      "height": 844,
+      "bytes": 31140,
+      "sha256": "5defabb33af851e025cbb5518120741496b00dd419c8908f0b57d27203049d55"
+    },
+    {
+      "id": "fieldlens-records-mobile",
+      "title": "禾镜 FieldLens 检测记录",
+      "url": "https://guhang2011.github.io/fieldlens/?demo=1&v=1.9.4#history",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "v1.9.4; twelve preset inspection records; no real inference.",
+      "capturedAt": "2026-11-12T18:29:18.838Z",
+      "asset": "assets/project-previews/20261113/fieldlens-records-mobile.webp",
+      "provenance": "Public demo using synthetic/local sample data. Captured from live UI, not a design mock-up.",
+      "sourceRepository": "https://github.com/GuHang2011/fieldlens",
+      "sourceCommit": "67af0350696bdc05823f440c420c1dbf3cdf0536",
+      "width": 390,
+      "height": 844,
+      "bytes": 34148,
+      "sha256": "dab9d6a68c44a669021792bfd3b70971508969cd85b4c5518ac645262ffe4739"
+    },
+    {
+      "id": "meteoformer-workspace-mobile",
+      "title": "MeteoFormer 气象工作台",
+      "url": "https://guhang2011.github.io/meteoformer-weather-system/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "Synthetic forecast snapshot: regional map, lead-time controls and point forecast.",
+      "capturedAt": "2026-11-12T18:26:43.652Z",
+      "asset": "assets/project-previews/20261113/meteoformer-workspace-mobile.webp",
+      "provenance": "Public demo using synthetic/local sample data. Captured from live UI, not a design mock-up.",
+      "sourceRepository": "https://github.com/GuHang2011/meteoformer-weather-system",
+      "sourceCommit": "72b9c251652a2ca1d17b7c0ffe2f7accf4ef6b4e",
+      "width": 390,
+      "height": 844,
+      "bytes": 31360,
+      "sha256": "6bc53e35d9f9addcf33f94934f3ca861dbe9e92c1be67e30f4c420a4d26d9218"
+    },
+    {
+      "id": "shuyang-home-mobile",
+      "title": "沭阳之家社区首页",
+      "url": "https://guhang2011.github.io/shuyang-home/#home",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "Public synthetic member demo. Dismissed broadcast banner and celebration popup with their UI close controls.",
+      "capturedAt": "2026-11-12T18:29:20.972Z",
+      "asset": "assets/project-previews/20261113/shuyang-home-mobile.webp",
+      "provenance": "Public demo using synthetic/local sample data. Captured from live UI, not a design mock-up.",
+      "sourceRepository": "https://github.com/GuHang2011/shuyang-home",
+      "sourceCommit": "cb62f91f26dd340d3b4a4029135e8db40ea0fd88",
+      "width": 390,
+      "height": 844,
+      "bytes": 53250,
+      "sha256": "d4b9832fb3d2a4725b8445ca222982a4eafc798655ae85d1a31dd8df87b99591"
+    },
+    {
+      "id": "shuyang-railway-mobile",
+      "title": "沭阳之家高铁专题",
+      "url": "https://guhang2011.github.io/shuyang-home/#railway",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "Railway forum in public synthetic demo.",
+      "capturedAt": "2026-11-12T18:29:21.538Z",
+      "asset": "assets/project-previews/20261113/shuyang-railway-mobile.webp",
+      "provenance": "Public demo using synthetic/local sample data. Captured from live UI, not a design mock-up.",
+      "sourceRepository": "https://github.com/GuHang2011/shuyang-home",
+      "sourceCommit": "cb62f91f26dd340d3b4a4029135e8db40ea0fd88",
+      "width": 390,
+      "height": 844,
+      "bytes": 36598,
+      "sha256": "be5a2e0faad615a4fcd0625ffeb15abce0b3861e7854c992f317e762534c03de"
+    },
+    {
+      "id": "silkroad-store-mobile",
+      "title": "丝路商城商品浏览",
+      "url": "https://guhang2011.github.io/silkroad-online-demo/#/customer",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "Logged in with the documented public demo customer account. Products, payment and AI are synthetic demos.",
+      "capturedAt": "2026-11-12T18:26:52.025Z",
+      "asset": "assets/project-previews/20261113/silkroad-store-mobile.webp",
+      "provenance": "Public demo using synthetic/local sample data. Captured from live UI, not a design mock-up.",
+      "sourceRepository": "https://github.com/GuHang2011/silkroad-online-demo",
+      "sourceCommit": "788fe679288c0df04b22ec20936159d610ef17d4",
+      "width": 390,
+      "height": 844,
+      "bytes": 54032,
+      "sha256": "6005a34f689ce28308a51377ac1c060a2b61bdc4f8c40fec1392523a1ae7977b"
+    },
+    {
+      "id": "archive-workspace-mobile",
+      "title": "学院资料归档工作台",
+      "url": "https://guhang2011.github.io/college-archive-demo/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "Five synthetic local archive files and task list; no real institutional data.",
+      "capturedAt": "2026-11-12T18:26:53.447Z",
+      "asset": "assets/project-previews/20261113/archive-workspace-mobile.webp",
+      "provenance": "Public demo using synthetic/local sample data. Captured from live UI, not a design mock-up.",
+      "sourceRepository": "https://github.com/GuHang2011/college-archive-demo",
+      "sourceCommit": "e93ee1fa1495e70eaf2ef9e125c31b121a0b7352",
+      "width": 390,
+      "height": 844,
+      "bytes": 25752,
+      "sha256": "a37fa9c325680134f2b32ba22d66aacfa1ae70a8f347ec558179fb652cf5b51b"
+    },
+    {
+      "id": "archive-records-mobile",
+      "title": "学院资料归档列表",
+      "url": "https://guhang2011.github.io/college-archive-demo/#archives",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "Browser-local synthetic archive file list and status/category filters.",
+      "capturedAt": "2026-11-12T18:26:54.038Z",
+      "asset": "assets/project-previews/20261113/archive-records-mobile.webp",
+      "provenance": "Public demo using synthetic/local sample data. Captured from live UI, not a design mock-up.",
+      "sourceRepository": "https://github.com/GuHang2011/college-archive-demo",
+      "sourceCommit": "e93ee1fa1495e70eaf2ef9e125c31b121a0b7352",
+      "width": 390,
+      "height": 844,
+      "bytes": 30114,
+      "sha256": "8cd3656ae6d21db8045f8d9d37eb52637399ff70bb316b23019498f624abf29c"
+    },
+    {
+      "id": "fieldlens-home-desktop",
+      "title": "禾镜 FieldLens home",
+      "url": "https://guhang2011.github.io/fieldlens/?demo=1&v=1.9.4#home",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "v1.9.4 public home page with preset demo data.",
+      "capturedAt": "2026-11-12T18:27:15.384Z",
+      "asset": "assets/project-previews/20261113/fieldlens-home-desktop.webp",
+      "provenance": "Public demo using synthetic/local sample data. Captured from live UI, not a design mock-up.",
+      "sourceRepository": "https://github.com/GuHang2011/fieldlens",
+      "sourceCommit": "67af0350696bdc05823f440c420c1dbf3cdf0536",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 129596,
+      "sha256": "e76ee69783e78347589b07d1bed0cce132003db1887508d5cb71c07ab056cc41"
+    },
+    {
+      "id": "fieldlens-screen-desktop",
+      "title": "禾镜 FieldLens screen",
+      "url": "https://guhang2011.github.io/fieldlens/?demo=1&v=1.9.4#dashboard",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "v1.9.4; data dashboard showing 12 preset records. Opened using 数据大屏 navigation.",
+      "capturedAt": "2026-11-12T18:29:09.280Z",
+      "asset": "assets/project-previews/20261113/fieldlens-screen-desktop.webp",
+      "provenance": "Public demo using synthetic/local sample data. Captured from live UI, not a design mock-up.",
+      "sourceRepository": "https://github.com/GuHang2011/fieldlens",
+      "sourceCommit": "67af0350696bdc05823f440c420c1dbf3cdf0536",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 62612,
+      "sha256": "abc14d068c6be21b997b39a487ff319dd0333da40d60f23fb394f2ad257f7ed0"
+    },
+    {
+      "id": "fieldlens-assistant-mobile",
+      "title": "禾镜 FieldLens assistant",
+      "url": "https://guhang2011.github.io/fieldlens/?demo=1&v=1.9.4#assistant",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "v1.9.4 public assistant page with preset demo data.",
+      "capturedAt": "2026-11-12T18:27:19.539Z",
+      "asset": "assets/project-previews/20261113/fieldlens-assistant-mobile.webp",
+      "provenance": "Public demo using synthetic/local sample data. Captured from live UI, not a design mock-up.",
+      "sourceRepository": "https://github.com/GuHang2011/fieldlens",
+      "sourceCommit": "67af0350696bdc05823f440c420c1dbf3cdf0536",
+      "width": 390,
+      "height": 844,
+      "bytes": 31836,
+      "sha256": "0f687baf77353d036821f07167327a840e1d91d7f898ac87bbeb1e75a0d10050"
+    },
+    {
+      "id": "low-code-form",
+      "title": "配置驱动表单工作台",
+      "url": "https://guhang2011.github.io/demos/low-code-form/?v=20261113-capture",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Chinese schema editor and filled teaching-support sample form",
+      "capturedAt": "2026-11-12T18:22:56.523Z",
+      "asset": "assets/project-previews/20261113/low-code-form-desktop.webp",
+      "provenance": "Synthetic data in the public browser demo. Capture preserves the actual rendered application.",
+      "sourceRepository": "https://github.com/GuHang2011/GuHang2011.github.io",
+      "sourceCommit": "bbff0ef2aa5eac2b9c7965c1a6bc3460e65ea258",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 38840,
+      "sha256": "8abd6e71eb1d515af2ca6ef51ad97b1c31a1e1a4ca20bf8e5e297b8037d5a57d"
+    },
+    {
+      "id": "low-code-form",
+      "title": "配置驱动表单工作台",
+      "url": "https://guhang2011.github.io/demos/low-code-form/?v=20261113-capture",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "Chinese schema editor and filled teaching-support sample form",
+      "capturedAt": "2026-11-12T18:22:56.878Z",
+      "asset": "assets/project-previews/20261113/low-code-form-mobile.webp",
+      "provenance": "Synthetic data in the public browser demo. Capture preserves the actual rendered application.",
+      "sourceRepository": "https://github.com/GuHang2011/GuHang2011.github.io",
+      "sourceCommit": "bbff0ef2aa5eac2b9c7965c1a6bc3460e65ea258",
+      "width": 390,
+      "height": 844,
+      "bytes": 20900,
+      "sha256": "2aa2349ac8c0e6763329af04207641977aa9d7c11504bc131897c7f579c9a608"
+    },
+    {
+      "id": "react-workflow",
+      "title": "React 工作流面板",
+      "url": "https://guhang2011.github.io/demos/react-workflow/?v=20261113-capture",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Chinese review board with synthetic tasks and permission controls",
+      "capturedAt": "2026-11-12T18:22:58.869Z",
+      "asset": "assets/project-previews/20261113/react-workflow-desktop.webp",
+      "provenance": "Synthetic data in the public browser demo. Capture preserves the actual rendered application.",
+      "sourceRepository": "https://github.com/GuHang2011/GuHang2011.github.io",
+      "sourceCommit": "bbff0ef2aa5eac2b9c7965c1a6bc3460e65ea258",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 59676,
+      "sha256": "6138dd0d672cf8bfb8b5a6edcaa33faef0b712506fcaf00db8aa68b7ad64bb8f"
+    },
+    {
+      "id": "react-workflow",
+      "title": "React 工作流面板",
+      "url": "https://guhang2011.github.io/demos/react-workflow/?v=20261113-capture",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "Chinese review board with synthetic tasks and permission controls",
+      "capturedAt": "2026-11-12T18:22:59.223Z",
+      "asset": "assets/project-previews/20261113/react-workflow-mobile.webp",
+      "provenance": "Synthetic data in the public browser demo. Capture preserves the actual rendered application.",
+      "sourceRepository": "https://github.com/GuHang2011/GuHang2011.github.io",
+      "sourceCommit": "bbff0ef2aa5eac2b9c7965c1a6bc3460e65ea258",
+      "width": 390,
+      "height": 844,
+      "bytes": 19288,
+      "sha256": "7e043cb8119b7324155e4ac7e2356588eff0d1c8e00f19eb5e86dd64596300be"
+    },
+    {
+      "id": "ai-stream",
+      "title": "流式回答交互实验",
+      "url": "https://guhang2011.github.io/demos/ai-stream/?v=20261113-capture",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Completed local preset answer with simulation disclosure",
+      "capturedAt": "2026-11-12T18:23:06.187Z",
+      "asset": "assets/project-previews/20261113/ai-stream-desktop.webp",
+      "provenance": "Synthetic data in the public browser demo. Capture preserves the actual rendered application.",
+      "sourceRepository": "https://github.com/GuHang2011/GuHang2011.github.io",
+      "sourceCommit": "bbff0ef2aa5eac2b9c7965c1a6bc3460e65ea258",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 82800,
+      "sha256": "47d6fb6773d1fb33d635c737437194488fc18dfb5bc8c5229af9a42d8e304f80"
+    },
+    {
+      "id": "production-workbench",
+      "title": "生产报工工作台",
+      "url": "https://guhang2011.github.io/demos/production-workbench/?v=20261113-capture",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Synthetic production report sample after scan and successful submit",
+      "capturedAt": "2026-11-12T18:25:16.146Z",
+      "asset": "assets/project-previews/20261113/production-workbench-desktop.webp",
+      "provenance": "Synthetic data in the public browser demo. Capture preserves the actual rendered application.",
+      "sourceRepository": "https://github.com/GuHang2011/GuHang2011.github.io",
+      "sourceCommit": "bbff0ef2aa5eac2b9c7965c1a6bc3460e65ea258",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 45688,
+      "sha256": "70d034565b7f315dedb1af2e540ba5393bcc64e047358a72a04837f315aa13ce"
+    },
+    {
+      "id": "telecom-service",
+      "title": "电信业务办理台",
+      "url": "https://guhang2011.github.io/demos/telecom-service/?v=20261113-capture",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Synthetic customer account and service review preview",
+      "capturedAt": "2026-11-12T18:25:18.510Z",
+      "asset": "assets/project-previews/20261113/telecom-service-desktop.webp",
+      "provenance": "Synthetic data in the public browser demo. Capture preserves the actual rendered application.",
+      "sourceRepository": "https://github.com/GuHang2011/GuHang2011.github.io",
+      "sourceCommit": "bbff0ef2aa5eac2b9c7965c1a6bc3460e65ea258",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 47832,
+      "sha256": "06d973a1cae0f6b028245a00cc57aacd0bae2b537102f5fa7852a9bbfc8f5c83"
+    },
+    {
+      "id": "virtual-host",
+      "title": "虚拟主播工作台",
+      "url": "https://guhang2011.github.io/demos/virtual-host/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Mao Live2D sample ready, narration paused, synthetic product and speech; corrected studio grid",
+      "capturedAt": "2026-11-12T18:27:35.416Z",
+      "asset": "assets/project-previews/20261113/virtual-host-desktop.webp",
+      "provenance": "Local release preview using actual updated source; public synthetic demonstration, Live2D sample © Live2D Inc. Pending deployment at capture time; no screenshot-only layout overrides.",
+      "sourceRepository": "https://github.com/GuHang2011/GuHang2011.github.io",
+      "sourceCommit": "bbff0ef2aa5eac2b9c7965c1a6bc3460e65ea258",
+      "sourceChange": "demos/virtual-host/studio.css: grid-template-rows auto 1fr; align-content start",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 75326,
+      "sha256": "0272b0de7b2b22dd492f5081c671398384f3b8f4e64b8ca4e1d75ef2fae24b9c"
+    },
+    {
+      "id": "virtual-host",
+      "title": "虚拟主播工作台",
+      "url": "https://guhang2011.github.io/demos/virtual-host/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "Mao Live2D sample ready, narration paused, synthetic product and speech; corrected studio grid",
+      "capturedAt": "2026-11-12T18:27:35.892Z",
+      "asset": "assets/project-previews/20261113/virtual-host-mobile.webp",
+      "provenance": "Local release preview using actual updated source; public synthetic demonstration, Live2D sample © Live2D Inc. Pending deployment at capture time; no screenshot-only layout overrides.",
+      "sourceRepository": "https://github.com/GuHang2011/GuHang2011.github.io",
+      "sourceCommit": "bbff0ef2aa5eac2b9c7965c1a6bc3460e65ea258",
+      "sourceChange": "demos/virtual-host/studio.css: grid-template-rows auto 1fr; align-content start",
+      "width": 390,
+      "height": 844,
+      "bytes": 40074,
+      "sha256": "863ad22d7922c59e6b90a9d7e0e04aaeb8535d184780728d3d77a084e9c88a3f"
+    },
+    {
+      "id": "financial-analysis",
+      "title": "财务比率探索",
+      "url": "https://guhang2011.github.io/demos/financial-analysis/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Default loaded public demo; Chinese language selected where available",
+      "capturedAt": "2026-11-12T18:21:56.667Z",
+      "asset": "assets/project-previews/20261113/financial-analysis-desktop.webp",
+      "provenance": "Public synthetic teaching/demo data",
+      "sourceRepository": "https://github.com/GuHang2011/GuHang2011.github.io",
+      "sourceCommit": "bbff0ef2aa5eac2b9c7965c1a6bc3460e65ea258",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 48758,
+      "sha256": "c5eef4bbc3e2861af481023edfc61989b4929d602401ea39d341644f50fe5ab2"
+    },
+    {
+      "id": "data-preparation",
+      "title": "数据清洗与质量审计",
+      "url": "https://guhang2011.github.io/demos/data-preparation/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Default loaded public demo; Chinese language selected where available",
+      "capturedAt": "2026-11-12T18:21:59.433Z",
+      "asset": "assets/project-previews/20261113/data-preparation-desktop.webp",
+      "provenance": "Public synthetic teaching/demo data",
+      "sourceRepository": "https://github.com/GuHang2011/GuHang2011.github.io",
+      "sourceCommit": "bbff0ef2aa5eac2b9c7965c1a6bc3460e65ea258",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 46844,
+      "sha256": "0ef08193965dd35961e91b369c7b9d314806d35537e3d618b71e096087a52f52"
+    },
+    {
+      "id": "model-evaluation",
+      "title": "模型评估实验室",
+      "url": "https://guhang2011.github.io/demos/model-evaluation/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Default loaded public demo; Chinese language selected where available",
+      "capturedAt": "2026-11-12T18:22:02.079Z",
+      "asset": "assets/project-previews/20261113/model-evaluation-desktop.webp",
+      "provenance": "Public synthetic teaching/demo data",
+      "sourceRepository": "https://github.com/GuHang2011/GuHang2011.github.io",
+      "sourceCommit": "bbff0ef2aa5eac2b9c7965c1a6bc3460e65ea258",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 56406,
+      "sha256": "fa42483d60947cedd26128d0dd817bbdd8cc2ca48a74de64fb04091b68e67139"
+    },
+    {
+      "id": "bleu-explorer",
+      "title": "BLEU 翻译指标探索",
+      "url": "https://guhang2011.github.io/demos/bleu-explorer/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Default loaded public demo; Chinese language selected where available",
+      "capturedAt": "2026-11-12T18:22:04.667Z",
+      "asset": "assets/project-previews/20261113/bleu-explorer-desktop.webp",
+      "provenance": "Public synthetic teaching/demo data",
+      "sourceRepository": "https://github.com/GuHang2011/GuHang2011.github.io",
+      "sourceCommit": "bbff0ef2aa5eac2b9c7965c1a6bc3460e65ea258",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 50506,
+      "sha256": "6130d029736b57e40e172fbaca7f6d3236c0fbd9243c8d220c86d1977ac10aee"
+    },
+    {
+      "id": "reliability-gates",
+      "title": "多模态可靠性门禁",
+      "url": "https://guhang2011.github.io/demos/reliability-gates/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Default loaded public demo; Chinese language selected where available",
+      "capturedAt": "2026-11-12T18:22:06.818Z",
+      "asset": "assets/project-previews/20261113/reliability-gates-desktop.webp",
+      "provenance": "Public synthetic teaching/demo data",
+      "sourceRepository": "https://github.com/GuHang2011/GuHang2011.github.io",
+      "sourceCommit": "bbff0ef2aa5eac2b9c7965c1a6bc3460e65ea258",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 67062,
+      "sha256": "c8425659a9f221f00d748894cc853b5a76f8e9155ae6d288de3310356494a7cd"
+    },
+    {
+      "id": "frontend-data",
+      "title": "前端数据实验室",
+      "url": "https://guhang2011.github.io/frontend-data-lab/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Default loaded public demo; Chinese language selected where available",
+      "capturedAt": "2026-11-12T18:22:09.510Z",
+      "asset": "assets/project-previews/20261113/frontend-data-desktop.webp",
+      "provenance": "Public synthetic teaching/demo data",
+      "sourceRepository": "https://github.com/GuHang2011/frontend-data-lab",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 75770,
+      "sha256": "e70e1f84e7dcd1d6feb794793023e0269240f6db0cb2e861ae0d018e6b460e4a"
+    },
+    {
+      "id": "counselor-demo",
+      "title": "辅导员工作流公开演示",
+      "url": "https://guhang2011.github.io/counselor-workflow-showcase/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Default loaded public demo; Chinese language selected where available",
+      "capturedAt": "2026-11-12T18:22:12.759Z",
+      "asset": "assets/project-previews/20261113/counselor-demo-desktop.webp",
+      "provenance": "Public synthetic teaching/demo data",
+      "sourceRepository": "https://github.com/GuHang2011/counselor-workflow-showcase",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 51174,
+      "sha256": "9606dbf2b7120e799118c5bb5dd7836f9b006c304566b1a018351b389fa27223"
+    },
+    {
+      "id": "counselor-demo-mobile",
+      "title": "辅导员工作流公开演示",
+      "url": "https://guhang2011.github.io/counselor-workflow-showcase/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": "Default loaded public demo; Chinese language selected where available",
+      "capturedAt": "2026-11-12T18:22:12.759Z",
+      "asset": "assets/project-previews/20261113/counselor-demo-mobile.webp",
+      "provenance": "Public synthetic teaching/demo data",
+      "sourceRepository": "https://github.com/GuHang2011/counselor-workflow-showcase",
+      "width": 390,
+      "height": 844,
+      "bytes": 30518,
+      "sha256": "a4c8b13d168e866009d1c6b3c46c17765661a62ce9c2546e74c6b49ba62c07a5"
+    },
+    {
+      "id": "financial-analysis-detail-desktop",
+      "title": "财务比率探索",
+      "url": "https://guhang2011.github.io/demos/financial-analysis/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Scrolled public demo to inspect populated data workspace and charts",
+      "capturedAt": "2026-11-12T18:24:06.952Z",
+      "asset": "assets/project-previews/20261113/financial-analysis-detail-desktop.webp",
+      "provenance": "Public synthetic teaching/demo data",
+      "sourceRepository": "https://github.com/GuHang2011/GuHang2011.github.io",
+      "sourceCommit": "bbff0ef2aa5eac2b9c7965c1a6bc3460e65ea258",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 48656,
+      "sha256": "589468f10926ff51d74b69bf576b0f68a5971076b30d9526b6ec3b5ee1b6d1ae"
+    },
+    {
+      "id": "model-evaluation-detail-desktop",
+      "title": "模型评估实验室",
+      "url": "https://guhang2011.github.io/demos/model-evaluation/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Scrolled public demo to inspect populated data workspace and charts",
+      "capturedAt": "2026-11-12T18:24:09.114Z",
+      "asset": "assets/project-previews/20261113/model-evaluation-detail-desktop.webp",
+      "provenance": "Public synthetic teaching/demo data",
+      "sourceRepository": "https://github.com/GuHang2011/GuHang2011.github.io",
+      "sourceCommit": "bbff0ef2aa5eac2b9c7965c1a6bc3460e65ea258",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 57756,
+      "sha256": "1bb1280fc32f04d3cf5c9e04650622537e2c6029ebd85367e353645b31feb83e"
+    },
+    {
+      "id": "data-preparation-detail-desktop",
+      "title": "数据清洗与质量审计",
+      "url": "https://guhang2011.github.io/demos/data-preparation/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Scrolled public demo to inspect populated data workspace and charts",
+      "capturedAt": "2026-11-12T18:24:11.242Z",
+      "asset": "assets/project-previews/20261113/data-preparation-detail-desktop.webp",
+      "provenance": "Public synthetic teaching/demo data",
+      "sourceRepository": "https://github.com/GuHang2011/GuHang2011.github.io",
+      "sourceCommit": "bbff0ef2aa5eac2b9c7965c1a6bc3460e65ea258",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 49594,
+      "sha256": "63513efd0dd45e6d4e6d90d55601f5140880a044c7e5e01b891d80309de42b7e"
+    },
+    {
+      "id": "frontend-data-detail-desktop",
+      "title": "前端数据实验室",
+      "url": "https://guhang2011.github.io/frontend-data-lab/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Scrolled public demo to inspect populated data workspace and charts",
+      "capturedAt": "2026-11-12T18:24:13.470Z",
+      "asset": "assets/project-previews/20261113/frontend-data-detail-desktop.webp",
+      "provenance": "Public synthetic teaching/demo data",
+      "sourceRepository": "https://github.com/GuHang2011/frontend-data-lab",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 65818,
+      "sha256": "db1620e5e179f8475d0e825c9eed1de68c17a7e46677028b00f13fce7ebbcd26"
+    },
+    {
+      "id": "counselor-demo-detail-desktop",
+      "title": "辅导员工作流公开演示",
+      "url": "https://guhang2011.github.io/counselor-workflow-showcase/",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Scrolled public demo to inspect populated role and module interaction",
+      "capturedAt": "2026-11-12T18:24:15.729Z",
+      "asset": "assets/project-previews/20261113/counselor-demo-detail-desktop.webp",
+      "provenance": "Public synthetic teaching/demo data",
+      "sourceRepository": "https://github.com/GuHang2011/counselor-workflow-showcase",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 34548,
+      "sha256": "36ccc03c29f32792827d316ddce251590f977641e33d20f4e02b885bcd626c3f"
+    },
+    {
+      "id": "kapt-demo",
+      "title": "KAPT 合成早停回放",
+      "url": "https://guhang2011.github.io/cases/kapt/#early-stopping",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Executed reset and seven next-epoch steps; synthetic sequence selects best epoch5 and stop epoch8; no model training",
+      "capturedAt": "2026-11-12T18:25:55.063Z",
+      "asset": "assets/project-previews/20261113/kapt-demo-desktop.webp",
+      "provenance": "Live browser synthetic educational fixture; no production data or training experiment",
+      "sourceRepository": "https://github.com/GuHang2011/GuHang2011.github.io",
+      "sourceCommit": "bbff0ef2aa5eac2b9c7965c1a6bc3460e65ea258",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 43794,
+      "sha256": "51006c0bd45b3ed92ae4ed7699624022a2788de54c471d6f1f63815b4c519cf7"
+    },
+    {
+      "id": "file-inventory",
+      "title": "文件盘点合成样例",
+      "url": "https://guhang2011.github.io/cases/file-inventory/#example",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": "Browser fixture recalculation after toggling node_modules exclusion and selecting16-byte threshold;4 files40 logical bytes1 threshold match; no disk access",
+      "capturedAt": "2026-11-12T18:25:57.243Z",
+      "asset": "assets/project-previews/20261113/file-inventory-desktop.webp",
+      "provenance": "Live browser synthetic educational fixture; no production data or training experiment",
+      "sourceRepository": "https://github.com/GuHang2011/GuHang2011.github.io",
+      "sourceCommit": "bbff0ef2aa5eac2b9c7965c1a6bc3460e65ea258",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 55978,
+      "sha256": "5e07a7c2d08c719136d35fbf45bc643e9182bc69a965356a5257d366498a63cb"
+    }
+  ]
+}

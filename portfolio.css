@@ -431,3 +431,8 @@ body.folio.folio-directory #demos .experience-description { font-size:17px; line
  .folio .selected-work { display:block; }
  .folio .selected-work > .work-feature { display:grid; grid-template-columns:1fr 1fr; margin-bottom:24px; }
 }
+
+/* Keep the complete refreshed UI visible, including its controls and status. */
+.folio .hero-preview-image img,.folio .update-image img{aspect-ratio:1.44;object-fit:contain;background:var(--surface)}
+
+.folio .screenshot-heading-links{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
