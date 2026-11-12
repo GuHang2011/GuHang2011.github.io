@@ -1,0 +1,54 @@
+.ai-opening { background:linear-gradient(112deg,#f1f7f5 0%,#fbfaf6 62%,#f7f6f0 100%); }
+.ai-architecture { display:grid; grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr) 24px minmax(0,1fr); gap:12px; align-items:stretch; margin-top:28px; }
+.ai-node { min-width:0; display:flex; flex-direction:column; justify-content:center; min-height:140px; padding:20px; background:var(--paper); border:1px solid var(--line); border-top:3px solid var(--teal); }
+.ai-node > span,.ai-storage > span,.ai-review > span { color:var(--accent); font-size:10px; font-weight:700; letter-spacing:.1em; }
+.ai-node strong { margin-top:9px; font-size:16px; }
+.ai-node small { margin-top:7px; color:var(--muted); font-size:11px; line-height:1.7; }
+.ai-provider { border-top-color:#ba8a42; }
+.ai-link { display:grid; place-items:center; color:var(--accent); font-size:22px; }
+.ai-storage,.ai-review { grid-column:span 2; display:grid; gap:5px 12px; padding:16px 18px; background:#edf4f2; border-left:3px solid var(--teal); }
+.ai-storage > span,.ai-review > span { grid-row:span 2; align-self:center; }
+.ai-storage strong,.ai-review strong { font-size:13px; }
+.ai-storage small,.ai-review small { color:var(--muted); font-size:11px; line-height:1.65; }
+.ai-review { grid-column:4 / span 2; background:#f6f2e8; border-left-color:#ba8a42; }
+.ai-workflows { display:grid; gap:10px; margin-top:26px; }
+.ai-workflow { border:1px solid var(--line); background:var(--paper); }
+.ai-workflow summary { display:grid; grid-template-columns:38px minmax(0,1fr) auto; align-items:center; gap:12px; min-height:64px; padding:12px 18px; cursor:pointer; list-style:none; }
+.ai-workflow summary::-webkit-details-marker { display:none; }
+.ai-workflow summary > span { color:var(--accent); font-size:11px; font-weight:700; }
+.ai-workflow summary strong { font-size:14px; }
+.ai-workflow summary em { color:var(--muted); font-size:10px; font-style:normal; letter-spacing:.06em; }
+.ai-workflow[open] summary { border-bottom:1px solid var(--line); background:#f4f7f5; }
+.ai-workflow-body { padding:18px 22px 20px 68px; }
+.ai-workflow-body ol { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin:0; padding:0; list-style:none; counter-reset:ai-step; }
+.ai-workflow-body li { position:relative; padding-top:24px; color:var(--muted); font-size:12px; line-height:1.75; counter-increment:ai-step; }
+.ai-workflow-body li::before { position:absolute; top:0; left:0; content:"STEP 0" counter(ai-step); color:var(--accent); font-size:9px; font-weight:700; letter-spacing:.08em; }
+.ai-workflow-body > p { margin-top:16px; padding:11px 13px; color:#725621; background:#fbf4e4; font-size:11px; line-height:1.65; }
+.ai-media-grid { grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); align-items:start; }
+.ai-media-grid .case-screen img { display:block; width:100%; height:auto; border:1px solid var(--line); }
+.ai-media-grid .case-screen:first-child img { aspect-ratio:4/3; object-fit:cover; object-position:top left; }
+.ai-media-grid .case-screen:last-child img { aspect-ratio:16/9; object-fit:cover; object-position:top left; }
+.ai-next { margin-top:30px; }
+@media(max-width:800px) {
+  .ai-architecture { grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr); }
+  .ai-architecture .ai-link:nth-of-type(2) { display:none; }
+  .ai-provider { grid-column:1 / 2; }
+  .ai-storage { grid-column:2 / 4; }
+  .ai-review { grid-column:1 / 4; }
+  .ai-workflow-body ol { grid-template-columns:1fr; gap:10px; }
+  .ai-workflow-body li { padding-top:20px; }
+}
+@media(max-width:620px) {
+  .ai-architecture { grid-template-columns:1fr; gap:8px; }
+  .ai-node { min-height:110px; padding:16px; }
+  .ai-link { min-height:17px; transform:rotate(90deg); }
+  .ai-architecture .ai-link:nth-of-type(2) { display:grid; }
+  .ai-provider,.ai-storage,.ai-review { grid-column:1; }
+  .ai-storage,.ai-review { grid-template-columns:1fr; }
+  .ai-storage > span,.ai-review > span { grid-row:auto; }
+  .ai-workflow summary { grid-template-columns:28px minmax(0,1fr); gap:7px 10px; padding-inline:12px; }
+  .ai-workflow summary em { grid-column:2; }
+  .ai-workflow-body { padding:15px; }
+  .ai-media-grid { grid-template-columns:1fr; }
+}
+@media(prefers-reduced-motion:reduce) { .ai-workflow { scroll-behavior:auto; } }
