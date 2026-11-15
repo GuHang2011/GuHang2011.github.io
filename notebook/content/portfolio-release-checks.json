@@ -1,0 +1,137 @@
+{
+  "slug": "portfolio-release-checks",
+  "date": "2026-11-15",
+  "category": "engineering",
+  "kind": "reflection",
+  "minutes": 7,
+  "title": {
+    "zh": "本地能看，不代表发布后能看",
+    "en": "A working local preview can still break after publishing"
+  },
+  "summary": {
+    "zh": "从一次项目截图更新说起：旧图引用、遗漏资源和线上 404，怎样在发布前后分别检查。附一个只用 Python 标准库的资源检查小工具。",
+    "en": "Old image references, omitted assets and live 404s from a portfolio refresh, with a small Python standard-library checker for direct page assets."
+  },
+  "basis": {
+    "zh": "整理于 2026-11-15。依据本站 11 月 13 日截图更新的提交和检查记录：20 个可运行项目及学习演示、43 张截图；随后补发两张历史界面图和一个案例样式文件。本文讨论静态站点发布，不代表各演示的完整业务验收。示例脚本只检查指定公开页面直接引用的同源资源，不执行 JavaScript，也不检查全部 CSS 依赖。",
+    "en": "Compiled on 15 November 2026 from this site's 13 November screenshot refresh and its verification records: 20 runnable projects and learning demos, 43 screenshots, followed by two missing historical images and one case stylesheet. This is a static-site release review, not full business acceptance of every demo. The example checks direct same-origin assets in selected public pages; it does not execute JavaScript or inspect all CSS dependencies."
+  },
+  "tags": ["Release checks", "Python", "HTTP", "Frontend", "Playwright"],
+  "sections": [
+    {
+      "id": "the-missing-files",
+      "title": {"zh": "图换好了，页面里还有旧问题", "en": "The new images were ready, but old problems remained"},
+      "paragraphs": [
+        {
+          "zh": "11 月 13 日这轮更新重新拍了 43 张项目截图。首页缩略图、项目目录和点开后的大图一起替换，本地检查也通过了。发布后再看线上页面，项目目录里却有一张 AI 配置图加载失败。接着核对资源清单，发现另一个旧归档截图也没有上传。",
+          "en": "The 13 November update captured 43 project screenshots and replaced the homepage thumbnails, directory images and enlarged previews together. Local checks passed. A check of the published pages then found a broken AI settings image in the directory. Comparing the asset list exposed another missing historical archive image."
+        },
+        {
+          "zh": "缺的是 assets/ai-settings-desktop.png 和 assets/archive-center-desktop.png。两张图都在本地，HTML 也一直引用着它们。补上图片以后，线上检查又报出 cases/ai-office/ai-office.css 返回 404。页面主体还在，少掉的却是案例专用布局。这种错误很容易被“网页能打开”掩盖。",
+          "en": "The missing paths were assets/ai-settings-desktop.png and assets/archive-center-desktop.png. Both existed locally and were already referenced by the HTML. After those images were uploaded, the live check found a 404 for cases/ai-office/ai-office.css. The page still opened, but its case-specific layout was missing."
+        }
+      ],
+      "code": {
+        "language": "HTTP · 本次实际遗漏的资源 / Missing resources in this release",
+        "text": "assets/ai-settings-desktop.png\nassets/archive-center-desktop.png\ncases/ai-office/ai-office.css"
+      }
+    },
+    {
+      "id": "what-local-checks-see",
+      "title": {"zh": "本地目录和发布清单，不是一回事", "en": "The local folder and the published file set differ"},
+      "paragraphs": [
+        {
+          "zh": "这次采用文件清单发布，只上传列出的文件。这样可以避免把缓存、证据目录或私有材料一并传出去，但也有一个代价：本地文件存在，不代表它进入了发布清单。浏览器只管能不能取到文件，并不知道这个文件下一步会不会被提交。",
+          "en": "This release uploaded an explicit list of files. That avoids including caches, evidence folders or private material, but it creates a gap: a file can exist locally without appearing in the publication list. The local browser can fetch it without knowing whether it will be committed."
+        },
+        {
+          "zh": "本地预览服务还有一个旧资源目录作为回退来源。它方便查看没有改动的页面，却进一步扩大了本地和线上之间的差别。对这次丢失的两张图，单凭本地文件已经足以让检查通过；不能把遗漏全部归因于回退机制。以后准备发布时，应另起一个只含目标产物的预览目录，让缺文件直接暴露出来。",
+          "en": "The local preview server also had a fallback folder for older assets. That helped display unchanged pages while making the local environment even less like the published site. In this incident, the two images already existed in the main local folder, so the fallback was not their sole cause. A separate preview containing only the intended release files would make omissions visible earlier."
+        }
+      ]
+    },
+    {
+      "id": "one-picture-two-paths",
+      "title": {"zh": "缩略图换了，大图也得换", "en": "The thumbnail and enlarged view need the same update"},
+      "paragraphs": [
+        {
+          "zh": "项目卡片的 img.src 和按钮上的 data-preview 是两份地址。只替换 img，读者在卡片里看见新版，点击以后仍可能打开旧版。同一个项目还会出现在首页、图集和 GitHub 个人页。与其靠记忆逐处修改，不如从图片清单中查出全部引用，再核对卡片与大图是否指向同一个文件。",
+          "en": "A card's img.src and its button's data-preview hold separate URLs. Updating only the image can leave the old version in the enlarged view. The same project also appears on the homepage, in the gallery and on the GitHub profile. An asset list makes these references easier to inspect together."
+        },
+        {
+          "zh": "这轮新图放进 20261113 日期目录，页面引用新地址。它能减少旧缓存继续显示同一路径图片的情况，也方便回头知道图是哪一轮拍的。不过，改文件名只能处理资源地址，页面 HTML 本身仍可能有缓存，发布后还要核对实际响应。",
+          "en": "The new images live under a 20261113 directory with new URLs. That reduces reuse of an older cached image at the same path and records the capture batch. New filenames do not solve every cache problem: the HTML can still be cached, so the published response needs checking too."
+        }
+      ],
+      "code": {
+        "language": "JavaScript · 浏览器核对示例 / Browser-check example",
+        "text": "const button = page.locator('#project-fieldlens [data-preview]');\nconst previewURL = await button.getAttribute('data-preview');\nconst thumbnailURL = await button.locator('img').getAttribute('src');\nif (previewURL !== thumbnailURL) {\n  throw new Error('Thumbnail and full-size preview do not match');\n}\nawait button.click();\nawait page.waitForFunction(() => {\n  const image = document.querySelector('dialog[open] .lightbox-image');\n  return image?.complete && image.naturalWidth > 0 && !image.hidden;\n});"
+      }
+    },
+    {
+      "id": "a-small-checker",
+      "title": {"zh": "先把能自动发现的遗漏找出来", "en": "Automate the omissions that are easy to detect"},
+      "paragraphs": [
+        {
+          "zh": "配套的 check-public-assets.py 不需要安装第三方库。给它几个明确的公开页面，它从 HTML 中提取图片、样式、脚本和 source 的直接地址，去重后发起同源 GET 请求。404 会失败；图片或 CSS 返回 HTML 时也会失败，避免把站点的兜底页面当成有效资源。",
+          "en": "The accompanying check-public-assets.py uses only the standard library. Given explicitly selected public pages, it extracts direct image, stylesheet, script and source URLs, deduplicates them and makes same-origin GET requests. It fails on 404s and on assets that return HTML, which can otherwise hide behind a site's fallback page."
+        },
+        {
+          "zh": "工具默认检查本站项目目录和 AI 案例，也可以用 --base 指向自己的本地预览。它不递归打开页面链接，不请求其他域名，不携带登录信息。每个资源只读取开头 1 KB；单页 HTML 限制为 1 MB，最多选 10 个页面和 200 个资源，单次请求超时为 12 秒。这样的范围适合发现少传文件，不能用来证明媒体完整、脚本能运行或整站没有问题。",
+          "en": "By default it checks this site's project directory and AI case. The --base option can select your own local preview. It does not crawl page links, request other origins or send login credentials. Asset responses are sampled at 1 KB, HTML is limited to 1 MB, and the run accepts up to 10 pages and 200 assets with a 12-second request timeout. This scope catches missing uploads; it does not establish complete media files, working scripts or a fault-free site."
+        }
+        ,
+        {
+          "zh": "整理本文时，脚本的 5 项本地 HTTP 行为测试通过，覆盖遗漏文件、HTML 兜底、重复引用、base 地址解析、跨域跳转和过大页面。另用它检查了上述两个线上页面及 57 个直接资源，未发现请求失败。这是本次选定范围的结果；CSS 内的字体、背景图和脚本动态创建的资源仍要由浏览器检查。",
+          "en": "When compiling this note, five local HTTP behavior tests passed, covering missing files, HTML fallbacks, duplicate references, base URL resolution, cross-origin redirects and oversized pages. A separate run checked the two selected live pages and 57 direct assets without request failures. Fonts and background images inside CSS, and resources created by scripts, still need browser checks."
+        }
+      ],
+      "code": {
+        "language": "Shell · Python 3.10+",
+        "text": "# 在仓库根目录执行 / Run from the repository root\npython notebook/examples/check-public-assets.py projects.html cases/ai-office/\n\n# 检查只包含本次发布产物的本地预览 / Check a release-only preview\npython notebook/examples/check-public-assets.py --base http://127.0.0.1:8000/ index.html\n\n# 运行离线行为测试 / Run local HTTP behavior tests\npython notebook/examples/check-public-assets-test.py"
+      },
+      "callout": {
+        "zh": "退出码 0 表示本次请求检查通过，1 表示页面或资源失败，2 表示参数有误。外域资源会记录为跳过，不应被理解成已经验证。",
+        "en": "Exit code 0 means the requested checks passed, 1 indicates a page or asset failure, and 2 indicates invalid arguments. External resources are recorded as skipped, not verified."
+      }
+    },
+    {
+      "id": "screenshots-have-scope",
+      "title": {"zh": "图片说明也要跟着改", "en": "Captions need the same review"},
+      "paragraphs": [
+        {
+          "zh": "这次检查还碰到两类文字和画面不一致。禾镜记录列表的新图没有勾选记录，旧图注却写着“勾选两条”；辅导员卡片以前用了本地应用截图，链接打开的是独立公开展示。图片都能加载，并不意味着表达就准确。",
+          "en": "The review also found two content mismatches. The new FieldLens list had no records selected, while its old caption said two were selected. A counselor card previously showed the local application while linking to a separate public showcase. Successful image loading does not make those descriptions accurate."
+        },
+        {
+          "zh": "现在的处理是按画面本身写图注：记录数量、当前操作范围、公开演示还是历史本地界面。合成任务可以说明交互设计，但不能当作真实业务使用情况；早停动画可以解释算法过程，也不能当作训练结果。历史图没有必要全部删掉，只要别把它们写成今天刚拍的界面。",
+          "en": "The captions now describe what is actually visible: record count, current action scope, and whether the view is a public demo or a historical local interface. Synthetic tasks can illustrate interaction design, and an early-stop animation can explain a process, but neither establishes production use or a training result. Historical images can stay if their dates and scope remain clear."
+        }
+      ]
+    },
+    {
+      "id": "after-deployment",
+      "title": {"zh": "发布完成以后，再走一遍读者的路径", "en": "After deployment, follow the reader's path"},
+      "paragraphs": [
+        {
+          "zh": "最后的检查从线上首页开始：看项目卡片，放大截图，进入案例，再打开对应演示。11 月 13 日的记录里，34 组语言与宽度组合、64 次大图查看已经完成；AI 案例样式遗漏修好后，又单独复查了该页的中英文与 390／1440px 布局。这些数字只说明检查覆盖到哪里，不代表所有设备和所有业务都已验证。",
+          "en": "The final check starts on the published homepage: inspect a project card, enlarge the image, open its case and follow the demo link. The 13 November records covered 34 language-and-width combinations and 64 preview openings. After the missing AI case stylesheet was restored, that page was checked again in both languages at 390 and 1440 pixels. These counts describe the performed checks, not every device or business workflow."
+        },
+        {
+          "zh": "这轮最值得留下的习惯，是把“已提交”“已部署”和“线上已检查”分开记。提交成功只说明代码到了仓库；部署成功说明构建流程走完；真正交到读者手里的页面，还需要用线上地址确认一次。尤其是这种长期追加内容的个人站点，旧页面的资源也会成为新一轮发布的问题。",
+          "en": "The useful habit is to record committed, deployed and checked online as separate states. A commit confirms repository content; a deployment confirms the build process; the page readers receive still needs a check at its live URL. On a portfolio that grows over time, an old page's dependency can become a problem in a new release."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {"label": {"zh": "11 月 13 日：项目截图与引用更新", "en": "13 November: screenshot and reference refresh"}, "url": "https://github.com/GuHang2011/GuHang2011.github.io/commit/3ef971ed90740f6f4f49d3f4514da0219b343283"},
+    {"label": {"zh": "补发两张历史 AI／归档界面图", "en": "Restore the two missing historical interface images"}, "url": "https://github.com/GuHang2011/GuHang2011.github.io/commit/b8684fb51121f515e25e65cc71e5ef63a1670abe"},
+    {"label": {"zh": "补发 AI 案例专用样式", "en": "Restore the AI case stylesheet"}, "url": "https://github.com/GuHang2011/GuHang2011.github.io/commit/ead6d4df62a0446b7fe47089906ff6d86ef3f7d5"},
+    {"label": {"zh": "本轮截图来源清单与范围", "en": "Screenshot sources and scope"}, "url": "https://guhang2011.github.io/assets/project-previews/20261113/manifest.json"},
+    {"label": {"zh": "资源检查示例：Python 标准库", "en": "Resource-check example: Python standard library"}, "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/notebook/examples/check-public-assets.py"},
+    {"label": {"zh": "资源检查的本地 HTTP 测试", "en": "Local HTTP behavior tests for the example"}, "url": "https://github.com/GuHang2011/GuHang2011.github.io/blob/main/notebook/examples/check-public-assets-test.py"},
+    {"label": {"zh": "Python HTMLParser 文档", "en": "Python HTMLParser documentation"}, "url": "https://docs.python.org/3/library/html.parser.html"}
+  ],
+  "related": ["mobile-workspace-reading", "accessible-interactions", "portfolio-rework"]
+}

@@ -9,3 +9,7 @@
 body.folio.engineering-home,body.notebook-page { --font-ui:"Portfolio Plex","Portfolio Han","PingFang SC","Microsoft YaHei UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif; font-family:var(--font-ui); }
 
 body.folio.engineering-home,body.notebook-page { font-weight:400; font-synthesis:none; }
+
+
+/* Added 2026-11-15: glyphs used by the release note and updated project pages. */
+@font-face { font-family:"Portfolio Han"; src:url("assets/fonts/PortfolioHan-update-20261115.woff2") format("woff2"); font-weight:400 650; font-style:normal; font-display:swap; unicode-range:U+515C,U+519C,U+60A3,U+6D45,U+7530,U+7586,U+75C5,U+7802,U+80A4,U+8F66,U+903E,U+9876,U+9EA6; }
