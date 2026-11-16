@@ -4,19 +4,26 @@ Small, newly written experiments based on themes found in local study and teachi
 
 | Experiment | Online | Code and Notes |
 | --- | --- | --- |
+| MeteoFormer weather workspace | [Synthetic snapshot](https://guhang2011.github.io/meteoformer-weather-system/) | [Source and setup](https://github.com/GuHang2011/meteoformer-weather-system) |
+| React typed workflow board | [Workflow board](https://guhang2011.github.io/demos/react-workflow/) | [React source and state notes](react-workflow/README.md) |
 | React streaming response lab | [Demo](https://guhang2011.github.io/demos/ai-stream/) | [Source, limits and tests](ai-stream/README.md) |
+| Schema-driven low-code form | [Form studio](https://guhang2011.github.io/demos/low-code-form/) | [Schema and renderer notes](low-code-form/README.md) |
+| Production Reporting Workbench | [Demo](https://guhang2011.github.io/demos/production-workbench/) | [Code and notes](production-workbench/README.md) |
+| Telecom Service Desk | [Demo](https://guhang2011.github.io/demos/telecom-service/) | [Code and notes](telecom-service/README.md) |
 | Financial ratios, clustering and PCA | [Explorer](https://guhang2011.github.io/demos/financial-analysis/) | [Reproduction](financial-analysis/README.md) |
 | Data preparation and quality audit | [Audit](https://guhang2011.github.io/demos/data-preparation/) | [Spark notes](data-preparation/spark-notes.md) |
 | Classification thresholds and prediction ensembles | [Evaluation](https://guhang2011.github.io/demos/model-evaluation/) | [Evaluation notes](model-evaluation/note.md) |
-| React typed workflow board | [Workflow board](https://guhang2011.github.io/demos/react-workflow/) | [React source and state notes](react-workflow/README.md) |
-| Schema-driven low-code form | [Form studio](https://guhang2011.github.io/demos/low-code-form/) | [Schema and renderer notes](low-code-form/README.md) |
-| Virtual presenter | [Presenter](https://guhang2011.github.io/demos/virtual-host/) | [Controls and notes](virtual-host/README.md) |
-| Production Reporting Workbench | [Demo](https://guhang2011.github.io/demos/production-workbench/) | [Code and notes](production-workbench/README.md) |
-| Telecom Service Desk | [Demo](https://guhang2011.github.io/demos/telecom-service/) | [Code and notes](telecom-service/README.md) |
 | Sentence BLEU and clipped n-grams | [Explorer](https://guhang2011.github.io/demos/bleu-explorer/) | [Protocol and tests](bleu-explorer/README.md) |
 | Evidence-aware reliability gate | [Gate lab](https://guhang2011.github.io/demos/reliability-gates/) | [Rules and limits](reliability-gates/README.md) |
+| Virtual presenter | [Presenter](https://guhang2011.github.io/demos/virtual-host/) | [Controls and notes](virtual-host/README.md) |
 
 这些示例由本地财务分析、Spark 课程及模型代码阅读主题重新整理。公开文件不含原始业务数据、试题、教材页面、模型权重或未公开论文。第三方代码阅读来源在各示例说明中标注，不能将第三方基线归为个人原创成果。
+
+## Directory update · 16 November 2026
+
+[The demo directory](https://guhang2011.github.io/demos/) now includes MeteoFormer and the streaming-response lab. Its entries follow the same order as the reading map above. Each card uses a real UI capture dated **13 November 2026**, with the sample-data scope shown beside it; this date describes the screenshot, not a claim that the project was updated today. [Capture provenance](../assets/project-previews/20261113/manifest.json).
+
+目录补齐气象工作台与流式回答实验，预览统一为 2026-11-13 的实际界面截图。气象页使用合成预报快照；流式回答使用本地预设文本，不连接模型服务。截图保留完整画面，卡片附数据范围与对应源码。
 
 ## Reproduce
 

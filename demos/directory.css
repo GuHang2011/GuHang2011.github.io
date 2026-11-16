@@ -1,0 +1,58 @@
+/* Directory-only readability and uncropped, dated project previews. */
+body[data-demo="demos"] .demo-index > .demo-note {
+  max-width: 880px;
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+body[data-demo="demos"] .demo-image {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: #f5f7fa;
+}
+
+body[data-demo="demos"] .demo-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1440 / 1000;
+  object-fit: contain;
+  object-position: center;
+  transform: none;
+}
+
+body[data-demo="demos"] .demo-entry-body > p:not(.section-number):not(.demo-capture) {
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+body[data-demo="demos"] .demo-entry-body > p.demo-capture {
+  margin: 0 0 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #52647b;
+}
+
+body[data-demo="demos"] .demo-entry .project-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+body[data-demo="demos"] .demo-footnotes {
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+@media (max-width: 650px) {
+  body[data-demo="demos"] .demo-entry {
+    gap: 0;
+    padding-bottom: 0;
+  }
+  body[data-demo="demos"] .demo-entry-body {
+    padding: 18px;
+  }
+}

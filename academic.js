@@ -41,6 +41,11 @@
     ]) {
       if (value) url.searchParams.set(key, value); else url.searchParams.delete(key);
     }
+    // A new filter takes precedence over a project anchor it now hides.
+    try {
+      const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+      if (target?.closest('[data-collection="projects"] [data-category]')?.hidden) url.hash = "";
+    } catch { /* Leave malformed fragments alone. */ }
     if (url.href === location.href) return;
     try { history[mode](history.state, "", url); } catch { /* Filtering works without history access. */ }
   }
@@ -283,17 +288,21 @@
     addEventListener("popstate", selectLinkedFilm);
   });
 
+  const navigation = document.getElementById(menu?.getAttribute("aria-controls"));
   function closeMenu() {
+    const focusedInNavigation = navigation?.contains(document.activeElement);
     if (header) header.dataset.open = "false";
     menu?.setAttribute("aria-expanded", "false");
+    // Closing must not leave focus on a link hidden by the mobile menu.
+    if (focusedInNavigation && !navigation.getClientRects().length) menu?.focus({ preventScroll: true });
   }
   menu?.addEventListener("click", () => {
     const open = menu.getAttribute("aria-expanded") !== "true";
     menu.setAttribute("aria-expanded", String(open));
     header.dataset.open = String(open);
+    if (open) navigation?.querySelector("a[href]")?.focus({ preventScroll: true });
   });
   document.querySelectorAll(".nav-links a").forEach(a => a.addEventListener("click", closeMenu));
-  const navigation = document.getElementById(menu?.getAttribute("aria-controls"));
   document.addEventListener("click", event => {
     if (header?.dataset.open === "true" && !menu?.contains(event.target) && !navigation?.contains(event.target)) closeMenu();
   });
