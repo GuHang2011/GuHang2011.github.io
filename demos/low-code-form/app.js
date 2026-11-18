@@ -44,25 +44,26 @@ function showError(field, message) {
   const input = document.getElementById(`field-${field.key}`);
   if (message) input.setAttribute("aria-invalid", "true"); else input.removeAttribute("aria-invalid");
 }
-function render(focusId) {
-  form.replaceChildren(); list.replaceChildren();
+function render(focusId, { rebuildEditor = true, syncJSON = true } = {}) {
+  form.replaceChildren();
+  if (rebuildEditor) list.replaceChildren();
   schema.fields.forEach((field, index) => {
     const wrapper = make("div", undefined, "dynamic-field"), label = make("label", title(field)); label.htmlFor = `field-${field.key}`;
     if (field.required) label.append(make("span", t("required", "必填")));
     const input = control(field), error = make("small", "", "field-error"); error.id = `error-${field.key}`;
     wrapper.append(label, input, error); form.append(wrapper);
     if (submitted) showError(field, errorFor(field, input));
-    list.append(editor(field, index));
+    if (rebuildEditor) list.append(editor(field, index));
   });
   const submit = make("button", t("Validate request", "校验申请"), "form-submit"); submit.type = "submit"; form.append(submit);
   document.querySelector("#field-count").textContent = t(`${schema.fields.length} / ${MAX_FIELDS} fields`, `${schema.fields.length} / ${MAX_FIELDS} 个字段`);
   document.querySelector("#add-field").disabled = schema.fields.length >= MAX_FIELDS;
-  json.value = JSON.stringify(schema, null, 2);
+  if (syncJSON) json.value = JSON.stringify(schema, null, 2);
   if (focusId) document.getElementById(focusId)?.focus({ preventScroll: true });
 }
-function editSchema(focusId) {
+function editSchema(focusId, options) {
   submitted = false; result.textContent = ""; result.removeAttribute("data-tone");
-  configurationStatus.textContent = t("Schema updated; unchanged fields retain their preview values.", "配置已更新；未改变字段的预览值会保留。"); render(focusId);
+  configurationStatus.textContent = t("Schema updated; unchanged fields retain their preview values.", "配置已更新；未改变字段的预览值会保留。"); render(focusId, options);
 }
 function button(symbol, name, id, disabled, onClick) {
   const button = make("button", symbol); button.type = "button"; button.id = id; button.disabled = disabled;
@@ -73,7 +74,16 @@ function editor(field, index) {
   const main = make("div", undefined, "schema-row-main");
   const editLabel = make("label", t("Label", "标题")), text = make("input"); text.id = `label-${field.key}`; text.value = title(field); text.maxLength = 80;
   editLabel.append(text); main.append(editLabel, make("small", field.key));
-  text.addEventListener("change", () => { if (!text.value.trim()) { text.value = title(field); return; } field.label = text.value.trim(); field.labelZh = field.label; editSchema(text.id); });
+  text.addEventListener("change", () => {
+    if (!text.value.trim()) { text.value = title(field); return; }
+    field.label = text.value.trim(); field.labelZh = field.label; text.value = field.label;
+    for (const [prefix, en, cn] of [["up", "Move up", "上移"], ["down", "Move down", "下移"], ["remove", "Remove", "删除"]]) {
+      const action = row.querySelector(`#${prefix}-${field.key}`);
+      action.title = `${t(en, cn)} ${title(field)}`; action.setAttribute("aria-label", action.title);
+    }
+    // A label commits on blur. Keep the editor nodes so Tab/click can finish naturally.
+    editSchema(undefined, { rebuildEditor: false });
+  });
   const typeLabel = make("label", t("Type", "类型")), select = make("select"); select.id = `type-${field.key}`;
   fieldTypes.forEach(type => { const option = make("option", zh() ? types[type] : type); option.value = type; select.append(option); }); select.value = field.type; typeLabel.append(select);
   select.addEventListener("change", () => {
@@ -113,7 +123,7 @@ document.querySelector("#apply-json").addEventListener("click", () => {
     configurationStatus.textContent = t("JSON applied. Preview values were reset.", "JSON 已应用，预览值已重置。");
   } catch (error) { configurationStatus.textContent = `${t("Rejected", "拒绝应用")}: ${error.message}`; }
 });
-document.addEventListener("portfolio-language-change", () => { if (schema) { result.textContent = ""; configurationStatus.textContent = ""; render(); } });
+document.addEventListener("portfolio-language-change", () => { if (schema) { result.textContent = ""; configurationStatus.textContent = ""; render(undefined, { syncJSON: false }); } });
 try {
   const response = await fetch("./schema.json"); if (!response.ok) throw Error(`HTTP ${response.status}`);
   initial = checkSchema(await response.json()); schema = structuredClone(initial); render();

@@ -20,7 +20,12 @@ export function App() {
   useEffect(() => { const leave = () => session.stop(); window.addEventListener('pagehide', leave); return () => { window.removeEventListener('pagehide', leave); session.dispose(); }; }, [session]);
   useEffect(() => { setCopied(''); }, [state.attempt, state.phase]);
   const start = () => { session.start({ topic, mode }); };
-  const retry = () => { if (session.retry()) setMode('normal'); };
+  const retry = () => {
+    if (state.options && session.retry()) {
+      setTopic(state.options.topic);
+      setMode('normal');
+    }
+  };
   const copy = async () => { try { await navigator.clipboard.writeText(state.text); setCopied('已复制'); } catch { setCopied('复制不可用，可在正文中选择文字复制'); } };
   return <ConfigProvider theme={{ token: { motion: !reduceMotion, colorPrimary: '#155f56', colorInfo: '#155f56', colorError: '#a52a32', borderRadius: 7, fontSize: 16, controlHeight: 44, fontFamily: '"IBM Plex Sans", "Microsoft YaHei", sans-serif' } }}>
     <div className="studio">
@@ -44,7 +49,7 @@ export function App() {
           {state.text ? <p>{state.text}</p> : <div className="empty"><span aria-hidden="true">Aa</span><p>{state.phase === 'idle' ? '一段回答，也是一串需要处理的状态。' : state.phase === 'stopped' ? '已在收到正文前停止。' : '等待第一段文字……'}</p><small>预设文本 · 本地模拟</small></div>}
           {state.phase === 'streaming' && <span className="cursor" aria-hidden="true" />}
         </div>
-        {(state.phase === 'error' || state.phase === 'stopped') && <div className="recovery"><Alert type={state.phase === 'error' ? 'error' : 'info'} showIcon title={state.phase === 'error' ? '本次模拟在收到部分文字后中断' : '本次输出已由你停止'} description="重新开始不会续写旧内容，也不会自动重复提交。" /><Button onClick={retry}>{state.phase === 'error' ? '恢复连接并重试' : '重新生成'}</Button></div>}
+        {(state.phase === 'error' || state.phase === 'stopped') && <div className="recovery"><Alert type={state.phase === 'error' ? 'error' : 'info'} showIcon title={state.phase === 'error' ? '本次模拟在收到部分文字后中断' : '本次输出已由你停止'} description="重试沿用上次话题，恢复正常连接并从头生成。想换话题，请选择后点击“开始演示”。" /><Button onClick={retry}>{state.phase === 'error' ? '恢复连接并重试' : '重新生成'}</Button></div>}
         <div className="output-footer"><span>{Array.from(state.text).length} 字符<span className="muted"> · 仅统计本次已显示内容</span></span><Button disabled={!state.text || active} onClick={copy}>复制文字</Button></div>
         <p className="copy-status" role="status">{copied}</p>
       </section>

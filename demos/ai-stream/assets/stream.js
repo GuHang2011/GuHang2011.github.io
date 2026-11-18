@@ -19638,10 +19638,10 @@ function Yg() {
 							type: t.phase === "error" ? "error" : "info",
 							showIcon: !0,
 							title: t.phase === "error" ? "本次模拟在收到部分文字后中断" : "本次输出已由你停止",
-							description: "重新开始不会续写旧内容，也不会自动重复提交。"
+							description: "重试沿用上次话题，恢复正常连接并从头生成。想换话题，请选择后点击“开始演示”。"
 						}), /* @__PURE__ */ (0, $.jsx)(Cg, {
 							onClick: () => {
-								e.retry() && a("normal");
+								t.options && e.retry() && (r(t.options.topic), a("normal"));
 							},
 							children: t.phase === "error" ? "恢复连接并重试" : "重新生成"
 						})]

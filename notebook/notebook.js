@@ -90,12 +90,39 @@
     narrow.addEventListener("change", adjustDirectory);
   }
   const toc = [...document.querySelectorAll('.article-toc a[href^="#"]')];
-  if (toc.length && "IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(entries => {
-      const current = entries.filter(entry => entry.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-      if (!current) return;
-      toc.forEach(link => { if (link.hash === `#${current.target.id}`) link.setAttribute("aria-current", "location"); else link.removeAttribute("aria-current"); });
-    }, { rootMargin: "-100px 0px -55% 0px", threshold: 0 });
-    toc.forEach(link => { const target = document.getElementById(link.hash.slice(1)); if (target) observer.observe(target); });
+  if (toc.length) {
+    const entries = toc.map(link => ({ link, section: document.getElementById(link.hash.slice(1)) })).filter(entry => entry.section);
+    const header = document.querySelector(".site-header");
+    let scheduled = false;
+    function updateCurrentSection() {
+      scheduled = false;
+      if (!entries.length) return;
+      // Use the same reading position as anchor navigation, below the fixed header.
+      const padding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+      const margin = parseFloat(getComputedStyle(entries[0].section).scrollMarginTop) || 0;
+      const marker = Math.max(header?.getBoundingClientRect().bottom || 0, padding) + margin + 1;
+      let current = entries[0];
+      for (const entry of entries) {
+        if (entry.section.getBoundingClientRect().top <= marker) current = entry;
+      }
+      const scrolling = document.scrollingElement || document.documentElement;
+      const max = scrolling.scrollHeight - document.documentElement.clientHeight;
+      if (max > 1 && max - scrolling.scrollTop <= 1) current = entries.at(-1);
+      toc.forEach(link => { if (link === current.link) link.setAttribute("aria-current", "location"); else link.removeAttribute("aria-current"); });
+    }
+    function scheduleCurrentSection() {
+      if (scheduled) return;
+      scheduled = true;
+      requestAnimationFrame(updateCurrentSection);
+    }
+    addEventListener("scroll", scheduleCurrentSection, { passive: true });
+    addEventListener("resize", scheduleCurrentSection);
+    addEventListener("hashchange", scheduleCurrentSection);
+    addEventListener("pageshow", scheduleCurrentSection);
+    document.addEventListener("portfolio-language-change", scheduleCurrentSection);
+    document.addEventListener("toggle", scheduleCurrentSection, true);
+    if ("ResizeObserver" in window) new ResizeObserver(scheduleCurrentSection).observe(document.body);
+    document.fonts?.ready.then(scheduleCurrentSection);
+    updateCurrentSection();
   }
 })();

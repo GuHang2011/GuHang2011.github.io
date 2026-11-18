@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parent
 DATE = "2026-11-15"
 VERSION = "20261115-update"
 NAVIGATION_VERSION = "20261116-navigation"
+NOTEBOOK_SCRIPT_VERSION = "20261118-interactions"
 ORDER = ['portfolio-release-checks', 'mobile-workspace-reading', 'list-selection-scope', 'agent-development-guide', 'agent-runtime-notes', 'portfolio-rework', 'streaming-ui-decisions', 'ai-frontend-reflection', 'energy-weather-reading', 'energy-forecast-baselines', 'weather-dashboard-contracts', 'inventory-scope-review', 'work-center-boundaries', 'notification-read-state', 'backup-restore-review', 'low-code-state-layers', 'low-code-rules', 'low-code-release', 'ai-code-race-review', 'workflow-recovery-review', 'schema-import-review', 'directory-rename-release', 'mobile-response-contracts', 'photo-queue-ownership', 'release-artifact-integrity', 'cross-platform-boundaries', 'request-scope-lifecycle', 'weather-fallback', 'upload-readiness', 'low-code-contracts', 'progressive-demo-loading', 'tft-information-boundary', 'gnn-risk-graphs', 'spatiotemporal-validation', 'research-demo-handoff', "multimodal-gates", "label-budget-ledger", "model-version-rollback", "rag-evaluation", "async-interfaces", "sql-windows", "model-selection", "order-idempotency", "accessible-interactions", "data-quality", "prompt-contracts", "permission-boundaries", "digital-human", "text-to-image", "generative-workflow"]
 CATEGORIES = {
     "all": {"en": "All topics", "zh": "全部主题"},
@@ -40,7 +41,7 @@ def frame(title, description, path, body):
 <meta property="og:type" content="{'website' if path == '' else 'article'}"><meta property="og:url" content="https://guhang2011.github.io/notebook/{path}">
 <link rel="canonical" href="https://guhang2011.github.io/notebook/{path}"><link rel="icon" href="../assets/favicon.svg">
 <link rel="stylesheet" href="../academic.css?v={VERSION}"><link rel="stylesheet" href="notebook.css?v={VERSION}">
-<script src="../academic.js?v={NAVIGATION_VERSION}" defer></script><script src="notebook.js?v={VERSION}" defer></script>{extra_style}</head>
+<script src="../academic.js?v={NAVIGATION_VERSION}" defer></script><script src="notebook.js?v={NOTEBOOK_SCRIPT_VERSION}" defer></script>{extra_style}</head>
 <body class="notebook-page"><a class="skip-link" href="#main">{pair('Skip to content','跳至正文')}</a>
 <div class="reading-progress" aria-hidden="true"><span></span></div>
 <header class="site-header" data-open="false"><div class="wrap header-inner">
