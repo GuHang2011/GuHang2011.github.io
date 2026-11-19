@@ -15,6 +15,9 @@
   function feedback(en, cn, tone = 'neutral') { text($('#service-feedback'), en, cn); $('#service-feedback').dataset.tone = tone; }
   function status(en, cn, tone = 'neutral') { text($('#service-status'), en, cn); $('#service-status').dataset.tone = tone; }
   function controls() {
+    // Keep only the current action as the form's native Enter-key submitter.
+    next.type = current === 3 ? 'button' : 'submit';
+    submit.type = current === 3 ? 'submit' : 'button';
     [name, phone, address, conflict, ...radios, $('#lookup-customer'), $('#sample-customer')].forEach(el => { el.disabled = busy || done; });
     back.disabled = current === 0 || busy || done;
     next.hidden = current === 3; next.disabled = busy || done || needsReview;
@@ -99,9 +102,7 @@
   $('#service-reset').addEventListener('click', reset);
   $('#resolve-conflict').addEventListener('click', () => { needsReview = false; conflict.checked = false; alertBox.dataset.visible = 'false'; $('#resolve-conflict').hidden = true; controls(); status('Reviewed', '已复核'); feedback('Simulated conflict cleared. Continue and submit again.', '本次模拟冲突已解除，请继续并再次提交。'); next.focus(); });
   radios.forEach(el => el.addEventListener('change', summary));
-  next.addEventListener('click', advance);
   back.addEventListener('click', () => { if (busy || done) return; needsReview = false; alertBox.dataset.visible = 'false'; $('#resolve-conflict').hidden = true; setStep(current - 1); status('Editing', '正在修改'); feedback('Revise this step, then continue.', '修改当前步骤后继续。'); });
-  submit.addEventListener('click', commit);
   form.addEventListener('submit', event => { event.preventDefault(); current === 3 ? commit() : advance(); });
   summary(); setStep(0, false);
   $('.ops-loading-guard').disabled = false;

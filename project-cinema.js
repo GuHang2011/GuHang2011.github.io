@@ -104,7 +104,8 @@
     });
     current.addEventListener("waiting", () => { if (active()) feedback("loading"); });
     current.addEventListener("playing", () => { if (active()) feedback(""); });
-    current.addEventListener("error", () => { if (active()) { play.hidden = true; feedback("error"); } });
+    // Remember a failed current request even while minimized; an old film cannot overwrite it.
+    current.addEventListener("error", () => { if (version === generation && video === current) { play.hidden = true; feedback("error"); } });
     current.addEventListener("ended", () => { if (active()) { play.hidden = false; feedback("ended"); } });
     screen.replaceChildren(current, play);
     video = current; playButton = play; feedback("");

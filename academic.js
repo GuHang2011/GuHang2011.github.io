@@ -278,14 +278,23 @@
     tabList.setAttribute("role", "tablist");
     tabList.hidden = false;
     gallery.dataset.enhanced = "true";
-    function selectLinkedFilm() {
-      const index = tabs.findIndex(tab => `#${tab.dataset.videoTab}` === location.hash);
+    function selectLinkedFilm(hash = location.hash) {
+      let id;
+      try { id = decodeURIComponent(hash.slice(1)); } catch { return; }
+      const target = document.getElementById(id);
+      const panel = target?.closest("[data-video-panel]");
+      const index = tabs.findIndex(tab => tab.id === id || tab.dataset.videoTab === panel?.id);
       if (index >= 0) selectFilm(index);
     }
     selectFilm(0);
     selectLinkedFilm();
-    addEventListener("hashchange", selectLinkedFilm);
-    addEventListener("popstate", selectLinkedFilm);
+    addEventListener("hashchange", () => selectLinkedFilm());
+    addEventListener("popstate", () => selectLinkedFilm());
+    document.addEventListener("click", event => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const link = event.target.closest('a[href^="#"]');
+      if (link) selectLinkedFilm(link.hash);
+    });
   });
 
   const navigation = document.getElementById(menu?.getAttribute("aria-controls"));

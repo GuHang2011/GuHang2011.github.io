@@ -10,8 +10,8 @@
   <link rel="stylesheet" href="../demo.css">
   <link rel="stylesheet" href="../operations.css?v=20261028-ready">
   <script src="../ops-settings.js" defer></script>
-  <script src="../../academic.js?v=20261116-navigation" defer></script>
-  <script src="app.js?v=20261028-ready" defer></script>
+  <script src="../../academic.js?v=20261119-media" defer></script>
+  <script src="app.js?v=20261119-media" defer></script>
   <title>Telecom Service Desk | Hang Gu</title>
 <link rel="stylesheet" href="../element-theme.css?v=20261101"><script src="../demo-navigation.js?v=20261101" defer></script>
 </head>
@@ -30,7 +30,7 @@
             <section class="telecom-step" data-step="2" data-active="false" aria-labelledby="review-step-title"><div class="telecom-step-heading"><h3 tabindex="-1" id="review-step-title" data-en="3. Review the order" data-zh="3. 复核订单">3. Review the order</h3><span>REVIEW</span></div><p data-en="Read the generated summary before any confirmation action." data-zh="在确认前阅读系统生成的订单摘要。">Read the generated summary before any confirmation action.</p><dl class="telecom-summary"><div><dt data-en="Customer" data-zh="客户">Customer</dt><dd id="summary-customer">—</dd></div><div><dt data-en="Service" data-zh="业务">Service</dt><dd id="summary-service">—</dd></div><div><dt data-en="Address" data-zh="地址">Address</dt><dd id="summary-address">—</dd></div><div><dt data-en="Order ID" data-zh="订单编号">Order ID</dt><dd>ORD-SYN-042</dd></div></dl><label class="ops-inline" style="margin-top:14px"><input id="simulate-conflict" type="checkbox"> <span data-en="Simulate duplicate-order conflict" data-zh="模拟重复订单冲突">Simulate duplicate-order conflict</span></label><button type="button" class="ops-button" id="resolve-conflict" hidden data-en="Clear simulated conflict" data-zh="解除本次模拟冲突">Clear simulated conflict</button><div id="telecom-alert" class="telecom-alert" role="alert" data-visible="false"></div></section>
             <section class="telecom-step" data-step="3" data-active="false" aria-labelledby="confirm-step-title"><div class="telecom-step-heading"><h3 tabindex="-1" id="confirm-step-title" data-en="4. Submit and confirm" data-zh="4. 提交并确认">4. Submit and confirm</h3><span>COMMIT</span></div><p data-en="The submit action is a simulated commit with a visible acknowledgement." data-zh="提交动作是一个带有可见确认结果的模拟提交。">The submit action is a simulated commit with a visible acknowledgement.</p><div id="telecom-receipt" class="telecom-receipt" data-visible="false"><strong data-en="Order accepted" data-zh="订单已受理">Order accepted</strong><p id="receipt-copy" data-en="A synthetic receipt has been created for review." data-zh="已生成一张用于复核的合成回执。">A synthetic receipt has been created for review.</p></div></section>
             <div id="service-feedback" class="ops-feedback" role="status" aria-live="polite" data-en="Enter a synthetic customer name and phone number." data-zh="输入合成客户姓名和联系电话。">Enter a synthetic customer name and phone number.</div>
-            <div class="telecom-navigation"><button class="ops-button" id="service-back" type="button" data-en="Back" data-zh="上一步" disabled>Back</button><div><button class="ops-button" id="service-next" type="button" data-en="Continue" data-zh="继续">Continue</button><button class="ops-button primary" id="service-submit" type="button" data-en="Submit order" data-zh="提交订单" hidden>Submit order</button></div></div>
+            <div class="telecom-navigation"><button class="ops-button" id="service-back" type="button" data-en="Back" data-zh="上一步" disabled>Back</button><div><button class="ops-button" id="service-next" type="submit" data-en="Continue" data-zh="继续">Continue</button><button class="ops-button primary" id="service-submit" type="button" data-en="Submit order" data-zh="提交订单" hidden>Submit order</button></div></div>
           </form>
         </section>
       </div>
