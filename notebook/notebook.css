@@ -12,6 +12,9 @@
 .notebook-page .language-controls button { background:transparent; font-size:14px; }
 .notebook-page .language-controls button { min-height: 40px; min-width: 40px; }
 .notebook-page .menu-toggle { min-width: 44px; min-height: 44px; }
+.notebook-page .footer-inner { flex-wrap:wrap; font-size:14px; line-height:1.75; }
+.notebook-page .footer-inner > div { min-width:0; max-width:100%; overflow-wrap:break-word; }
+.notebook-page .footer-inner > div:last-child > a { display:inline-flex; align-items:center; min-height:44px; min-width:44px; }
 .notebook-intro { display: grid; grid-template-columns: minmax(0, 1fr) 270px; gap: 64px; padding-block: 44px 30px; }
 .notebook-kicker { display:none; }
 .notebook-intro h1 { max-width:760px; font:600 clamp(30px,3vw,38px)/1.4 var(--font-ui); text-wrap:pretty; }

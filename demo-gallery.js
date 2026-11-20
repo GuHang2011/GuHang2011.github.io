@@ -10,6 +10,27 @@
   let selected = 'featured';
   let motionTimer;
 
+  function readView() {
+    const requested = new URL(location.href).searchParams.get('demo');
+    selected = controls.some(button => button.dataset.demoFilter === requested) ? requested : 'featured';
+  }
+
+  function linkedCard(hash) {
+    let id;
+    try { id = decodeURIComponent(hash.slice(1)); } catch { return null; }
+    const card = document.getElementById(id)?.closest('[data-demo-group]');
+    return cards.includes(card) ? card : null;
+  }
+
+  function writeView() {
+    const url = new URL(location.href);
+    if (selected === 'featured') url.searchParams.delete('demo'); else url.searchParams.set('demo', selected);
+    // A newly selected category supersedes an anchor to a card it hides.
+    if (linkedCard(url.hash)?.hidden) url.hash = '';
+    if (url.href === location.href) return;
+    try { history.pushState(history.state, '', url); } catch { /* Local filtering remains available. */ }
+  }
+
   function update(animate = false) {
     let count = 0;
     cards.forEach(card => {
@@ -30,21 +51,31 @@
     }
   }
 
-  function revealHash() {
-    const card = cards.find(item => '#' + item.id === location.hash);
+  function revealHash(hash = location.hash, scroll = true) {
+    const card = linkedCard(hash);
     if (!card) return;
-    selected = card.dataset.demoGroup;
-    update();
-    requestAnimationFrame(() => card.scrollIntoView({block:'start',behavior:'instant'}));
+    if (card.hidden) {
+      selected = card.dataset.demoGroup;
+      update();
+    }
+    if (scroll) requestAnimationFrame(() => document.getElementById(decodeURIComponent(hash.slice(1))).scrollIntoView({block:'start',behavior:'instant'}));
   }
 
   controls.forEach(button => button.addEventListener('click', () => {
     if (button.dataset.demoFilter === selected) return;
     selected = button.dataset.demoFilter;
     update(true);
+    writeView();
   }));
   document.addEventListener('portfolio-language-change', () => update());
-  window.addEventListener('hashchange', revealHash);
+  window.addEventListener('hashchange', () => revealHash());
+  window.addEventListener('popstate', () => { readView(); update(); revealHash(); });
+  document.addEventListener('click', event => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const link = event.target.closest('a[href^="#"]');
+    if (link) revealHash(link.hash, link.hash === location.hash);
+  });
+  readView();
   update();
   section.querySelector('[data-demo-toolbar]').hidden = false;
   revealHash();
