@@ -10,6 +10,7 @@
   };
   let dataset;
   let chart;
+  let loading = false;
   let selectedId = "S01";
   const language = () => document.documentElement.lang.startsWith("zh") ? "zh" : "en";
   const t = (en, zh) => language() === "zh" ? zh : en;
@@ -57,6 +58,16 @@
   }
 
   function renderChart(rows) {
+    if (typeof Chart === "undefined") {
+      $("scatter").parentElement.hidden = true;
+      $("cluster-legend").hidden = true;
+      $("view").closest(".control-group").hidden = true;
+      $("chart-caption").textContent = t(
+        "The chart could not load. Explore company values in the table below.",
+        "图表加载失败。可在下方企业观测表中查看数值。"
+      );
+      return;
+    }
     const isPca = $("view").value === "pca";
     $("ratio-controls").hidden = isPca;
     const xKey = $("x-ratio").value;
@@ -110,10 +121,8 @@
         y: { title: { display: true, text: yTitle, color: "#5d6d7d", font: { size: 11 } }, ticks: { color: "#637383", font: { size: 10 }, maxTicksLimit: 6 }, grid: { color: "#edf0f3" }, border: { color: "#dfe6ed" } },
       },
     };
-    if (typeof Chart !== "undefined") {
-      if (!chart) chart = new Chart($("scatter"), { type: "scatter", data: { datasets: groups }, options });
-      else { chart.data.datasets = groups; chart.options = options; chart.update(); }
-    }
+    if (!chart) chart = new Chart($("scatter"), { type: "scatter", data: { datasets: groups }, options });
+    else { chart.data.datasets = groups; chart.options = options; chart.update(); }
     $("chart-caption").textContent = isPca
       ? t(`${plotted.length} companies · five standardized features → two principal components. All annual observations determine the model.`, `${plotted.length} 家企业 · 五项标准化特征 → 两个主成分。模型由全部年度样本决定。`)
       : t(`${plotted.length} companies plotted · ${rows.length - plotted.length} omitted for undefined axis values. Colors still reflect five-feature clustering.`, `已绘制 ${plotted.length} 家企业 · ${rows.length - plotted.length} 家因坐标比率缺失未绘制。颜色仍表示五维特征聚类。`);
@@ -226,16 +235,35 @@
   $("export-json").addEventListener("click", () => { if (dataset) download("synthetic-financial-data.json", JSON.stringify(dataset, null, 2) + "\n", "application/json"); });
 
   new MutationObserver(() => { if (dataset) { buildFeatureOptions(); render(); } }).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
-  fetch("data.json").then(response => { if (!response.ok) throw new Error("Dataset unavailable"); return response.json(); }).then(data => {
-    dataset = data;
-    buildFeatureOptions(); render();
-    if (typeof Chart === "undefined") {
-      $("status").hidden = false;
-      $("status").textContent = t("The chart could not load. Company values remain available in the table.", "图表暂未加载，企业观测值仍可通过表格阅读。");
-    }
-  }).catch(() => {
+  async function loadData() {
+    if (loading) return;
+    loading = true;
+    const retry = $("retry-data");
     $("status").hidden = false;
-    $("status").textContent = t("The synthetic dataset could not load. Please reload the page.", "合成数据暂未加载，请刷新页面。");
-    $("export-csv").disabled = true; $("export-json").disabled = true;
-  });
+    $("loading-data").hidden = false;
+    $("data-error").hidden = true;
+    retry.setAttribute("aria-disabled", "true");
+    try {
+      const response = await fetch("data.json", { cache: "no-cache" });
+      if (!response.ok) throw new Error("Dataset unavailable");
+      dataset = await response.json();
+      buildFeatureOptions();
+      $("analysis-workspace").hidden = false;
+      render();
+      if (document.activeElement === retry) $("year").focus();
+      retry.hidden = true;
+      $("status").hidden = true;
+    } catch {
+      dataset = undefined;
+      $("analysis-workspace").hidden = true;
+      $("loading-data").hidden = true;
+      $("data-error").hidden = false;
+      retry.hidden = false;
+    } finally {
+      retry.removeAttribute("aria-disabled");
+      loading = false;
+    }
+  }
+  $("retry-data").addEventListener("click", loadData);
+  loadData();
 })();

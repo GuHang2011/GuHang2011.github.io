@@ -50,7 +50,7 @@
   if (!list) return;
   const tabs = [...list.querySelectorAll('[data-hero-tab]')];
   const panels = [...document.querySelectorAll('[data-hero-panel]')];
-  function select(tab, focus = false) {
+  function select(tab, focus = false, historyMode) {
     tabs.forEach(item => {
       const selected = item === tab;
       item.setAttribute('aria-selected', String(selected));
@@ -58,9 +58,22 @@
     });
     panels.forEach(panel => { panel.hidden = panel.dataset.heroPanel !== tab.dataset.heroTab; });
     if (focus) tab.focus();
+    if (historyMode) {
+      const url = new URL(location.href);
+      url.hash = tab.getAttribute('aria-controls');
+      if (url.href !== location.href) {
+        try { history[historyMode](history.state, '', url); } catch { /* Selection still works without URL access. */ }
+      }
+    }
+  }
+  function restorePreview() {
+    let id = '';
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch { /* Use the default preview. */ }
+    const linked = tabs.find(tab => tab.id === id || tab.getAttribute('aria-controls') === id);
+    select(linked || tabs[0]);
   }
   tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => select(tab));
+    tab.addEventListener('click', () => select(tab, false, 'pushState'));
     tab.addEventListener('keydown', event => {
       let next;
       if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
@@ -69,9 +82,10 @@
       if (event.key === 'End') next = tabs.length - 1;
       if (next === undefined) return;
       event.preventDefault();
-      select(tabs[next], true);
+      select(tabs[next], true, 'replaceState');
     });
   });
   list.hidden = false;
-  select(tabs[0]);
+  restorePreview();
+  addEventListener('hashchange', restorePreview);
 })();

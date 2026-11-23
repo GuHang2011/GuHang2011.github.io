@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="demo.css">
   <script src="../../academic.js?v=20261119-media" defer></script>
   <script src="../vendor/chart.umd.js" defer></script>
-  <script src="app.js" defer></script>
+  <script src="app.js?v=20261123-recovery" defer></script>
 <link rel="stylesheet" href="../element-theme.css?v=20261101"><script src="../demo-navigation.js?v=20261101" defer></script>
 </head>
 <body data-demo="financial-analysis">
@@ -41,6 +41,14 @@
       <p class="demo-note" data-en="24 fictional companies across two years. Clusters describe patterns; they are not tax-risk labels or violation predictions." data-zh="24 家虚构企业、两个年度。聚类仅描述样本模式，不代表税务风险等级或违规预测。">24 fictional companies across two years. Clusters describe patterns; they are not tax-risk labels or violation predictions.</p>
     </div>
 
+    <p id="status" role="status" class="demo-note" hidden>
+      <span id="loading-data" data-en="Loading company observations…" data-zh="正在加载企业观测数据…">Loading company observations…</span>
+      <span id="data-error" data-en="The company data could not load." data-zh="企业观测数据加载失败。" hidden>The company data could not load.</span>
+    </p>
+    <div class="demo-actions"><button type="button" id="retry-data" data-en="Retry loading data" data-zh="重新加载数据" hidden>Retry loading data</button></div>
+    <noscript><p class="demo-note">Interactive charts require JavaScript. <a href="data.json">Download company observations (JSON)</a>.</p></noscript>
+
+    <div id="analysis-workspace" hidden>
     <form class="demo-toolbar" id="controls">
       <div class="control-group"><label for="year" data-en="Year" data-zh="年度">Year</label><select id="year"><option value="2024">2024</option><option value="2023">2023</option></select></div>
       <div class="control-group"><label for="view" data-en="View" data-zh="视图">View</label><select id="view"><option value="pca" data-en="PCA projection" data-zh="PCA 投影">PCA projection</option><option value="ratios" data-en="Ratio comparison" data-zh="比率比较">Ratio comparison</option></select></div>
@@ -86,6 +94,7 @@
       <p class="demo-note table-note" data-en="— means an undefined or missing observed ratio. Median imputation is used only for the model input. Filtering does not refit the model." data-zh="— 表示未定义或缺失的观测比率。中位数填补仅用于模型输入；筛选不会重新拟合模型。">— means an undefined or missing observed ratio. Median imputation is used only for the model input. Filtering does not refit the model.</p>
     </section>
 
+    </div>
     <section id="methods" class="method-section">
       <h2 data-en="Methods & boundaries" data-zh="方法与边界">Methods & boundaries</h2>
       <div class="method-grid">
@@ -96,7 +105,6 @@
       <div class="method-links"><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/financial-analysis/README.md" data-en="Technical notes" data-zh="技术笔记">Technical notes</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/financial-analysis/generate_data.py" data-en="Reproducible generator" data-zh="可复现数据生成代码">Reproducible generator</a><a href="https://github.com/GuHang2011/GuHang2011.github.io/blob/main/demos/financial-analysis/test_generate_data.py" data-en="Data-quality tests" data-zh="数据质量测试">Data-quality tests</a><a href="https://scikit-learn.org/1.7/modules/clustering.html#k-means" target="_blank" rel="noreferrer" data-en="scikit-learn reference" data-zh="scikit-learn 参考文档">scikit-learn reference</a></div>
       <p class="demo-footnotes" data-en="This newly authored example draws on financial-analysis learning topics. Source notebooks were reviewed, not reproduced with original business data. scikit-learn 1.7.2 · 48 synthetic records · generator seed 20261013." data-zh="此示例为围绕财务分析学习主题新编写的演示。已阅读相关笔记，但未复制原始业务数据。scikit-learn 1.7.2 · 48 条合成记录 · 生成种子 20261013。">This newly authored example draws on financial-analysis learning topics. Source notebooks were reviewed, not reproduced with original business data. scikit-learn 1.7.2 · 48 synthetic records · generator seed 20261013.</p>
     </section>
-    <p id="status" role="status" class="demo-status" hidden></p>
   </main>
   <footer class="section surface"><div class="wrap"><a href="../../#work" data-en="Back to Hang Gu's projects" data-zh="返回顾航的项目页">Back to Hang Gu's projects</a></div></footer>
 </body>
