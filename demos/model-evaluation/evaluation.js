@@ -5,10 +5,11 @@
   const colors = { a: "#2365a4", b: "#ac5049", ensemble: "#267562" };
   const state = { scenario: "balanced", model: "ensemble", thresholdIndex: 50, curve: "roc", filter: "all" };
   const labels = {
-    en: { a: "Model A", b: "Model B", ensemble: "Mean ensemble", accuracy: "Accuracy", precision: "Precision", recall: "Recall", f1: "F1", fpr: "False positive rate", tpr: "True positive rate", selected: "Selected threshold", correct: "Correct", error: "Error", none: "No samples match this filter.", summary: "fixed synthetic samples", positive: "positive", negative: "negative", shown: "shown", of: "of", exported: "samples exported", failure: "Evaluation data could not be loaded. Please refresh this page.", chartFailure: "The chart library could not be loaded. Please refresh this page." },
-    zh: { a: "模型 A", b: "模型 B", ensemble: "均值集成", accuracy: "准确率", precision: "精确率", recall: "召回率", f1: "F1", fpr: "假阳性率", tpr: "真阳性率", selected: "所选阈值", correct: "正确", error: "错误", none: "此筛选下没有样本。", summary: "条固定合成样本", positive: "正类", negative: "负类", shown: "已显示", of: "共", exported: "条样本已导出", failure: "评估数据加载失败，请刷新页面。", chartFailure: "图表库加载失败，请刷新页面。" },
+    en: { a: "Model A", b: "Model B", ensemble: "Mean ensemble", accuracy: "Accuracy", precision: "Precision", recall: "Recall", f1: "F1", fpr: "False positive rate", tpr: "True positive rate", selected: "Selected threshold", correct: "Correct", error: "Error", none: "No samples match this filter.", summary: "fixed synthetic samples", positive: "positive", negative: "negative", shown: "shown", of: "of", exported: "samples exported" },
+    zh: { a: "模型 A", b: "模型 B", ensemble: "均值集成", accuracy: "准确率", precision: "精确率", recall: "召回率", f1: "F1", fpr: "假阳性率", tpr: "真阳性率", selected: "所选阈值", correct: "正确", error: "错误", none: "此筛选下没有样本。", summary: "条固定合成样本", positive: "正类", negative: "负类", shown: "已显示", of: "共", exported: "条样本已导出" },
   };
   let payload;
+  let loading = false;
   let comparisonChart;
   let rankingChart;
   const language = () => document.documentElement.lang.startsWith("zh") ? "zh" : "en";
@@ -69,7 +70,6 @@
     rankingChart.options.scales.x.title.text = state.curve === "roc" ? words.fpr : words.recall;
     rankingChart.options.scales.y.title.text = state.curve === "roc" ? words.tpr : words.precision;
     rankingChart.update();
-    setText("ranking-summary", modelIds.map(model => `${words[model]}: ${state.curve === "roc" ? "AUC" : "AP"} ${data.models[model][state.curve === "roc" ? "auc" : "averagePrecision"].toFixed(3)}`).join(" · "));
   }
 
   function cell(text, className = "") {
@@ -149,7 +149,8 @@
     setText("confusion-model", `${words[state.model]} · ${language() === "zh" ? "阈值" : "Threshold"} ${(state.thresholdIndex / 100).toFixed(2)}`);
     renderComparison(data);
     renderSamples(data);
-    renderCharts(data);
+    setText("ranking-summary", modelIds.map(model => `${words[model]}: ${state.curve === "roc" ? "AUC" : "AP"} ${data.models[model][state.curve === "roc" ? "auc" : "averagePrecision"].toFixed(3)}`).join(" · "));
+    if (comparisonChart && rankingChart) renderCharts(data);
     setText("export-status", "");
   }
 
@@ -190,21 +191,48 @@
   });
   new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
 
-  fetch("metrics.json").then(response => {
-    if (!response.ok) throw new Error("Missing metric payload");
-    return response.json();
-  }).then(data => {
-    if (typeof Chart === "undefined") throw new Error("Missing chart library");
-    payload = data;
-    element("load-status").hidden = true;
-    element("evaluation-workspace").hidden = false;
-    createCharts();
-    render();
-  }).catch(() => {
-    const status = element("load-status");
-    status.dataset.en = typeof Chart === "undefined" ? labels.en.chartFailure : labels.en.failure;
-    status.dataset.zh = typeof Chart === "undefined" ? labels.zh.chartFailure : labels.zh.failure;
-    status.textContent = status.dataset[language()];
-    status.setAttribute("role", "alert");
-  });
+  function showCharts() {
+    try {
+      if (typeof Chart !== "function") throw new Error("Chart.js unavailable");
+      createCharts();
+      renderCharts(scenario());
+    } catch {
+      comparisonChart?.destroy();
+      rankingChart?.destroy();
+      comparisonChart = rankingChart = undefined;
+      document.querySelectorAll(".chart-frame, [data-chart-help]").forEach(node => { node.hidden = true; });
+      document.querySelectorAll("[data-chart-fallback]").forEach(node => { node.hidden = false; });
+    }
+  }
+
+  async function loadData() {
+    if (loading) return;
+    loading = true;
+    const retry = element("retry-data");
+    retry.setAttribute("aria-disabled", "true");
+    element("loading-data").hidden = false;
+    element("data-error").hidden = true;
+    try {
+      const response = await fetch("metrics.json", { cache: "no-cache" });
+      if (!response.ok) throw new Error("Evaluation data unavailable");
+      payload = await response.json();
+      render();
+      element("evaluation-workspace").hidden = false;
+      showCharts();
+      if (document.activeElement === retry) element("scenario").focus();
+      element("load-status").hidden = true;
+    } catch {
+      payload = undefined;
+      element("evaluation-workspace").hidden = true;
+      element("loading-data").hidden = true;
+      element("data-error").hidden = false;
+      retry.hidden = false;
+    } finally {
+      retry.removeAttribute("aria-disabled");
+      loading = false;
+    }
+  }
+
+  element("retry-data").addEventListener("click", loadData);
+  loadData();
 })();

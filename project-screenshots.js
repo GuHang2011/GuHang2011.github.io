@@ -16,7 +16,7 @@
   const text = new Map(cards.map(card => [card, normalize([
     card.id,
     card.dataset.shotKeywords || "",
-    ...[...card.querySelectorAll("h2, .shot-context")].flatMap(node => [node.textContent, node.dataset.zh || "", node.dataset.en || ""]),
+    ...[...card.querySelectorAll("h2, .shot-context, figcaption > span[data-en]")].flatMap(node => [node.textContent, node.dataset.zh || "", node.dataset.en || ""]),
   ].join(" "))]));
   const categories = new Set(buttons.map(button => button.dataset.shotCategory));
   let category = "all";

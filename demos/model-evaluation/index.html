@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="evaluation.css">
   <script defer src="../vendor/chart.umd.js"></script>
   <script defer src="../../academic.js?v=20261119-media"></script>
-  <script defer src="evaluation.js"></script>
+  <script defer src="evaluation.js?v=20261124-recovery"></script>
 <link rel="stylesheet" href="../element-theme.css?v=20261101"><script src="../demo-navigation.js?v=20261101" defer></script>
 </head>
 <body class="evaluation-page" data-demo="model-evaluation">
@@ -45,7 +45,10 @@
         <a href="scenario-input.json" data-en="Synthetic inputs" data-zh="合成输入">Synthetic inputs</a>
       </div>
     </section>
-    <div id="load-status" class="demo-note" role="status" data-en="Loading evaluation data…" data-zh="正在加载评估数据…">Loading evaluation data…</div>
+    <div id="load-status" class="demo-note">
+      <p role="status"><span id="loading-data" data-en="Loading evaluation data…" data-zh="正在加载评估数据…">Loading evaluation data…</span><span id="data-error" hidden data-en="The evaluation data could not be loaded." data-zh="评估数据加载失败。">The evaluation data could not be loaded.</span></p>
+      <button id="retry-data" type="button" class="quiet-button" hidden data-en="Retry loading data" data-zh="重新加载数据">Retry loading data</button>
+    </div>
     <section id="evaluation-workspace" hidden aria-label="Evaluation workspace">
       <div class="demo-toolbar evaluation-controls">
         <div class="control-group">
@@ -85,6 +88,7 @@
       <div class="demo-layout evaluation-layout">
         <section class="demo-panel">
           <div class="evaluation-panel-heading"><h2 data-en="Same-threshold comparison" data-zh="同一阈值下的比较">Same-threshold comparison</h2></div>
+          <p class="evaluation-chart-note" data-chart-fallback hidden data-en="Chart unavailable. The table below compares the three models at your chosen threshold." data-zh="图表暂不可用。下表列出了三个模型在当前阈值的指标。">Chart unavailable. The table below compares the three models at your chosen threshold.</p>
           <div class="chart-frame"><canvas id="comparison-chart" role="img" aria-label="Model metrics comparison" data-en-label="Model metrics comparison" data-zh-label="模型指标比较"></canvas></div>
           <div class="data-table-wrap">
             <table class="data-table comparison-table">
@@ -96,9 +100,10 @@
         </section>
         <section class="demo-panel">
           <div class="evaluation-panel-heading"><h2 data-en="Ranking curves" data-zh="排序曲线">Ranking curves</h2><div class="evaluation-segmented curve-mode"><button type="button" data-curve="roc" aria-pressed="true">ROC</button><button type="button" data-curve="pr" aria-pressed="false">PR</button></div></div>
+          <p class="evaluation-chart-note" data-chart-fallback hidden data-en="Curves unavailable. Select ROC for AUC or PR for average precision to compare the model scores below." data-zh="曲线暂不可用。选择 ROC 可比较三个模型的 AUC，选择 PR 可比较平均精确率。">Curves unavailable. Select ROC for AUC or PR for average precision to compare the model scores below.</p>
           <div class="chart-frame"><canvas id="ranking-chart" role="img" aria-label="ROC curves and selected threshold" data-en-label="ROC or PR curves and selected threshold" data-zh-label="ROC 或 PR 曲线及所选阈值"></canvas></div>
-          <p class="evaluation-chart-note" data-en="The larger dot marks the displayed model at the selected threshold. Full curves and AUC / AP use every unique score boundary." data-zh="大圆点代表所选模型在当前阈值的位置。完整曲线及 AUC / AP 使用所有不同分数边界。">The larger dot marks the displayed model at the selected threshold. Full curves and AUC / AP use every unique score boundary.</p>
-          <p class="evaluation-chart-note" data-en="The PR curve ends at recall 0, precision 1 by convention; the threshold marker uses precision 0 when no positives are predicted." data-zh="PR 曲线按约定在召回率 0、精确率 1 处结束；没有正类预测时，当前阈值圆点的精确率按 0 处理。">The PR curve ends at recall 0, precision 1 by convention; the threshold marker uses precision 0 when no positives are predicted.</p>
+          <p class="evaluation-chart-note" data-chart-help data-en="The larger dot marks the displayed model at the selected threshold. Full curves and AUC / AP use every unique score boundary." data-zh="大圆点代表所选模型在当前阈值的位置。完整曲线及 AUC / AP 使用所有不同分数边界。">The larger dot marks the displayed model at the selected threshold. Full curves and AUC / AP use every unique score boundary.</p>
+          <p class="evaluation-chart-note" data-chart-help data-en="The PR curve ends at recall 0, precision 1 by convention; the threshold marker uses precision 0 when no positives are predicted." data-zh="PR 曲线按约定在召回率 0、精确率 1 处结束；没有正类预测时，当前阈值圆点的精确率按 0 处理。">The PR curve ends at recall 0, precision 1 by convention; the threshold marker uses precision 0 when no positives are predicted.</p>
           <p id="ranking-summary" class="evaluation-chart-note"></p>
         </section>
       </div>

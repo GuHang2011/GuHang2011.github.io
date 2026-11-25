@@ -11,6 +11,21 @@
   if (!controls || !entries.length || !more || !count) return;
   let topic = "all";
   let expanded = false;
+  function linkedEntry() {
+    let id;
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch { return null; }
+    return entries.find(entry => entry.id === id);
+  }
+  function writeView() {
+    const url = new URL(location.href);
+    if (topic === "all" && !expanded) url.searchParams.delete("timeline");
+    else url.searchParams.set("timeline", topic);
+    const entry = linkedEntry();
+    if (!entry || entry.hidden) url.hash = root.id;
+    if (url.href !== location.href) {
+      try { history.pushState(history.state, "", url); } catch { /* The controls still work locally. */ }
+    }
+  }
   function update(animate = false) {
     const zh = document.documentElement.lang.startsWith("zh");
     const matches = entries.filter(el => topic === "all" || el.dataset.timelineTopic === topic);
@@ -33,22 +48,30 @@
     topic = button.dataset.timelineFilter;
     expanded = false;
     update(true);
+    writeView();
   }));
   more.addEventListener("click", () => {
     expanded = !expanded;
     update(true);
+    writeView();
     // Continue reading at the first newly revealed item, without losing keyboard position.
     if (expanded) entries[3]?.querySelector("a")?.focus({preventScroll:true});
   });
-  function revealAnchor() {
-    const target = entries.find(el => "#" + el.id === location.hash);
-    if (!target) return;
-    topic = "all"; expanded = true; update();
-    target.scrollIntoView({behavior:"instant",block:"start"});
+  function restoreView() {
+    const requested = new URL(location.href).searchParams.get("timeline");
+    topic = buttons.some(button => button.dataset.timelineFilter === requested) ? requested : "all";
+    expanded = requested === "all";
+    const target = linkedEntry();
+    if (target && topic !== target.dataset.timelineTopic) {
+      topic = "all";
+      expanded = expanded || entries.indexOf(target) >= 3;
+    }
+    update();
+    if (target) target.scrollIntoView({behavior:"instant",block:"start"});
   }
   controls.hidden = false;
-  update();
-  revealAnchor();
-  addEventListener("hashchange", revealAnchor);
+  restoreView();
+  addEventListener("hashchange", restoreView);
+  addEventListener("popstate", restoreView);
   document.addEventListener("portfolio-language-change", () => update());
 })();
