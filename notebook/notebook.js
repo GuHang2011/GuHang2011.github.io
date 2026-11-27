@@ -17,7 +17,7 @@
     let matches = [];
     const normalize = value => value.normalize("NFKC").trim().toLowerCase();
     let topic = "all";
-    let urlTimer;
+    let editingSearch = false;
     function readURL() {
       const params = new URL(location.href).searchParams;
       topic = buttons.some(b => b.dataset.noteTopic === params.get("topic")) ? params.get("topic") : "all";
@@ -25,12 +25,17 @@
       const requested = Number(params.get("shown"));
       limit = Number.isInteger(requested) && requested > batchSize ? Math.min(requested, rows.length) : batchSize;
     }
-    function writeURL() {
+    function writeURL(replace = false) {
       const url = new URL(location.href);
       if (topic === "all") url.searchParams.delete("topic"); else url.searchParams.set("topic", topic);
       if (input.value.trim()) url.searchParams.set("q", input.value.trim()); else url.searchParams.delete("q");
       if (limit > batchSize) url.searchParams.set("shown", String(limit)); else url.searchParams.delete("shown");
-      try { history.replaceState(null, "", url); } catch { /* Filtering still works without history access. */ }
+      if (url.href === location.href) return false;
+      try {
+        if (replace) history.replaceState(history.state, "", url);
+        else history.pushState(history.state, "", url);
+        return true;
+      } catch { return false; }
     }
     function filter() {
       const terms = normalize(input.value).split(/\s+/u).filter(Boolean);
@@ -48,18 +53,32 @@
     tools.hidden = false;
     readURL();
     filter();
-    tools.addEventListener("submit", event => { event.preventDefault(); clearTimeout(urlTimer); writeURL(); });
-    buttons.forEach(button => button.addEventListener("click", () => { topic = button.dataset.noteTopic; limit = batchSize; clearTimeout(urlTimer); filter(); writeURL(); }));
-    input.addEventListener("input", () => { limit = batchSize; filter(); clearTimeout(urlTimer); urlTimer = setTimeout(writeURL, 250); });
-    clear.addEventListener("click", () => { input.value = ""; limit = batchSize; clearTimeout(urlTimer); filter(); writeURL(); input.focus(); });
-    document.querySelector("[data-note-reset]").addEventListener("click", () => { topic = "all"; input.value = ""; limit = batchSize; clearTimeout(urlTimer); filter(); writeURL(); input.focus(); });
+    function commitView() {
+      editingSearch = false;
+      filter();
+      writeURL();
+    }
+    function editSearch(event) {
+      limit = batchSize;
+      filter();
+      // Commit the first edit immediately so even the next click can open an article safely.
+      // Further keystrokes refine the same history entry.
+      if (!event.isComposing && writeURL(editingSearch)) editingSearch = true;
+    }
+    tools.addEventListener("submit", event => { event.preventDefault(); commitView(); });
+    buttons.forEach(button => button.addEventListener("click", () => { topic = button.dataset.noteTopic; limit = batchSize; commitView(); }));
+    input.addEventListener("input", editSearch);
+    input.addEventListener("compositionend", editSearch);
+    input.addEventListener("blur", () => { editingSearch = false; });
+    clear.addEventListener("click", () => { input.value = ""; limit = batchSize; commitView(); input.focus(); });
+    document.querySelector("[data-note-reset]").addEventListener("click", () => { topic = "all"; input.value = ""; limit = batchSize; commitView(); input.focus(); });
     more.addEventListener("click", () => {
       const next = matches[limit]?.querySelector("h2 a");
       limit = Math.min(limit + batchSize, matches.length);
-      clearTimeout(urlTimer); filter(); writeURL();
+      commitView();
       next?.focus();
     });
-    addEventListener("popstate", () => { clearTimeout(urlTimer); readURL(); filter(); });
+    addEventListener("popstate", () => { editingSearch = false; readURL(); filter(); });
     document.addEventListener("portfolio-language-change", filter);
   }
   let copyTimer;

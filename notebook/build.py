@@ -34,6 +34,7 @@ def pair(en, zh, tag="span", attrs=""):
 
 def frame(title, description, path, body):
     extra_style = '<link rel="stylesheet" href="practice.css?v=20261108">' if path in ['portfolio-rework.html', 'streaming-ui-decisions.html'] else ''
+    script_version = NOTEBOOK_SCRIPT_VERSION if path else "20261127-directory"
     return f'''<!doctype html>
 <html lang="en" data-title-en="{esc(title['en'])} | Hang Gu" data-title-zh="{esc(title['zh'])} | 顾航">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,7 +43,7 @@ def frame(title, description, path, body):
 <meta property="og:type" content="{'website' if path == '' else 'article'}"><meta property="og:url" content="https://guhang2011.github.io/notebook/{path}">
 <link rel="canonical" href="https://guhang2011.github.io/notebook/{path}"><link rel="icon" href="../assets/favicon.svg">
 <link rel="stylesheet" href="../academic.css?v={VERSION}"><link rel="stylesheet" href="notebook.css?v={NOTEBOOK_STYLE_VERSION}">
-<script src="../academic.js?v={NAVIGATION_VERSION}" defer></script><script src="notebook.js?v={NOTEBOOK_SCRIPT_VERSION}" defer></script>{extra_style}</head>
+<script src="../academic.js?v={NAVIGATION_VERSION}" defer></script><script src="notebook.js?v={script_version}" defer></script>{extra_style}</head>
 <body class="notebook-page"><a class="skip-link" href="#main">{pair('Skip to content','跳至正文')}</a>
 <div class="reading-progress" aria-hidden="true"><span></span></div>
 <header class="site-header" data-open="false"><div class="wrap header-inner">
